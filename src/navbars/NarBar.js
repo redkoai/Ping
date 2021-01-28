@@ -9,40 +9,40 @@ import Eventsbtn from '../../assets/NavBarAssets/Calendar.png'
 import Invitebtn from '../../assets/NavBarAssets/add.png'
 import Messagesbtn from '../../assets/NavBarAssets/message-circle.png'
 import Accountsbtn from '../../assets/NavBarAssets/user.png'
-import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
-
+import {widthPercentageToDP,heightPercentageToDP,} from '../../util/scaler'
+import {useRoute} from '@react-navigation/native';
 
 function NavBar({}){
-    // const navigation = useNavigation();
+    const navigation = useNavigation();
 
     
     return(
-        <View style={{ backgroundColor:'white',  alignItems:'center', alignContent:'center', height: '10%' }}>
-            <View style={{flexDirection:'row', width:'90%', justifyContent: 'space-between', alignItems:"center"}}>
+        <View style={{ backgroundColor:'white',  alignItems:'center', alignContent:'center', width: widthPercentageToDP('100'), height: heightPercentageToDP('10') }}>
+            <View style={{flexDirection:'row', width:'90%', justifyContent: 'space-between', paddingBottom:10}}>
                 <TouchableOpacity onPress={() => { 
-                    // navigation.navigate('Home')
+                    navigation.navigate('HomeScreenEmpty')
                 }}>
-                    <Image source={Homebtn} style={{bottom: hp('-3'), left: wp('-0.5') }} />
+                    <Image source={Homebtn} style={{bottom: heightPercentageToDP('-2.4'), left: heightPercentageToDP('-0.1') }} />
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() =>{
                     // navigation.navigate('Events')
                 }}>
-                    <Image source={Eventsbtn} style={{bottom: hp('-3'), left: wp('-0.5') }}/>
+                    <Image source={Eventsbtn} style={{bottom: heightPercentageToDP('-2.4'), left: heightPercentageToDP('-0.1') }}/>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => {
                     // navigation.navigate('Invite')
                     }}>
-                    <Image source={Invitebtn} style={{bottom: hp('-3'), left: wp('-0.5') }}/>
+                    <Image source={Invitebtn} style={{bottom: heightPercentageToDP('-2.4'), left: heightPercentageToDP('-0.1') }}/>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => {
                     // navigation.navigate('Messages')
                     }}>
-                    <Image source={Messagesbtn} style={{bottom: hp('-3'), left: wp('-0.5') }} />
+                    <Image source={Messagesbtn} style={{bottom: heightPercentageToDP('-2.4'), left: heightPercentageToDP('-0.1') }} />
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() =>{
                     // navigation.navigate('Account')
                     }}>
-                    <Image source={Accountsbtn} style={{bottom: hp('-3'), left: wp('-0.5') }}/>
+                    <Image source={Accountsbtn} style={{bottom: heightPercentageToDP('-2.4'), left: heightPercentageToDP('-0.1') }}/>
                 </TouchableOpacity>
                     
             </View>
