@@ -1,16 +1,16 @@
 import {StyleSheet} from "react-native";
 // import { Dimensions } from 'react-native';
-// import {widthPercentageToDP,heightPercentageToDP} from '../../util/scaler'
+import {widthPercentageToDP,heightPercentageToDP} from '../../util/scaler'
 
 const styles = StyleSheet.create({
 
-    homefull: {
+    homeEmpty: {
         flex: 1,
-        resizeMode:'cover',
+        resizeMode:'contain',
         justifyContent: 'center',
         alignItems: 'center',
         width:'100%',
-        opacity: 1,
+        opacity: 1
     }
 
 })

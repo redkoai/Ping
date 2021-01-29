@@ -17,7 +17,7 @@ function NavBar({}){
 
     
     return(
-        <View style={{ backgroundColor:'white',  alignItems:'center', alignContent:'center', width: widthPercentageToDP('100'), height: heightPercentageToDP('10') }}>
+        <View style={{ backgroundColor:'white',  border: "black", alignItems:'center', alignContent:'center', width: widthPercentageToDP('100'), height: heightPercentageToDP('10'), paddigBottom:'10' }}>
             <View style={{flexDirection:'row', width:'90%', justifyContent: 'space-between', paddingBottom:10}}>
                 <TouchableOpacity onPress={() => { 
                     navigation.navigate('HomeScreenEmpty')
