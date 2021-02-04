@@ -11,6 +11,15 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         width:'100%',
         opacity: 1
+    },
+
+    homeEmpty1: {
+        flex: 1,
+        resizeMode:'contain',
+        justifyContent: 'center',
+        alignItems: 'center',
+        width:'100%',
+        opacity: 1
     }
 
 })

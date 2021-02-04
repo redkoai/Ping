@@ -9,6 +9,8 @@ import NavBar from './src/navbars/NarBar.js'
 const Stack = createStackNavigator();
 
 import HomeScreenEmpty from './src/screens/home/HomeScreenEmpty'
+import Events from './src/screens/home/Events'
+import Messages from './src/screens/home/Messages'
 
 
 export default function App() {
@@ -20,12 +22,12 @@ export default function App() {
         headerShown: false
       }}>
         <Stack.Screen name="HomeScreenEmpty" component={HomeScreenEmpty}/>
+        <Stack.Screen name="Events" component={Events}/>
+        <Stack.Screen name="Messages" component={Messages}/>
+
+
+
       </Stack.Navigator>
-      {/* <View style={styles.container}>
-        <Text>Ping</Text>
-        <StatusBar style="auto" />
-      </View> */}
-      {/* <NavBar/> */}
     </NavigationContainer>
   );
 }

@@ -4,11 +4,11 @@ import {TouchableOpacity} from 'react-native';
 import React, {useEffect, useState}  from "react";
 import { Dimensions } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import Homebtn from '../../assets/NavBarAssets/home.png'
-import Eventsbtn from '../../assets/NavBarAssets/Calendar.png'
-import Invitebtn from '../../assets/NavBarAssets/add.png'
-import Messagesbtn from '../../assets/NavBarAssets/message-circle.png'
-import Accountsbtn from '../../assets/NavBarAssets/user.png'
+import Homebtn from '../../assets/NavBarAssets/homeg.png'
+import Eventsbtn from '../../assets/NavBarAssets/eventsb.png'
+import Invitebtn from '../../assets/NavBarAssets/addb.png'
+import Messagesbtn from '../../assets/NavBarAssets/messagesb.png'
+import Accountsbtn from '../../assets/NavBarAssets/accb.png'
 import {widthPercentageToDP,heightPercentageToDP,} from '../../util/scaler'
 import {useRoute} from '@react-navigation/native';
 
@@ -25,7 +25,7 @@ function NavBar({}){
                     <Image source={Homebtn} style={{bottom: heightPercentageToDP('-2.4'), left: heightPercentageToDP('-0.1') }} />
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() =>{
-                    // navigation.navigate('Events')
+                    navigation.navigate('Events')
                 }}>
                     <Image source={Eventsbtn} style={{bottom: heightPercentageToDP('-2.4'), left: heightPercentageToDP('-0.1') }}/>
                 </TouchableOpacity>
@@ -35,7 +35,7 @@ function NavBar({}){
                     <Image source={Invitebtn} style={{bottom: heightPercentageToDP('-2.4'), left: heightPercentageToDP('-0.1') }}/>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => {
-                    // navigation.navigate('Messages')
+                     navigation.navigate('Messages')
                     }}>
                     <Image source={Messagesbtn} style={{bottom: heightPercentageToDP('-2.4'), left: heightPercentageToDP('-0.1') }} />
                 </TouchableOpacity>
