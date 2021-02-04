@@ -9,6 +9,7 @@ import React, {useEffect, useState} from "react";
 import NavBar from "../../navbars/NarBar";
 import createNewEventBtn from "../../../assets/NavBarAssets/createNewEventBtn.png"
 import addFriendsBtn from "../../../assets/NavBarAssets/addFriendsBtn.png"
+import NavBar_events from "../../navbars/NarBar_events";
 
 function Events({}) {
     const navigation = useNavigation()
@@ -29,7 +30,7 @@ function Events({}) {
                 </TouchableOpacity>
             </View>
             </ImageBackground>
-            <NavBar/>
+            <NavBar_events/>
         </View>
     )
 }

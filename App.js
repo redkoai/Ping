@@ -5,6 +5,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 import NavBar from './src/navbars/NarBar.js'
+import NavBar_events from './src/navbars/NarBar_events.js'
 
 const Stack = createStackNavigator();
 
