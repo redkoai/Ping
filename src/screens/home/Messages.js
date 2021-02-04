@@ -6,7 +6,7 @@ import styles from "../../styles/styles";
 import { Dimensions } from 'react-native';
 import {widthPercentageToDP,heightPercentageToDP,} from '../../../util/scaler';
 import React, {useEffect, useState} from "react";
-import NavBar from "../../navbars/NarBar";
+import NavBar_message from "../../navbars/NarBar_message";
 import createNewEventBtn from "../../../assets/NavBarAssets/createNewEventBtn.png"
 import addFriendsBtn from "../../../assets/NavBarAssets/addFriendsBtn.png"
 
@@ -29,7 +29,7 @@ function Events({}) {
                 </TouchableOpacity>
             </View>
             </ImageBackground>
-            <NavBar/>
+            <NavBar_message/>
         </View>
     )
 }
