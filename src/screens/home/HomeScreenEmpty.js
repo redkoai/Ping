@@ -25,12 +25,12 @@ function HomeScreenEmpty({}) {
                 <TouchableOpacity onPress={() => { 
                     // navigation.navigate('HomeScreenEmpty')
                 }}>
-                    <Image source={createNewEventBtn} style={{height: heightPercentageToDP('20'), width :widthPercentageToDP('70'), bottom: heightPercentageToDP('0'), resizeMode:'contain' }} />
+                    <Image source={createNewEventBtn} style={{height: heightPercentageToDP('7'), width :widthPercentageToDP('70'), marginTop: heightPercentageToDP('5'), resizeMode:'contain', left:heightPercentageToDP('5') }} />
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => { 
                     // navigation.navigate('HomeScreenEmpty')
                 }}>
-                    <Image source={addFriendsBtn} style={{height: heightPercentageToDP('20'), width :widthPercentageToDP('70'), bottom: heightPercentageToDP('0'), resizeMode:'contain' }} />
+                    <Image source={addFriendsBtn} style={{height: heightPercentageToDP('7'), width :widthPercentageToDP('70'), marginBottom: heightPercentageToDP('15'), resizeMode:'contain' , left:heightPercentageToDP('5')}} />
                 </TouchableOpacity>
             </View>
             </ImageBackground>
