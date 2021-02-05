@@ -1,5 +1,5 @@
 import { textStyles } from '../styles/styles';
-import { widthPercentageToDP, heightPercentageToDP } from '../../util/scaler';
+import { widthPercentageToDP } from '../../util/scaler';
 
 import React from 'react';
 import { View, Text, TextInput, StyleSheet } from 'react-native';
@@ -30,7 +30,7 @@ function CustomTextInput({
   },
 }) {
   return (
-    <View style={{ width: '90%' }}>
+    <View style={{ width: widthPercentageToDP(90) }}>
       <Text style={textStyles.normalSemiBold}>{input.label}</Text>
       <Controller
         control={control}
@@ -68,7 +68,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#F7F8FA',
     borderColor: '#000',
     height: 50,
-    width: '100%',
+    width: widthPercentageToDP(100),
     padding: 20,
     borderRadius: 12,
   },

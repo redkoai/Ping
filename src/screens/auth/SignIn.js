@@ -1,4 +1,3 @@
-import { textStyles } from '../../styles/styles';
 import pingLogo from '../../../assets/pingLogo.png';
 import {
   widthPercentageToDP,
@@ -6,18 +5,9 @@ import {
 } from '../../../util/scaler';
 
 import React from 'react';
-import {
-  View,
-  Text,
-  Image,
-  TextInput,
-  Alert,
-  Button,
-  TouchableOpacity,
-  StyleSheet,
-} from 'react-native';
+import { View, Image, Button, StyleSheet } from 'react-native';
 
-import { useForm, Controller } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import CustomTextInput from '../../components/CustomTextInput';
 
 function SignIn() {
@@ -68,54 +58,11 @@ function SignIn() {
         }}
       />
 
-      {/* <Text style={textStyles.normalSemiBold}>Last name</Text>
-      <Controller
-        control={control}
-        render={({ onChange, onBlur, value }) => (
-          <TextInput
-            style={styles.input}
-            onBlur={onBlur}
-            onChangeText={(value) => onChange(value)}
-            value={value}
-          />
-        )}
-        name="lastName"
-        defaultValue=""
-      /> */}
-
       <Button title="Submit" onPress={handleSubmit(onSubmit)} />
     </View>
   );
 }
 
-const styles = StyleSheet.create({
-  label: {
-    fontFamily: 'FiraSans_600SemiBold',
-    // color: 'white',
-    margin: 20,
-    marginLeft: 0,
-  },
-  button: {
-    marginTop: 40,
-    color: 'white',
-    height: 40,
-    backgroundColor: '#ec5990',
-    borderRadius: 4,
-  },
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    paddingTop: '50px',
-    padding: 8,
-    backgroundColor: '#0e101c',
-  },
-  input: {
-    backgroundColor: 'white',
-    borderColor: '#000',
-    height: 40,
-    padding: 10,
-    borderRadius: 4,
-  },
-});
+const styles = StyleSheet.create({});
 
 export default SignIn;
