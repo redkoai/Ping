@@ -17,7 +17,7 @@ function CustomTextInput({
     name: 'unknown-text-input',
     label: '',
     placeholder: '',
-    defaultValue,
+    defaultValue: '',
     validation: {},
   },
   rules = {
