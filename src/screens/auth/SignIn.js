@@ -1,4 +1,10 @@
 import { textStyles } from '../../styles/styles';
+import pingLogo from '../../../assets/pingLogo.png';
+import {
+  widthPercentageToDP,
+  heightPercentageToDP,
+} from '../../../util/scaler';
+
 import React from 'react';
 import {
   View,
@@ -10,20 +16,16 @@ import {
   TouchableOpacity,
   StyleSheet,
 } from 'react-native';
-import {
-  widthPercentageToDP,
-  heightPercentageToDP,
-} from '../../../util/scaler';
-import { useForm, Controller } from 'react-hook-form';
 
-import pingLogo from '../../../assets/pingLogo.png';
+import { useForm, Controller } from 'react-hook-form';
+import CustomTextInput from '../../components/CustomTextInput';
 
 function SignIn() {
   const { control, handleSubmit, errors } = useForm();
   const onSubmit = (data) => console.log(data);
 
   return (
-    <View style={{ flex: 1, alignItems: 'center' }}>
+    <View style={{ flex: 1, alignItems: 'center', backgroundColor: 'white' }}>
       <Image
         source={pingLogo}
         style={{
@@ -33,24 +35,40 @@ function SignIn() {
           resizeMode: 'contain',
         }}
       />
-      <Text style={textStyles.normalSemiBold}>First name</Text>
-      <Controller
-        control={control}
-        render={({ onChange, onBlur, value }) => (
-          <TextInput
-            style={styles.input}
-            onBlur={onBlur}
-            onChangeText={(value) => onChange(value)}
-            value={value}
-          />
-        )}
-        name="firstName"
-        rules={{ required: true }}
-        defaultValue=""
-      />
-      {errors.firstName && <Text>This is required.</Text>}
 
-      <Text style={textStyles.normalSemiBold}>Last name</Text>
+      <CustomTextInput
+        control={control}
+        errors={errors}
+        input={{
+          name: 'email',
+          label: 'Email',
+          placeholder: 'bobbybrown@mail.com',
+        }}
+        rules={{
+          contentType: 'email-address',
+          keyboardType: 'email-address',
+          autoCapitalize: false,
+          autoCorrect: false,
+        }}
+      />
+
+      <CustomTextInput
+        control={control}
+        errors={errors}
+        input={{
+          name: 'password',
+          label: 'Password',
+          placeholder: '**********',
+        }}
+        rules={{
+          contentType: 'password',
+          autoCapitalize: false,
+          autoCorrect: false,
+          secureTextEntry: true,
+        }}
+      />
+
+      {/* <Text style={textStyles.normalSemiBold}>Last name</Text>
       <Controller
         control={control}
         render={({ onChange, onBlur, value }) => (
@@ -63,7 +81,7 @@ function SignIn() {
         )}
         name="lastName"
         defaultValue=""
-      />
+      /> */}
 
       <Button title="Submit" onPress={handleSubmit(onSubmit)} />
     </View>

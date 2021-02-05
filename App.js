@@ -21,7 +21,12 @@ import Events from './src/screens/home/Events';
 import Messages from './src/screens/home/Messages';
 
 export default function App() {
-  const [fontsLoaded] = useFonts({ FiraSans_600SemiBold });
+  const [fontsLoaded] = useFonts({
+    FiraSans_400Regular,
+    FiraSans_500Medium,
+    FiraSans_600SemiBold,
+    FiraSans_700Bold,
+  });
   if (!fontsLoaded) return null;
 
   return (
