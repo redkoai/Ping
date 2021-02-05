@@ -19,9 +19,9 @@ function SignIn() {
       <Image
         source={pingLogo}
         style={{
-          height: heightPercentageToDP(50),
+          top: heightPercentageToDP(3),
+          height: heightPercentageToDP(33),
           width: widthPercentageToDP(50),
-          bottom: heightPercentageToDP(-5),
           resizeMode: 'contain',
         }}
       />

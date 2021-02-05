@@ -17,7 +17,7 @@ function CustomTextInput({
     name: 'unknown-text-input',
     label: '',
     placeholder: '',
-    defaultValue: '',
+    defaultValue,
     validation: {},
   },
   rules = {
@@ -68,7 +68,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#F7F8FA',
     borderColor: '#000',
     height: 50,
-    width: widthPercentageToDP(100),
     padding: 20,
     borderRadius: 12,
   },
