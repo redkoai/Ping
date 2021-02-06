@@ -5,7 +5,6 @@ import React from 'react';
 import { View, Image, Button, StyleSheet } from 'react-native';
 
 import { useForm } from 'react-hook-form';
-// import CustomTextInput from '../../components/CustomTextInput';
 import CustomTextInput from 'ping/src/components/CustomTextInput';
 import CustomButton from 'ping/src/components/CustomButton';
 
@@ -57,8 +56,11 @@ function SignIn() {
         }}
       />
 
-      <Button title="Submit" onPress={handleSubmit(onSubmit)} />
-      <CustomButton />
+      <CustomButton 
+        text="Submit"
+        onPress={handleSubmit(onSubmit)}
+        isPrimary={true}
+      />
     </View>
   );
 }

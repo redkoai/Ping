@@ -45,7 +45,11 @@ function CustomTextInput({
         render={({ onChange, onBlur, value }) => (
           <View style={styles.container}>
             <TextInput
-              style={[styles.input, focus && styles.inputFocused]}
+              style={[
+                textStyles.normalRegular,
+                styles.input,
+                focus && styles.inputFocused,
+              ]}
               onBlur={onBlur}
               onChangeText={(value) => onChange(value)}
               value={value}
@@ -87,12 +91,10 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     marginTop: 10,
-    marginBottom: 35,
+    marginBottom: 30,
   },
   input: {
     flex: 1,
-    fontFamily: 'FiraSans_400Regular',
-    fontSize: 14,
     color: '#555',
     padding: 20,
     paddingRight: 60,
