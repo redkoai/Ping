@@ -37,7 +37,7 @@ function SignIn() {
         rules={{
           contentType: 'email-address',
           keyboardType: 'email-address',
-          autoCapitalize: false,
+          autoCapitalize: 'none',
           autoCorrect: false,
         }}
       />
@@ -52,7 +52,7 @@ function SignIn() {
         }}
         rules={{
           contentType: 'password',
-          autoCapitalize: false,
+          autoCapitalize: 'none',
           autoCorrect: false,
           secureTextEntry: true,
         }}
