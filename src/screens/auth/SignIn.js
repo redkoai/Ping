@@ -5,6 +5,7 @@ import pingLogo from 'ping/assets/pingLogo.png';
 import React from 'react';
 import {
   StatusBar,
+  SafeAreaView,
   View,
   Image,
   Text,
@@ -21,55 +22,61 @@ function SignIn() {
   const onSubmit = (data) => console.log(data);
 
   return (
-    <View style={{ flex: 1, alignItems: 'center', backgroundColor: 'white' }}>
-      <StatusBar backgroundColor="#3D8976" />
+    <SafeAreaView style={{ flex: 1, alignItems: 'center', backgroundColor: 'white' }}>
+      <StatusBar backgroundColor={colors.primary} />
+
+      <View style={styles.topBar}>
+        <View/>
+        <TouchableOpacity onPress={() => console.log('skip pressed')}>
+          <Text style={[textStyles.smallBold, styles.skipButton]}>SKIP</Text>
+        </TouchableOpacity>
+      </View>
+
       <Image
         source={pingLogo}
-        style={{
-          top: heightPercentageToDP(3),
-          height: heightPercentageToDP(33),
-          width: widthPercentageToDP(50),
-          resizeMode: 'contain',
-        }}
+        style={styles.logo}
       />
 
-      <CustomTextInput
-        control={control}
-        errors={errors}
-        input={{
-          name: 'email',
-          label: 'Email',
-          placeholder: 'bobbybrown@mail.com',
-        }}
-        rules={{
-          contentType: 'email-address',
-          keyboardType: 'email-address',
-          autoCapitalize: 'none',
-          autoCorrect: false,
-        }}
-      />
+      <View>
+        <CustomTextInput
+          control={control}
+          errors={errors}
+          input={{
+            name: 'email',
+            label: 'Email',
+            placeholder: 'bobbybrown@mail.com',
+          }}
+          rules={{
+            contentType: 'email-address',
+            keyboardType: 'email-address',
+            autoCapitalize: 'none',
+            autoCorrect: false,
+          }}
+        />
 
-<View>
-      <CustomTextInput
-        control={control}
-        errors={errors}
-        input={{
-          name: 'password',
-          label: 'Password',
-          placeholder: '**********',
-        }}
-        rules={{
-          contentType: 'password',
-          autoCapitalize: 'none',
-          autoCorrect: false,
-          secureTextEntry: true,
-        }}
-      />
-      <TouchableOpacity>
-        <Text style={[textStyles.smallRegular, styles.forgotPassword]}>
-          Forgot password
-        </Text>
-      </TouchableOpacity>
+        <CustomTextInput
+          control={control}
+          errors={errors}
+          input={{
+            name: 'password',
+            label: 'Password',
+            placeholder: '**********',
+          }}
+          rules={{
+            contentType: 'password',
+            autoCapitalize: 'none',
+            autoCorrect: false,
+            secureTextEntry: true,
+          }}
+        />
+
+        <TouchableOpacity
+          onPress={() => console.log('forgot password pressed')}
+        >
+          <Text style={[textStyles.smallRegular, styles.forgotPassword]}>
+            Forgot password
+          </Text>
+        </TouchableOpacity>
       </View>
 
       <CustomButton
@@ -77,11 +84,32 @@ function SignIn() {
         onPress={handleSubmit(onSubmit)}
         isPrimary={true}
       />
-    </View>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
+  topBar: {
+    top: 12,
+    width: widthPercentageToDP(90),
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  skipButton: {
+    color: colors.primary,
+    paddingVertical:10,
+    paddingHorizontal: 20,
+    position: 'relative',
+    right: -10,
+  },
+  logo: {
+    top: heightPercentageToDP(-1),
+    right: widthPercentageToDP(-2),
+    height: heightPercentageToDP(28),
+    width: widthPercentageToDP(50),
+    resizeMode: 'contain',
+  },
   forgotPassword: {
     color: colors.primary,
     position: 'absolute',

@@ -102,6 +102,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: 'white',
     backgroundColor: colors.lightGray,
+    height: 55,
   },
   inputFocused: {
     backgroundColor: colors.lightGray,
