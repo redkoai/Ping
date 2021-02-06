@@ -1,14 +1,13 @@
-import pingLogo from '../../../assets/pingLogo.png';
-import {
-  widthPercentageToDP,
-  heightPercentageToDP,
-} from '../../../util/scaler';
+import pingLogo from 'ping/assets/pingLogo.png';
+import { widthPercentageToDP, heightPercentageToDP } from 'ping/util/scaler';
 
 import React from 'react';
 import { View, Image, Button, StyleSheet } from 'react-native';
 
 import { useForm } from 'react-hook-form';
-import CustomTextInput from '../../components/CustomTextInput';
+// import CustomTextInput from '../../components/CustomTextInput';
+import CustomTextInput from 'ping/src/components/CustomTextInput';
+import CustomButton from 'ping/src/components/CustomButton';
 
 function SignIn() {
   const { control, handleSubmit, errors } = useForm();
@@ -59,6 +58,7 @@ function SignIn() {
       />
 
       <Button title="Submit" onPress={handleSubmit(onSubmit)} />
+      <CustomButton />
     </View>
   );
 }

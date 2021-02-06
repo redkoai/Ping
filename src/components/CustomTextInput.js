@@ -1,5 +1,5 @@
-import { textStyles } from '../styles/styles';
-import { heightPercentageToDP, widthPercentageToDP } from '../../util/scaler';
+import { textStyles } from 'ping/src/styles/styles';
+import { heightPercentageToDP, widthPercentageToDP } from 'ping/util/scaler';
 
 import React, { useState } from 'react';
 import {
@@ -12,7 +12,6 @@ import {
 import { Ionicons } from '@expo/vector-icons';
 
 import { Controller } from 'react-hook-form';
-
 // control and errors are passed from the useForm hook of the react-hook-form package
 // const { control, handleSubmit, errors } = useForm();
 
