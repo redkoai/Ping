@@ -2,7 +2,7 @@ import pingLogo from 'ping/assets/pingLogo.png';
 import { widthPercentageToDP, heightPercentageToDP } from 'ping/util/scaler';
 
 import React from 'react';
-import { View, Image, Button, StyleSheet } from 'react-native';
+import { View, Image, StyleSheet } from 'react-native';
 
 import { useForm } from 'react-hook-form';
 import CustomTextInput from 'ping/src/components/CustomTextInput';
