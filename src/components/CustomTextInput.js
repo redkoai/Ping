@@ -1,4 +1,4 @@
-import { textStyles } from 'ping/src/styles/styles';
+import { textStyles, colors } from 'ping/src/styles/styles';
 import { heightPercentageToDP, widthPercentageToDP } from 'ping/util/scaler';
 
 import React, { useState } from 'react';
@@ -71,7 +71,7 @@ function CustomTextInput({
                 <Ionicons
                   name={secure ? 'ios-eye' : 'ios-eye-off'}
                   size={30}
-                  color="#555"
+                  color={colors.offBlack}
                 />
               </TouchableOpacity>
             )}
@@ -95,17 +95,17 @@ const styles = StyleSheet.create({
   },
   input: {
     flex: 1,
-    color: '#555',
+    color: colors.offBlack,
     padding: 20,
     paddingRight: 60,
     borderRadius: 12,
     borderWidth: 1,
     borderColor: 'white',
-    backgroundColor: '#F7F8FA',
+    backgroundColor: colors.lightGray,
   },
   inputFocused: {
-    backgroundColor: '#F7F8FA',
-    borderColor: '#555',
+    backgroundColor: colors.lightGray,
+    borderColor: colors.offBlack,
   },
   icon: {
     position: 'absolute',

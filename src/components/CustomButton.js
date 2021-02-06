@@ -1,4 +1,4 @@
-import { textStyles } from 'ping/src/styles/styles';
+import { textStyles, colors } from 'ping/src/styles/styles';
 import { heightPercentageToDP, widthPercentageToDP } from 'ping/util/scaler';
 
 import React from 'react';
@@ -38,14 +38,14 @@ const styles = StyleSheet.create({
     borderRadius: 50,
     display: 'flex',
     alignItems: 'center',
-    shadowColor: '#555',
+    shadowColor: colors.offBlack,
     shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.3,
     shadowRadius: 4,
     elevation: 1,
   },
   buttonPrimary: {
-    backgroundColor: '#3D8976',
+    backgroundColor: colors.primary,
   },
   buttonSecondary: {
     backgroundColor: 'white',
@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
     color: 'white',
   },
   textSecondary: {
-    color: '#3D8976',
+    color: colors.primary,
   },
 });
 

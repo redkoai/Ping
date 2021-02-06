@@ -1,8 +1,16 @@
-import pingLogo from 'ping/assets/pingLogo.png';
+import { textStyles, colors } from 'ping/src/styles/styles'
 import { widthPercentageToDP, heightPercentageToDP } from 'ping/util/scaler';
+import pingLogo from 'ping/assets/pingLogo.png';
 
 import React from 'react';
-import { View, Image, StyleSheet } from 'react-native';
+import {
+  StatusBar,
+  View,
+  Image,
+  Text,
+  TouchableOpacity,
+  StyleSheet,
+} from 'react-native';
 
 import { useForm } from 'react-hook-form';
 import CustomTextInput from 'ping/src/components/CustomTextInput';
@@ -14,6 +22,7 @@ function SignIn() {
 
   return (
     <View style={{ flex: 1, alignItems: 'center', backgroundColor: 'white' }}>
+      <StatusBar backgroundColor="#3D8976" />
       <Image
         source={pingLogo}
         style={{
@@ -55,9 +64,12 @@ function SignIn() {
           secureTextEntry: true,
         }}
       />
+      <TouchableOpacity>
+        <Text style={[textStyles.smallRegular, {color: colors.primary}]}>Forgot password</Text>
+      </TouchableOpacity>
 
-      <CustomButton 
-        text="Submit"
+      <CustomButton
+        text="Sign In"
         onPress={handleSubmit(onSubmit)}
         isPrimary={true}
       />
