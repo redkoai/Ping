@@ -1,4 +1,4 @@
-import { textStyles, colors } from 'ping/src/styles/styles'
+import { textStyles, colors } from 'ping/src/styles/styles';
 import { widthPercentageToDP, heightPercentageToDP } from 'ping/util/scaler';
 import pingLogo from 'ping/assets/pingLogo.png';
 
@@ -49,6 +49,7 @@ function SignIn() {
         }}
       />
 
+<View>
       <CustomTextInput
         control={control}
         errors={errors}
@@ -65,8 +66,11 @@ function SignIn() {
         }}
       />
       <TouchableOpacity>
-        <Text style={[textStyles.smallRegular, {color: colors.primary}]}>Forgot password</Text>
+        <Text style={[textStyles.smallRegular, styles.forgotPassword]}>
+          Forgot password
+        </Text>
       </TouchableOpacity>
+      </View>
 
       <CustomButton
         text="Sign In"
@@ -77,6 +81,15 @@ function SignIn() {
   );
 }
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  forgotPassword: {
+    color: colors.primary,
+    position: 'absolute',
+    top: -30,
+    right: -15,
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+  },
+});
 
 export default SignIn;
