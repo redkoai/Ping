@@ -30,10 +30,13 @@ const validationSchema = yup.object().shape({
 });
 
 function SignIn() {
-  const { control, handleSubmit, errors } = useForm({
+  const { control, handleSubmit, errors, clearErrors } = useForm({
     resolver: yupResolver(validationSchema),
   });
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = (data) => {
+    clearErrors;
+    console.log(data);
+  };
 
   return (
     <SafeAreaView
