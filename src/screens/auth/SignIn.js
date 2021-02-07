@@ -13,6 +13,7 @@ import {
   TouchableOpacity,
   StyleSheet,
   Platform,
+  Dimensions,
 } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
@@ -26,7 +27,12 @@ function SignIn() {
 
   return (
     <SafeAreaView
-      style={{ flex: 1, alignItems: 'center', backgroundColor: 'white' }}
+      style={{
+        flex: 1,
+        alignItems: 'center',
+        backgroundColor: 'white',
+        minHeight: Math.round(Dimensions.get('window').height),
+      }}
     >
       <StatusBar backgroundColor={colors.primary} />
 
