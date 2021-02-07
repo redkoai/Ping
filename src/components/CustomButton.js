@@ -30,13 +30,13 @@ function CustomButton({ icon, text, onPress, isPrimary }) {
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: heightPercentageToDP(4),
-    marginBottom: heightPercentageToDP(-1),
+    marginTop: heightPercentageToDP(-0.5),
+    marginBottom: heightPercentageToDP(4),
   },
   button: {
     width: widthPercentageToDP(80),
     paddingHorizontal: 30,
-    paddingVertical: 12,
+    paddingVertical: heightPercentageToDP(1.5),
     borderRadius: 50,
     display: 'flex',
     alignItems: 'center',
@@ -58,7 +58,7 @@ const styles = StyleSheet.create({
   icon: {
     resizeMode: 'contain',
     width: 35,
-    height: 24,
+    height: heightPercentageToDP(3),
     marginRight: 8,
   },
   textPrimary: {

@@ -26,7 +26,7 @@ function SignIn() {
 
   return (
     <SafeAreaView
-      style={{ flex: 1, alignItems: 'center', backgroundColor: 'white' }}
+      style={{ flex: 1, alignItems: 'center', backgroundColor: 'white'}}
     >
       <StatusBar backgroundColor={colors.primary} />
 
@@ -41,12 +41,12 @@ function SignIn() {
 
       <View
         style={Platform.select({
-          android: { height: heightPercentageToDP(30) },
+          android: { height: heightPercentageToDP(29) },
           ios: { height: heightPercentageToDP(25) },
         })}
       />
 
-      <KeyboardAwareScrollView contentContainerStyle={{ alignItems: 'center' }}>
+      <KeyboardAwareScrollView contentContainerStyle={{ flex:1, alignItems: 'center' }}>
         <CustomTextInput
           control={control}
           errors={errors}
@@ -99,7 +99,13 @@ function SignIn() {
           text="Sign in with Google"
           onPress={() => console.log('sign in with google pressed')}
         />
-        {/* </View> */}
+
+        <View style={{position: 'absolute', bottom: heightPercentageToDP(3), flexDirection: 'row', width: widthPercentageToDP(50), alignItems: 'center', justifyContent: 'space-between'}}>
+          <Text style={[textStyles.smallRegular, {color: colors.offBlack}]}>Don't have an account?</Text>
+          <TouchableOpacity>
+            <Text style={[textStyles.normalSemiBold, {color: colors.primary}]}>Register</Text>
+          </TouchableOpacity>
+        </View>
       </KeyboardAwareScrollView>
     </SafeAreaView>
   );
@@ -122,8 +128,8 @@ const styles = StyleSheet.create({
   },
   logo: {
     position: 'absolute',
-    top: heightPercentageToDP(8),
-    height: heightPercentageToDP(28),
+    top: heightPercentageToDP(10),
+    height: heightPercentageToDP(22),
     width: widthPercentageToDP(50),
     resizeMode: 'contain',
   },
