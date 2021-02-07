@@ -123,6 +123,7 @@ const styles = StyleSheet.create({
     right: -15,
     paddingVertical: 10,
     paddingHorizontal: 20,
+    
   },
 });
 
