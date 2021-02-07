@@ -14,6 +14,7 @@ import {
   TouchableNativeFeedback,
   TouchableHighlight,
   StyleSheet,
+  Platform,
 } from 'react-native';
 // import { TouchableOpacity } from 'react-native-gesture-handler';
 
@@ -39,6 +40,13 @@ function SignIn() {
       </View>
 
       <Image source={pingLogo} style={styles.logo} />
+
+      <View
+        style={Platform.select({
+          android: { height: heightPercentageToDP(30) },
+          ios: { height: heightPercentageToDP(25) },
+        })}
+      />
 
       <View>
         <CustomTextInput
@@ -114,8 +122,8 @@ const styles = StyleSheet.create({
     right: -10,
   },
   logo: {
-    top: heightPercentageToDP(-1),
-    right: widthPercentageToDP(-2),
+    position: 'absolute',
+    top: heightPercentageToDP(8),
     height: heightPercentageToDP(28),
     width: widthPercentageToDP(50),
     resizeMode: 'contain',
