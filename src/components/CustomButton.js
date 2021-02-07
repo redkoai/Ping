@@ -30,8 +30,8 @@ function CustomButton({ icon, text, onPress, isPrimary }) {
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: heightPercentageToDP(-1.5),
-    marginBottom: heightPercentageToDP(4),
+    marginTop: heightPercentageToDP(-3),
+    marginBottom: heightPercentageToDP(6),
   },
   button: {
     width: widthPercentageToDP(80),

@@ -3,7 +3,7 @@ import { widthPercentageToDP, heightPercentageToDP } from 'ping/util/scaler';
 import pingLogo from 'ping/assets/pingLogo.png';
 import googleLogo from 'ping/assets/Google_G_Logo.png';
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   StatusBar,
   SafeAreaView,
@@ -18,11 +18,21 @@ import {
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
+
 import CustomTextInput from 'ping/src/components/CustomTextInput';
 import CustomButton from 'ping/src/components/CustomButton';
 
+const validationSchema = yup.object().shape({
+  email: yup.string().required('required').email('must be email'),
+  password: yup.string().required('required').min(6, 'must be 6 or more chars'),
+});
+
 function SignIn() {
-  const { control, handleSubmit, errors } = useForm();
+  const { control, handleSubmit, errors } = useForm({
+    resolver: yupResolver(validationSchema),
+  });
   const onSubmit = (data) => console.log(data);
 
   return (
@@ -57,7 +67,7 @@ function SignIn() {
       >
         <CustomTextInput
           control={control}
-          errors={errors}
+          error={errors?.email}
           input={{
             name: 'email',
             label: 'Email',
@@ -73,7 +83,7 @@ function SignIn() {
 
         <CustomTextInput
           control={control}
-          errors={errors}
+          error={errors?.password}
           input={{
             name: 'password',
             label: 'Password',
@@ -152,7 +162,7 @@ const styles = StyleSheet.create({
     alignSelf: 'flex-end',
     paddingVertical: 15,
     paddingHorizontal: 40,
-    top: -30,
+    top: -48,
     right: -35,
   },
   registerButton: {

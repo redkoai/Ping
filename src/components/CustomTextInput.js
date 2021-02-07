@@ -17,8 +17,7 @@ import { Controller } from 'react-hook-form';
 
 function CustomTextInput({
   control,
-  errors,
-  errorMessage = 'Not a valid input',
+  error,
   input = {
     name: 'unknown-text-input',
     label: '',
@@ -38,17 +37,20 @@ function CustomTextInput({
   const [focus, setFocus] = useState(rules.autoFocus);
   const [secure, setSecure] = useState(rules.secureTextEntry);
   return (
-    <View style={{ width: widthPercentageToDP(90) }}>
-      <Text style={textStyles.normalSemiBold}>{input.label}</Text>
+    <View style={styles.container}>
+      <Text style={[textStyles.normalSemiBold, styles.offsetMargin]}>
+        {input.label}
+      </Text>
       <Controller
         control={control}
         render={({ onChange, onBlur, value }) => (
-          <View style={styles.container}>
+          <View style={styles.inputContainer}>
             <TextInput
               style={[
                 textStyles.normalRegular,
                 styles.input,
                 focus && styles.inputFocused,
+                error && { borderColor: colors.redError },
               ]}
               onBlur={onBlur}
               onChangeText={(value) => onChange(value)}
@@ -81,17 +83,29 @@ function CustomTextInput({
         rules={input.validation}
         defaultValue={input.defaultValue}
       />
-      {errors.input ? errors.input.name && <Text>{errorMessage}</Text> : null}
+      {
+        <View>
+          <Text
+            style={[textStyles.smallRegular, styles.error, styles.offsetMargin]}
+          >
+            {error ? error.message : ' '}
+          </Text>
+        </View>
+      }
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
+    width: widthPercentageToDP(90),
+    marginTop: heightPercentageToDP(0.5),
+    marginBottom: heightPercentageToDP(2),
+  },
+  inputContainer: {
+    marginVertical: heightPercentageToDP(0.3),
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginTop: 10,
-    marginBottom: 30,
   },
   input: {
     flex: 1,
@@ -113,6 +127,12 @@ const styles = StyleSheet.create({
     position: 'absolute',
     right: 15,
     top: heightPercentageToDP(1.4),
+  },
+  error: {
+    color: colors.redError,
+  },
+  offsetMargin: {
+    marginLeft: 2,
   },
 });
 

@@ -97,6 +97,7 @@ export const colors = {
   primary: '#3D8976',
   lightGray: '#F7F8FA',
   offBlack: '#555',
+  redError: '#FE5F5F',
 };
 
 export default styles;
