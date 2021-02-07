@@ -11,8 +11,11 @@ import {
   Image,
   Text,
   TouchableOpacity,
+  TouchableNativeFeedback,
+  TouchableHighlight,
   StyleSheet,
 } from 'react-native';
+// import { TouchableOpacity } from 'react-native-gesture-handler';
 
 import { useForm } from 'react-hook-form';
 import CustomTextInput from 'ping/src/components/CustomTextInput';
@@ -72,6 +75,7 @@ function SignIn() {
 
         <TouchableOpacity
           onPress={() => console.log('forgot password pressed')}
+          hitSlop={{ left: 0, top: 30, right: 10, bottom: 10 }}
         >
           <Text style={[textStyles.smallRegular, styles.forgotPassword]}>
             Forgot password
@@ -123,7 +127,7 @@ const styles = StyleSheet.create({
     right: -15,
     paddingVertical: 10,
     paddingHorizontal: 20,
-    
+    zIndex: 1,
   },
 });
 

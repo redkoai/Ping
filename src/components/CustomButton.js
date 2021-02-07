@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.3,
     shadowRadius: 4,
-    elevation: 4,
+    elevation: 5,
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
