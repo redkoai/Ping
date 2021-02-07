@@ -26,7 +26,7 @@ function SignIn() {
 
   return (
     <SafeAreaView
-      style={{ flex: 1, alignItems: 'center', backgroundColor: 'white'}}
+      style={{ flex: 1, alignItems: 'center', backgroundColor: 'white' }}
     >
       <StatusBar backgroundColor={colors.primary} />
 
@@ -46,7 +46,9 @@ function SignIn() {
         })}
       />
 
-      <KeyboardAwareScrollView contentContainerStyle={{ flex:1, alignItems: 'center' }}>
+      <KeyboardAwareScrollView
+        contentContainerStyle={{ flex: 1, alignItems: 'center' }}
+      >
         <CustomTextInput
           control={control}
           errors={errors}
@@ -100,10 +102,16 @@ function SignIn() {
           onPress={() => console.log('sign in with google pressed')}
         />
 
-        <View style={{position: 'absolute', bottom: heightPercentageToDP(3), flexDirection: 'row', width: widthPercentageToDP(50), alignItems: 'center', justifyContent: 'space-between'}}>
-          <Text style={[textStyles.smallRegular, {color: colors.offBlack}]}>Don't have an account?</Text>
-          <TouchableOpacity>
-            <Text style={[textStyles.normalSemiBold, {color: colors.primary}]}>Register</Text>
+        <View style={styles.registerButton}>
+          <Text style={[textStyles.smallRegular, { color: colors.offBlack }]}>
+            Don't have an account?
+          </Text>
+          <TouchableOpacity onPress={() => console.log('register pressed')}>
+            <Text
+              style={[textStyles.normalSemiBold, { color: colors.primary }]}
+            >
+              Register
+            </Text>
           </TouchableOpacity>
         </View>
       </KeyboardAwareScrollView>
@@ -140,6 +148,14 @@ const styles = StyleSheet.create({
     paddingHorizontal: 40,
     top: -30,
     right: -35,
+  },
+  registerButton: {
+    position: 'absolute',
+    bottom: heightPercentageToDP(3),
+    flexDirection: 'row',
+    width: widthPercentageToDP(50),
+    alignItems: 'center',
+    justifyContent: 'space-between',
   },
 });
 
