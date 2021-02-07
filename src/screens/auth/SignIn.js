@@ -11,12 +11,10 @@ import {
   Image,
   Text,
   TouchableOpacity,
-  TouchableNativeFeedback,
-  TouchableHighlight,
   StyleSheet,
   Platform,
 } from 'react-native';
-// import { TouchableOpacity } from 'react-native-gesture-handler';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 import { useForm } from 'react-hook-form';
 import CustomTextInput from 'ping/src/components/CustomTextInput';
@@ -48,7 +46,7 @@ function SignIn() {
         })}
       />
 
-      <View>
+      <KeyboardAwareScrollView contentContainerStyle={{ alignItems: 'center' }}>
         <CustomTextInput
           control={control}
           errors={errors}
@@ -83,25 +81,26 @@ function SignIn() {
 
         <TouchableOpacity
           onPress={() => console.log('forgot password pressed')}
-          hitSlop={{ left: 0, top: 30, right: 10, bottom: 10 }}
+          style={styles.forgotPassword}
         >
-          <Text style={[textStyles.smallRegular, styles.forgotPassword]}>
+          <Text style={[textStyles.smallRegular, { color: colors.primary }]}>
             Forgot password
           </Text>
         </TouchableOpacity>
-      </View>
 
-      <CustomButton
-        text="Sign In"
-        onPress={handleSubmit(onSubmit)}
-        isPrimary={true}
-      />
+        <CustomButton
+          text="Sign In"
+          onPress={handleSubmit(onSubmit)}
+          isPrimary={true}
+        />
 
-      <CustomButton
-        icon={googleLogo}
-        text="Sign in with Google"
-        onPress={() => console.log('sign in with google pressed')}
-      />
+        <CustomButton
+          icon={googleLogo}
+          text="Sign in with Google"
+          onPress={() => console.log('sign in with google pressed')}
+        />
+        {/* </View> */}
+      </KeyboardAwareScrollView>
     </SafeAreaView>
   );
 }
@@ -130,12 +129,11 @@ const styles = StyleSheet.create({
   },
   forgotPassword: {
     color: colors.primary,
-    position: 'absolute',
+    alignSelf: 'flex-end',
+    paddingVertical: 15,
+    paddingHorizontal: 40,
     top: -30,
-    right: -15,
-    paddingVertical: 10,
-    paddingHorizontal: 20,
-    zIndex: 1,
+    right: -35,
   },
 });
 
