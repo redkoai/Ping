@@ -2,9 +2,9 @@ import { textStyles, colors } from 'ping/src/styles/styles';
 import { heightPercentageToDP, widthPercentageToDP } from 'ping/util/scaler';
 
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Image, Text, StyleSheet, TouchableOpacity } from 'react-native';
 
-function CustomButton({ text, onPress, isPrimary }) {
+function CustomButton({ icon, text, onPress, isPrimary }) {
   return (
     <View style={styles.container}>
       <TouchableOpacity
@@ -14,6 +14,7 @@ function CustomButton({ text, onPress, isPrimary }) {
         ]}
         onPress={onPress}
       >
+        {icon && <Image source={icon} style={styles.icon} />}
         <Text
           style={[
             textStyles.bigBold,
@@ -30,6 +31,7 @@ function CustomButton({ text, onPress, isPrimary }) {
 const styles = StyleSheet.create({
   container: {
     marginTop: 30,
+    marginBottom: -8,
   },
   button: {
     width: widthPercentageToDP(80),
@@ -42,13 +44,22 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.3,
     shadowRadius: 4,
-    elevation: 1,
+    elevation: 4,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   buttonPrimary: {
     backgroundColor: colors.primary,
   },
   buttonSecondary: {
     backgroundColor: 'white',
+  },
+  icon: {
+    resizeMode: 'contain',
+    width: 35,
+    height: 24,
+    marginRight: 8,
   },
   textPrimary: {
     color: 'white',

@@ -1,6 +1,7 @@
 import { textStyles, colors } from 'ping/src/styles/styles';
 import { widthPercentageToDP, heightPercentageToDP } from 'ping/util/scaler';
 import pingLogo from 'ping/assets/pingLogo.png';
+import googleLogo from 'ping/assets/Google_G_Logo.png';
 
 import React from 'react';
 import {
@@ -22,20 +23,19 @@ function SignIn() {
   const onSubmit = (data) => console.log(data);
 
   return (
-    <SafeAreaView style={{ flex: 1, alignItems: 'center', backgroundColor: 'white' }}>
+    <SafeAreaView
+      style={{ flex: 1, alignItems: 'center', backgroundColor: 'white' }}
+    >
       <StatusBar backgroundColor={colors.primary} />
 
       <View style={styles.topBar}>
-        <View/>
+        <View />
         <TouchableOpacity onPress={() => console.log('skip pressed')}>
           <Text style={[textStyles.smallBold, styles.skipButton]}>SKIP</Text>
         </TouchableOpacity>
       </View>
 
-      <Image
-        source={pingLogo}
-        style={styles.logo}
-      />
+      <Image source={pingLogo} style={styles.logo} />
 
       <View>
         <CustomTextInput
@@ -84,6 +84,12 @@ function SignIn() {
         onPress={handleSubmit(onSubmit)}
         isPrimary={true}
       />
+
+      <CustomButton
+        icon={googleLogo}
+        text="Sign in with Google"
+        onPress={() => console.log('sign in with google pressed')}
+      />
     </SafeAreaView>
   );
 }
@@ -98,7 +104,7 @@ const styles = StyleSheet.create({
   },
   skipButton: {
     color: colors.primary,
-    paddingVertical:10,
+    paddingVertical: 10,
     paddingHorizontal: 20,
     position: 'relative',
     right: -10,
