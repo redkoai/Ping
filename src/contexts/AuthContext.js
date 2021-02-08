@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import * as GoogleSignIn from 'expo-google-sign-in';
-import EncryptedStorage from 'react-native-encrypted-storage';
 
 const AuthContext = React.createContext();
 
@@ -11,7 +10,7 @@ export function AuthProvider({ children }) {
   const googleInitAsync = async () => {
     await GoogleSignIn.initAsync({
       // You may ommit the clientId when the firebase `googleServicesFile` is configured
-      clientId: '<YOUR_IOS_CLIENT_ID>',
+      clientId: process.env.GOOGLE_CLIENT_ID,
     });
     _googleSyncUserWithStateAsync();
   };
@@ -41,6 +40,7 @@ export function AuthProvider({ children }) {
   return (
     <AuthContext.Provider
       value={{
+        user,
         googleSignInAsync,
         googleSignOutAsync,
       }}

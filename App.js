@@ -1,5 +1,6 @@
 // import 'react-native-gesture-handler';
 import { StatusBar } from 'expo-status-bar';
+import { AuthProvider } from 'ping/src/contexts/AuthContext';
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
@@ -32,20 +33,22 @@ export default function App() {
   if (!fontsLoaded) return null;
 
   return (
-    <NavigationContainer>
-      <Stack.Navigator
-        screenOptions={{
-          headerShown: false,
-        }}
-      >
-        <Stack.Screen name="SignIn" component={SignIn} />
-        <Stack.Screen name="ResetPassword" component={ResetPassword} />
-        <Stack.Screen name="SignUp" component={SignUp} />
-        <Stack.Screen name="HomeScreenEmpty" component={HomeScreenEmpty} />
-        <Stack.Screen name="Events" component={Events} />
-        <Stack.Screen name="Messages" component={Messages} />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <AuthProvider>
+      <NavigationContainer>
+        <Stack.Navigator
+          screenOptions={{
+            headerShown: false,
+          }}
+        >
+          <Stack.Screen name="SignIn" component={SignIn} />
+          <Stack.Screen name="ResetPassword" component={ResetPassword} />
+          <Stack.Screen name="SignUp" component={SignUp} />
+          <Stack.Screen name="HomeScreenEmpty" component={HomeScreenEmpty} />
+          <Stack.Screen name="Events" component={Events} />
+          <Stack.Screen name="Messages" component={Messages} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </AuthProvider>
   );
 }
 
