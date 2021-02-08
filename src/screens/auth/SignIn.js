@@ -3,7 +3,7 @@ import { widthPercentageToDP, heightPercentageToDP } from 'ping/util/scaler';
 import pingLogo from 'ping/assets/pingLogo.png';
 import googleLogo from 'ping/assets/Google_G_Logo.png';
 
-import React, { useEffect } from 'react';
+import React from 'react';
 import {
   StatusBar,
   SafeAreaView,
@@ -12,7 +12,6 @@ import {
   Text,
   TouchableOpacity,
   StyleSheet,
-  Platform,
   Dimensions,
 } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
@@ -24,14 +23,14 @@ import * as yup from 'yup';
 import { EmailInput, PasswordInput } from 'ping/src/components/CustomTextInput';
 import CustomButton from 'ping/src/components/CustomButton';
 
-const validationSchema = yup.object().shape({
+const VALIDATION_SCHEMA = yup.object().shape({
   email: yup.string().required('required').email('must be email'),
   password: yup.string().required('required').min(6, 'must be 6 or more chars'),
 });
 
 function SignIn() {
   const { control, handleSubmit, errors, clearErrors } = useForm({
-    resolver: yupResolver(validationSchema),
+    resolver: yupResolver(VALIDATION_SCHEMA),
   });
   const onSubmit = (data) => {
     clearErrors;
