@@ -1,11 +1,6 @@
-// import 'react-native-gesture-handler';
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { AuthProvider } from './src/contexts/AuthContext';
-import { StyleSheet, Text, View } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
-import NavBar from './src/navbars/NarBar.js';
+
 import {
   useFonts,
   FiraSans_400Regular,
@@ -14,16 +9,12 @@ import {
   FiraSans_700Bold,
 } from '@expo-google-fonts/fira-sans';
 
-const Stack = createStackNavigator();
+// import 'react-native-gesture-handler';
+import NavBar from './src/navbars/NarBar.js';
+import { StatusBar } from 'expo-status-bar';
+import Navigation from './src/navigators/NavigationContainer';
 
-import SignIn from './src/screens/auth/SignIn';
-import ResetPassword from './src/screens/auth/ResetPassword';
-import SignUp from './src/screens/auth/SignUp';
-import HomeScreenEmpty from './src/screens/home/HomeScreenEmpty';
-import Events from './src/screens/home/Events';
-import Messages from './src/screens/home/Messages';
-
-export default function App() {
+function App() {
   const [fontsLoaded] = useFonts({
     FiraSans_400Regular,
     FiraSans_500Medium,
@@ -34,29 +25,9 @@ export default function App() {
 
   return (
     <AuthProvider>
-      <NavigationContainer>
-        <Stack.Navigator
-          screenOptions={{
-            headerShown: false,
-          }}
-        >
-          <Stack.Screen name="SignIn" component={SignIn} />
-          <Stack.Screen name="ResetPassword" component={ResetPassword} />
-          <Stack.Screen name="SignUp" component={SignUp} />
-          <Stack.Screen name="HomeScreenEmpty" component={HomeScreenEmpty} />
-          <Stack.Screen name="Events" component={Events} />
-          <Stack.Screen name="Messages" component={Messages} />
-        </Stack.Navigator>
-      </NavigationContainer>
+      <Navigation />
     </AuthProvider>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: 'green',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default App;

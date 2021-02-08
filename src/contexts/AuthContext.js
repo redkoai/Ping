@@ -5,7 +5,7 @@ const AuthContext = React.createContext();
 
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
-  useEffect(googleInitAsync, []);
+  useEffect(() => googleInitAsync(), []);
 
   const googleInitAsync = async () => {
     await GoogleSignIn.initAsync({

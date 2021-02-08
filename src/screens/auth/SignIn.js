@@ -3,7 +3,8 @@ import { widthPercentageToDP, heightPercentageToDP } from 'ping/util/scaler';
 import pingLogo from 'ping/assets/pingLogo.png';
 import googleLogo from 'ping/assets/Google_G_Logo.png';
 
-import React from 'react';
+import React, { useContext } from 'react';
+import AuthContext from 'ping/src/contexts/AuthContext';
 import {
   StatusBar,
   SafeAreaView,
@@ -26,6 +27,7 @@ import { EmailInput, PasswordInput } from 'ping/src/components/CustomTextInput';
 import CustomButton from 'ping/src/components/CustomButton';
 
 function SignIn({ navigation }) {
+  const { user, googleSignInAsync } = useContext(AuthContext);
   const { control, handleSubmit, errors, clearErrors } = useForm({
     resolver: yupResolver(AUTH_SCHEMA),
   });
@@ -61,7 +63,11 @@ function SignIn({ navigation }) {
         <Spacer height={23} />
 
         <EmailInput control={control} errors={errors} />
-        <PasswordInput control={control} errors={errors} forgotPasswordNav={navigation} />
+        <PasswordInput
+          control={control}
+          errors={errors}
+          forgotPasswordNav={navigation}
+        />
         <Spacer height={1.5} />
 
         <CustomButton
