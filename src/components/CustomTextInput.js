@@ -32,7 +32,7 @@ function CustomTextInput({
     autoFocus,
     secureTextEntry,
   },
-  forgotPassword = false,
+  forgotPasswordNav = false,
   ...inputProps
 }) {
   const [focus, setFocus] = useState(rules.autoFocus);
@@ -92,9 +92,9 @@ function CustomTextInput({
           <View
           // style={!forgotPassword && styles.forgotPassword}
           >
-            {forgotPassword && (
+            {forgotPasswordNav && (
               <TouchableOpacity
-                onPress={() => console.log('forgot password pressed')}
+                onPress={() => forgotPasswordNav.navigate('ResetPassword')}
                 style={styles.forgotPassword}
               >
                 <Text
@@ -152,7 +152,7 @@ export function PasswordInput({
     placeholder: '',
     defaultValue: '',
   },
-  forgotPassword,
+  forgotPasswordNav,
   ...inputProps
 }) {
   return (
@@ -172,7 +172,7 @@ export function PasswordInput({
         autoCorrect: false,
         secureTextEntry: true,
       }}
-      forgotPassword={forgotPassword}
+      forgotPasswordNav={forgotPasswordNav}
       {...inputProps}
     />
   );
