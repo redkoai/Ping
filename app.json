@@ -17,11 +17,13 @@
       "**/*"
     ],
     "ios": {
+      "bundleIdentifier": "com.redko.ping",
+      "googleServicesFile": "./GoogleService-Info.plist",
       "supportsTablet": true
     },
     "android": {
       "package": "com.redko.ping",
-      "googleServicesFile": "",
+      "googleServicesFile": "./google-services.json",
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
