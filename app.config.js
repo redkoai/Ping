@@ -5,6 +5,7 @@ export default ({ config }) => {
   return {
     ...config,
     ios: {
+      ...config.ios,
       config: {
         googleSignIn: {
           reservedClientId: process.env.GOOGLE_CLIENT_ID,
