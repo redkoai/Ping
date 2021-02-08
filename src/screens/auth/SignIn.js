@@ -20,6 +20,8 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 
+import Spacer from 'ping/src/components/Spacer';
+import TopBar from 'ping/src/components/TopBar';
 import { EmailInput, PasswordInput } from 'ping/src/components/CustomTextInput';
 import CustomButton from 'ping/src/components/CustomButton';
 
@@ -28,7 +30,7 @@ const VALIDATION_SCHEMA = yup.object().shape({
   password: yup.string().required('required').min(6, 'must be 6 or more chars'),
 });
 
-function SignIn() {
+function SignIn({ navigation }) {
   const { control, handleSubmit, errors, clearErrors } = useForm({
     resolver: yupResolver(VALIDATION_SCHEMA),
   });
@@ -47,25 +49,26 @@ function SignIn() {
       }}
     >
       <StatusBar backgroundColor={colors.primary} />
+
+      <TopBar>
+        <Spacer />
+        <TouchableOpacity
+          onPress={() => navigation.navigate('HomeScreenEmpty')}
+        >
+          <Text style={[textStyles.smallBold, styles.skipButton]}>SKIP</Text>
+        </TouchableOpacity>
+      </TopBar>
+
       <KeyboardAwareScrollView
         contentContainerStyle={{ flex: 1, alignItems: 'center' }}
       >
-        <View style={styles.topBar}>
-          <View />
-          <TouchableOpacity onPress={() => console.log('skip pressed')}>
-            <Text style={[textStyles.smallBold, styles.skipButton]}>SKIP</Text>
-          </TouchableOpacity>
-        </View>
-
         <Image source={pingLogo} style={styles.logo} />
-
-        <View style={{ height: heightPercentageToDP(29) }} />
+        <Spacer height={23} />
 
         <EmailInput control={control} errors={errors} />
         <PasswordInput control={control} errors={errors} forgotPassword />
-
-        <View style={{ height: heightPercentageToDP(1.5) }} />
-
+        <Spacer height={1.5} />
+        
         <CustomButton
           text="Sign In"
           onPress={handleSubmit(onSubmit)}
@@ -95,13 +98,6 @@ function SignIn() {
 }
 
 const styles = StyleSheet.create({
-  topBar: {
-    top: 12,
-    width: widthPercentageToDP(90),
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
   skipButton: {
     color: colors.primary,
     paddingVertical: 10,
@@ -111,7 +107,6 @@ const styles = StyleSheet.create({
   },
   logo: {
     position: 'absolute',
-    top: heightPercentageToDP(10),
     height: heightPercentageToDP(22),
     width: widthPercentageToDP(50),
     resizeMode: 'contain',
