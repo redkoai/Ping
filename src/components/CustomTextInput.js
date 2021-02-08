@@ -23,7 +23,6 @@ function CustomTextInput({
     label: '',
     placeholder: '',
     defaultValue: '',
-    validation: {},
   },
   rules = {
     contentType,
@@ -33,16 +32,20 @@ function CustomTextInput({
     autoFocus,
     secureTextEntry,
   },
+  forgotPassword = false,
+  ...inputProps
 }) {
   const [focus, setFocus] = useState(rules.autoFocus);
   const [secure, setSecure] = useState(rules.secureTextEntry);
   return (
     <View style={styles.container}>
-      <Text style={[textStyles.normalSemiBold, styles.offsetMargin]}>
+      <Text style={[textStyles.normalSemiBold, styles.marginOffset]}>
         {input.label}
       </Text>
       <Controller
         control={control}
+        name={input.name}
+        defaultValue={input.defaultValue}
         render={({ onChange, onBlur, value }) => (
           <View style={styles.inputContainer}>
             <TextInput
@@ -64,6 +67,7 @@ function CustomTextInput({
               onFocus={() => setFocus(true)}
               onBlur={() => setFocus(false)}
               secureTextEntry={secure}
+              {...inputProps}
             />
             {rules.secureTextEntry && (
               <TouchableOpacity
@@ -79,20 +83,98 @@ function CustomTextInput({
             )}
           </View>
         )}
-        name={input.name}
-        rules={input.validation}
-        defaultValue={input.defaultValue}
       />
       {
-        <View>
-          <Text
-            style={[textStyles.smallRegular, styles.error, styles.offsetMargin]}
-          >
+        <View style={[styles.barBelowInput, styles.marginOffset]}>
+          <Text style={[textStyles.smallRegular, styles.error]}>
             {error ? error.message : ' '}
           </Text>
+          <View
+          // style={!forgotPassword && styles.forgotPassword}
+          >
+            {forgotPassword && (
+              <TouchableOpacity
+                onPress={() => console.log('forgot password pressed')}
+                style={styles.forgotPassword}
+              >
+                <Text
+                  style={[textStyles.smallRegular, { color: colors.primary }]}
+                >
+                  Forgot password
+                </Text>
+              </TouchableOpacity>
+            )}
+          </View>
         </View>
       }
     </View>
+  );
+}
+
+export function EmailInput({
+  control,
+  errors,
+  input = {
+    name: 'email',
+    label: 'Email',
+    placeholder: '',
+    defaultValue: '',
+  },
+  ...inputProps
+}) {
+  return (
+    <CustomTextInput
+      control={control}
+      error={errors?.email}
+      input={{
+        name: input.name,
+        label: input.label,
+        placeholder: input.placeholder,
+        defaultValue: input.defaultValue,
+      }}
+      rules={{
+        contentType: 'emailAddress',
+        keyboardType: 'email-address',
+        autoCapitalize: 'none',
+        autoCorrect: false,
+      }}
+      {...inputProps}
+    />
+  );
+}
+
+export function PasswordInput({
+  control,
+  errors,
+  input = {
+    name: 'password',
+    label: 'Password',
+    placeholder: '',
+    defaultValue: '',
+  },
+  forgotPassword,
+  ...inputProps
+}) {
+  return (
+    <CustomTextInput
+      control={control}
+      error={errors?.password}
+      input={{
+        name: input.name,
+        label: input.label,
+        placeholder: input.placeholder,
+        defaultValue: input.defaultValue,
+      }}
+      rules={{
+        contentType: 'password',
+        keyboardType: 'default',
+        autoCapitalize: 'none',
+        autoCorrect: false,
+        secureTextEntry: true,
+      }}
+      forgotPassword={forgotPassword}
+      {...inputProps}
+    />
   );
 }
 
@@ -100,7 +182,7 @@ const styles = StyleSheet.create({
   container: {
     width: widthPercentageToDP(90),
     marginTop: heightPercentageToDP(0.5),
-    marginBottom: heightPercentageToDP(2),
+    marginBottom: heightPercentageToDP(0.5),
   },
   inputContainer: {
     marginVertical: heightPercentageToDP(0.3),
@@ -128,11 +210,25 @@ const styles = StyleSheet.create({
     right: 15,
     top: heightPercentageToDP(1.4),
   },
+  barBelowInput: {
+    marginTop: -10,
+    width: widthPercentageToDP(97),
+    height: 45,
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
   error: {
     color: colors.redError,
   },
-  offsetMargin: {
-    marginLeft: 2,
+  forgotPassword: {
+    color: colors.primary,
+    paddingVertical: 15,
+    paddingHorizontal: 40,
+  },
+  marginOffset: {
+    marginHorizontal: widthPercentageToDP(1),
   },
 });
 

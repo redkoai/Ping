@@ -21,7 +21,7 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 
-import CustomTextInput from 'ping/src/components/CustomTextInput';
+import { EmailInput, PasswordInput } from 'ping/src/components/CustomTextInput';
 import CustomButton from 'ping/src/components/CustomButton';
 
 const validationSchema = yup.object().shape({
@@ -48,73 +48,30 @@ function SignIn() {
       }}
     >
       <StatusBar backgroundColor={colors.primary} />
-
-      <View style={styles.topBar}>
-        <View />
-        <TouchableOpacity onPress={() => console.log('skip pressed')}>
-          <Text style={[textStyles.smallBold, styles.skipButton]}>SKIP</Text>
-        </TouchableOpacity>
-      </View>
-
-      <Image source={pingLogo} style={styles.logo} />
-
-      <View
-        style={Platform.select({
-          android: { height: heightPercentageToDP(29) },
-          ios: { height: heightPercentageToDP(25) },
-        })}
-      />
-
       <KeyboardAwareScrollView
         contentContainerStyle={{ flex: 1, alignItems: 'center' }}
       >
-        <CustomTextInput
-          control={control}
-          error={errors?.email}
-          input={{
-            name: 'email',
-            label: 'Email',
-            placeholder: 'bobbybrown@mail.com',
-          }}
-          rules={{
-            contentType: 'email-address',
-            keyboardType: 'email-address',
-            autoCapitalize: 'none',
-            autoCorrect: false,
-          }}
-        />
+        <View style={styles.topBar}>
+          <View />
+          <TouchableOpacity onPress={() => console.log('skip pressed')}>
+            <Text style={[textStyles.smallBold, styles.skipButton]}>SKIP</Text>
+          </TouchableOpacity>
+        </View>
 
-        <CustomTextInput
-          control={control}
-          error={errors?.password}
-          input={{
-            name: 'password',
-            label: 'Password',
-            placeholder: '**********',
-          }}
-          rules={{
-            contentType: 'password',
-            autoCapitalize: 'none',
-            autoCorrect: false,
-            secureTextEntry: true,
-          }}
-        />
+        <Image source={pingLogo} style={styles.logo} />
 
-        <TouchableOpacity
-          onPress={() => console.log('forgot password pressed')}
-          style={styles.forgotPassword}
-        >
-          <Text style={[textStyles.smallRegular, { color: colors.primary }]}>
-            Forgot password
-          </Text>
-        </TouchableOpacity>
+        <View style={{ height: heightPercentageToDP(29) }} />
+
+        <EmailInput control={control} errors={errors} />
+        <PasswordInput control={control} errors={errors} forgotPassword />
+
+        <View style={{ height: heightPercentageToDP(1.5) }} />
 
         <CustomButton
           text="Sign In"
           onPress={handleSubmit(onSubmit)}
           isPrimary={true}
         />
-
         <CustomButton
           icon={googleLogo}
           text="Sign in with Google"
@@ -159,14 +116,6 @@ const styles = StyleSheet.create({
     height: heightPercentageToDP(22),
     width: widthPercentageToDP(50),
     resizeMode: 'contain',
-  },
-  forgotPassword: {
-    color: colors.primary,
-    alignSelf: 'flex-end',
-    paddingVertical: 15,
-    paddingHorizontal: 40,
-    top: -48,
-    right: -35,
   },
   registerButton: {
     position: 'absolute',
