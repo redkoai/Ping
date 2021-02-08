@@ -4,7 +4,7 @@ import pingLogo from 'ping/assets/pingLogo.png';
 import googleLogo from 'ping/assets/Google_G_Logo.png';
 
 import React, { useContext } from 'react';
-import AuthContext from 'ping/src/contexts/AuthContext';
+// import AuthContext from 'ping/src/contexts/AuthContext';
 import {
   StatusBar,
   SafeAreaView,
@@ -12,6 +12,7 @@ import {
   Image,
   Text,
   TouchableOpacity,
+  ActivityIndicator,
   StyleSheet,
   Dimensions,
 } from 'react-native';
@@ -26,20 +27,92 @@ import TopBar from 'ping/src/components/TopBar';
 import { EmailInput, PasswordInput } from 'ping/src/components/CustomTextInput';
 import CustomButton from 'ping/src/components/CustomButton';
 
-function SignIn({ navigation }) {
-  const { user, googleSignInAsync } = useContext(AuthContext);
+import 'firebase/firestore';
+import firebase from 'firebase';
+import * as Google from 'expo-google-app-auth';
+import * as GoogleSignIn from 'expo-google-sign-in';
 
-  const { control, handleSubmit, errors, clearErrors } = useForm({
+import { ANDROID_CLIENT_ID, IOS_CLIENT_ID } from '@env';
+
+const androidClientId = {
+  ANDROID_CLIENT_ID,
+};
+const iosClientId = {
+  IOS_CLIENT_ID,
+};
+
+function SignIn({ navigation }) {
+  // const { user } = useContext(AuthContext);
+
+  const {
+    control,
+    handleSubmit,
+    errors,
+    clearErrors,
+    setError,
+    formState,
+  } = useForm({
     resolver: yupResolver(AUTH_SCHEMA),
   });
-  const signIn = (data) => {
-    clearErrors;
-    console.log(data);
+
+  const onLoginSuccess = () => {
+    navigation.navigate('HomeScreenEmpty');
   };
-  const googleSignIn = async () => {
-    alert('sign in with google pressed');
-    await googleSignInAsync();
-    alert(user);
+  const onLoginFailure = (errorMessage) => {
+    setError(errorMessage);
+  };
+  const renderLoading = () => {
+    if (formState.isSubmitting) {
+      return (
+        <View>
+          <ActivityIndicator size={'large'} />
+        </View>
+      );
+    }
+  };
+
+  const signInWithEmail = async (data) => {
+    await firebase
+      .auth()
+      .signInWithEmailAndPassword(data.email, data.password)
+      .then(onLoginSuccess())
+      .catch((error) => {
+        let errorCode = error.code;
+        let errorMessage = error.message;
+        if (errorCode == 'auth/weak-password') {
+          onLoginFailure('Weak Password!');
+        } else {
+          onLoginFailure(errorMessage);
+        }
+      });
+  };
+
+  const signInWithGoogle = async () => {
+    try {
+      const result = await Expo.Google.logInAsync({
+        androidClientId: androidClientId,
+        iosClientId: iosClientId,
+        behavior: 'web',
+        iosClientId: '', //enter ios client id
+        scopes: ['profile', 'email'],
+      });
+
+      if (result.type === 'success') {
+        await firebase
+          .auth()
+          .setPersistence(firebase.auth.Auth.Persistence.LOCAL);
+        const credential = firebase.auth.GoogleAuthProvider.credential(
+          data.idToken,
+          data.accessToken,
+        );
+        const googleProfileData = await firebase
+          .auth()
+          .signInWithCredential(credential);
+        onLoginSuccess();
+      }
+    } catch ({ message }) {
+      alert('login: Error:' + message);
+    }
   };
 
   return (
@@ -75,16 +148,16 @@ function SignIn({ navigation }) {
           forgotPasswordNav={navigation}
         />
         <Spacer height={1.5} />
-
+        {renderLoading()}
         <CustomButton
           text="Sign In"
-          onPress={handleSubmit(signIn)}
+          onPress={handleSubmit(signInWithEmail)}
           isPrimary={true}
         />
         <CustomButton
           icon={googleLogo}
           text="Sign in with Google"
-          onPress={googleSignIn}
+          onPress={signInWithGoogle}
         />
 
         <View style={styles.registerButton}>
