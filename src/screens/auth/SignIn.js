@@ -28,12 +28,18 @@ import CustomButton from 'ping/src/components/CustomButton';
 
 function SignIn({ navigation }) {
   const { user, googleSignInAsync } = useContext(AuthContext);
+
   const { control, handleSubmit, errors, clearErrors } = useForm({
     resolver: yupResolver(AUTH_SCHEMA),
   });
   const signIn = (data) => {
     clearErrors;
     console.log(data);
+  };
+  const googleSignIn = async () => {
+    alert('sign in with google pressed');
+    await googleSignInAsync();
+    alert(user);
   };
 
   return (
@@ -78,7 +84,7 @@ function SignIn({ navigation }) {
         <CustomButton
           icon={googleLogo}
           text="Sign in with Google"
-          onPress={() => console.log('sign in with google pressed')}
+          onPress={googleSignIn}
         />
 
         <View style={styles.registerButton}>
