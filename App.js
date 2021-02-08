@@ -1,7 +1,7 @@
 // import 'react-native-gesture-handler';
 import { StatusBar } from 'expo-status-bar';
-import { AuthProvider } from 'ping/src/contexts/AuthContext';
 import React from 'react';
+import { AuthProvider } from './src/contexts/AuthContext';
 import { StyleSheet, Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
