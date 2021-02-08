@@ -16,6 +16,7 @@ import {
 const Stack = createStackNavigator();
 
 import SignIn from './src/screens/auth/SignIn';
+import SignUp from './src/screens/auth/SignUp';
 import HomeScreenEmpty from './src/screens/home/HomeScreenEmpty';
 import Events from './src/screens/home/Events';
 import Messages from './src/screens/home/Messages';
@@ -37,6 +38,7 @@ export default function App() {
         }}
       >
         <Stack.Screen name="SignIn" component={SignIn} />
+        <Stack.Screen name="SignUp" component={SignUp} />
         <Stack.Screen name="HomeScreenEmpty" component={HomeScreenEmpty} />
         <Stack.Screen name="Events" component={Events} />
         <Stack.Screen name="Messages" component={Messages} />
