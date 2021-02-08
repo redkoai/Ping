@@ -212,7 +212,7 @@ const styles = StyleSheet.create({
   },
   barBelowInput: {
     marginTop: -10,
-    width: widthPercentageToDP(97),
+    width: widthPercentageToDP(88),
     height: 45,
     display: 'flex',
     flexDirection: 'row',
@@ -225,7 +225,7 @@ const styles = StyleSheet.create({
   forgotPassword: {
     color: colors.primary,
     paddingVertical: 15,
-    paddingHorizontal: 40,
+    paddingLeft: 20,
   },
   marginOffset: {
     marginHorizontal: widthPercentageToDP(1),

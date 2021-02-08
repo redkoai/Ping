@@ -1,8 +1,22 @@
 import * as yup from 'yup';
 
+export const EMAIL_SCHEMA = yup.object().shape({
+  email: yup
+    .string()
+    .required('You must enter an email.')
+    .email('Please enter a valid email address.'),
+});
+
+export const PASSWORD_SCHEMA = yup.object().shape({
+  password: yup
+    .string()
+    .required('You must enter a password.')
+    .min(6, 'Password must be at least 6 characters or more.'),
+});
+
 const AUTH_SCHEMA = yup.object().shape({
-  email: yup.string().required('required').email('must be email'),
-  password: yup.string().required('required').min(6, 'must be 6 or more chars'),
+  ...EMAIL_SCHEMA.fields,
+  ...PASSWORD_SCHEMA.fields,
 });
 
 export default AUTH_SCHEMA;

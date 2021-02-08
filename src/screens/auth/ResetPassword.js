@@ -17,17 +17,17 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import AUTH_SCHEMA from 'ping/src/schema/authSchema';
+import { EMAIL_SCHEMA } from 'ping/src/schema/authSchema';
 
 import Spacer from 'ping/src/components/Spacer';
 import BackChevron from 'ping/src/components/BackChevron';
 import TopBar from 'ping/src/components/TopBar';
-import { EmailInput, PasswordInput } from 'ping/src/components/CustomTextInput';
+import { EmailInput } from 'ping/src/components/CustomTextInput';
 import CustomButton from 'ping/src/components/CustomButton';
 
 function ResetPassword({ navigation }) {
   const { control, handleSubmit, errors, clearErrors } = useForm({
-    resolver: yupResolver(AUTH_SCHEMA),
+    resolver: yupResolver(EMAIL_SCHEMA),
   });
   const sendEmail = (data) => {
     clearErrors;
