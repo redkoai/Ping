@@ -28,7 +28,7 @@ import { EmailInput } from 'ping/src/components/CustomTextInput';
 import CustomButton from 'ping/src/components/CustomButton';
 
 function ResetPassword({ navigation }) {
-  const { resetPasswordEmailAsync } = useContext(AuthContext);
+  const { passwordResetEmailAsync } = useContext(AuthContext);
 
   const { control, handleSubmit, errors, setError, formState } = useForm({
     resolver: yupResolver(EMAIL_SCHEMA),
@@ -76,7 +76,7 @@ function ResetPassword({ navigation }) {
           text="Send Email"
           onPress={handleSubmit(
             async (data) =>
-              await resetPasswordEmailAsync(data, onSuccess, onFailure),
+              await passwordResetEmailAsync(data, onSuccess, onFailure),
           )}
           isPrimary={true}
         />
