@@ -32,7 +32,7 @@ function NavBar_profile({}){
                     <Image source={Eventsbtn} style={{height: heightPercentageToDP('15'), width :widthPercentageToDP('12'),  resizeMode:'contain', bottom: heightPercentageToDP('3') }}/>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => {
-                    // navigation.navigate('Invite')
+                     navigation.navigate('Details')
                     }}>
                     <Image source={Invitebtn} style={{height: heightPercentageToDP('15'), width :widthPercentageToDP('12'),  resizeMode:'contain', bottom: heightPercentageToDP('3')}}/>
                 </TouchableOpacity>
@@ -42,7 +42,7 @@ function NavBar_profile({}){
                     <Image source={Messagesbtn} style={{height: heightPercentageToDP('15'), width :widthPercentageToDP('12'),  resizeMode:'contain', bottom: heightPercentageToDP('3')}} />
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() =>{
-                    // navigation.navigate('Account')
+                    navigation.navigate('Accounts')
                     }}>
                     <Image source={Accountsbtn} style={{height: heightPercentageToDP('15'), width :widthPercentageToDP('12'),  resizeMode:'contain', bottom: heightPercentageToDP('3')}}/>
                 </TouchableOpacity>

@@ -26,7 +26,7 @@ function Events({}) {
                 <TouchableOpacity onPress={() => { 
                     // navigation.navigate('HomeScreenEmpty')
                 }}>
-                    <Image source={createNewEventBtn} style={{height: heightPercentageToDP('7'), width :widthPercentageToDP('70'), marginTop: heightPercentageToDP('5'), resizeMode:'contain', left:heightPercentageToDP('5') }} />
+                    <Image source={createNewEventBtn} style={{height: heightPercentageToDP('10'), width :widthPercentageToDP('70'), marginTop: heightPercentageToDP('5'), resizeMode:'contain', left:heightPercentageToDP('5') }} />
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => { 
                     // navigation.navigate('HomeScreenEmpty')
