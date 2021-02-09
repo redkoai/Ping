@@ -28,9 +28,9 @@ import CustomButton from 'ping/src/components/CustomButton';
 
 import 'firebase/firestore';
 import firebase from 'firebase';
-import * as Google from 'expo-google-app-auth';
+import * as GoogleSignIn from 'expo-google-sign-in';
 import * as Segment from 'expo-analytics-segment';
-export const isAndroid = () => Platform.OS === 'android';
+
 import { ANDROID_CLIENT_ID, IOS_CLIENT_ID } from '@env';
 
 const androidClientId = {
@@ -157,11 +157,10 @@ function SignUp({ navigation }) {
 
   const signInWithGoogleAsync = async () => {
     try {
-      const result = await Google.logInAsync({
+      const result = await GoogleSignIn.logInAsync({
         androidClientId: androidClientId,
         iosClientId: iosClientId,
         behavior: 'web',
-        iosClientId: '', //enter ios client id
         scopes: ['profile', 'email'],
       });
 
