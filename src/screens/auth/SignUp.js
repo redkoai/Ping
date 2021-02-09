@@ -206,6 +206,8 @@ function SignUp({ navigation }) {
         <PasswordInput control={control} errors={errors} />
         <Spacer height={1.5} />
 
+        {renderLoading()}
+
         <CustomButton
           text="Sign Up"
           onPress={handleSubmit(signInWithEmail)}

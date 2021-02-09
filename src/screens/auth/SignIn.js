@@ -148,7 +148,9 @@ function SignIn({ navigation }) {
           forgotPasswordNav={navigation}
         />
         <Spacer height={1.5} />
+
         {renderLoading()}
+        
         <CustomButton
           text="Sign In"
           onPress={handleSubmit(signInWithEmail)}
