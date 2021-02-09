@@ -93,15 +93,18 @@ function SignIn({ navigation }) {
 
         <CustomButton
           text="Sign In"
-          onPress={handleSubmit(() =>
-            signInWithEmailAsync(...arguments, onLoginSuccess, onLoginFailure),
+          onPress={handleSubmit(
+            async (data) =>
+              await signInWithEmailAsync(data, onLoginSuccess, onLoginFailure),
           )}
           isPrimary={true}
         />
         <CustomButton
           icon={googleLogo}
           text="Sign in with Google"
-          onPress={() => signInWithGoogleAsync(onLoginSuccess, onLoginFailure)}
+          onPress={async () =>
+            await signInWithGoogleAsync(onLoginSuccess, onLoginFailure)
+          }
         />
 
         <View style={styles.registerButton}>

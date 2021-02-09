@@ -34,14 +34,7 @@ function SignUp({ navigation }) {
     AuthContext,
   );
 
-  const {
-    control,
-    handleSubmit,
-    errors,
-    clearErrors,
-    setError,
-    formState,
-  } = useForm({
+  const { control, handleSubmit, errors, setError, formState } = useForm({
     resolver: yupResolver(AUTH_SCHEMA),
   });
 
@@ -90,15 +83,18 @@ function SignUp({ navigation }) {
 
         <CustomButton
           text="Sign Up"
-          onPress={handleSubmit(() =>
-            signUpwithEmailAsync(...arguments, onLoginSuccess, onLoginFailure),
+          onPress={handleSubmit(
+            async (data) =>
+              await signUpwithEmailAsync(data, onLoginSuccess, onLoginFailure),
           )}
           isPrimary={true}
         />
         <CustomButton
           icon={googleLogo}
           text="Sign up with Google"
-          onPress={() => signInWithGoogleAsync(onLoginSuccess, onLoginFailure)}
+          onPress={async () =>
+            await signInWithGoogleAsync(onLoginSuccess, onLoginFailure)
+          }
         />
       </KeyboardAwareScrollView>
     </SafeAreaView>
