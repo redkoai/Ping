@@ -12,13 +12,12 @@ export function AuthProvider({ children }) {
   const [user, setUser] = useState({});
 
   useEffect(() => {
-    GoogleSignIn.initAsync({clientId: IOS_RESERVED_CLIENT_ID,})
+    GoogleSignIn.initAsync({ clientId: IOS_RESERVED_CLIENT_ID });
     // const user = GoogleSignIn.signInSilentlyAsync();
     // if (user != null) setUser(user);
     firebase.auth().onAuthStateChanged((user) => {
       if (user != null) setUser(user);
     });
-  
   }, []);
 
   const singOutAsync = async () => {

@@ -11,7 +11,7 @@ export const PASSWORD_SCHEMA = yup.object().shape({
   password: yup
     .string()
     .required('You must enter a password.')
-    .min(6, 'Password must be at least 6 characters or more.'),
+    .min(6, 'Password is too short.'),
 });
 
 const AUTH_SCHEMA = yup.object().shape({
