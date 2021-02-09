@@ -4,6 +4,7 @@ import 'firebase/firestore';
 import firebase from 'firebase';
 import * as GoogleSignIn from 'expo-google-sign-in';
 import * as Segment from 'expo-analytics-segment';
+import { IOS_RESERVED_CLIENT_ID } from '@env';
 
 const AuthContext = React.createContext();
 
@@ -11,13 +12,19 @@ export function AuthProvider({ children }) {
   const [user, setUser] = useState({});
 
   useEffect(() => {
+    GoogleSignIn.initAsync({clientId: IOS_RESERVED_CLIENT_ID,})
+    // const user = GoogleSignIn.signInSilentlyAsync();
+    // if (user != null) setUser(user);
     firebase.auth().onAuthStateChanged((user) => {
       if (user != null) setUser(user);
     });
+  
   }, []);
 
   const singOutAsync = async () => {
     await firebase.auth().signOut();
+    // await GoogleSignIn.signOutAsync();
+    // setUser(null);
   };
 
   const signUpwithEmailAsync = async (data, handleSuccess, handleFailure) => {
@@ -63,6 +70,8 @@ export function AuthProvider({ children }) {
       const { type, user } = await GoogleSignIn.signInAsync();
       const data = await GoogleSignIn.GoogleAuthentication.prototype.toJSON();
       if (type === 'success') {
+        // const user = await GoogleSignIn.signInSilentlyAsync();
+        // setUser(user);
         await firebase
           .auth()
           .setPersistence(firebase.auth.Auth.Persistence.LOCAL);
@@ -76,11 +85,15 @@ export function AuthProvider({ children }) {
         handleSuccess();
       }
     } catch ({ message }) {
-      alert('Login error:' + message);
+      alert('Login error: ' + message);
     }
   };
 
-  const passwordResetEmailAsync = async (data, handleSuccess, handleFailure) => {
+  const passwordResetEmailAsync = async (
+    data,
+    handleSuccess,
+    handleFailure,
+  ) => {
     await firebase
       .auth()
       .sendPasswordResetEmail(data.email)
