@@ -10,7 +10,7 @@ function Navigation() {
 
   return (
     <NavigationContainer>
-      {user?.token ? <HomeStackNavigator /> : <AuthStackNavigator />}
+      {user ? <HomeStackNavigator /> : <AuthStackNavigator />}
     </NavigationContainer>
   );
 }

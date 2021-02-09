@@ -94,7 +94,7 @@ function CustomTextInput({
           >
             {forgotPasswordNav && (
               <TouchableOpacity
-                onPress={() => forgotPasswordNav.navigate('ResetPassword')}
+                onPress={() => forgotPasswordNav.navigate('PasswordReset')}
                 style={styles.forgotPassword}
               >
                 <Text

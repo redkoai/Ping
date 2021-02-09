@@ -40,7 +40,7 @@ function NavBar({}){
                     <Image source={Messagesbtn} style={{bottom: heightPercentageToDP('-2.4'), left: heightPercentageToDP('-0.1') }} />
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() =>{
-                    // navigation.navigate('Account')
+                    navigation.navigate('Account')
                     }}>
                     <Image source={Accountsbtn} style={{bottom: heightPercentageToDP('-2.4'), left: heightPercentageToDP('-0.1') }}/>
                 </TouchableOpacity>

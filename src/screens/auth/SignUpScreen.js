@@ -39,7 +39,7 @@ function SignUpScreen({ navigation }) {
   });
 
   const onSuccess = () => {
-    navigation.navigate('HomeScreenEmpty');
+    // navigation.navigate('HomeScreenEmpty');
   };
   const onFailure = (errorMessage) => {
     setError(errorMessage);

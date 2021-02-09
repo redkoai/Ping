@@ -22,10 +22,15 @@ export function AuthProvider({ children }) {
     setIsLoading(false);
   }, []);
 
-  const singOutAsync = async () => {
-    await firebase.auth().signOut();
-    // await GoogleSignIn.signOutAsync();
-    // setUser(null);
+  const singOutAsync = async (handleSuccess, handleFailure) => {
+    try {
+      await firebase.auth().signOut();
+      await GoogleSignIn.signOutAsync();
+      setUser(null);
+      handleSuccess();
+    } catch ({ message }) {
+      handleFailure(message);
+    }
   };
 
   const signUpWithEmailAsync = async (data, handleSuccess, handleFailure) => {
