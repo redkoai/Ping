@@ -1,6 +1,7 @@
 import { textStyles, colors } from 'ping/src/styles/styles';
 import { widthPercentageToDP, heightPercentageToDP } from 'ping/util/scaler';
 import pingLogo from 'ping/assets/pingLogo.png';
+import googleLogo from 'ping/assets/Google_G_Logo.png';
 
 import React, { useContext } from 'react';
 import AuthContext from 'ping/src/contexts/AuthContext';
@@ -11,6 +12,7 @@ import {
   View,
   Image,
   Text,
+  TouchableOpacity,
   ActivityIndicator,
   StyleSheet,
   Dimensions,
@@ -19,23 +21,24 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { EMAIL_SCHEMA } from 'ping/src/schema/authSchema';
+import AUTH_SCHEMA from 'ping/src/schema/authSchema';
 
 import Spacer from 'ping/src/components/Spacer';
-import BackChevron from 'ping/src/components/BackChevron';
 import TopBar from 'ping/src/components/TopBar';
-import { EmailInput } from 'ping/src/components/CustomTextInput';
+import { EmailInput, PasswordInput } from 'ping/src/components/CustomTextInput';
 import CustomButton from 'ping/src/components/CustomButton';
 
-function ResetPassword({ navigation }) {
-  const { passwordResetEmailAsync } = useContext(AuthContext);
+function SignInScreen({ navigation }) {
+  const { signInWithEmailAsync, signInWithGoogleAsync } = useContext(
+    AuthContext,
+  );
 
   const { control, handleSubmit, errors, setError, formState } = useForm({
-    resolver: yupResolver(EMAIL_SCHEMA),
+    resolver: yupResolver(AUTH_SCHEMA),
   });
 
   const onSuccess = () => {
-    navigation.navigate('SignIn');
+    navigation.navigate('HomeScreenEmpty');
   };
   const onFailure = (errorMessage) => {
     setError(errorMessage);
@@ -53,8 +56,12 @@ function ResetPassword({ navigation }) {
       <StatusBar backgroundColor={colors.primary} />
 
       <TopBar>
-        <BackChevron nav={navigation} />
-        <Text style={textStyles.bigBold}>Reset Password</Text>
+        <Spacer />
+        <TouchableOpacity
+          onPress={() => navigation.navigate('HomeScreenEmpty')}
+        >
+          <Text style={[textStyles.smallBold, styles.skipButton]}>SKIP</Text>
+        </TouchableOpacity>
       </TopBar>
 
       <KeyboardAwareScrollView
@@ -64,6 +71,11 @@ function ResetPassword({ navigation }) {
         <Spacer height={23} />
 
         <EmailInput control={control} errors={errors} />
+        <PasswordInput
+          control={control}
+          errors={errors}
+          forgotPasswordNav={navigation}
+        />
         <Spacer height={1.5} />
 
         {formState.isSubmitting && (
@@ -73,13 +85,33 @@ function ResetPassword({ navigation }) {
         )}
 
         <CustomButton
-          text="Send Email"
+          text="Sign In"
           onPress={handleSubmit(
             async (data) =>
-              await passwordResetEmailAsync(data, onSuccess, onFailure),
+              await signInWithEmailAsync(data, onSuccess, onFailure),
           )}
           isPrimary={true}
         />
+        <CustomButton
+          icon={googleLogo}
+          text="Sign in with Google"
+          onPress={async () =>
+            await signInWithGoogleAsync(onSuccess, onFailure)
+          }
+        />
+
+        <View style={styles.registerButton}>
+          <Text style={[textStyles.smallRegular, { color: colors.offBlack }]}>
+            Don't have an account?
+          </Text>
+          <TouchableOpacity onPress={() => navigation.navigate('SignUp')}>
+            <Text
+              style={[textStyles.normalSemiBold, { color: colors.primary }]}
+            >
+              Register
+            </Text>
+          </TouchableOpacity>
+        </View>
       </KeyboardAwareScrollView>
     </SafeAreaView>
   );
@@ -103,10 +135,10 @@ const styles = StyleSheet.create({
     position: 'absolute',
     bottom: heightPercentageToDP(3),
     flexDirection: 'row',
-    width: widthPercentageToDP(50),
+    width: 195,
     alignItems: 'center',
     justifyContent: 'space-between',
   },
 });
 
-export default ResetPassword;
+export default SignInScreen;

@@ -24,12 +24,13 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import AUTH_SCHEMA from 'ping/src/schema/authSchema';
 
 import Spacer from 'ping/src/components/Spacer';
+import BackChevron from 'ping/src/components/BackChevron';
 import TopBar from 'ping/src/components/TopBar';
 import { EmailInput, PasswordInput } from 'ping/src/components/CustomTextInput';
 import CustomButton from 'ping/src/components/CustomButton';
 
-function SignIn({ navigation }) {
-  const { signInWithEmailAsync, signInWithGoogleAsync } = useContext(
+function SignUpScreen({ navigation }) {
+  const { signUpWithEmailAsync, signInWithGoogleAsync } = useContext(
     AuthContext,
   );
 
@@ -56,7 +57,7 @@ function SignIn({ navigation }) {
       <StatusBar backgroundColor={colors.primary} />
 
       <TopBar>
-        <Spacer />
+        <BackChevron nav={navigation} />
         <TouchableOpacity
           onPress={() => navigation.navigate('HomeScreenEmpty')}
         >
@@ -71,11 +72,7 @@ function SignIn({ navigation }) {
         <Spacer height={23} />
 
         <EmailInput control={control} errors={errors} />
-        <PasswordInput
-          control={control}
-          errors={errors}
-          forgotPasswordNav={navigation}
-        />
+        <PasswordInput control={control} errors={errors} />
         <Spacer height={1.5} />
 
         {formState.isSubmitting && (
@@ -85,33 +82,20 @@ function SignIn({ navigation }) {
         )}
 
         <CustomButton
-          text="Sign In"
+          text="Sign Up"
           onPress={handleSubmit(
             async (data) =>
-              await signInWithEmailAsync(data, onSuccess, onFailure),
+              await signUpWithEmailAsync(data, onSuccess, onFailure),
           )}
           isPrimary={true}
         />
         <CustomButton
           icon={googleLogo}
-          text="Sign in with Google"
+          text="Sign up with Google"
           onPress={async () =>
             await signInWithGoogleAsync(onSuccess, onFailure)
           }
         />
-
-        <View style={styles.registerButton}>
-          <Text style={[textStyles.smallRegular, { color: colors.offBlack }]}>
-            Don't have an account?
-          </Text>
-          <TouchableOpacity onPress={() => navigation.navigate('SignUp')}>
-            <Text
-              style={[textStyles.normalSemiBold, { color: colors.primary }]}
-            >
-              Register
-            </Text>
-          </TouchableOpacity>
-        </View>
       </KeyboardAwareScrollView>
     </SafeAreaView>
   );
@@ -133,12 +117,12 @@ const styles = StyleSheet.create({
   },
   registerButton: {
     position: 'absolute',
-    bottom: heightPercentageToDP(1.5) + 10,
+    bottom: heightPercentageToDP(3),
     flexDirection: 'row',
-    width: 195,
+    width: widthPercentageToDP(50),
     alignItems: 'center',
     justifyContent: 'space-between',
   },
 });
 
-export default SignIn;
+export default SignUpScreen;

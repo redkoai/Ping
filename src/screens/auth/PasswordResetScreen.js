@@ -1,7 +1,6 @@
 import { textStyles, colors } from 'ping/src/styles/styles';
 import { widthPercentageToDP, heightPercentageToDP } from 'ping/util/scaler';
 import pingLogo from 'ping/assets/pingLogo.png';
-import googleLogo from 'ping/assets/Google_G_Logo.png';
 
 import React, { useContext } from 'react';
 import AuthContext from 'ping/src/contexts/AuthContext';
@@ -12,7 +11,6 @@ import {
   View,
   Image,
   Text,
-  TouchableOpacity,
   ActivityIndicator,
   StyleSheet,
   Dimensions,
@@ -21,25 +19,23 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import AUTH_SCHEMA from 'ping/src/schema/authSchema';
+import { EMAIL_SCHEMA } from 'ping/src/schema/authSchema';
 
 import Spacer from 'ping/src/components/Spacer';
 import BackChevron from 'ping/src/components/BackChevron';
 import TopBar from 'ping/src/components/TopBar';
-import { EmailInput, PasswordInput } from 'ping/src/components/CustomTextInput';
+import { EmailInput } from 'ping/src/components/CustomTextInput';
 import CustomButton from 'ping/src/components/CustomButton';
 
-function SignUp({ navigation }) {
-  const { signUpwithEmailAsync, signInWithGoogleAsync } = useContext(
-    AuthContext,
-  );
+function PasswordResetScreen({ navigation }) {
+  const { passwordResetEmailAsync } = useContext(AuthContext);
 
   const { control, handleSubmit, errors, setError, formState } = useForm({
-    resolver: yupResolver(AUTH_SCHEMA),
+    resolver: yupResolver(EMAIL_SCHEMA),
   });
 
   const onSuccess = () => {
-    navigation.navigate('HomeScreenEmpty');
+    navigation.navigate('SignIn');
   };
   const onFailure = (errorMessage) => {
     setError(errorMessage);
@@ -58,11 +54,7 @@ function SignUp({ navigation }) {
 
       <TopBar>
         <BackChevron nav={navigation} />
-        <TouchableOpacity
-          onPress={() => navigation.navigate('HomeScreenEmpty')}
-        >
-          <Text style={[textStyles.smallBold, styles.skipButton]}>SKIP</Text>
-        </TouchableOpacity>
+        <Text style={textStyles.bigBold}>Reset Password</Text>
       </TopBar>
 
       <KeyboardAwareScrollView
@@ -72,7 +64,6 @@ function SignUp({ navigation }) {
         <Spacer height={23} />
 
         <EmailInput control={control} errors={errors} />
-        <PasswordInput control={control} errors={errors} />
         <Spacer height={1.5} />
 
         {formState.isSubmitting && (
@@ -82,19 +73,12 @@ function SignUp({ navigation }) {
         )}
 
         <CustomButton
-          text="Sign Up"
+          text="Send Email"
           onPress={handleSubmit(
             async (data) =>
-              await signUpwithEmailAsync(data, onSuccess, onFailure),
+              await passwordResetEmailAsync(data, onSuccess, onFailure),
           )}
           isPrimary={true}
-        />
-        <CustomButton
-          icon={googleLogo}
-          text="Sign up with Google"
-          onPress={async () =>
-            await signInWithGoogleAsync(onSuccess, onFailure)
-          }
         />
       </KeyboardAwareScrollView>
     </SafeAreaView>
@@ -125,4 +109,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default SignUp;
+export default PasswordResetScreen;

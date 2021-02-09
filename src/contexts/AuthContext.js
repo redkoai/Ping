@@ -9,7 +9,8 @@ import { IOS_RESERVED_CLIENT_ID } from '@env';
 const AuthContext = React.createContext();
 
 export function AuthProvider({ children }) {
-  const [user, setUser] = useState({});
+  const [user, setUser] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     GoogleSignIn.initAsync({ clientId: IOS_RESERVED_CLIENT_ID });
@@ -18,6 +19,7 @@ export function AuthProvider({ children }) {
     firebase.auth().onAuthStateChanged((user) => {
       if (user != null) setUser(user);
     });
+    setIsLoading(false);
   }, []);
 
   const singOutAsync = async () => {
@@ -26,7 +28,7 @@ export function AuthProvider({ children }) {
     // setUser(null);
   };
 
-  const signUpwithEmailAsync = async (data, handleSuccess, handleFailure) => {
+  const signUpWithEmailAsync = async (data, handleSuccess, handleFailure) => {
     await firebase
       .auth()
       .createUserWithEmailAndPassword(data.email, data.password)
@@ -111,8 +113,9 @@ export function AuthProvider({ children }) {
     <AuthContext.Provider
       value={{
         user,
+        isLoading,
         singOutAsync,
-        signUpwithEmailAsync,
+        signUpWithEmailAsync,
         signInWithEmailAsync,
         signInWithGoogleAsync,
         passwordResetEmailAsync,

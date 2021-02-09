@@ -1,5 +1,5 @@
 import React from 'react';
-import { AuthProvider } from './src/contexts/AuthContext';
+import { AuthProvider } from 'ping/src/contexts/AuthContext';
 
 import {
   useFonts,
@@ -9,10 +9,10 @@ import {
   FiraSans_700Bold,
 } from '@expo-google-fonts/fira-sans';
 
-// import 'react-native-gesture-handler';
-import NavBar from './src/navbars/NarBar.js';
+import 'react-native-gesture-handler';
+import NavBar from 'ping/src/navbars/NarBar.js';
 import { StatusBar } from 'expo-status-bar';
-import Navigation from './src/navigators/NavigationContainer';
+import NavigationContainer from 'ping/src/navigators/NavigationContainer';
 
 import firebase from 'firebase';
 import {
@@ -50,7 +50,7 @@ function App() {
 
   return (
     <AuthProvider>
-      <Navigation />
+      <NavigationContainer />
     </AuthProvider>
   );
 }
