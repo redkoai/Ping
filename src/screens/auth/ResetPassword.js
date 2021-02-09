@@ -1,15 +1,15 @@
 import { textStyles, colors } from 'ping/src/styles/styles';
 import { widthPercentageToDP, heightPercentageToDP } from 'ping/util/scaler';
 import pingLogo from 'ping/assets/pingLogo.png';
-import googleLogo from 'ping/assets/Google_G_Logo.png';
 
-import React from 'react';
+import React, { useContext } from 'react';
+import AuthContext from 'ping/src/contexts/AuthContext';
+
 import {
   StatusBar,
   SafeAreaView,
   Image,
   Text,
-  TouchableOpacity,
   StyleSheet,
   Dimensions,
 } from 'react-native';
@@ -26,12 +26,17 @@ import { EmailInput } from 'ping/src/components/CustomTextInput';
 import CustomButton from 'ping/src/components/CustomButton';
 
 function ResetPassword({ navigation }) {
-  const { control, handleSubmit, errors, clearErrors } = useForm({
+  const { resetPasswordEmailAsync } = useContext(AuthContext);
+
+  const { control, handleSubmit, errors, setError, formState } = useForm({
     resolver: yupResolver(EMAIL_SCHEMA),
   });
-  const sendEmail = (data) => {
-    clearErrors;
-    console.log(data);
+
+  const onSuccess = () => {
+    navigation.navigate('SignIn');
+  };
+  const onFailure = (errorMessage) => {
+    setError(errorMessage);
   };
 
   return (
@@ -61,7 +66,10 @@ function ResetPassword({ navigation }) {
 
         <CustomButton
           text="Send Email"
-          onPress={handleSubmit(sendEmail)}
+          onPress={handleSubmit(
+            async (data) =>
+              await resetPasswordEmailAsync(data, onSuccess, onFailure),
+          )}
           isPrimary={true}
         />
       </KeyboardAwareScrollView>

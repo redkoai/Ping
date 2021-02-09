@@ -29,25 +29,18 @@ import { EmailInput, PasswordInput } from 'ping/src/components/CustomTextInput';
 import CustomButton from 'ping/src/components/CustomButton';
 
 function SignIn({ navigation }) {
-  const { user, signInWithEmailAsync, signInWithGoogleAsync } = useContext(
+  const { signInWithEmailAsync, signInWithGoogleAsync } = useContext(
     AuthContext,
   );
 
-  const {
-    control,
-    handleSubmit,
-    errors,
-    clearErrors,
-    setError,
-    formState,
-  } = useForm({
+  const { control, handleSubmit, errors, setError, formState } = useForm({
     resolver: yupResolver(AUTH_SCHEMA),
   });
 
-  const onLoginSuccess = () => {
+  const onSuccess = () => {
     navigation.navigate('HomeScreenEmpty');
   };
-  const onLoginFailure = (errorMessage) => {
+  const onFailure = (errorMessage) => {
     setError(errorMessage);
   };
 
@@ -95,7 +88,7 @@ function SignIn({ navigation }) {
           text="Sign In"
           onPress={handleSubmit(
             async (data) =>
-              await signInWithEmailAsync(data, onLoginSuccess, onLoginFailure),
+              await signInWithEmailAsync(data, onSuccess, onFailure),
           )}
           isPrimary={true}
         />
@@ -103,7 +96,7 @@ function SignIn({ navigation }) {
           icon={googleLogo}
           text="Sign in with Google"
           onPress={async () =>
-            await signInWithGoogleAsync(onLoginSuccess, onLoginFailure)
+            await signInWithGoogleAsync(onSuccess, onFailure)
           }
         />
 

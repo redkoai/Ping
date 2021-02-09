@@ -30,7 +30,7 @@ import { EmailInput, PasswordInput } from 'ping/src/components/CustomTextInput';
 import CustomButton from 'ping/src/components/CustomButton';
 
 function SignUp({ navigation }) {
-  const { user, signUpwithEmailAsync, signInWithGoogleAsync } = useContext(
+  const { signUpwithEmailAsync, signInWithGoogleAsync } = useContext(
     AuthContext,
   );
 
@@ -38,10 +38,10 @@ function SignUp({ navigation }) {
     resolver: yupResolver(AUTH_SCHEMA),
   });
 
-  const onLoginSuccess = () => {
+  const onSuccess = () => {
     navigation.navigate('HomeScreenEmpty');
   };
-  const onLoginFailure = (errorMessage) => {
+  const onFailure = (errorMessage) => {
     setError(errorMessage);
   };
 
@@ -85,7 +85,7 @@ function SignUp({ navigation }) {
           text="Sign Up"
           onPress={handleSubmit(
             async (data) =>
-              await signUpwithEmailAsync(data, onLoginSuccess, onLoginFailure),
+              await signUpwithEmailAsync(data, onSuccess, onFailure),
           )}
           isPrimary={true}
         />
@@ -93,7 +93,7 @@ function SignUp({ navigation }) {
           icon={googleLogo}
           text="Sign up with Google"
           onPress={async () =>
-            await signInWithGoogleAsync(onLoginSuccess, onLoginFailure)
+            await signInWithGoogleAsync(onSuccess, onFailure)
           }
         />
       </KeyboardAwareScrollView>

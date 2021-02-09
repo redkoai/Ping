@@ -20,18 +20,18 @@ export function AuthProvider({ children }) {
     await firebase.auth().signOut();
   };
 
-  const signUpwithEmailAsync = async (data, onLoginSuccess, onLoginFailure) => {
+  const signUpwithEmailAsync = async (data, handleSuccess, handleFailure) => {
     await firebase
       .auth()
       .createUserWithEmailAndPassword(data.email, data.password)
-      .then(onLoginSuccess())
+      .then(handleSuccess())
       .catch((error) => {
         let errorCode = error.code;
         let errorMessage = error.message;
         if (errorCode == 'auth/weak-password') {
-          onLoginFailure()('Weak Password!');
+          handleFailure()('Weak Password!');
         } else {
-          onLoginFailure()(errorMessage);
+          handleFailure()(errorMessage);
         }
       });
     Segment.identify(data.email);
@@ -41,23 +41,23 @@ export function AuthProvider({ children }) {
     });
   };
 
-  const signInWithEmailAsync = async (data, onLoginSuccess, onLoginFailure) => {
+  const signInWithEmailAsync = async (data, handleSuccess, handleFailure) => {
     await firebase
       .auth()
       .signInWithEmailAndPassword(data.email, data.password)
-      .then(onLoginSuccess())
+      .then(handleSuccess())
       .catch((error) => {
         let errorCode = error.code;
         let errorMessage = error.message;
         if (errorCode == 'auth/weak-password') {
-          onLoginFailure('Weak Password!');
+          handleFailure('Weak Password!');
         } else {
-          onLoginFailure(errorMessage);
+          handleFailure(errorMessage);
         }
       });
   };
 
-  const signInWithGoogleAsync = async (onLoginSuccess, onLoginFailure) => {
+  const signInWithGoogleAsync = async (handleSuccess, handleFailure) => {
     try {
       await GoogleSignIn.askForPlayServicesAsync();
       const { type, user } = await GoogleSignIn.signInAsync();
@@ -73,11 +73,26 @@ export function AuthProvider({ children }) {
         const googleProfileData = await firebase
           .auth()
           .signInWithCredential(credential);
-        onLoginSuccess();
+        handleSuccess();
       }
     } catch ({ message }) {
       alert('Login error:' + message);
     }
+  };
+
+  const passwordResetEmailAsync = async (data, handleSuccess, handleFailure) => {
+    await firebase
+      .auth()
+      .sendPasswordResetEmail(data.email)
+      .catch((error) => {
+        let errorCode = error.code;
+        let errorMessage = error.message;
+        if (errorCode == 'auth/weak-password') {
+          handleFailure('Weak Password!');
+        } else {
+          handleFailure(errorMessage);
+        }
+      });
   };
 
   return (
@@ -88,6 +103,7 @@ export function AuthProvider({ children }) {
         signUpwithEmailAsync,
         signInWithEmailAsync,
         signInWithGoogleAsync,
+        passwordResetEmailAsync,
       }}
     >
       {children}
