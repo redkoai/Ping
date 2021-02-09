@@ -11,11 +11,10 @@ import CustomButton from 'ping/src/components/CustomButton';
 import NavBar from 'ping/src/navbars/NarBar';
 
 function AccountScreen({ navigation }) {
-  const { user } = useContext(AuthContext);
-  console.log(user);
+  const { singOutAsync } = useContext(AuthContext);
 
   const onSuccess = () => {
-    navigation.navigate('SignIn');
+    // navigation.navigate('SignIn');
   }
   const onFailure = (errorMessage) => {
     alert(errorMessage)

@@ -29,7 +29,7 @@ import { EmailInput, PasswordInput } from 'ping/src/components/CustomTextInput';
 import CustomButton from 'ping/src/components/CustomButton';
 
 function SignInScreen({ navigation }) {
-  const { signInWithEmailAsync, signInWithGoogleAsync } = useContext(
+  const { setSkipped, signInWithEmailAsync, signInWithGoogleAsync } = useContext(
     AuthContext,
   );
 
@@ -58,7 +58,7 @@ function SignInScreen({ navigation }) {
       <TopBar>
         <Spacer />
         <TouchableOpacity
-          onPress={() => navigation.navigate('HomeScreenEmpty')}
+          onPress={() => setSkipped(true)}
         >
           <Text style={[textStyles.smallBold, styles.skipButton]}>SKIP</Text>
         </TouchableOpacity>

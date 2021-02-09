@@ -11,6 +11,7 @@ const AuthContext = React.createContext();
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [skipped, setSkipped] = useState(false);
 
   useEffect(() => {
     GoogleSignIn.initAsync({ clientId: IOS_RESERVED_CLIENT_ID });
@@ -25,8 +26,9 @@ export function AuthProvider({ children }) {
   const singOutAsync = async (handleSuccess, handleFailure) => {
     try {
       await firebase.auth().signOut();
-      await GoogleSignIn.signOutAsync();
+      // await GoogleSignIn.signOutAsync();
       setUser(null);
+      setSkipped(false);
       handleSuccess();
     } catch ({ message }) {
       handleFailure(message);
@@ -118,6 +120,8 @@ export function AuthProvider({ children }) {
     <AuthContext.Provider
       value={{
         user,
+        skipped,
+        setSkipped,
         isLoading,
         singOutAsync,
         signUpWithEmailAsync,
