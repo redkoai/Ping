@@ -8,6 +8,7 @@ import AuthContext from 'ping/src/contexts/AuthContext';
 import {
   StatusBar,
   SafeAreaView,
+  View,
   Image,
   Text,
   ActivityIndicator,
