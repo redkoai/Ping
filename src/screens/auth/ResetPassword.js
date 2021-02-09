@@ -10,6 +10,7 @@ import {
   SafeAreaView,
   Image,
   Text,
+  ActivityIndicator,
   StyleSheet,
   Dimensions,
 } from 'react-native';
@@ -63,6 +64,12 @@ function ResetPassword({ navigation }) {
 
         <EmailInput control={control} errors={errors} />
         <Spacer height={1.5} />
+
+        {formState.isSubmitting && (
+          <View>
+            <ActivityIndicator size={'large'} />
+          </View>
+        )}
 
         <CustomButton
           text="Send Email"
