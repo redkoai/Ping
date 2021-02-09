@@ -18,12 +18,12 @@
     ],
     "ios": {
       "bundleIdentifier": "com.redko.ping",
-      "googleServicesFile": "./GoogleService-Info.plist",
+      "googleServicesFile": "./firebase/GoogleService-Info.plist",
       "supportsTablet": true
     },
     "android": {
       "package": "com.redko.ping",
-      "googleServicesFile": "./google-services.json",
+      "googleServicesFile": "./firebase/google-services.json",
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"

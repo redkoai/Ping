@@ -68,7 +68,7 @@ function SignUp({ navigation }) {
     }
   };
 
-  const signInWithEmail = async (data) => {
+  const signInWithEmailAsync = async (data) => {
     await firebase
       .auth()
       .createUserWithEmailAndPassword(data.email, data.password)
@@ -210,7 +210,7 @@ function SignUp({ navigation }) {
 
         <CustomButton
           text="Sign Up"
-          onPress={handleSubmit(signInWithEmail)}
+          onPress={handleSubmit(signInWithEmailAsync)}
           isPrimary={true}
         />
         <CustomButton

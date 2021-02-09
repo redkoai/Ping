@@ -71,7 +71,7 @@ function SignIn({ navigation }) {
     }
   };
 
-  const signInWithEmail = async (data) => {
+  const signInWithEmailAsync = async (data) => {
     await firebase
       .auth()
       .signInWithEmailAndPassword(data.email, data.password)
@@ -87,9 +87,9 @@ function SignIn({ navigation }) {
       });
   };
 
-  const signInWithGoogle = async () => {
+  const signInWithGoogleAsync = async () => {
     try {
-      const result = await Expo.Google.logInAsync({
+      const result = await Google.logInAsync({
         androidClientId: androidClientId,
         iosClientId: iosClientId,
         behavior: 'web',
@@ -150,16 +150,16 @@ function SignIn({ navigation }) {
         <Spacer height={1.5} />
 
         {renderLoading()}
-        
+
         <CustomButton
           text="Sign In"
-          onPress={handleSubmit(signInWithEmail)}
+          onPress={handleSubmit(signInWithEmailAsync)}
           isPrimary={true}
         />
         <CustomButton
           icon={googleLogo}
           text="Sign in with Google"
-          onPress={signInWithGoogle}
+          onPress={signInWithGoogleAsync}
         />
 
         <View style={styles.registerButton}>
