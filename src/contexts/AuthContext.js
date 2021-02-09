@@ -18,9 +18,11 @@ export function AuthProvider({ children }) {
     // const user = GoogleSignIn.signInSilentlyAsync();
     // if (user != null) setUser(user);
     firebase.auth().onAuthStateChanged((user) => {
-      if (user != null) setUser(user);
+      if (user != null) {
+        setUser(user);
+        setIsLoading(false);
+      }
     });
-    setIsLoading(false);
   }, []);
 
   const singOutAsync = async (handleSuccess, handleFailure) => {
