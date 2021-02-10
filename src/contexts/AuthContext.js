@@ -15,16 +15,9 @@ export function AuthProvider({ children }) {
 
   useEffect(() => {
     GoogleSignIn.initAsync({ clientId: IOS_RESERVED_CLIENT_ID });
-    const user = GoogleSignIn.signInSilentlyAsync();
-    if (user != null) {
-      setUser(user);
-      setIsLoading(false);
-    }
     firebase.auth().onAuthStateChanged((user) => {
-      if (user != null) {
-        setUser(user);
-        setIsLoading(false);
-      }
+      setIsLoading(false);
+      if (user != null) setUser(user);
     });
   }, []);
 
@@ -77,31 +70,6 @@ export function AuthProvider({ children }) {
       });
   };
 
-  const signInWithGoogleAsync = async (handleSuccess, handleFailure) => {
-    try {
-      await GoogleSignIn.askForPlayServicesAsync();
-      const { type, user } = await GoogleSignIn.signInAsync();
-      const data = await GoogleSignIn.GoogleAuthentication.prototype.toJSON();
-      if (type === 'success') {
-        // const user = await GoogleSignIn.signInSilentlyAsync();
-        // setUser(user);
-        await firebase
-          .auth()
-          .setPersistence(firebase.auth.Auth.Persistence.LOCAL);
-        const credential = firebase.auth.GoogleAuthProvider.credential(
-          data.idToken,
-          data.accessToken,
-        );
-        const googleProfileData = await firebase
-          .auth()
-          .signInWithCredential(credential);
-        handleSuccess();
-      }
-    } catch ({ message }) {
-      alert('Login error: ' + message);
-    }
-  };
-
   const passwordResetEmailAsync = async (
     data,
     handleSuccess,
@@ -119,6 +87,35 @@ export function AuthProvider({ children }) {
           handleFailure(errorMessage);
         }
       });
+  };
+  
+  const _syncUserWithStateAsync = async () => {
+    const user = await GoogleSignIn.signInSilentlyAsync();
+    setUser(user);
+  };
+  
+  const signInWithGoogleAsync = async (handleSuccess, handleFailure) => {
+    try {
+      await GoogleSignIn.askForPlayServicesAsync();
+      const { type, user } = await GoogleSignIn.signInAsync();
+      const data = await GoogleSignIn.GoogleAuthentication.prototype.toJSON();
+      if (type === 'success') {
+        // _syncUserWithStateAsync();
+        await firebase
+          .auth()
+          .setPersistence(firebase.auth.Auth.Persistence.LOCAL);
+        const credential = firebase.auth.GoogleAuthProvider.credential(
+          data.idToken,
+          data.accessToken,
+        );
+        const googleProfileData = await firebase
+          .auth()
+          .signInWithCredential(credential);
+        handleSuccess();
+      }
+    } catch ({ message }) {
+      alert('Login error: ' + message);
+    }
   };
 
   return (
