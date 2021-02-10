@@ -9,20 +9,24 @@ import React, {useEffect, useState} from "react";
 import NavBar from "../../navbars/NarBar";
 import createNewEventBtn from "../../../assets/NavBarAssets/createNewEventBtn.png"
 import addFriendsBtn from "../../../assets/NavBarAssets/addFriendsBtn.png"
-import emptyPic from "../../../assets/messages/img.png";
-import homettl from "../../../assets/messages/messagettl.png";
-import NavBar_message from "../../navbars/NarBar_message";
+import Accname from "../../../assets/Accounts/AccountName.png";
+import Accfriends from "../../../assets/Accounts/friends.png";
+import Accactivity from "../../../assets/Accounts/Accountactivity.png";
+import Acccenterone from "../../../assets/Accounts/Accountscenterone.png";
+import NavBar_accountsone from "../../navbars/NarBar_accountsone";
 
 
-function Messages({}) {
+function Accountsone({}) {
     const navigation = useNavigation()
 
     return (
         <View style={{flex: 1}}>    
             <ImageBackground source={emptyHome} style={styles.homeEmpty}>
             <View style={{ flexDirection: 'column', justifyContent: 'center',marginTop:widthPercentageToDP(3)}}>
-            <Image source={homettl} style={{height: heightPercentageToDP('15'), width :widthPercentageToDP('90'),  resizeMode:'contain',marginTop: heightPercentageToDP('10'), }} />
-            <Image source={emptyPic} style={{height: heightPercentageToDP('40'), width :widthPercentageToDP('85'), marginTop: heightPercentageToDP('0'), resizeMode:'contain' }} />
+            <Image source={Accname} style={{height: heightPercentageToDP('10'), width :widthPercentageToDP('95'),  resizeMode:'contain',marginTop: heightPercentageToDP('10'), }} />
+            <Image source={Accfriends} style={{height: heightPercentageToDP('4'), width :widthPercentageToDP('30'),  resizeMode:'contain',marginTop: heightPercentageToDP('-2'), }} />
+            <Image source={Accactivity} style={{height: heightPercentageToDP('20'), width :widthPercentageToDP('85'), marginTop: heightPercentageToDP('-7'), resizeMode:'contain' }} />
+            <Image source={Acccenterone} style={{height: heightPercentageToDP('40'), width :widthPercentageToDP('95'), marginTop: heightPercentageToDP('-2'), resizeMode:'contain' }} />
                 <TouchableOpacity onPress={() => { 
                     // navigation.navigate('HomeScreenEmpty')
                 }}>
@@ -35,8 +39,8 @@ function Messages({}) {
                 </TouchableOpacity>
             </View>
             </ImageBackground>
-            <NavBar_message/>
+            <NavBar_accountsone/>
         </View>
     )
 }
-export default Messages
+export default Accountsone

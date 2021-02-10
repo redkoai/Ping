@@ -4,16 +4,16 @@ import {TouchableOpacity} from 'react-native';
 import React, {useEffect, useState}  from "react";
 import { Dimensions } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import Homebtn from '../../assets/navbar/homeg.png'
+import Homebtn from '../../assets/navbar/home.png'
 import Eventsbtn from '../../assets/navbar/events.png'
 import Invitebtn from '../../assets/navbar/add.png'
 import Messagesbtn from '../../assets/navbar/messages.png'
-import Accountsbtn from '../../assets/navbar/account.png'
+import Accountsbtn from '../../assets/navbar/accountg.png'
 import navContainer from '../../assets/navbar/navCont.png'
 import {widthPercentageToDP,heightPercentageToDP,} from '../../util/scaler'
 import {useRoute} from '@react-navigation/native';
 
-function NavBar({}){
+function NavBar_profile({}){
     const navigation = useNavigation();
 
     
@@ -32,7 +32,7 @@ function NavBar({}){
                     <Image source={Eventsbtn} style={{height: heightPercentageToDP('15'), width :widthPercentageToDP('12'),  resizeMode:'contain', bottom: heightPercentageToDP('3') }}/>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => {
-                    navigation.navigate('Details')
+                     navigation.navigate('Details')
                     }}>
                     <Image source={Invitebtn} style={{height: heightPercentageToDP('15'), width :widthPercentageToDP('12'),  resizeMode:'contain', bottom: heightPercentageToDP('3')}}/>
                 </TouchableOpacity>
@@ -42,7 +42,7 @@ function NavBar({}){
                     <Image source={Messagesbtn} style={{height: heightPercentageToDP('15'), width :widthPercentageToDP('12'),  resizeMode:'contain', bottom: heightPercentageToDP('3')}} />
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() =>{
-                     navigation.navigate('Accounts')
+                    navigation.navigate('Accounts')
                     }}>
                     <Image source={Accountsbtn} style={{height: heightPercentageToDP('15'), width :widthPercentageToDP('12'),  resizeMode:'contain', bottom: heightPercentageToDP('3')}}/>
                 </TouchableOpacity>
@@ -52,4 +52,4 @@ function NavBar({}){
     )
 }
 
-export default NavBar
+export default NavBar_profile

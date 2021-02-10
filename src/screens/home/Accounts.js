@@ -5,24 +5,38 @@ import emptyHome from "../../../assets/homeScreen/bg.png";
 import styles from "../../styles/styles";
 import { Dimensions } from 'react-native';
 import {widthPercentageToDP,heightPercentageToDP,} from '../../../util/scaler';
-import React, {useEffect, useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
+import AuthContext from 'ping/src/contexts/AuthContext';
 import NavBar from "../../navbars/NarBar";
+import CustomButton from 'ping/src/components/CustomButton';
 import createNewEventBtn from "../../../assets/NavBarAssets/createNewEventBtn.png"
 import addFriendsBtn from "../../../assets/NavBarAssets/addFriendsBtn.png"
-import emptyPic from "../../../assets/messages/img.png";
-import homettl from "../../../assets/messages/messagettl.png";
-import NavBar_message from "../../navbars/NarBar_message";
+import Accname from "../../../assets/Accounts/AccountName.png";
+import Accfriends from "../../../assets/Accounts/friends.png";
+import Accevents from "../../../assets/Accounts/Accountevents.png";
+import Acccenter from "../../../assets/Accounts/Accountscenter.png";
+import NavBar_account from "../../navbars/NarBar_account";
 
 
-function Messages({}) {
+function Accounts({}) {
     const navigation = useNavigation()
+    const { singOutAsync } = useContext(AuthContext);
+
+    const onSuccess = () => {
+        // navigation.navigate('SignIn');
+    }
+    const onFailure = (errorMessage) => {
+        alert(errorMessage)
+    };
 
     return (
         <View style={{flex: 1}}>    
             <ImageBackground source={emptyHome} style={styles.homeEmpty}>
             <View style={{ flexDirection: 'column', justifyContent: 'center',marginTop:widthPercentageToDP(3)}}>
-            <Image source={homettl} style={{height: heightPercentageToDP('15'), width :widthPercentageToDP('90'),  resizeMode:'contain',marginTop: heightPercentageToDP('10'), }} />
-            <Image source={emptyPic} style={{height: heightPercentageToDP('40'), width :widthPercentageToDP('85'), marginTop: heightPercentageToDP('0'), resizeMode:'contain' }} />
+            <Image source={Accname} style={{height: heightPercentageToDP('10'), width :widthPercentageToDP('95'),  resizeMode:'contain',marginTop: heightPercentageToDP('10'), }} />
+            <Image source={Accfriends} style={{height: heightPercentageToDP('4'), width :widthPercentageToDP('30'),  resizeMode:'contain',marginTop: heightPercentageToDP('-2'), }} />
+            <Image source={Accevents} style={{height: heightPercentageToDP('20'), width :widthPercentageToDP('85'), marginTop: heightPercentageToDP('-7'), resizeMode:'contain' }} />
+            <Image source={Acccenter} style={{height: heightPercentageToDP('40'), width :widthPercentageToDP('95'), marginTop: heightPercentageToDP('-2'), resizeMode:'contain' }} />
                 <TouchableOpacity onPress={() => { 
                     // navigation.navigate('HomeScreenEmpty')
                 }}>
@@ -35,8 +49,13 @@ function Messages({}) {
                 </TouchableOpacity>
             </View>
             </ImageBackground>
-            <NavBar_message/>
+            <CustomButton
+                text="Sign Out"
+                onPress={async () => await singOutAsync(onSuccess, onFailure)}
+                isPrimary={true}
+            />
+            <NavBar_account/>
         </View>
     )
 }
-export default Messages
+export default Accounts

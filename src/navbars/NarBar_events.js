@@ -4,8 +4,8 @@ import {TouchableOpacity} from 'react-native';
 import React, {useEffect, useState}  from "react";
 import { Dimensions } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import Homebtn from '../../assets/navbar/homeg.png'
-import Eventsbtn from '../../assets/navbar/events.png'
+import Homebtn from '../../assets/navbar/home.png'
+import Eventsbtn from '../../assets/navbar/eventsg.png'
 import Invitebtn from '../../assets/navbar/add.png'
 import Messagesbtn from '../../assets/navbar/messages.png'
 import Accountsbtn from '../../assets/navbar/account.png'
@@ -13,7 +13,7 @@ import navContainer from '../../assets/navbar/navCont.png'
 import {widthPercentageToDP,heightPercentageToDP,} from '../../util/scaler'
 import {useRoute} from '@react-navigation/native';
 
-function NavBar({}){
+function NavBar_events({}){
     const navigation = useNavigation();
 
     
@@ -52,4 +52,4 @@ function NavBar({}){
     )
 }
 
-export default NavBar
+export default NavBar_events
