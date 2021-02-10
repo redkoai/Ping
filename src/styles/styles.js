@@ -26,15 +26,15 @@ export const textStyles = StyleSheet.create({
   // big
   bigRegular: {
     fontFamily: 'FiraSans_400Regular',
-    fontSize: 14,
+    fontSize: 20,
   },
   bigMedium: {
     fontFamily: 'FiraSans_500Medium',
-    fontSize: 14,
+    fontSize: 20,
   },
   bigSemiBold: {
     fontFamily: 'FiraSans_600SemiBold',
-    fontSize: 14,
+    fontSize: 20,
   },
   bigBold: {
     fontFamily: 'FiraSans_700Bold',
