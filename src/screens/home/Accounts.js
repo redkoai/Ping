@@ -5,8 +5,10 @@ import emptyHome from "../../../assets/homeScreen/bg.png";
 import styles from "../../styles/styles";
 import { Dimensions } from 'react-native';
 import {widthPercentageToDP,heightPercentageToDP,} from '../../../util/scaler';
-import React, {useEffect, useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
+import AuthContext from 'ping/src/contexts/AuthContext';
 import NavBar from "../../navbars/NarBar";
+import CustomButton from 'ping/src/components/CustomButton';
 import createNewEventBtn from "../../../assets/NavBarAssets/createNewEventBtn.png"
 import addFriendsBtn from "../../../assets/NavBarAssets/addFriendsBtn.png"
 import Accname from "../../../assets/Accounts/AccountName.png";
@@ -18,6 +20,14 @@ import NavBar_account from "../../navbars/NarBar_account";
 
 function Accounts({}) {
     const navigation = useNavigation()
+    const { singOutAsync } = useContext(AuthContext);
+
+    const onSuccess = () => {
+        // navigation.navigate('SignIn');
+    }
+    const onFailure = (errorMessage) => {
+        alert(errorMessage)
+    };
 
     return (
         <View style={{flex: 1}}>    
@@ -39,6 +49,11 @@ function Accounts({}) {
                 </TouchableOpacity>
             </View>
             </ImageBackground>
+            <CustomButton
+                text="Sign Out"
+                onPress={async () => await singOutAsync(onSuccess, onFailure)}
+                isPrimary={true}
+            />
             <NavBar_account/>
         </View>
     )

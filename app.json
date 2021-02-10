@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "my-app",
-    "slug": "my-app",
+    "name": "Ping",
+    "slug": "ping",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -17,9 +17,13 @@
       "**/*"
     ],
     "ios": {
+      "bundleIdentifier": "com.redko.ping",
+      "googleServicesFile": "./firebase/GoogleService-Info.plist",
       "supportsTablet": true
     },
     "android": {
+      "package": "com.redko.ping",
+      "googleServicesFile": "./firebase/google-services.json",
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
