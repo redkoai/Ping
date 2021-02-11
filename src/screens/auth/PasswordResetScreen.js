@@ -61,14 +61,8 @@ function PasswordResetScreen({ navigation }) {
         <Text style={textStyles.bigBold}>Reset Password</Text>
       </TopBar>
 
-      <KeyboardAwareScrollView
-        contentContainerStyle={{ flex: 1, alignItems: 'center' }}
-      >
-        <PingLogo
-          height={heightPercentageToDP(20)}
-          fill={colors.primary}
-          style={styles.logo}
-        />
+      <KeyboardAwareScrollView contentContainerStyle={{ flex: 1, alignItems: 'center' }}>
+        <PingLogo height={heightPercentageToDP(20)} fill={colors.primary} style={styles.logo} />
         <Spacer height={9} />
 
         <EmailInput control={control} errors={errors} />
@@ -83,12 +77,7 @@ function PasswordResetScreen({ navigation }) {
         <CustomButton
           text="Send Email"
           onPress={handleSubmit(
-            async (data) =>
-              await passwordResetEmailAsync(
-                data,
-                onResetSuccess,
-                onResetFailure,
-              ),
+            async (data) => await passwordResetEmailAsync(data, onResetSuccess, onResetFailure),
           )}
           isPrimary={true}
         />

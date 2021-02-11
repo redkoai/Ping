@@ -29,11 +29,7 @@ import { EmailInput, PasswordInput } from 'ping/src/components/CustomTextInput';
 import CustomButton from 'ping/src/components/CustomButton';
 
 function SignUpScreen({ navigation }) {
-  const {
-    setSkipped,
-    signUpWithEmailAsync,
-    signInWithGoogleAsync,
-  } = useContext(AuthContext);
+  const { setSkipped, signUpWithEmailAsync, signInWithGoogleAsync } = useContext(AuthContext);
 
   const { control, handleSubmit, errors, reset, formState } = useForm({
     resolver: yupResolver(AUTH_SCHEMA),
@@ -69,14 +65,8 @@ function SignUpScreen({ navigation }) {
         </TouchableOpacity>
       </TopBar>
 
-      <KeyboardAwareScrollView
-        contentContainerStyle={{ flex: 1, alignItems: 'center' }}
-      >
-        <PingLogo
-          height={heightPercentageToDP(20)}
-          fill={colors.primary}
-          style={styles.logo}
-        />
+      <KeyboardAwareScrollView contentContainerStyle={{ flex: 1, alignItems: 'center' }}>
+        <PingLogo height={heightPercentageToDP(20)} fill={colors.primary} style={styles.logo} />
         <Spacer height={7} />
 
         <EmailInput control={control} errors={errors} />
@@ -92,21 +82,14 @@ function SignUpScreen({ navigation }) {
         <CustomButton
           text="Sign Up"
           onPress={handleSubmit(
-            async (data) =>
-              await signUpWithEmailAsync(
-                data,
-                onSignUpSuccess,
-                onSignUpFailure,
-              ),
+            async (data) => await signUpWithEmailAsync(data, onSignUpSuccess, onSignUpFailure),
           )}
           isPrimary={true}
         />
         <CustomButton
           icon={googleLogo}
           text="Sign up with Google"
-          onPress={async () =>
-            await signInWithGoogleAsync(onSignUpSuccess, onSignUpFailure)
-          }
+          onPress={async () => await signInWithGoogleAsync(onSignUpSuccess, onSignUpFailure)}
         />
       </KeyboardAwareScrollView>
     </SafeAreaView>

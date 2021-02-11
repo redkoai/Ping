@@ -28,11 +28,7 @@ import { EmailInput, PasswordInput } from 'ping/src/components/CustomTextInput';
 import CustomButton from 'ping/src/components/CustomButton';
 
 function SignInScreen({ navigation }) {
-  const {
-    setSkipped,
-    signInWithEmailAsync,
-    signInWithGoogleAsync,
-  } = useContext(AuthContext);
+  const { setSkipped, signInWithEmailAsync, signInWithGoogleAsync } = useContext(AuthContext);
 
   const { control, handleSubmit, errors, reset, formState } = useForm({
     resolver: yupResolver(AUTH_SCHEMA),
@@ -72,14 +68,8 @@ function SignInScreen({ navigation }) {
         </TouchableOpacity>
       </TopBar>
 
-      <KeyboardAwareScrollView
-        contentContainerStyle={{ flex: 1, alignItems: 'center' }}
-      >
-        <PingLogo
-          height={heightPercentageToDP(20)}
-          fill={colors.primary}
-          style={styles.logo}
-        />
+      <KeyboardAwareScrollView contentContainerStyle={{ flex: 1, alignItems: 'center' }}>
+        <PingLogo height={heightPercentageToDP(20)} fill={colors.primary} style={styles.logo} />
         <Spacer height={7} />
 
         <EmailInput control={control} errors={errors} />
@@ -99,21 +89,14 @@ function SignInScreen({ navigation }) {
         <CustomButton
           text="Sign In"
           onPress={handleSubmit(
-            async (data) =>
-              await signInWithEmailAsync(
-                data,
-                onSignInSuccess,
-                onSignInFailure,
-              ),
+            async (data) => await signInWithEmailAsync(data, onSignInSuccess, onSignInFailure),
           )}
           isPrimary={true}
         />
         <CustomButton
           icon={googleLogo}
           text="Sign in with Google"
-          onPress={async () =>
-            await signInWithGoogleAsync(onSignInSuccess, onSignInFailure)
-          }
+          onPress={async () => await signInWithGoogleAsync(onSignInSuccess, onSignInFailure)}
         />
 
         <View style={styles.registerButton}>
@@ -121,11 +104,7 @@ function SignInScreen({ navigation }) {
             Don't have an account?
           </Text>
           <TouchableOpacity onPress={onRegisterNavigation}>
-            <Text
-              style={[textStyles.normalSemiBold, { color: colors.primary }]}
-            >
-              Register
-            </Text>
+            <Text style={[textStyles.normalSemiBold, { color: colors.primary }]}>Register</Text>
           </TouchableOpacity>
         </View>
       </KeyboardAwareScrollView>

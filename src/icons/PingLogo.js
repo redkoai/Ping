@@ -1,12 +1,7 @@
 import React from 'react';
 import Svg, { G, Path } from 'react-native-svg';
 
-function PingLogo({
-  width = '286.322',
-  height = '221.517',
-  fill = '#888',
-  ...props
-}) {
+function PingLogo({ width = '286.322', height = '221.517', fill = '#888', ...props }) {
   return (
     <Svg
       xmlns="http://www.w3.org/2000/svg"

@@ -39,9 +39,7 @@ const FIREBASE_CONFIG = {
   measurementId: MEASUREMENT_ID,
 };
 
-!firebase.apps.length
-  ? firebase.initializeApp(FIREBASE_CONFIG)
-  : firebase.app();
+!firebase.apps.length ? firebase.initializeApp(FIREBASE_CONFIG) : firebase.app();
 
 SplashScreen.preventAutoHideAsync().catch(() =>
   LogBox.ignoreLogs([

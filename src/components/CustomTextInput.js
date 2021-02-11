@@ -2,13 +2,7 @@ import { textStyles, colors } from 'ping/src/styles/styles';
 import { heightPercentageToDP, widthPercentageToDP } from 'ping/util/scaler';
 
 import React, { useState } from 'react';
-import {
-  View,
-  Text,
-  TextInput,
-  StyleSheet,
-  TouchableOpacity,
-} from 'react-native';
+import { View, Text, TextInput, StyleSheet, TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
 import { Controller } from 'react-hook-form';
@@ -39,9 +33,7 @@ function CustomTextInput({
   const [secure, setSecure] = useState(rules.secureTextEntry);
   return (
     <View style={styles.container}>
-      <Text style={[textStyles.normalSemiBold, styles.marginOffset]}>
-        {input.label}
-      </Text>
+      <Text style={[textStyles.normalSemiBold, styles.marginOffset]}>{input.label}</Text>
       <Controller
         control={control}
         name={input.name}
@@ -70,10 +62,7 @@ function CustomTextInput({
               {...inputProps}
             />
             {rules.secureTextEntry && (
-              <TouchableOpacity
-                style={styles.icon}
-                onPress={() => setSecure(!secure)}
-              >
+              <TouchableOpacity style={styles.icon} onPress={() => setSecure(!secure)}>
                 <Ionicons
                   name={secure ? 'ios-eye' : 'ios-eye-off'}
                   size={heightPercentageToDP(4.2)}
@@ -86,19 +75,11 @@ function CustomTextInput({
       />
       {
         <View style={[styles.barBelowInput, styles.marginOffset]}>
-          <Text style={[textStyles.smallRegular, styles.error]}>
-            {error ? error.message : ' '}
-          </Text>
-          <View
-          >
+          <Text style={[textStyles.smallRegular, styles.error]}>{error ? error.message : ' '}</Text>
+          <View>
             {forgotPassword && (
-              <TouchableOpacity
-                onPress={forgotPassword}
-                style={styles.forgotPassword}
-              >
-                <Text
-                  style={[textStyles.smallRegular, { color: colors.primary }]}
-                >
+              <TouchableOpacity onPress={forgotPassword} style={styles.forgotPassword}>
+                <Text style={[textStyles.smallRegular, { color: colors.primary }]}>
                   Forgot password
                 </Text>
               </TouchableOpacity>
