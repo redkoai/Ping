@@ -1,5 +1,6 @@
 import React from 'react';
 import * as SplashScreen from 'expo-splash-screen';
+import { LogBox } from 'react-native';
 import { AuthProvider } from 'ping/src/contexts/AuthContext';
 
 import {
@@ -38,13 +39,15 @@ const FIREBASE_CONFIG = {
   measurementId: MEASUREMENT_ID,
 };
 
-firebase.initializeApp(FIREBASE_CONFIG);
+!firebase.apps.length
+  ? firebase.initializeApp(FIREBASE_CONFIG)
+  : firebase.app();
 
-SplashScreen.preventAutoHideAsync()
-  .then((result) =>
-    console.log(`SplashScreen.preventAutoHideAsync() succeeded: ${result}`),
-  )
-  .catch(console.warn);
+SplashScreen.preventAutoHideAsync().catch(() =>
+  LogBox.ignoreLogs([
+    'Unhandled promise rejection: Error: Native splash screen is already hidden.',
+  ]),
+);
 
 function App() {
   const [fontsLoaded] = useFonts({
