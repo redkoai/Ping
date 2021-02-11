@@ -127,7 +127,7 @@ const styles = StyleSheet.create({
   },
   logo: {
     position: 'absolute',
-    height: heightPercentageToDP(22),
+    height: heightPercentageToDP(19),
     width: widthPercentageToDP(50),
     resizeMode: 'contain',
   },
