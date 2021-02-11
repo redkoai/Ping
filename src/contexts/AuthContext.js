@@ -90,13 +90,14 @@ export function AuthProvider({ children }) {
     try {
       await GoogleSignIn.askForPlayServicesAsync();
       const { type, user } = await GoogleSignIn.signInAsync();
+      const data = await GoogleSignIn.GoogleAuthentication.prototype;
       if (type === 'success') {
         await firebase
           .auth()
           .setPersistence(firebase.auth.Auth.Persistence.LOCAL);
         const credential = firebase.auth.GoogleAuthProvider.credential(
-          user.auth.idToken,
-          user.auth.accessToken,
+          data.idToken,
+          data.accessToken,
         );
         await firebase.auth().signInWithCredential(credential);
         handleSuccess();
