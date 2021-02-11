@@ -77,7 +77,7 @@ function SignUpScreen({ navigation }) {
           fill={colors.primary}
           style={styles.logo}
         />
-        <Spacer height={heightPercentageToDP(0.7)} />
+        <Spacer height={7} />
 
         <EmailInput control={control} errors={errors} />
         <PasswordInput control={control} errors={errors} />

@@ -69,7 +69,7 @@ function PasswordResetScreen({ navigation }) {
           fill={colors.primary}
           style={styles.logo}
         />
-        <Spacer height={heightPercentageToDP(0.9)} />
+        <Spacer height={9} />
 
         <EmailInput control={control} errors={errors} />
         <Spacer height={1.5} />
