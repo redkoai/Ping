@@ -76,7 +76,7 @@ function CustomTextInput({
               >
                 <Ionicons
                   name={secure ? 'ios-eye' : 'ios-eye-off'}
-                  size={30}
+                  size={heightPercentageToDP(4.2)}
                   color={colors.offBlack}
                 />
               </TouchableOpacity>
