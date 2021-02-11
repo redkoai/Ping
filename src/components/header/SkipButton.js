@@ -8,7 +8,7 @@ function SkipButton({ text = 'SKIP' }) {
   const { setSkipped } = useContext(AuthContext);
 
   return (
-    <TouchableOpacity onPress={() => setSkipped}>
+    <TouchableOpacity onPress={() => setSkipped(true)}>
       <Text style={[textStyles.smallBold, styles.skipButton]}>{text}</Text>
     </TouchableOpacity>
   );
