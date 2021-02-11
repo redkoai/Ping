@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import * as SplashScreen from 'expo-splash-screen';
 import { LogBox } from 'react-native';
 
 import 'firebase/firestore';
@@ -11,14 +12,17 @@ const AuthContext = React.createContext();
 
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
   const [skipped, setSkipped] = useState(false);
 
   useEffect(() => {
+    // Google SSO Initialization
     GoogleSignIn.initAsync({ clientId: IOS_RESERVED_CLIENT_ID });
-    LogBox.ignoreLogs(['expo-google-sign-in is not supported in the Expo Client'])
-    firebase.auth().onAuthStateChanged((user) => {
-      setIsLoading(false);
+    LogBox.ignoreLogs([
+      'Unhandled promise rejection: Invariant Violation: expo-google-sign-in is not supported in the Expo Client because a custom URL scheme is required at build time. Please refer to the docs for usage outside of Expo www.npmjs.com/package/expo-google-sign-in',
+    ]);
+    // Firebase Auth Initialization
+    firebase.auth().onAuthStateChanged(async (user) => {
+      SplashScreen.hideAsync();
       if (user != null) setUser(user);
     });
   }, []);
@@ -116,7 +120,6 @@ export function AuthProvider({ children }) {
         user,
         skipped,
         setSkipped,
-        isLoading,
         singOutAsync,
         signUpWithEmailAsync,
         signInWithEmailAsync,

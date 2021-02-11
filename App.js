@@ -1,4 +1,5 @@
 import React from 'react';
+import * as SplashScreen from 'expo-splash-screen';
 import { AuthProvider } from 'ping/src/contexts/AuthContext';
 
 import {
@@ -37,6 +38,7 @@ const FIREBASE_CONFIG = {
   measurementId: MEASUREMENT_ID,
 };
 
+SplashScreen.preventAutoHideAsync().catch(console.warn);
 firebase.initializeApp(FIREBASE_CONFIG);
 
 function App() {
