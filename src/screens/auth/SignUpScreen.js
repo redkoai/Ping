@@ -1,17 +1,16 @@
-import { textStyles, colors } from 'ping/src/styles/styles';
+import { colors } from 'ping/src/styles/styles';
 import { widthPercentageToDP, heightPercentageToDP } from 'ping/util/scaler';
 import PingLogo from 'ping/src/icons/PingLogo';
 import googleLogo from 'ping/assets/Google_G_Logo.png';
 
-import React, { useContext } from 'react';
+import React, { useContext, useCallback } from 'react';
+import { useFocusEffect } from '@react-navigation/native';
 import AuthContext from 'ping/src/contexts/AuthContext';
 
 import {
   StatusBar,
   SafeAreaView,
   View,
-  Text,
-  TouchableOpacity,
   ActivityIndicator,
   StyleSheet,
   Dimensions,
@@ -23,28 +22,21 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import AUTH_SCHEMA from 'ping/src/schema/authSchema';
 
 import Spacer from 'ping/src/components/Spacer';
-import BackChevron from 'ping/src/components/BackChevron';
-import TopBar from 'ping/src/components/TopBar';
 import { EmailInput, PasswordInput } from 'ping/src/components/CustomTextInput';
 import CustomButton from 'ping/src/components/CustomButton';
 
-function SignUpScreen({ navigation }) {
-  const { setSkipped, signUpWithEmailAsync, signInWithGoogleAsync } = useContext(AuthContext);
-
+function SignUpScreen() {
+  const { signUpWithEmailAsync, signInWithGoogleAsync } = useContext(AuthContext);
   const { control, handleSubmit, errors, reset, formState } = useForm({
     resolver: yupResolver(AUTH_SCHEMA),
   });
+  useFocusEffect(useCallback(reset));
 
   const onSignUpSuccess = () => {
     // navigation.navigate('HomeScreenEmpty');
   };
   const onSignUpFailure = (errorMessage) => {
     alert(errorMessage);
-  };
-
-  const onBackrNavigation = () => {
-    reset();
-    navigation.goBack();
   };
 
   return (
@@ -57,13 +49,6 @@ function SignUpScreen({ navigation }) {
       }}
     >
       <StatusBar backgroundColor={colors.primary} />
-
-      <TopBar>
-        <BackChevron onPress={onBackrNavigation} />
-        <TouchableOpacity onPress={() => setSkipped}>
-          <Text style={[textStyles.smallBold, styles.skipButton]}>SKIP</Text>
-        </TouchableOpacity>
-      </TopBar>
 
       <KeyboardAwareScrollView contentContainerStyle={{ flex: 1, alignItems: 'center' }}>
         <PingLogo height={heightPercentageToDP(20)} fill={colors.primary} style={styles.logo} />
@@ -97,13 +82,6 @@ function SignUpScreen({ navigation }) {
 }
 
 const styles = StyleSheet.create({
-  skipButton: {
-    color: colors.primary,
-    paddingVertical: 10,
-    paddingHorizontal: 20,
-    position: 'relative',
-    right: -10,
-  },
   logo: {
     position: 'relative',
     left: widthPercentageToDP(2),

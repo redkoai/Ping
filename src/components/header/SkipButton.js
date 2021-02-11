@@ -1,0 +1,27 @@
+import { textStyles, colors } from 'ping/src/styles/styles';
+import { StyleSheet, TouchableOpacity, Text } from 'react-native';
+
+import React, { useContext } from 'react';
+import AuthContext from 'ping/src/contexts/AuthContext';
+
+function SkipButton({ text = 'SKIP' }) {
+  const { setSkipped } = useContext(AuthContext);
+
+  return (
+    <TouchableOpacity onPress={() => setSkipped}>
+      <Text style={[textStyles.smallBold, styles.skipButton]}>{text}</Text>
+    </TouchableOpacity>
+  );
+}
+
+const styles = StyleSheet.create({
+  skipButton: {
+    color: colors.primary,
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    position: 'relative',
+    right: -10,
+  },
+});
+
+export default SkipButton;

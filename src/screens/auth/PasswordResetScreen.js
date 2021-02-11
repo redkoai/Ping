@@ -1,15 +1,15 @@
-import { textStyles, colors } from 'ping/src/styles/styles';
+import { colors } from 'ping/src/styles/styles';
 import { widthPercentageToDP, heightPercentageToDP } from 'ping/util/scaler';
 import PingLogo from 'ping/src/icons/PingLogo';
 
-import React, { useContext } from 'react';
+import React, { useContext, useCallback } from 'react';
+import { useFocusEffect } from '@react-navigation/native';
 import AuthContext from 'ping/src/contexts/AuthContext';
 
 import {
   StatusBar,
   SafeAreaView,
   View,
-  Text,
   ActivityIndicator,
   StyleSheet,
   Dimensions,
@@ -21,28 +21,21 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { EMAIL_SCHEMA } from 'ping/src/schema/authSchema';
 
 import Spacer from 'ping/src/components/Spacer';
-import BackChevron from 'ping/src/components/BackChevron';
-import TopBar from 'ping/src/components/TopBar';
 import { EmailInput } from 'ping/src/components/CustomTextInput';
 import CustomButton from 'ping/src/components/CustomButton';
 
-function PasswordResetScreen({ navigation }) {
+function PasswordResetScreen() {
   const { passwordResetEmailAsync } = useContext(AuthContext);
-
   const { control, handleSubmit, errors, reset, formState } = useForm({
     resolver: yupResolver(EMAIL_SCHEMA),
   });
+  useFocusEffect(useCallback(reset));
 
   const onResetSuccess = () => {
     // navigation.navigate('SignIn');
   };
   const onResetFailure = (errorMessage) => {
     alert(errorMessage);
-  };
-
-  const onBackrNavigation = () => {
-    reset();
-    navigation.goBack();
   };
 
   return (
@@ -55,11 +48,6 @@ function PasswordResetScreen({ navigation }) {
       }}
     >
       <StatusBar backgroundColor={colors.primary} />
-
-      <TopBar>
-        <BackChevron onPress={onBackrNavigation} />
-        <Text style={textStyles.bigBold}>Reset Password</Text>
-      </TopBar>
 
       <KeyboardAwareScrollView contentContainerStyle={{ flex: 1, alignItems: 'center' }}>
         <PingLogo height={heightPercentageToDP(20)} fill={colors.primary} style={styles.logo} />
