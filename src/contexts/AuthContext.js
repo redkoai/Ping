@@ -17,9 +17,8 @@ export function AuthProvider({ children }) {
   useEffect(() => {
     // Google SSO Initialization
     GoogleSignIn.initAsync({ clientId: IOS_RESERVED_CLIENT_ID });
-    LogBox.ignoreLogs([
-      'Unhandled promise rejection: Invariant Violation: expo-google-sign-in is not supported in the Expo Client because a custom URL scheme is required at build time. Please refer to the docs for usage outside of Expo www.npmjs.com/package/expo-google-sign-in',
-    ]);
+    // Possible Unhandled Promise Rejection: Invariant Violation: expo-google-sign-in is not supported in the Expo Client because a custom URL scheme is required at build time. Please refer to the docs for usage outside of Expo www.npmjs.com/package/expo-google-sign-in
+    LogBox.ignoreLogs(['Possible Unhandled Promise Rejection']);
     // Firebase Auth Initialization
     firebase.auth().onAuthStateChanged(async (user) => {
       SplashScreen.hideAsync();
