@@ -37,7 +37,7 @@ function PasswordResetScreen({ navigation }) {
     // navigation.navigate('SignIn');
   };
   const onResetFailure = (errorMessage) => {
-    console.log(errorMessage);
+    alert(errorMessage);
   };
 
   const onBackrNavigation = () => {

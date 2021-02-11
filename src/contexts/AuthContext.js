@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { LogBox } from 'react-native';
 import * as SplashScreen from 'expo-splash-screen';
 
 import 'firebase/firestore';
 import firebase from 'firebase';
 import * as GoogleSignIn from 'expo-google-sign-in';
 import * as Segment from 'expo-analytics-segment';
-import { IOS_RESERVED_CLIENT_ID } from '@env';
 
 const AuthContext = React.createContext();
 
@@ -16,12 +14,6 @@ export function AuthProvider({ children }) {
 
   useEffect(() => {
     firebase.auth().onAuthStateChanged(async (user) => {
-      await GoogleSignIn.initAsync({ clientId: IOS_RESERVED_CLIENT_ID }).catch(() =>
-      LogBox.ignoreLogs([
-        'Unhandled promise rejection: Invariant Violation: expo-google-sign-in is not supported in the Expo Client because a custom URL scheme is required at build time.',
-      ]),
-    );
-    ;
       if (user != null) setUser(user);
       await SplashScreen.hideAsync();
     });
@@ -98,14 +90,13 @@ export function AuthProvider({ children }) {
     try {
       await GoogleSignIn.askForPlayServicesAsync();
       const { type, user } = await GoogleSignIn.signInAsync();
-      const data = await GoogleSignIn.GoogleAuthentication.prototype;
       if (type === 'success') {
         await firebase
           .auth()
           .setPersistence(firebase.auth.Auth.Persistence.LOCAL);
         const credential = firebase.auth.GoogleAuthProvider.credential(
-          data.idToken,
-          data.accessToken,
+          user.auth.idToken,
+          user.auth.accessToken,
         );
         await firebase.auth().signInWithCredential(credential);
         handleSuccess();

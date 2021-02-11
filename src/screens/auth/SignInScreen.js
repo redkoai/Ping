@@ -42,7 +42,7 @@ function SignInScreen({ navigation }) {
     // navigation.navigate('HomeScreenEmpty');
   };
   const onSignInFailure = (errorMessage) => {
-    console.log(errorMessage);
+    alert(errorMessage);
   };
 
   const onForgotPasswordNavigation = () => {
@@ -92,7 +92,7 @@ function SignInScreen({ navigation }) {
 
         {formState.isSubmitting && (
           <View>
-            <ActivityIndicator size={'large'} />
+            <ActivityIndicator size={'large'} color={colors.primary} />
           </View>
         )}
 

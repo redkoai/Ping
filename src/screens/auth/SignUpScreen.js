@@ -43,7 +43,7 @@ function SignUpScreen({ navigation }) {
     // navigation.navigate('HomeScreenEmpty');
   };
   const onSignUpFailure = (errorMessage) => {
-    console.log(errorMessage);
+    alert(errorMessage);
   };
 
   const onBackrNavigation = () => {
