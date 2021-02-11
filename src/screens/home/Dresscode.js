@@ -7,7 +7,9 @@ import { Dimensions } from 'react-native';
 import {widthPercentageToDP,heightPercentageToDP,} from '../../../util/scaler';
 import React, {useEffect, useState} from "react";
 import NavBar from "../../navbars/NarBar";
-import back from "../../../assets/createnew/dresscode/back.png";
+import chevron from "../../../assets/createnew/templates/chevron.png";
+import back from "../../../assets/createnew/templates/back.png";
+import dresscode from "../../../assets/createnew/dresscode/dresscode.png";
 import deprogline from "../../../assets/createnew/dresscode/dresscodeprogline.png";
 import optone from "../../../assets/createnew/dresscode/optionone.png";
 import opttwo from "../../../assets/createnew/dresscode/optiontwo.png";
@@ -28,28 +30,28 @@ function DressCode({}) {
         <View style={{flex: 1}}>    
             <ImageBackground source={emptyHome} style={styles.homeEmpty}>
             <View style={{ flexDirection: 'column', justifyContent: 'center',marginTop:widthPercentageToDP(3)}}>
-            <Image source={back} style={{height: heightPercentageToDP('10'), width :widthPercentageToDP('95'),  resizeMode:'contain',marginTop: heightPercentageToDP('17'), }} />
-            <Image source={deprogline} style={{height: heightPercentageToDP('10'), width :widthPercentageToDP('85'),  resizeMode:'contain',marginTop: heightPercentageToDP('-4'), left:heightPercentageToDP('2')}} />
+            <TouchableOpacity onPress={() => { 
+                    navigation.navigate('Details')
+                }}>
+            <Image source={chevron} style={{height: heightPercentageToDP('30'), width :widthPercentageToDP('8'),  resizeMode:'contain',marginTop: heightPercentageToDP('14'),left:heightPercentageToDP('0') }} />  
+            </TouchableOpacity>
+            <Image source={back} style={{height: heightPercentageToDP('10'), width :widthPercentageToDP('10'),  resizeMode:'contain',marginTop: heightPercentageToDP('-20'),left:heightPercentageToDP('4')  }} />
+            <Image source={dresscode} style={{height: heightPercentageToDP('25'), width :widthPercentageToDP('30'),  resizeMode:'contain',marginTop: heightPercentageToDP('-17.5'),right:heightPercentageToDP('-29.5') }} />
+            <Image source={deprogline} style={{height: heightPercentageToDP('10'), width :widthPercentageToDP('85'),  resizeMode:'contain',marginTop: heightPercentageToDP('-12'), left:heightPercentageToDP('2')}} />
             <Image source={optone} style={{height: heightPercentageToDP('5'), width :widthPercentageToDP('50'), marginTop: heightPercentageToDP('-2'),left:heightPercentageToDP('2'), resizeMode:'contain' }} /> 
             <Image source={opttwo} style={{height: heightPercentageToDP('5'), width :widthPercentageToDP('40'), marginTop: heightPercentageToDP('-1'),left:heightPercentageToDP('2'), resizeMode:'contain' }} /> 
             <Image source={optthree} style={{height: heightPercentageToDP('5'), width :widthPercentageToDP('35'), marginTop: heightPercentageToDP('-1'),left:heightPercentageToDP('2'), resizeMode:'contain' }} /> 
             <Image source={optfour} style={{height: heightPercentageToDP('5'), width :widthPercentageToDP('43'), marginTop: heightPercentageToDP('-1'),left:heightPercentageToDP('2'), resizeMode:'contain' }} /> 
             <Image source={optfive} style={{height: heightPercentageToDP('5'), width :widthPercentageToDP('25'), marginTop: heightPercentageToDP('-1'),left:heightPercentageToDP('2'), resizeMode:'contain' }} /> 
             <Image source={rect} style={{height: heightPercentageToDP('10'), width :widthPercentageToDP('95'), marginTop: heightPercentageToDP('1'),right:heightPercentageToDP('-4'), resizeMode:'contain' }} /> 
-            <Image source={optional} style={{height: heightPercentageToDP('10'), width :widthPercentageToDP('65'), marginTop: heightPercentageToDP('2'), resizeMode:'contain' }} /> 
-            <Image source={upload} style={{height: heightPercentageToDP('15'), width :widthPercentageToDP('65'), marginTop: heightPercentageToDP('-3'),left:heightPercentageToDP('0'), resizeMode:'contain' }} /> 
+            <Image source={optional} style={{height: heightPercentageToDP('10'), width :widthPercentageToDP('65'), marginTop: heightPercentageToDP('2'), resizeMode:'contain',left:heightPercentageToDP('0.7') }} /> 
+            <Image source={upload} style={{height: heightPercentageToDP('15'), width :widthPercentageToDP('65'), marginTop: heightPercentageToDP('-2.2'),left:heightPercentageToDP('0.5'), resizeMode:'contain' }} /> 
+            <TouchableOpacity onPress={() => { 
+                    navigation.navigate('FAQ')
+                }}>
             <Image source={denext} style={{height: heightPercentageToDP('47'), width :widthPercentageToDP('45'), marginTop: heightPercentageToDP('-12'),right:heightPercentageToDP('-23'), resizeMode:'contain' }} />  
-            
-                {/* <TouchableOpacity onPress={() => { 
-                    // navigation.navigate('HomeScreenEmpty')
-                }}>
-                    <Image source={createNewEventBtn} style={{height: heightPercentageToDP('7'), width :widthPercentageToDP('70'), marginTop: heightPercentageToDP('5'), resizeMode:'contain', left:heightPercentageToDP('5') }} />
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => { 
-                    // navigation.navigate('HomeScreenEmpty')
-                }}>
-                    <Image source={addFriendsBtn} style={{height: heightPercentageToDP('7'), width :widthPercentageToDP('70'), marginBottom: heightPercentageToDP('15'), resizeMode:'contain' , left:heightPercentageToDP('5')}} />
-                </TouchableOpacity> */}
+            </TouchableOpacity>
+
             </View>
             </ImageBackground>
             <NavBar_invite/>

@@ -20,8 +20,16 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         width:'100%',
         opacity: 1
+    },
+    textinput:{
+        fontSize:15,
+        backgroundColor:'lightgray',
+        borderColor:'gray',
+        borderRadius:4,
+        borderWidth:0,
+        height:50,
+        width:'99%'
     }
-
 })
 
 

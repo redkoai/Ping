@@ -24,6 +24,7 @@ import  FAQ from './src/screens/home/FAQ'
 import  Signinpopup from './src/screens/home/Signinpopup'
 import  RSVP from './src/screens/home/RSVP'
 import  CreationSuccess from './src/screens/home/CreationSuccess'
+import  Form from './src/screens/home/Form'
 
 
 
@@ -48,6 +49,7 @@ export default function App() {
         <Stack.Screen name="Signinpopup" component={Signinpopup}/>
         <Stack.Screen name="RSVP" component={RSVP}/>
         <Stack.Screen name="CreationSuccess" component={CreationSuccess}/>
+        <Stack.Screen name="Form" component={Form}/>
       </Stack.Navigator>
     </NavigationContainer>
   );

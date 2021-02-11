@@ -32,7 +32,7 @@ function NavBar_accountsone({}){
                     <Image source={Eventsbtn} style={{height: heightPercentageToDP('15'), width :widthPercentageToDP('12'),  resizeMode:'contain', bottom: heightPercentageToDP('3') }}/>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => {
-                    navigation.navigate('Details')
+                    navigation.navigate('createnewtemplates')
                     }}>
                     <Image source={Invitebtn} style={{height: heightPercentageToDP('15'), width :widthPercentageToDP('12'),  resizeMode:'contain', bottom: heightPercentageToDP('3')}}/>
                 </TouchableOpacity>
