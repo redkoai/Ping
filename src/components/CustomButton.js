@@ -35,8 +35,8 @@ const styles = StyleSheet.create({
   },
   button: {
     width: widthPercentageToDP(80),
+    height: heightPercentageToDP(6.5),
     paddingHorizontal: 30,
-    height: 50,
     borderRadius: 50,
     display: 'flex',
     alignItems: 'center',

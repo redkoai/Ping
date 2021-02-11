@@ -29,15 +29,15 @@ import CustomButton from 'ping/src/components/CustomButton';
 function PasswordResetScreen({ navigation }) {
   const { passwordResetEmailAsync } = useContext(AuthContext);
 
-  const { control, handleSubmit, errors, setError, formState } = useForm({
+  const { control, handleSubmit, errors, reset, formState } = useForm({
     resolver: yupResolver(EMAIL_SCHEMA),
   });
 
   const onSuccess = () => {
-    navigation.navigate('SignIn');
+    // navigation.navigate('SignIn');
   };
   const onFailure = (errorMessage) => {
-    setError(errorMessage);
+    console.log(errorMessage);
   };
 
   return (
@@ -52,7 +52,12 @@ function PasswordResetScreen({ navigation }) {
       <StatusBar backgroundColor={colors.primary} />
 
       <TopBar>
-        <BackChevron nav={navigation} />
+        <BackChevron
+          handlePress={() => {
+            reset();
+            navigation.goBack();
+          }}
+        />
         <Text style={textStyles.bigBold}>Reset Password</Text>
       </TopBar>
 
@@ -64,7 +69,7 @@ function PasswordResetScreen({ navigation }) {
           fill={colors.primary}
           style={styles.logo}
         />
-        <Spacer height={heightPercentageToDP(0.4)} />
+        <Spacer height={heightPercentageToDP(0.9)} />
 
         <EmailInput control={control} errors={errors} />
         <Spacer height={1.5} />
@@ -99,6 +104,7 @@ const styles = StyleSheet.create({
   logo: {
     position: 'relative',
     left: widthPercentageToDP(2),
+    top: heightPercentageToDP(2),
   },
   registerButton: {
     position: 'absolute',

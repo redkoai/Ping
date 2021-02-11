@@ -181,25 +181,23 @@ export function PasswordInput({
 const styles = StyleSheet.create({
   container: {
     width: widthPercentageToDP(90),
-    marginTop: heightPercentageToDP(0.3),
-    marginBottom: heightPercentageToDP(0.2),
   },
   inputContainer: {
     marginVertical: heightPercentageToDP(0.3),
     flexDirection: 'row',
     justifyContent: 'space-between',
+    alignItems: 'center',
   },
   input: {
     flex: 1,
     color: colors.offBlack,
     paddingRight: 60,
     paddingLeft: 20,
-    paddingVertical: 17,
     borderRadius: 12,
     borderWidth: 1,
     borderColor: 'white',
     backgroundColor: colors.lightGray,
-    height: 55,
+    height: heightPercentageToDP(6.5),
   },
   inputFocused: {
     backgroundColor: colors.lightGray,
@@ -208,10 +206,9 @@ const styles = StyleSheet.create({
   icon: {
     position: 'absolute',
     right: 15,
-    top: heightPercentageToDP(1.4),
   },
   barBelowInput: {
-    marginTop: -10,
+    marginTop: -13,
     width: widthPercentageToDP(88),
     height: 45,
     display: 'flex',

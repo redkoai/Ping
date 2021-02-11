@@ -29,11 +29,13 @@ import { EmailInput, PasswordInput } from 'ping/src/components/CustomTextInput';
 import CustomButton from 'ping/src/components/CustomButton';
 
 function SignUpScreen({ navigation }) {
-  const { setSkipped, signUpWithEmailAsync, signInWithGoogleAsync } = useContext(
-    AuthContext,
-  );
+  const {
+    setSkipped,
+    signUpWithEmailAsync,
+    signInWithGoogleAsync,
+  } = useContext(AuthContext);
 
-  const { control, handleSubmit, errors, setError, formState } = useForm({
+  const { control, handleSubmit, errors, reset, formState } = useForm({
     resolver: yupResolver(AUTH_SCHEMA),
   });
 
@@ -41,7 +43,7 @@ function SignUpScreen({ navigation }) {
     // navigation.navigate('HomeScreenEmpty');
   };
   const onFailure = (errorMessage) => {
-    setError(errorMessage);
+    console.log(errorMessage);
   };
 
   return (
@@ -56,10 +58,13 @@ function SignUpScreen({ navigation }) {
       <StatusBar backgroundColor={colors.primary} />
 
       <TopBar>
-        <BackChevron nav={navigation} />
-        <TouchableOpacity
-          onPress={() => setSkipped}
-        >
+        <BackChevron
+          handlePress={() => {
+            reset();
+            navigation.goBack();
+          }}
+        />
+        <TouchableOpacity onPress={() => setSkipped}>
           <Text style={[textStyles.smallBold, styles.skipButton]}>SKIP</Text>
         </TouchableOpacity>
       </TopBar>
@@ -72,7 +77,7 @@ function SignUpScreen({ navigation }) {
           fill={colors.primary}
           style={styles.logo}
         />
-        <Spacer height={heightPercentageToDP(0.4)} />
+        <Spacer height={heightPercentageToDP(0.7)} />
 
         <EmailInput control={control} errors={errors} />
         <PasswordInput control={control} errors={errors} />
@@ -115,6 +120,7 @@ const styles = StyleSheet.create({
   logo: {
     position: 'relative',
     left: widthPercentageToDP(2),
+    top: heightPercentageToDP(2),
   },
   registerButton: {
     position: 'absolute',

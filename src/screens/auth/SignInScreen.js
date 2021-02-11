@@ -34,7 +34,7 @@ function SignInScreen({ navigation }) {
     signInWithGoogleAsync,
   } = useContext(AuthContext);
 
-  const { control, handleSubmit, errors, setError, formState } = useForm({
+  const { control, handleSubmit, errors, reset, formState } = useForm({
     resolver: yupResolver(AUTH_SCHEMA),
   });
 
@@ -42,7 +42,7 @@ function SignInScreen({ navigation }) {
     // navigation.navigate('HomeScreenEmpty');
   };
   const onFailure = (errorMessage) => {
-    setError(errorMessage);
+    console.log(errorMessage);
   };
 
   return (
@@ -71,7 +71,7 @@ function SignInScreen({ navigation }) {
           fill={colors.primary}
           style={styles.logo}
         />
-        <Spacer height={heightPercentageToDP(0.4)} />
+        <Spacer height={heightPercentageToDP(0.7)} />
 
         <EmailInput control={control} errors={errors} />
         <PasswordInput
@@ -79,7 +79,7 @@ function SignInScreen({ navigation }) {
           errors={errors}
           forgotPasswordNav={navigation}
         />
-        <Spacer height={1.5} />
+        <Spacer height={2.5} />
 
         {formState.isSubmitting && (
           <View>
@@ -107,7 +107,12 @@ function SignInScreen({ navigation }) {
           <Text style={[textStyles.smallRegular, { color: colors.offBlack }]}>
             Don't have an account?
           </Text>
-          <TouchableOpacity onPress={() => navigation.navigate('SignUp')}>
+          <TouchableOpacity
+            onPress={() => {
+              reset();
+              navigation.navigate('SignUp');
+            }}
+          >
             <Text
               style={[textStyles.normalSemiBold, { color: colors.primary }]}
             >
@@ -131,6 +136,7 @@ const styles = StyleSheet.create({
   logo: {
     position: 'relative',
     left: widthPercentageToDP(2),
+    top: heightPercentageToDP(2),
   },
   registerButton: {
     position: 'absolute',

@@ -4,9 +4,9 @@ import leftChevron from 'ping/assets/chevron-left.png';
 import React from 'react';
 import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
 
-function BackChevron({ nav, text = 'back', icon = leftChevron }) {
+function BackChevron({ handlePress, text = 'back', icon = leftChevron }) {
   return (
-    <TouchableOpacity onPress={() => nav.goBack()}>
+    <TouchableOpacity onPress={handlePress}>
       <View style={styles.container}>
         {icon && <Image source={icon} style={styles.icon} />}
         {text && <Text style={textStyles.normalMedium}>{text}</Text>}
