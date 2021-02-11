@@ -38,8 +38,13 @@ const FIREBASE_CONFIG = {
   measurementId: MEASUREMENT_ID,
 };
 
-SplashScreen.preventAutoHideAsync().catch(console.warn);
 firebase.initializeApp(FIREBASE_CONFIG);
+
+SplashScreen.preventAutoHideAsync()
+  .then((result) =>
+    console.log(`SplashScreen.preventAutoHideAsync() succeeded: ${result}`),
+  )
+  .catch(console.warn);
 
 function App() {
   const [fontsLoaded] = useFonts({

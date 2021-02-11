@@ -14,8 +14,8 @@ export function AuthProvider({ children }) {
 
   useEffect(() => {
     firebase.auth().onAuthStateChanged(async (user) => {
-      SplashScreen.hideAsync();
       if (user != null) setUser(user);
+      await SplashScreen.hideAsync();
     });
   }, []);
 
