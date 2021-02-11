@@ -1,8 +1,8 @@
-// The sole purpose of this file is to add our sensitive 
+// The sole purpose of this file is to add our sensitive
 // environment variables to our app.json in a secure way.
 
 // The reason we're not ditching our app.json entirely is that:
-// Static configs can be automatically updated with CLI tools, 
+// Static configs can be automatically updated with CLI tools,
 // whereas dynamic configs must be manually updated by the developer.
 
 export default ({ config }) => {
@@ -13,6 +13,14 @@ export default ({ config }) => {
       config: {
         googleSignIn: {
           reservedClientId: process.env.IOS_RESERVED_CLIENT_ID,
+        },
+      },
+    },
+    android: {
+      ...config.android,
+      config: {
+        googleSignIn: {
+          certificateHash: process.env.ANDROID_CERTIFICATE_HASH,
         },
       },
     },
