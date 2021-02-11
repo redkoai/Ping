@@ -24,7 +24,6 @@ export function AuthProvider({ children }) {
   const singOutAsync = async (handleSuccess, handleFailure) => {
     try {
       await firebase.auth().signOut();
-      // await GoogleSignIn.signOutAsync();
       setUser(null);
       setSkipped(false);
       handleSuccess();
@@ -88,19 +87,12 @@ export function AuthProvider({ children }) {
         }
       });
   };
-  
-  const _syncUserWithStateAsync = async () => {
-    const user = await GoogleSignIn.signInSilentlyAsync();
-    setUser(user);
-  };
-  
+
   const signInWithGoogleAsync = async (handleSuccess, handleFailure) => {
     try {
       await GoogleSignIn.askForPlayServicesAsync();
       const { type, user } = await GoogleSignIn.signInAsync();
-      // const data = await GoogleSignIn.GoogleAuthentication.prototype();
       if (type === 'success') {
-        // _syncUserWithStateAsync();
         await firebase
           .auth()
           .setPersistence(firebase.auth.Auth.Persistence.LOCAL);
@@ -108,9 +100,7 @@ export function AuthProvider({ children }) {
           user.auth.idToken,
           user.auth.accessToken,
         );
-        const googleProfileData = await firebase
-          .auth()
-          .signInWithCredential(credential);
+        await firebase.auth().signInWithCredential(credential);
         handleSuccess();
       }
     } catch ({ message }) {
