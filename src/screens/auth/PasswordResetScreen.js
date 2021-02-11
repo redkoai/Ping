@@ -59,7 +59,12 @@ function PasswordResetScreen({ navigation }) {
       <KeyboardAwareScrollView
         contentContainerStyle={{ flex: 1, alignItems: 'center' }}
       >
-        <PingLogo width={220} fill={colors.primary} style={styles.logo} />
+        <PingLogo
+          height={heightPercentageToDP(20)}
+          fill={colors.primary}
+          style={styles.logo}
+        />
+        <Spacer height={heightPercentageToDP(0.4)} />
 
         <EmailInput control={control} errors={errors} />
         <Spacer height={1.5} />
@@ -93,7 +98,6 @@ const styles = StyleSheet.create({
   },
   logo: {
     position: 'relative',
-    bottom: heightPercentageToDP(1.5),
     left: widthPercentageToDP(2),
   },
   registerButton: {
