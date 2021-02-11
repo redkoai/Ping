@@ -44,6 +44,17 @@ export function AuthProvider({ children }) {
           handleFailure()(errorMessage);
         }
       });
+    // const credential = await firebase.auth.EmailAuthProvider.credential(data.email, data.password);
+    // await firebase
+    //   .auth()
+    //   .currentUser.linkWithCredential(credential)
+    //   .then((usercred) => {
+    //     const user = usercred.user;
+    //     alert('Account linking success' + user);
+    //   })
+    //   .catch(({ message }) => {
+    //     alert('Account linking error: ' + message);
+    //   });
     Segment.identify(data.email);
     Segment.trackWithProperties('User SignIn', {
       accountType: 'CustomEmailAuth',
@@ -85,22 +96,23 @@ export function AuthProvider({ children }) {
   const signInWithGoogleAsync = async (handleSuccess, handleFailure) => {
     try {
       await GoogleSignIn.askForPlayServicesAsync();
-      const { type, user } = await GoogleSignIn.signInAsync();;
+      const { type, user } = await GoogleSignIn.signInAsync();
       if (type === 'success') {
         await firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL);
         const credential = firebase.auth.GoogleAuthProvider.credential(
           user.auth.idToken,
           user.auth.accessToken,
         );
-        await firebase
-          .auth()
-          .currentUser.linkWithCredential(credential)
-          .then(async (linkResult) => {
-            await firebase.auth().signInWithCredential(linkResult.credential);
-          })
-          .catch(async () => {
-            await firebase.auth().signInWithCredential(credential);
-          });
+        await firebase.auth().signInWithCredential(credential);
+        // await firebase
+        //   .auth()
+        //   .currentUser.linkWithCredential(credential)
+        //   .then(async (linkResult) => {
+        //     await firebase.auth().signInWithCredential(linkResult.credential);
+        //   })
+        //   .catch(({ message }) => {
+        //     alert('Account linking error: ' + message);
+        //   });
         handleSuccess();
       }
     } catch ({ message }) {
