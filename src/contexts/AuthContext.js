@@ -85,21 +85,21 @@ export function AuthProvider({ children }) {
   const signInWithGoogleAsync = async (handleSuccess, handleFailure) => {
     try {
       await GoogleSignIn.askForPlayServicesAsync();
-      const { type, user } = await GoogleSignIn.signInAsync();
+      const { type, user } = await GoogleSignIn.signInAsync();;
       if (type === 'success') {
         await firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL);
-        const newCredential = firebase.auth.GoogleAuthProvider.credential(
+        const credential = firebase.auth.GoogleAuthProvider.credential(
           user.auth.idToken,
           user.auth.accessToken,
         );
         await firebase
           .auth()
-          .currentUser.linkWithCredential(newCredential)
+          .currentUser.linkWithCredential(credential)
           .then(async (linkResult) => {
-            await firebase.auth.signInWithCredential(linkResult.credential);
+            await firebase.auth().signInWithCredential(linkResult.credential);
           })
           .catch(async () => {
-            await firebase.auth.signInWithCredential(newCredential);
+            await firebase.auth().signInWithCredential(credential);
           });
         handleSuccess();
       }
