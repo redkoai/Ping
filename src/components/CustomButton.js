@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
   button: {
     width: widthPercentageToDP(80),
     paddingHorizontal: 30,
-    paddingVertical: heightPercentageToDP(1.5),
+    height: 50,
     borderRadius: 50,
     display: 'flex',
     alignItems: 'center',
@@ -58,7 +58,7 @@ const styles = StyleSheet.create({
   icon: {
     resizeMode: 'contain',
     width: 35,
-    height: heightPercentageToDP(3),
+    height: heightPercentageToDP(2.5),
     marginRight: 8,
   },
   textPrimary: {
