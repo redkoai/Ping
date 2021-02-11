@@ -98,15 +98,15 @@ export function AuthProvider({ children }) {
     try {
       await GoogleSignIn.askForPlayServicesAsync();
       const { type, user } = await GoogleSignIn.signInAsync();
-      const data = await GoogleSignIn.GoogleAuthentication.prototype.toJSON();
+      // const data = await GoogleSignIn.GoogleAuthentication.prototype();
       if (type === 'success') {
         // _syncUserWithStateAsync();
         await firebase
           .auth()
           .setPersistence(firebase.auth.Auth.Persistence.LOCAL);
         const credential = firebase.auth.GoogleAuthProvider.credential(
-          data.idToken,
-          data.accessToken,
+          user.auth.idToken,
+          user.auth.accessToken,
         );
         const googleProfileData = await firebase
           .auth()
