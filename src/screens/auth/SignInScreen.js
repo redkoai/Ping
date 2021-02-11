@@ -133,7 +133,7 @@ const styles = StyleSheet.create({
   },
   registerButton: {
     position: 'absolute',
-    bottom: heightPercentageToDP(3),
+    bottom: heightPercentageToDP(6),
     flexDirection: 'row',
     width: 195,
     alignItems: 'center',

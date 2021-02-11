@@ -181,8 +181,8 @@ export function PasswordInput({
 const styles = StyleSheet.create({
   container: {
     width: widthPercentageToDP(90),
-    marginTop: heightPercentageToDP(0.5),
-    marginBottom: heightPercentageToDP(0.5),
+    marginTop: heightPercentageToDP(0.3),
+    marginBottom: heightPercentageToDP(0.2),
   },
   inputContainer: {
     marginVertical: heightPercentageToDP(0.3),
