@@ -1,6 +1,6 @@
 import { textStyles, colors } from 'ping/src/styles/styles';
 import { widthPercentageToDP, heightPercentageToDP } from 'ping/util/scaler';
-import pingLogo from 'ping/assets/pingLogo.png';
+import PingLogo from 'ping/src/icons/PingLogo';
 
 import React, { useContext } from 'react';
 import AuthContext from 'ping/src/contexts/AuthContext';
@@ -9,7 +9,6 @@ import {
   StatusBar,
   SafeAreaView,
   View,
-  Image,
   Text,
   ActivityIndicator,
   StyleSheet,
@@ -60,8 +59,7 @@ function PasswordResetScreen({ navigation }) {
       <KeyboardAwareScrollView
         contentContainerStyle={{ flex: 1, alignItems: 'center' }}
       >
-        <Image source={pingLogo} style={styles.logo} />
-        <Spacer height={23} />
+        <PingLogo width={220} fill={colors.primary} style={styles.logo} />
 
         <EmailInput control={control} errors={errors} />
         <Spacer height={1.5} />
@@ -94,10 +92,9 @@ const styles = StyleSheet.create({
     right: -10,
   },
   logo: {
-    position: 'absolute',
-    height: heightPercentageToDP(22),
-    width: widthPercentageToDP(50),
-    resizeMode: 'contain',
+    position: 'relative',
+    bottom: heightPercentageToDP(1.5),
+    left: widthPercentageToDP(2),
   },
   registerButton: {
     position: 'absolute',

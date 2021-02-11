@@ -1,6 +1,6 @@
 import { textStyles, colors } from 'ping/src/styles/styles';
 import { widthPercentageToDP, heightPercentageToDP } from 'ping/util/scaler';
-import pingLogo from 'ping/assets/pingLogo.png';
+import PingLogo from 'ping/src/icons/PingLogo';
 import googleLogo from 'ping/assets/Google_G_Logo.png';
 
 import React, { useContext } from 'react';
@@ -10,7 +10,6 @@ import {
   StatusBar,
   SafeAreaView,
   View,
-  Image,
   Text,
   TouchableOpacity,
   ActivityIndicator,
@@ -68,8 +67,7 @@ function SignUpScreen({ navigation }) {
       <KeyboardAwareScrollView
         contentContainerStyle={{ flex: 1, alignItems: 'center' }}
       >
-        <Image source={pingLogo} style={styles.logo} />
-        <Spacer height={23} />
+        <PingLogo width={220} fill={colors.primary} style={styles.logo} />
 
         <EmailInput control={control} errors={errors} />
         <PasswordInput control={control} errors={errors} />
@@ -110,10 +108,9 @@ const styles = StyleSheet.create({
     right: -10,
   },
   logo: {
-    position: 'absolute',
-    height: heightPercentageToDP(22),
-    width: widthPercentageToDP(50),
-    resizeMode: 'contain',
+    position: 'relative',
+    bottom: heightPercentageToDP(1.5),
+    left: widthPercentageToDP(2),
   },
   registerButton: {
     position: 'absolute',
