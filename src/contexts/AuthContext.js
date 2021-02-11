@@ -67,11 +67,7 @@ export function AuthProvider({ children }) {
       });
   };
 
-  const passwordResetEmailAsync = async (
-    data,
-    handleSuccess,
-    handleFailure,
-  ) => {
+  const passwordResetEmailAsync = async (data, handleSuccess, handleFailure) => {
     await firebase
       .auth()
       .sendPasswordResetEmail(data.email)
@@ -91,18 +87,24 @@ export function AuthProvider({ children }) {
       await GoogleSignIn.askForPlayServicesAsync();
       const { type, user } = await GoogleSignIn.signInAsync();
       if (type === 'success') {
-        await firebase
-          .auth()
-          .setPersistence(firebase.auth.Auth.Persistence.LOCAL);
-        const credential = firebase.auth.GoogleAuthProvider.credential(
+        await firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL);
+        const newCredential = firebase.auth.GoogleAuthProvider.credential(
           user.auth.idToken,
           user.auth.accessToken,
         );
-        await firebase.auth().signInWithCredential(credential);
+        await firebase
+          .auth()
+          .currentUser.linkWithCredential(newCredential)
+          .then(async (linkResult) => {
+            await firebase.auth.signInWithCredential(linkResult.credential);
+          })
+          .catch(async () => {
+            await firebase.auth.signInWithCredential(newCredential);
+          });
         handleSuccess();
       }
     } catch ({ message }) {
-      alert('Login error: ' + message);
+      handleFailure('Login error: ' + message);
     }
   };
 
