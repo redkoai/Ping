@@ -39,11 +39,16 @@ function SignUpScreen({ navigation }) {
     resolver: yupResolver(AUTH_SCHEMA),
   });
 
-  const onSuccess = () => {
+  const onSignUpSuccess = () => {
     // navigation.navigate('HomeScreenEmpty');
   };
-  const onFailure = (errorMessage) => {
+  const onSignUpFailure = (errorMessage) => {
     console.log(errorMessage);
+  };
+
+  const onBackrNavigation = () => {
+    reset();
+    navigation.goBack();
   };
 
   return (
@@ -58,12 +63,7 @@ function SignUpScreen({ navigation }) {
       <StatusBar backgroundColor={colors.primary} />
 
       <TopBar>
-        <BackChevron
-          handlePress={() => {
-            reset();
-            navigation.goBack();
-          }}
-        />
+        <BackChevron onPress={onBackrNavigation} />
         <TouchableOpacity onPress={() => setSkipped}>
           <Text style={[textStyles.smallBold, styles.skipButton]}>SKIP</Text>
         </TouchableOpacity>
@@ -93,7 +93,11 @@ function SignUpScreen({ navigation }) {
           text="Sign Up"
           onPress={handleSubmit(
             async (data) =>
-              await signUpWithEmailAsync(data, onSuccess, onFailure),
+              await signUpWithEmailAsync(
+                data,
+                onSignUpSuccess,
+                onSignUpFailure,
+              ),
           )}
           isPrimary={true}
         />
@@ -101,7 +105,7 @@ function SignUpScreen({ navigation }) {
           icon={googleLogo}
           text="Sign up with Google"
           onPress={async () =>
-            await signInWithGoogleAsync(onSuccess, onFailure)
+            await signInWithGoogleAsync(onSignUpSuccess, onSignUpFailure)
           }
         />
       </KeyboardAwareScrollView>

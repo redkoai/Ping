@@ -38,11 +38,20 @@ function SignInScreen({ navigation }) {
     resolver: yupResolver(AUTH_SCHEMA),
   });
 
-  const onSuccess = () => {
+  const onSignInSuccess = () => {
     // navigation.navigate('HomeScreenEmpty');
   };
-  const onFailure = (errorMessage) => {
+  const onSignInFailure = (errorMessage) => {
     console.log(errorMessage);
+  };
+
+  const onForgotPasswordNavigation = () => {
+    reset();
+    navigation.navigate('PasswordReset');
+  };
+  const onRegisterNavigation = () => {
+    reset();
+    navigation.navigate('SignUp');
   };
 
   return (
@@ -77,7 +86,7 @@ function SignInScreen({ navigation }) {
         <PasswordInput
           control={control}
           errors={errors}
-          forgotPasswordNav={navigation}
+          forgotPassword={onForgotPasswordNavigation}
         />
         <Spacer height={2.5} />
 
@@ -91,7 +100,11 @@ function SignInScreen({ navigation }) {
           text="Sign In"
           onPress={handleSubmit(
             async (data) =>
-              await signInWithEmailAsync(data, onSuccess, onFailure),
+              await signInWithEmailAsync(
+                data,
+                onSignInSuccess,
+                onSignInFailure,
+              ),
           )}
           isPrimary={true}
         />
@@ -99,7 +112,7 @@ function SignInScreen({ navigation }) {
           icon={googleLogo}
           text="Sign in with Google"
           onPress={async () =>
-            await signInWithGoogleAsync(onSuccess, onFailure)
+            await signInWithGoogleAsync(onSignInSuccess, onSignInFailure)
           }
         />
 
@@ -107,12 +120,7 @@ function SignInScreen({ navigation }) {
           <Text style={[textStyles.smallRegular, { color: colors.offBlack }]}>
             Don't have an account?
           </Text>
-          <TouchableOpacity
-            onPress={() => {
-              reset();
-              navigation.navigate('SignUp');
-            }}
-          >
+          <TouchableOpacity onPress={onRegisterNavigation}>
             <Text
               style={[textStyles.normalSemiBold, { color: colors.primary }]}
             >

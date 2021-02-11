@@ -33,11 +33,16 @@ function PasswordResetScreen({ navigation }) {
     resolver: yupResolver(EMAIL_SCHEMA),
   });
 
-  const onSuccess = () => {
+  const onResetSuccess = () => {
     // navigation.navigate('SignIn');
   };
-  const onFailure = (errorMessage) => {
+  const onResetFailure = (errorMessage) => {
     console.log(errorMessage);
+  };
+
+  const onBackrNavigation = () => {
+    reset();
+    navigation.goBack();
   };
 
   return (
@@ -52,12 +57,7 @@ function PasswordResetScreen({ navigation }) {
       <StatusBar backgroundColor={colors.primary} />
 
       <TopBar>
-        <BackChevron
-          handlePress={() => {
-            reset();
-            navigation.goBack();
-          }}
-        />
+        <BackChevron onPress={onBackrNavigation} />
         <Text style={textStyles.bigBold}>Reset Password</Text>
       </TopBar>
 
@@ -84,7 +84,11 @@ function PasswordResetScreen({ navigation }) {
           text="Send Email"
           onPress={handleSubmit(
             async (data) =>
-              await passwordResetEmailAsync(data, onSuccess, onFailure),
+              await passwordResetEmailAsync(
+                data,
+                onResetSuccess,
+                onResetFailure,
+              ),
           )}
           isPrimary={true}
         />

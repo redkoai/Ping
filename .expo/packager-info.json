@@ -1,10 +1,10 @@
 {
   "devToolsPort": 19002,
-  "expoServerPort": 19000,
-  "packagerPort": 19000,
+  "expoServerPort": 19001,
+  "packagerPort": 19001,
   "expoServerNgrokUrl": "https://ju-qdu.sepsol.code.exp.direct",
   "packagerNgrokUrl": "https://packager.ju-qdu.sepsol.code.exp.direct",
-  "ngrokPid": 70125,
+  "ngrokPid": 72705,
   "packagerPid": null,
   "webpackServerPort": null
 }
