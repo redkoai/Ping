@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import AuthContext from 'ping/src/contexts/AuthContext';
 
 import { NavigationContainer } from '@react-navigation/native';
@@ -7,11 +7,6 @@ import HomeStackNavigator from 'ping/src/navigators/HomeStackNavigator';
 
 function Navigation() {
   const { user, skipped } = useContext(AuthContext);
-
-  useEffect(() => {
-    console.log("================")
-    console.log(user);
-  });
 
   return (
     <NavigationContainer>

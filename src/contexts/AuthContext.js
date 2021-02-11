@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { LogBox } from 'react-native';
 
 import 'firebase/firestore';
 import firebase from 'firebase';
@@ -15,6 +16,7 @@ export function AuthProvider({ children }) {
 
   useEffect(() => {
     GoogleSignIn.initAsync({ clientId: IOS_RESERVED_CLIENT_ID });
+    LogBox.ignoreLogs(['expo-google-sign-in is not supported in the Expo Client'])
     firebase.auth().onAuthStateChanged((user) => {
       setIsLoading(false);
       if (user != null) setUser(user);
