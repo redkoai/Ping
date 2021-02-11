@@ -100,4 +100,5 @@ export const colors = {
   redError: '#FE5F5F',
 };
 
+
 export default styles;
