@@ -1,6 +1,7 @@
 import React from 'react';
 import * as SplashScreen from 'expo-splash-screen';
 import { LogBox } from 'react-native';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { AuthProvider } from 'ping/src/contexts/AuthContext';
 
 import {
@@ -58,7 +59,9 @@ function App() {
 
   return (
     <AuthProvider>
-      <NavigationContainer />
+      <SafeAreaProvider>
+        <NavigationContainer />
+      </SafeAreaProvider>
     </AuthProvider>
   );
 }
