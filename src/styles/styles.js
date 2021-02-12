@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import { Platform, StyleSheet } from 'react-native';
 // import { Dimensions } from 'react-native';
 import { widthPercentageToDP, heightPercentageToDP } from '../../util/scaler';
 
@@ -102,12 +102,15 @@ export const colors = {
 
 export const headerPaddings = {
   horizontal: widthPercentageToDP(6) + 2,
-  vertical: 5,
+  vertical: Platform.OS === 'ios' ? 5 : 0,
 };
 
 export const headerStyles = {
   backgroundColor: 'white',
   shadowColor: 'transparent',
+  elevation: 0,
+  shadowOpacity: 0,
+  borderBottomWidth: 0,
 };
 
 export const headerOptions = {
