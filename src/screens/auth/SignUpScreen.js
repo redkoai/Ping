@@ -40,17 +40,16 @@ function SignUpScreen() {
   };
 
   return (
-    <SafeAreaView
-      style={{
-        flex: 1,
-        alignItems: 'center',
-        backgroundColor: 'white',
-        minHeight: Math.round(Dimensions.get('window').height),
-      }}
-    >
+    <KeyboardAwareScrollView>
       <StatusBar backgroundColor={colors.primary} />
-
-      <KeyboardAwareScrollView contentContainerStyle={{ flex: 1, alignItems: 'center' }}>
+      <SafeAreaView
+        style={{
+          flex: 1,
+          alignItems: 'center',
+          backgroundColor: 'white',
+          minHeight: Math.round(Dimensions.get('window').height),
+        }}
+      >
         <PingLogo height={heightPercentageToDP(20)} fill={colors.primary} style={styles.logo} />
         <Spacer height={6.5} />
 
@@ -76,8 +75,8 @@ function SignUpScreen() {
           text="Continue with Google"
           onPress={async () => await signInWithGoogleAsync(onSignUpSuccess, onSignUpFailure)}
         />
-      </KeyboardAwareScrollView>
-    </SafeAreaView>
+      </SafeAreaView>
+    </KeyboardAwareScrollView>
   );
 }
 

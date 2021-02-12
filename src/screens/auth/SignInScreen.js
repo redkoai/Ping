@@ -42,17 +42,17 @@ function SignInScreen({ navigation }) {
   };
 
   return (
-    <SafeAreaView
-      style={{
-        flex: 1,
-        alignItems: 'center',
-        backgroundColor: 'white',
-        minHeight: Math.round(Dimensions.get('window').height),
-      }}
-    >
+    <KeyboardAwareScrollView>
       <StatusBar backgroundColor={colors.primary} />
+      <SafeAreaView
+        style={{
+          flex: 1,
+          alignItems: 'center',
+          backgroundColor: 'white',
+          minHeight: Math.round(Dimensions.get('window').height),
+        }}
+      >
 
-      <KeyboardAwareScrollView contentContainerStyle={{ flex: 1, alignItems: 'center' }}>
         <PingLogo height={heightPercentageToDP(20)} fill={colors.primary} style={styles.logo} />
         <Spacer height={6.5} />
 
@@ -91,8 +91,8 @@ function SignInScreen({ navigation }) {
             <Text style={[textStyles.normalSemiBold, { color: colors.primary }]}>Register</Text>
           </TouchableOpacity>
         </View>
-      </KeyboardAwareScrollView>
-    </SafeAreaView>
+      </SafeAreaView>
+    </KeyboardAwareScrollView>
   );
 }
 

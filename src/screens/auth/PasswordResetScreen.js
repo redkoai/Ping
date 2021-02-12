@@ -39,17 +39,16 @@ function PasswordResetScreen() {
   };
 
   return (
-    <SafeAreaView
-      style={{
-        flex: 1,
-        alignItems: 'center',
-        backgroundColor: 'white',
-        minHeight: Math.round(Dimensions.get('window').height),
-      }}
-    >
+    <KeyboardAwareScrollView>
       <StatusBar backgroundColor={colors.primary} />
-
-      <KeyboardAwareScrollView contentContainerStyle={{ flex: 1, alignItems: 'center' }}>
+      <SafeAreaView
+        style={{
+          flex: 1,
+          alignItems: 'center',
+          backgroundColor: 'white',
+          minHeight: Math.round(Dimensions.get('window').height),
+        }}
+      >
         <PingLogo height={heightPercentageToDP(20)} fill={colors.primary} style={styles.logo} />
         <Spacer height={8} />
 
@@ -69,8 +68,8 @@ function PasswordResetScreen() {
           )}
           isPrimary={true}
         />
-      </KeyboardAwareScrollView>
-    </SafeAreaView>
+      </SafeAreaView>
+    </KeyboardAwareScrollView>
   );
 }
 
