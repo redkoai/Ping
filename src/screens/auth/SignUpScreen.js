@@ -52,11 +52,11 @@ function SignUpScreen() {
 
       <KeyboardAwareScrollView contentContainerStyle={{ flex: 1, alignItems: 'center' }}>
         <PingLogo height={heightPercentageToDP(20)} fill={colors.primary} style={styles.logo} />
-        <Spacer height={7} />
+        <Spacer height={6.5} />
 
         <EmailInput control={control} errors={errors} />
         <PasswordInput control={control} errors={errors} />
-        <Spacer height={1.5} />
+        <Spacer height={2} />
 
         {formState.isSubmitting && (
           <View>
@@ -73,7 +73,7 @@ function SignUpScreen() {
         />
         <CustomButton
           icon={googleLogo}
-          text="Sign up with Google"
+          text="Continue with Google"
           onPress={async () => await signInWithGoogleAsync(onSignUpSuccess, onSignUpFailure)}
         />
       </KeyboardAwareScrollView>

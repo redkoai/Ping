@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
   skipButton: {
     color: colors.primary,
     paddingVertical: headerPaddings.vertical,
-    paddingHorizontal: headerPaddings.horizontal + widthPercentageToDP(3),
+    paddingHorizontal: headerPaddings.horizontal + widthPercentageToDP(3.5),
     position: 'relative',
     right: -10,
   },

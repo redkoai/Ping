@@ -55,7 +55,7 @@ function SignInScreen({ navigation }) {
 
       <KeyboardAwareScrollView contentContainerStyle={{ flex: 1, alignItems: 'center' }}>
         <PingLogo height={heightPercentageToDP(20)} fill={colors.primary} style={styles.logo} />
-        <Spacer height={7} />
+        <Spacer height={6.5} />
 
         <EmailInput control={control} errors={errors} />
         <PasswordInput
@@ -63,7 +63,7 @@ function SignInScreen({ navigation }) {
           errors={errors}
           forgotPassword={() => navigation.navigate('PasswordReset')}
         />
-        <Spacer height={2.5} />
+        <Spacer height={2} />
 
         {formState.isSubmitting && (
           <View>
@@ -80,7 +80,7 @@ function SignInScreen({ navigation }) {
         />
         <CustomButton
           icon={googleLogo}
-          text="Sign in with Google"
+          text="Continue with Google"
           onPress={async () => await signInWithGoogleAsync(onSignInSuccess, onSignInFailure)}
         />
 
@@ -105,7 +105,7 @@ const styles = StyleSheet.create({
   },
   registerButton: {
     position: 'absolute',
-    bottom: 85 + widthPercentageToDP(Platform.OS === "ios" ? 2 : 1),
+    bottom: widthPercentageToDP(2) + 85,
     flexDirection: 'row',
     width: 195,
     alignItems: 'center',

@@ -51,10 +51,10 @@ function PasswordResetScreen() {
 
       <KeyboardAwareScrollView contentContainerStyle={{ flex: 1, alignItems: 'center' }}>
         <PingLogo height={heightPercentageToDP(20)} fill={colors.primary} style={styles.logo} />
-        <Spacer height={9} />
+        <Spacer height={8} />
 
         <EmailInput control={control} errors={errors} />
-        <Spacer height={1.5} />
+        <Spacer height={1} />
 
         {formState.isSubmitting && (
           <View>

@@ -102,7 +102,7 @@ export const colors = {
 
 export const headerPaddings = {
   horizontal: widthPercentageToDP(6) + 2,
-  vertical: Platform.OS === 'ios' ? 5 : 0,
+  vertical: Platform.OS === 'ios' ? 5 : 1,
 };
 
 export const headerStyles = {
