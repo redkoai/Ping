@@ -9,13 +9,13 @@ import AuthContext from 'ping/src/contexts/AuthContext';
 
 import {
   StatusBar,
+  KeyboardAvoidingView,
   SafeAreaView,
   View,
   ActivityIndicator,
   StyleSheet,
   Dimensions,
 } from 'react-native';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -40,15 +40,20 @@ function SignUpScreen() {
   };
 
   return (
-    <KeyboardAwareScrollView>
+    <SafeAreaView
+      style={{
+        flex: 1,
+        alignItems: 'center',
+        backgroundColor: 'white',
+        minHeight: Math.round(Dimensions.get('window').height),
+      }}
+    >
       <StatusBar backgroundColor={colors.primary} />
-      <SafeAreaView
-        style={{
-          flex: 1,
-          alignItems: 'center',
-          backgroundColor: 'white',
-          minHeight: Math.round(Dimensions.get('window').height),
-        }}
+      <KeyboardAvoidingView
+        behavior={Platform.OS == 'ios' ? 'padding' : 'position'}
+        keyboardVerticalOffset={-240}
+        contentContainerStyle={{ flex: 1, alignItems: 'center' }}
+        style={{ flex: 1, alignItems: 'center' }}
       >
         <PingLogo height={heightPercentageToDP(20)} fill={colors.primary} style={styles.logo} />
         <Spacer height={6.5} />
@@ -75,8 +80,8 @@ function SignUpScreen() {
           text="Continue with Google"
           onPress={async () => await signInWithGoogleAsync(onSignUpSuccess, onSignUpFailure)}
         />
-      </SafeAreaView>
-    </KeyboardAwareScrollView>
+      </KeyboardAvoidingView>
+    </SafeAreaView>
   );
 }
 

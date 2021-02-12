@@ -8,13 +8,13 @@ import AuthContext from 'ping/src/contexts/AuthContext';
 
 import {
   StatusBar,
+  KeyboardAvoidingView,
   SafeAreaView,
   View,
   ActivityIndicator,
   StyleSheet,
   Dimensions,
 } from 'react-native';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -39,15 +39,20 @@ function PasswordResetScreen() {
   };
 
   return (
-    <KeyboardAwareScrollView>
+    <SafeAreaView
+      style={{
+        flex: 1,
+        alignItems: 'center',
+        backgroundColor: 'white',
+        minHeight: Math.round(Dimensions.get('window').height),
+      }}
+    >
       <StatusBar backgroundColor={colors.primary} />
-      <SafeAreaView
-        style={{
-          flex: 1,
-          alignItems: 'center',
-          backgroundColor: 'white',
-          minHeight: Math.round(Dimensions.get('window').height),
-        }}
+      <KeyboardAvoidingView
+        behavior={Platform.OS == 'ios' ? 'padding' : 'position'}
+        keyboardVerticalOffset={-240}
+        contentContainerStyle={{ flex: 1, alignItems: 'center' }}
+        style={{ flex: 1, alignItems: 'center' }}
       >
         <PingLogo height={heightPercentageToDP(20)} fill={colors.primary} style={styles.logo} />
         <Spacer height={8} />
@@ -68,8 +73,8 @@ function PasswordResetScreen() {
           )}
           isPrimary={true}
         />
-      </SafeAreaView>
-    </KeyboardAwareScrollView>
+      </KeyboardAvoidingView>
+    </SafeAreaView>
   );
 }
 
