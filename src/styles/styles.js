@@ -100,5 +100,19 @@ export const colors = {
   redError: '#FE5F5F',
 };
 
+export const headerPaddings = {
+  horizontal: widthPercentageToDP(6) + 2,
+  vertical: 5,
+};
+
+export const headerStyles = {
+  backgroundColor: 'white',
+  shadowColor: 'transparent',
+};
+
+export const headerOptions = {
+  headerTitle: false,
+  headerStyle: headerStyles,
+};
 
 export default styles;

@@ -1,4 +1,5 @@
-import { textStyles, colors } from 'ping/src/styles/styles';
+import { widthPercentageToDP } from 'ping/util/scaler';
+import { textStyles, colors, headerPaddings } from 'ping/src/styles/styles';
 import { StyleSheet, TouchableOpacity, Text } from 'react-native';
 
 import React, { useContext } from 'react';
@@ -17,8 +18,8 @@ function SkipButton({ text = 'SKIP' }) {
 const styles = StyleSheet.create({
   skipButton: {
     color: colors.primary,
-    paddingVertical: 10,
-    paddingHorizontal: 20,
+    paddingVertical: headerPaddings.vertical,
+    paddingHorizontal: headerPaddings.horizontal + widthPercentageToDP(3),
     position: 'relative',
     right: -10,
   },

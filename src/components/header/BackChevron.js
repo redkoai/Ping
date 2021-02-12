@@ -1,4 +1,4 @@
-import { textStyles } from 'ping/src/styles/styles';
+import { textStyles, headerPaddings } from 'ping/src/styles/styles';
 import leftChevron from 'ping/assets/chevron-left.png';
 
 import React from 'react';
@@ -20,8 +20,8 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     alignItems: 'center',
-    paddingVertical: 2,
-    paddingHorizontal: 2,
+    paddingVertical: headerPaddings.vertical,
+    paddingHorizontal: headerPaddings.horizontal,
   },
   icon: {
     resizeMode: 'contain',

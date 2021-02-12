@@ -75,25 +75,10 @@ function PasswordResetScreen() {
 }
 
 const styles = StyleSheet.create({
-  skipButton: {
-    color: colors.primary,
-    paddingVertical: 10,
-    paddingHorizontal: 20,
-    position: 'relative',
-    right: -10,
-  },
   logo: {
     position: 'relative',
     left: widthPercentageToDP(2),
     top: heightPercentageToDP(2),
-  },
-  registerButton: {
-    position: 'absolute',
-    bottom: heightPercentageToDP(3),
-    flexDirection: 'row',
-    width: widthPercentageToDP(50),
-    alignItems: 'center',
-    justifyContent: 'space-between',
   },
 });
 

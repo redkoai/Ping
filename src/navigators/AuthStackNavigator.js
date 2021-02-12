@@ -1,7 +1,6 @@
+import { headerOptions } from 'ping/src/styles/styles';
 import React from 'react';
-import { View } from 'react-native';
 
-import TopBar from 'ping/src/components/header/TopBar';
 import BackChevron from 'ping/src/components/header/BackChevron';
 import ScreenTitle from 'ping/src/components/header/ScreenTitle';
 import SkipButton from 'ping/src/components/header/SkipButton';
@@ -15,41 +14,28 @@ const AuthStack = createStackNavigator();
 
 function AuthStackNavigator() {
   return (
-    <AuthStack.Navigator>
+    <AuthStack.Navigator screenOptions={headerOptions}>
       <AuthStack.Screen
         name="SignIn"
         component={SignInScreen}
         options={{
-          header: () => (
-            <TopBar>
-              <View />
-              <SkipButton />
-            </TopBar>
-          ),
+          headerRight: () => <SkipButton />,
         }}
       />
       <AuthStack.Screen
         name="SignUp"
         component={SignUpScreen}
         options={{
-          header: () => (
-            <TopBar>
-              <BackChevron />
-              <ScreenTitle title="Reset Password" />
-            </TopBar>
-          ),
+          headerLeft: () => <BackChevron />,
+          headerRight: () => <SkipButton />,
         }}
       />
       <AuthStack.Screen
         name="PasswordReset"
         component={PasswordResetScreen}
         options={{
-          header: () => (
-            <TopBar>
-              <BackChevron />
-              <SkipButton />
-            </TopBar>
-          ),
+          headerLeft: () => <BackChevron />,
+          headerRight: () => <ScreenTitle title="Reset Password" />,
         }}
       />
     </AuthStack.Navigator>

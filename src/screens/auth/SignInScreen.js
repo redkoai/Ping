@@ -16,6 +16,7 @@ import {
   ActivityIndicator,
   StyleSheet,
   Dimensions,
+  Platform,
 } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
@@ -97,13 +98,6 @@ function SignInScreen({ navigation }) {
 }
 
 const styles = StyleSheet.create({
-  skipButton: {
-    color: colors.primary,
-    paddingVertical: 10,
-    paddingHorizontal: 20,
-    position: 'relative',
-    right: -10,
-  },
   logo: {
     position: 'relative',
     left: widthPercentageToDP(2),
@@ -111,7 +105,7 @@ const styles = StyleSheet.create({
   },
   registerButton: {
     position: 'absolute',
-    bottom: 97,
+    bottom: 85 + widthPercentageToDP(Platform.OS === "ios" ? 2 : 1),
     flexDirection: 'row',
     width: 195,
     alignItems: 'center',
