@@ -95,9 +95,10 @@ export const textStyles = StyleSheet.create({
 
 export const colors = {
   primary: '#3D8976',
-  lightGray: '#F7F8FA',
-  offBlack: '#555',
   redError: '#FE5F5F',
+  offBlack: '#555',
+  darkGrey: '#777',
+  offWhite: '#F7F8FA',
 };
 
 export const headerPaddings = {

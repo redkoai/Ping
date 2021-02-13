@@ -27,13 +27,17 @@ function CustomTextInput({
     secureTextEntry,
   },
   forgotPassword = false,
+  optional = false,
   ...inputProps
 }) {
   const [focus, setFocus] = useState(rules.autoFocus);
   const [secure, setSecure] = useState(rules.secureTextEntry);
   return (
     <View style={styles.container}>
-      <Text style={[textStyles.normalSemiBold, styles.marginOffset]}>{input.label}</Text>
+      <View style={[styles.marginOffset, styles.label]}>
+        <Text style={[textStyles.normalSemiBold]}>{input.label}</Text>
+        {optional && <Text style={[textStyles.smallRegular, styles.optional]}>optional</Text>}
+      </View>
       <Controller
         control={control}
         name={input.name}
@@ -162,8 +166,17 @@ const styles = StyleSheet.create({
   container: {
     width: widthPercentageToDP(90),
   },
+  label: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  optional: {
+    color: colors.darkGrey,
+    paddingLeft: widthPercentageToDP(5),
+  },
   inputContainer: {
-    marginVertical: heightPercentageToDP(0.3),
+    marginTop: heightPercentageToDP(0.5),
+    marginBottom: heightPercentageToDP(0.3),
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
@@ -176,11 +189,11 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     borderWidth: 1,
     borderColor: 'white',
-    backgroundColor: colors.lightGray,
+    backgroundColor: colors.offWhite,
     height: heightPercentageToDP(6.8),
   },
   inputFocused: {
-    backgroundColor: colors.lightGray,
+    backgroundColor: colors.offWhite,
     borderColor: colors.offBlack,
   },
   icon: {
