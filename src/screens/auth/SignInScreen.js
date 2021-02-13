@@ -1,6 +1,6 @@
 import { textStyles, colors } from 'ping/src/styles/styles';
 import { widthPercentageToDP, heightPercentageToDP } from 'ping/util/scaler';
-import PingLogo from 'ping/src/icons/PingLogo';
+import PingIcon from 'ping/src/icons/PingIcon';
 import googleLogo from 'ping/assets/Google_G_Logo.png';
 
 import React, { useContext, useCallback } from 'react';
@@ -58,7 +58,7 @@ function SignInScreen({ navigation }) {
         contentContainerStyle={{ flex: 1, alignItems: 'center' }}
         style={{ flex: 1, alignItems: 'center' }}
       >
-        <PingLogo height={heightPercentageToDP(20)} fill={colors.primary} style={styles.logo} />
+        <PingIcon size={heightPercentageToDP(20)} color={colors.primary} style={styles.logo} />
         <Spacer height={6.5} />
 
         <EmailInput control={control} errors={errors} />

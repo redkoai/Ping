@@ -3,7 +3,9 @@ import { heightPercentageToDP, widthPercentageToDP } from 'ping/util/scaler';
 
 import React, { useState } from 'react';
 import { View, Text, TextInput, StyleSheet, TouchableOpacity } from 'react-native';
+
 import { Ionicons } from '@expo/vector-icons';
+import CalendarIcon from 'ping/src/icons/CalendarIcon';
 
 import { Controller } from 'react-hook-form';
 // control and errors are passed from the useForm hook of the react-hook-form package
@@ -28,6 +30,7 @@ function CustomTextInput({
   },
   forgotPassword = false,
   optional = false,
+  icon = false,
   ...inputProps
 }) {
   const [focus, setFocus] = useState(rules.autoFocus);
@@ -74,6 +77,11 @@ function CustomTextInput({
                 />
               </TouchableOpacity>
             )}
+            {icon && (
+              <TouchableOpacity style={styles.icon} onPress={() => console.log('icon pressed')}>
+                <CalendarIcon size={heightPercentageToDP(3)} color={colors.offBlack} />
+              </TouchableOpacity>
+            )}
           </View>
         )}
       />
@@ -108,6 +116,7 @@ export function EmailInput({
 }) {
   return (
     <CustomTextInput
+      icon
       control={control}
       error={errors?.email}
       input={{
