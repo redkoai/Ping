@@ -31,7 +31,7 @@ import CustomButton from 'ping/src/components/CustomButton';
 function SignInScreen({ navigation }) {
   const { signInWithEmailAsync, signInWithGoogleAsync } = useContext(AuthContext);
   const { control, handleSubmit, errors, reset, formState } = useForm({
-    //resolver: yupResolver(AUTH_SCHEMA),
+    resolver: yupResolver(AUTH_SCHEMA),
   });
   useFocusEffect(useCallback(reset));
 
