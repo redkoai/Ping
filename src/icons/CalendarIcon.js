@@ -1,5 +1,6 @@
-import React from 'react';
 import { heightPercentageToDP, widthPercentageToDP } from 'ping/util/scaler';
+
+import React from 'react';
 import Svg, { Path } from 'react-native-svg';
 
 function CalendarIcon({ size = 16, color = '#777', ...props }) {

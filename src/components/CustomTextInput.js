@@ -6,6 +6,7 @@ import { View, Text, TextInput, StyleSheet, TouchableOpacity } from 'react-nativ
 
 import { Ionicons } from '@expo/vector-icons';
 import CalendarIcon from 'ping/src/icons/CalendarIcon';
+import LocationNearMeIcon from 'ping/src/icons/LocationNearMeIcon';
 
 import { Controller } from 'react-hook-form';
 // control and errors are passed from the useForm hook of the react-hook-form package
@@ -30,11 +31,37 @@ function CustomTextInput({
   },
   forgotPassword = false,
   optional = false,
-  icon = false,
+  icon = rules.secureTextEntry,
   ...inputProps
 }) {
   const [focus, setFocus] = useState(rules.autoFocus);
   const [secure, setSecure] = useState(rules.secureTextEntry);
+
+  const iconToRender = () => {
+    if (rules.secureTextEntry) {
+      return {
+        component: (
+          <Ionicons
+            name={secure ? 'ios-eye' : 'ios-eye-off'}
+            size={heightPercentageToDP(4.2)}
+            color={colors.offBlack}
+          />
+        ),
+        function: () => setSecure(!secure),
+      };
+    } else if (icon === 'calendar') {
+      return {
+        component: <CalendarIcon size={heightPercentageToDP(3)} color={colors.offBlack} />,
+        function: () => console.log('calendar icon pressed'),
+      };
+    } else if (icon === 'location') {
+      return {
+        component: <LocationNearMeIcon size={heightPercentageToDP(4)} color={colors.offBlack} />,
+        function: () => console.log('location icon pressed'),
+      };
+    } else return icon;
+  };
+
   return (
     <View style={styles.container}>
       <View style={[styles.marginOffset, styles.label]}>
@@ -51,6 +78,7 @@ function CustomTextInput({
               style={[
                 textStyles.normalRegular,
                 styles.input,
+                icon && styles.inputWithIcon,
                 focus && styles.inputFocused,
                 error && { borderColor: colors.redError },
               ]}
@@ -68,18 +96,9 @@ function CustomTextInput({
               secureTextEntry={secure}
               {...inputProps}
             />
-            {rules.secureTextEntry && (
-              <TouchableOpacity style={styles.icon} onPress={() => setSecure(!secure)}>
-                <Ionicons
-                  name={secure ? 'ios-eye' : 'ios-eye-off'}
-                  size={heightPercentageToDP(4.2)}
-                  color={colors.offBlack}
-                />
-              </TouchableOpacity>
-            )}
             {icon && (
-              <TouchableOpacity style={styles.icon} onPress={() => console.log('icon pressed')}>
-                <CalendarIcon size={heightPercentageToDP(3)} color={colors.offBlack} />
+              <TouchableOpacity style={styles.icon} onPress={iconToRender().function}>
+                {iconToRender().component}
               </TouchableOpacity>
             )}
           </View>
@@ -116,7 +135,6 @@ export function EmailInput({
 }) {
   return (
     <CustomTextInput
-      icon
       control={control}
       error={errors?.email}
       input={{
@@ -193,13 +211,16 @@ const styles = StyleSheet.create({
   input: {
     flex: 1,
     color: colors.offBlack,
-    paddingRight: 60,
+    paddingRight: 20,
     paddingLeft: 20,
     borderRadius: 12,
     borderWidth: 1,
     borderColor: 'white',
     backgroundColor: colors.offWhite,
     height: heightPercentageToDP(6.8),
+  },
+  inputWithIcon: {
+    paddingRight: 60,
   },
   inputFocused: {
     backgroundColor: colors.offWhite,
