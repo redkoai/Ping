@@ -14,7 +14,7 @@ import { Controller } from 'react-hook-form';
 
 function CustomTextInput({
   control,
-  error,
+  errors,
   input = {
     name: 'unknown-text-input',
     label: '',
@@ -36,6 +36,8 @@ function CustomTextInput({
 }) {
   const [focus, setFocus] = useState(rules.autoFocus);
   const [secure, setSecure] = useState(rules.secureTextEntry);
+
+  const error = errors?.[input.name];
 
   const iconToRender = () => {
     if (rules.secureTextEntry) {
@@ -136,7 +138,7 @@ export function EmailInput({
   return (
     <CustomTextInput
       control={control}
-      error={errors?.email}
+      errors={errors}
       input={{
         name: input.name,
         label: input.label,
@@ -169,7 +171,7 @@ export function PasswordInput({
   return (
     <CustomTextInput
       control={control}
-      error={errors?.password}
+      errors={errors}
       input={{
         name: input.name,
         label: input.label,
@@ -184,6 +186,62 @@ export function PasswordInput({
         secureTextEntry: true,
       }}
       forgotPassword={forgotPassword}
+      {...inputProps}
+    />
+  );
+}
+
+export function CalendarInput(
+  control,
+  errors,
+  input = {
+    name: 'calendar',
+    label: 'Date',
+    placeholder: '',
+    defaultValue: '',
+  },
+  icon = 'calendar',
+  ...inputProps
+) {
+  return (
+    <CustomTextInput
+      control={control}
+      error={errors}
+      input={{
+        name: input.name,
+        label: input.label,
+        placeholder: input.placeholder,
+        defaultValue: input.defaultValue,
+      }}
+      icon={icon}
+      {...inputProps}
+    />
+  );
+}
+
+export function LocationInput(
+  control,
+  errors,
+  input = {
+    name: 'location',
+    label: 'Location',
+    placeholder: '',
+    defaultValue: '',
+  },
+  icon = 'location',
+  ...inputProps
+) {
+  return (
+    <CustomTextInput
+      control={control}
+      error={errors}
+      input={{
+        name: input.name,
+        label: input.label,
+        placeholder: input.placeholder,
+        defaultValue: input.defaultValue,
+      }}
+      icon={icon}
       {...inputProps}
     />
   );
