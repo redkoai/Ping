@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import * as SplashScreen from 'expo-splash-screen';
-import { LogBox } from 'react-native';
 
 import 'firebase/firestore';
 import firebase from 'firebase';
 import * as GoogleSignIn from 'expo-google-sign-in';
 import * as Segment from 'expo-analytics-segment';
-import { IOS_RESERVED_CLIENT_ID } from '@env';
 
 const AuthContext = React.createContext();
 
@@ -15,15 +13,9 @@ export function AuthProvider({ children }) {
   const [skipped, setSkipped] = useState(false);
 
   useEffect(() => {
-    // Google SSO Initialization
-    GoogleSignIn.initAsync({ clientId: IOS_RESERVED_CLIENT_ID });
-    LogBox.ignoreLogs([
-      'Unhandled promise rejection: Invariant Violation: expo-google-sign-in is not supported in the Expo Client because a custom URL scheme is required at build time. Please refer to the docs for usage outside of Expo www.npmjs.com/package/expo-google-sign-in',
-    ]);
-    // Firebase Auth Initialization
     firebase.auth().onAuthStateChanged(async (user) => {
-      SplashScreen.hideAsync();
       if (user != null) setUser(user);
+      await SplashScreen.hideAsync();
     });
   }, []);
 
@@ -52,6 +44,17 @@ export function AuthProvider({ children }) {
           handleFailure()(errorMessage);
         }
       });
+    // const credential = await firebase.auth.EmailAuthProvider.credential(data.email, data.password);
+    // await firebase
+    //   .auth()
+    //   .currentUser.linkWithCredential(credential)
+    //   .then((usercred) => {
+    //     const user = usercred.user;
+    //     alert('Account linking success' + user);
+    //   })
+    //   .catch(({ message }) => {
+    //     alert('Account linking error: ' + message);
+    //   });
     Segment.identify(data.email);
     Segment.trackWithProperties('User SignIn', {
       accountType: 'CustomEmailAuth',
@@ -75,11 +78,7 @@ export function AuthProvider({ children }) {
       });
   };
 
-  const passwordResetEmailAsync = async (
-    data,
-    handleSuccess,
-    handleFailure,
-  ) => {
+  const passwordResetEmailAsync = async (data, handleSuccess, handleFailure) => {
     await firebase
       .auth()
       .sendPasswordResetEmail(data.email)
@@ -99,18 +98,25 @@ export function AuthProvider({ children }) {
       await GoogleSignIn.askForPlayServicesAsync();
       const { type, user } = await GoogleSignIn.signInAsync();
       if (type === 'success') {
-        await firebase
-          .auth()
-          .setPersistence(firebase.auth.Auth.Persistence.LOCAL);
+        await firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL);
         const credential = firebase.auth.GoogleAuthProvider.credential(
           user.auth.idToken,
           user.auth.accessToken,
         );
         await firebase.auth().signInWithCredential(credential);
+        // await firebase
+        //   .auth()
+        //   .currentUser.linkWithCredential(credential)
+        //   .then(async (linkResult) => {
+        //     await firebase.auth().signInWithCredential(linkResult.credential);
+        //   })
+        //   .catch(({ message }) => {
+        //     alert('Account linking error: ' + message);
+        //   });
         handleSuccess();
       }
     } catch ({ message }) {
-      alert('Login error: ' + message);
+      handleFailure('Login error: ' + message);
     }
   };
 

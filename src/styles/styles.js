@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import { Platform, StyleSheet } from 'react-native';
 // import { Dimensions } from 'react-native';
 import { widthPercentageToDP, heightPercentageToDP } from '../../util/scaler';
 
@@ -95,10 +95,28 @@ export const textStyles = StyleSheet.create({
 
 export const colors = {
   primary: '#3D8976',
-  lightGray: '#F7F8FA',
-  offBlack: '#555',
   redError: '#FE5F5F',
+  offBlack: '#555',
+  darkGrey: '#777',
+  offWhite: '#F7F8FA',
 };
 
+export const headerPaddings = {
+  horizontal: widthPercentageToDP(6) + 2,
+  vertical: Platform.OS === 'ios' ? 5 : 1,
+};
+
+export const headerStyles = {
+  backgroundColor: 'white',
+  shadowColor: 'transparent',
+  elevation: 0,
+  shadowOpacity: 0,
+  borderBottomWidth: 0,
+};
+
+export const headerOptions = {
+  headerTitle: false,
+  headerStyle: headerStyles,
+};
 
 export default styles;

@@ -1,48 +1,41 @@
-import { textStyles, colors } from 'ping/src/styles/styles';
+import { colors } from 'ping/src/styles/styles';
 import { widthPercentageToDP, heightPercentageToDP } from 'ping/util/scaler';
-import PingLogo from 'ping/src/icons/PingLogo';
+import PingIcon from 'ping/src/icons/PingIcon';
 
-import React, { useContext } from 'react';
+import React, { useContext, useCallback } from 'react';
+import { useFocusEffect } from '@react-navigation/native';
 import AuthContext from 'ping/src/contexts/AuthContext';
 
 import {
   StatusBar,
+  KeyboardAvoidingView,
   SafeAreaView,
   View,
-  Text,
   ActivityIndicator,
   StyleSheet,
   Dimensions,
 } from 'react-native';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { EMAIL_SCHEMA } from 'ping/src/schema/authSchema';
 
 import Spacer from 'ping/src/components/Spacer';
-import BackChevron from 'ping/src/components/BackChevron';
-import TopBar from 'ping/src/components/TopBar';
 import { EmailInput } from 'ping/src/components/CustomTextInput';
 import CustomButton from 'ping/src/components/CustomButton';
 
-function PasswordResetScreen({ navigation }) {
+function PasswordResetScreen() {
   const { passwordResetEmailAsync } = useContext(AuthContext);
-
   const { control, handleSubmit, errors, reset, formState } = useForm({
     resolver: yupResolver(EMAIL_SCHEMA),
   });
+  useFocusEffect(useCallback(reset));
 
   const onResetSuccess = () => {
     // navigation.navigate('SignIn');
   };
   const onResetFailure = (errorMessage) => {
-    console.log(errorMessage);
-  };
-
-  const onBackrNavigation = () => {
-    reset();
-    navigation.goBack();
+    alert(errorMessage);
   };
 
   return (
@@ -55,24 +48,17 @@ function PasswordResetScreen({ navigation }) {
       }}
     >
       <StatusBar backgroundColor={colors.primary} />
-
-      <TopBar>
-        <BackChevron onPress={onBackrNavigation} />
-        <Text style={textStyles.bigBold}>Reset Password</Text>
-      </TopBar>
-
-      <KeyboardAwareScrollView
+      <KeyboardAvoidingView
+        behavior={Platform.OS == 'ios' ? 'padding' : 'position'}
+        keyboardVerticalOffset={-240}
         contentContainerStyle={{ flex: 1, alignItems: 'center' }}
+        style={{ flex: 1, alignItems: 'center' }}
       >
-        <PingLogo
-          height={heightPercentageToDP(20)}
-          fill={colors.primary}
-          style={styles.logo}
-        />
-        <Spacer height={heightPercentageToDP(0.9)} />
+        <PingIcon size={heightPercentageToDP(20)} color={colors.primary} style={styles.logo} />
+        <Spacer height={8} />
 
         <EmailInput control={control} errors={errors} />
-        <Spacer height={1.5} />
+        <Spacer height={1} />
 
         {formState.isSubmitting && (
           <View>
@@ -83,40 +69,20 @@ function PasswordResetScreen({ navigation }) {
         <CustomButton
           text="Send Email"
           onPress={handleSubmit(
-            async (data) =>
-              await passwordResetEmailAsync(
-                data,
-                onResetSuccess,
-                onResetFailure,
-              ),
+            async (data) => await passwordResetEmailAsync(data, onResetSuccess, onResetFailure),
           )}
           isPrimary={true}
         />
-      </KeyboardAwareScrollView>
+      </KeyboardAvoidingView>
     </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-  skipButton: {
-    color: colors.primary,
-    paddingVertical: 10,
-    paddingHorizontal: 20,
-    position: 'relative',
-    right: -10,
-  },
   logo: {
     position: 'relative',
     left: widthPercentageToDP(2),
     top: heightPercentageToDP(2),
-  },
-  registerButton: {
-    position: 'absolute',
-    bottom: heightPercentageToDP(3),
-    flexDirection: 'row',
-    width: widthPercentageToDP(50),
-    alignItems: 'center',
-    justifyContent: 'space-between',
   },
 });
 

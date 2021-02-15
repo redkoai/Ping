@@ -2,14 +2,11 @@ import { textStyles, colors } from 'ping/src/styles/styles';
 import { heightPercentageToDP, widthPercentageToDP } from 'ping/util/scaler';
 
 import React, { useState } from 'react';
-import {
-  View,
-  Text,
-  TextInput,
-  StyleSheet,
-  TouchableOpacity,
-} from 'react-native';
+import { View, Text, TextInput, StyleSheet, TouchableOpacity } from 'react-native';
+
 import { Ionicons } from '@expo/vector-icons';
+import CalendarIcon from 'ping/src/icons/CalendarIcon';
+import LocationNearMeIcon from 'ping/src/icons/LocationNearMeIcon';
 
 import { Controller } from 'react-hook-form';
 // control and errors are passed from the useForm hook of the react-hook-form package
@@ -17,7 +14,7 @@ import { Controller } from 'react-hook-form';
 
 function CustomTextInput({
   control,
-  error,
+  errors,
   input = {
     name: 'unknown-text-input',
     label: '',
@@ -33,15 +30,46 @@ function CustomTextInput({
     secureTextEntry,
   },
   forgotPassword = false,
+  optional = false,
+  icon = rules.secureTextEntry,
   ...inputProps
 }) {
   const [focus, setFocus] = useState(rules.autoFocus);
   const [secure, setSecure] = useState(rules.secureTextEntry);
+
+  const error = errors?.[input.name];
+
+  const iconToRender = () => {
+    if (rules.secureTextEntry) {
+      return {
+        component: (
+          <Ionicons
+            name={secure ? 'ios-eye' : 'ios-eye-off'}
+            size={heightPercentageToDP(4.2)}
+            color={colors.offBlack}
+          />
+        ),
+        function: () => setSecure(!secure),
+      };
+    } else if (icon === 'calendar') {
+      return {
+        component: <CalendarIcon size={heightPercentageToDP(3)} color={colors.offBlack} />,
+        function: () => console.log('calendar icon pressed'),
+      };
+    } else if (icon === 'location') {
+      return {
+        component: <LocationNearMeIcon size={heightPercentageToDP(4)} color={colors.offBlack} />,
+        function: () => console.log('location icon pressed'),
+      };
+    } else return icon;
+  };
+
   return (
     <View style={styles.container}>
-      <Text style={[textStyles.normalSemiBold, styles.marginOffset]}>
-        {input.label}
-      </Text>
+      <View style={[styles.marginOffset, styles.label]}>
+        <Text style={[textStyles.normalSemiBold]}>{input.label}</Text>
+        {optional && <Text style={[textStyles.smallRegular, styles.optional]}>optional</Text>}
+      </View>
       <Controller
         control={control}
         name={input.name}
@@ -52,6 +80,7 @@ function CustomTextInput({
               style={[
                 textStyles.normalRegular,
                 styles.input,
+                icon && styles.inputWithIcon,
                 focus && styles.inputFocused,
                 error && { borderColor: colors.redError },
               ]}
@@ -69,16 +98,9 @@ function CustomTextInput({
               secureTextEntry={secure}
               {...inputProps}
             />
-            {rules.secureTextEntry && (
-              <TouchableOpacity
-                style={styles.icon}
-                onPress={() => setSecure(!secure)}
-              >
-                <Ionicons
-                  name={secure ? 'ios-eye' : 'ios-eye-off'}
-                  size={30}
-                  color={colors.offBlack}
-                />
+            {icon && (
+              <TouchableOpacity style={styles.icon} onPress={iconToRender().function}>
+                {iconToRender().component}
               </TouchableOpacity>
             )}
           </View>
@@ -86,19 +108,11 @@ function CustomTextInput({
       />
       {
         <View style={[styles.barBelowInput, styles.marginOffset]}>
-          <Text style={[textStyles.smallRegular, styles.error]}>
-            {error ? error.message : ' '}
-          </Text>
-          <View
-          >
+          <Text style={[textStyles.smallRegular, styles.error]}>{error ? error.message : ' '}</Text>
+          <View>
             {forgotPassword && (
-              <TouchableOpacity
-                onPress={forgotPassword}
-                style={styles.forgotPassword}
-              >
-                <Text
-                  style={[textStyles.smallRegular, { color: colors.primary }]}
-                >
+              <TouchableOpacity onPress={forgotPassword} style={styles.forgotPassword}>
+                <Text style={[textStyles.smallRegular, { color: colors.primary }]}>
                   Forgot password
                 </Text>
               </TouchableOpacity>
@@ -124,7 +138,7 @@ export function EmailInput({
   return (
     <CustomTextInput
       control={control}
-      error={errors?.email}
+      errors={errors}
       input={{
         name: input.name,
         label: input.label,
@@ -157,7 +171,7 @@ export function PasswordInput({
   return (
     <CustomTextInput
       control={control}
-      error={errors?.password}
+      errors={errors}
       input={{
         name: input.name,
         label: input.label,
@@ -177,12 +191,77 @@ export function PasswordInput({
   );
 }
 
+export function CalendarInput(
+  control,
+  errors,
+  input = {
+    name: 'calendar',
+    label: 'Date',
+    placeholder: '',
+    defaultValue: '',
+  },
+  icon = 'calendar',
+  ...inputProps
+) {
+  return (
+    <CustomTextInput
+      control={control}
+      error={errors}
+      input={{
+        name: input.name,
+        label: input.label,
+        placeholder: input.placeholder,
+        defaultValue: input.defaultValue,
+      }}
+      icon={icon}
+      {...inputProps}
+    />
+  );
+}
+
+export function LocationInput(
+  control,
+  errors,
+  input = {
+    name: 'location',
+    label: 'Location',
+    placeholder: '',
+    defaultValue: '',
+  },
+  icon = 'location',
+  ...inputProps
+) {
+  return (
+    <CustomTextInput
+      control={control}
+      error={errors}
+      input={{
+        name: input.name,
+        label: input.label,
+        placeholder: input.placeholder,
+        defaultValue: input.defaultValue,
+      }}
+      icon={icon}
+      {...inputProps}
+    />
+  );
+}
+
 const styles = StyleSheet.create({
   container: {
     width: widthPercentageToDP(90),
   },
+  label: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  optional: {
+    color: colors.darkGrey,
+    paddingLeft: widthPercentageToDP(5),
+  },
   inputContainer: {
-    marginVertical: heightPercentageToDP(0.3),
+    marginTop: heightPercentageToDP(0.5),
+    marginBottom: heightPercentageToDP(0.3),
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
@@ -190,16 +269,19 @@ const styles = StyleSheet.create({
   input: {
     flex: 1,
     color: colors.offBlack,
-    paddingRight: 60,
+    paddingRight: 20,
     paddingLeft: 20,
     borderRadius: 12,
     borderWidth: 1,
     borderColor: 'white',
-    backgroundColor: colors.lightGray,
-    height: heightPercentageToDP(6.5),
+    backgroundColor: colors.offWhite,
+    height: heightPercentageToDP(6.8),
+  },
+  inputWithIcon: {
+    paddingRight: 60,
   },
   inputFocused: {
-    backgroundColor: colors.lightGray,
+    backgroundColor: colors.offWhite,
     borderColor: colors.offBlack,
   },
   icon: {

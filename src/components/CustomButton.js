@@ -8,19 +8,11 @@ function CustomButton({ icon, text, onPress, isPrimary }) {
   return (
     <View style={styles.container}>
       <TouchableOpacity
-        style={[
-          styles.button,
-          isPrimary ? styles.buttonPrimary : styles.buttonSecondary,
-        ]}
+        style={[styles.button, isPrimary ? styles.buttonPrimary : styles.buttonSecondary]}
         onPress={onPress}
       >
         {icon && <Image source={icon} style={styles.icon} />}
-        <Text
-          style={[
-            textStyles.bigBold,
-            isPrimary ? styles.textPrimary : styles.textSecondary,
-          ]}
-        >
+        <Text style={[textStyles.bigBold, isPrimary ? styles.textPrimary : styles.textSecondary]}>
           {text}
         </Text>
       </TouchableOpacity>
@@ -35,7 +27,7 @@ const styles = StyleSheet.create({
   },
   button: {
     width: widthPercentageToDP(80),
-    height: heightPercentageToDP(6.5),
+    height: heightPercentageToDP(6.3),
     paddingHorizontal: 30,
     borderRadius: 50,
     display: 'flex',

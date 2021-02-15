@@ -1,12 +1,13 @@
-import { textStyles } from 'ping/src/styles/styles';
+import { textStyles, headerPaddings } from 'ping/src/styles/styles';
 import leftChevron from 'ping/assets/chevron-left.png';
 
 import React from 'react';
+import { withNavigation } from '@react-navigation/compat';
 import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
 
-function BackChevron({ onPress, text = 'back', icon = leftChevron }) {
+function BackChevron({ navigation, text = 'back', icon = leftChevron }) {
   return (
-    <TouchableOpacity onPress={onPress}>
+    <TouchableOpacity onPress={() => navigation.goBack()}>
       <View style={styles.container}>
         {icon && <Image source={icon} style={styles.icon} />}
         {text && <Text style={textStyles.normalMedium}>{text}</Text>}
@@ -19,8 +20,8 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     alignItems: 'center',
-    paddingVertical: 2,
-    paddingHorizontal: 2,
+    paddingVertical: headerPaddings.vertical,
+    paddingHorizontal: headerPaddings.horizontal,
   },
   icon: {
     resizeMode: 'contain',
@@ -29,4 +30,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default BackChevron;
+export default withNavigation(BackChevron);

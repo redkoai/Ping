@@ -25,7 +25,7 @@
       "package": "com.redko.ping",
       "googleServicesFile": "./firebase/google-services.json",
       "adaptiveIcon": {
-        "foregroundImage": "./assets/ping-icon.png",
+        "foregroundImage": "./assets/splash-logo.png",
         "backgroundColor": "#3D8976"
       }
     },
