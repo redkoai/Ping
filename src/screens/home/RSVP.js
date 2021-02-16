@@ -43,7 +43,7 @@ function RSVP({}) {
         <View style={{flex: 1}}>    
             <ImageBackground source={emptyHome} style={styles.homeEmpty}>
             <View style={{ flexDirection: 'column', justifyContent: 'center',marginTop:widthPercentageToDP(3)}}>
-            <Image source={rsvpprogline} style={{height: heightPercentageToDP('10'), width :widthPercentageToDP('85'),  resizeMode:'contain',marginTop: heightPercentageToDP('5'), left:heightPercentageToDP('1')}} />
+            <Image source={rsvpprogline} style={{height: heightPercentageToDP('10'), width :widthPercentageToDP('85'),  resizeMode:'contain',marginTop: heightPercentageToDP('-17'), left:heightPercentageToDP('0.5')}} />
             <Image source={collect} style={{height: heightPercentageToDP('40'), width :widthPercentageToDP('80'), marginTop: heightPercentageToDP('-18'),left:heightPercentageToDP('0.5'), resizeMode:'contain' }} /> 
             <View>
             <Switch style={{height: heightPercentageToDP('10'), width :widthPercentageToDP('10'), marginTop: heightPercentageToDP('-20'),left:heightPercentageToDP('35'), resizeMode:'contain' }}
@@ -60,11 +60,11 @@ function RSVP({}) {
                 value={kidsattending}
             />
             </View>
-            <Image source={total} style={{height: heightPercentageToDP('40'), width :widthPercentageToDP('50'), marginTop: heightPercentageToDP('-28'),left:heightPercentageToDP('0'), resizeMode:'contain' }} /> 
-            <View style={{height: heightPercentageToDP('10'), width :widthPercentageToDP('3'), marginTop: heightPercentageToDP('-22.5'),left:heightPercentageToDP('35'), resizeMode:'contain' }}>
+            <Image source={total} style={{height: heightPercentageToDP('40'), width :widthPercentageToDP('60'), marginTop: heightPercentageToDP('-28'),left:heightPercentageToDP('0'), resizeMode:'contain' }} /> 
+            <View style={{height: heightPercentageToDP('10'), width :widthPercentageToDP('3'), marginTop: heightPercentageToDP('-22.5'),left:heightPercentageToDP('33'), resizeMode:'contain' }}>
         <NumericInput  
             onChange={value => setNumericInput(value)} 
-            totalWidth={50}
+            totalWidth={72}
             totalHeight={35} 
             iconSize={25}
             step={1}

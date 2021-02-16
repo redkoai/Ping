@@ -20,9 +20,6 @@ import NavBar_invite from "../../navbars/NarBar_invite";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import moment from 'moment';
 
-
-
-
 function Details({}) {
     const { control, handleSubmit, errors, reset, formState } = useForm({
         resolver: yupResolver(AUTH_SCHEMA),

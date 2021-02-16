@@ -33,6 +33,7 @@ function CustomTextInput({
     secureTextEntry,
   },
   forgotPassword = false,
+ 
   optional = false,
   icon = rules.secureTextEntry,
   ...inputProps
@@ -198,34 +199,34 @@ export function PasswordInput({
   );
 }
 
-export function CalendarInput(
-  control,
-  errors,
-  input = {
-    name: 'calendar',
-    label: 'Date',
-    placeholder: '',
-    defaultValue: '',
-  },
+// export function CalendarInput(
+//   control,
+//   errors,
+//   input = {
+//     name: 'calendar',
+//     label: 'Date',
+//     placeholder: '',
+//     defaultValue: '',
+//   },
   
-  icon = 'calendar',
-  ...inputProps
-) {
-  return (
-    <CustomTextInput
-      control={control}
-      error={errors}
-      input={{
-        name: input.name,
-        label: input.label,
-        placeholder: input.placeholder,
-        defaultValue: input.defaultValue,
-      }}
-      icon={icon}
-      {...inputProps}
-    />
-  );
-}
+//   icon = 'calendar',
+//   ...inputProps
+// ) {
+//   return (
+//     <CustomTextInput
+//       control={control}
+//       error={errors}
+//       input={{
+//         name: input.name,
+//         label: input.label,
+//         placeholder: input.placeholder,
+//         defaultValue: input.defaultValue,
+//       }}
+//       icon={icon}
+//       {...inputProps}
+//     />
+//   );
+// }
 
 // export function LocationInput(
 //   control,
@@ -447,6 +448,176 @@ export function DescriptionInput({
       rules={{
         contentType: 'emailAddress',
         keyboardType: 'email-address',
+        autoCapitalize: 'none',
+        autoCorrect: false,
+        multiline:true,
+        
+      }}
+      {...inputProps}
+    />
+  );
+}
+
+export function DresscodeInput({
+  control,
+  errors,
+  input = {
+    name: 'dresscode',
+    label: '',
+    placeholder: "Do you have specific theme or color in mind? Don't make your guests guess!",
+    defaultValue: '',
+  },
+  ...inputProps
+}) {
+  return (
+    <CustomTextInput
+      control={control}
+      errors={errors}
+      input={{
+        name: input.name,
+        label: input.label,
+        placeholder: input.placeholder,
+        defaultValue: input.defaultValue,
+      }}
+      rules={{
+        contentType: 'emailAddress',
+        keyboardType: 'default',
+        autoCapitalize: 'none',
+        autoCorrect: false,
+        multiline:true,
+        
+      }}
+      {...inputProps}
+    />
+  );
+}
+
+export function FaqpeopleparkInput({
+  control,
+  errors,
+  input = {
+    name: 'faqpeoplepark',
+    label: 'Where should people park?',
+    placeholder: "Street parking",
+    defaultValue: '',
+  },
+  ...inputProps
+}) {
+  return (
+    <CustomTextInput
+      control={control}
+      errors={errors}
+      input={{
+        name: input.name,
+        label: input.label,
+        placeholder: input.placeholder,
+        defaultValue: input.defaultValue,
+      }}
+      rules={{
+        contentType: 'emailAddress',
+        keyboardType: 'default',
+        autoCapitalize: 'none',
+        autoCorrect: false,
+        multiline:true,
+        
+      }}
+      {...inputProps}
+    />
+  );
+}
+
+export function FaqsecretcodeInput({
+  control,
+  errors,
+  input = {
+    name: 'faqsecretcode',
+    label: 'Is there a secret code?',
+    placeholder: "52301",
+    defaultValue: '',
+  },
+  ...inputProps
+}) {
+  return (
+    <CustomTextInput
+      control={control}
+      errors={errors}
+      input={{
+        name: input.name,
+        label: input.label,
+        placeholder: input.placeholder,
+        defaultValue: input.defaultValue,
+      }}
+      rules={{
+        contentType: 'emailAddress',
+        keyboardType: 'default',
+        autoCapitalize: 'none',
+        autoCorrect: false,
+        multiline:true,
+        
+      }}
+      {...inputProps}
+    />
+  );
+}
+
+export function FaqguestsInput({
+  control,
+  errors,
+  input = {
+    name: 'faqguests',
+    label: 'What should guests prepare?',
+    placeholder: "Bring some food for the potluck!",
+    defaultValue: '',
+  },
+  ...inputProps
+}) {
+  return (
+    <CustomTextInput
+      control={control}
+      errors={errors}
+      input={{
+        name: input.name,
+        label: input.label,
+        placeholder: input.placeholder,
+        defaultValue: input.defaultValue,
+      }}
+      rules={{
+        contentType: 'emailAddress',
+        keyboardType: 'default',
+        autoCapitalize: 'none',
+        autoCorrect: false,
+        multiline:true,
+        
+      }}
+      {...inputProps}
+    />
+  );
+}
+
+export function FaqquestionInput({
+  control,
+  errors,
+  input = {
+    name: 'faqquestion',
+    label: 'Type your question here',
+    placeholder: "Type the answer to your question",
+    defaultValue: '',
+  },
+  ...inputProps
+}) {
+  return (
+    <CustomTextInput
+      control={control}
+      errors={errors}
+      input={{
+        name: input.name,
+        label: input.label,
+        placeholder: input.placeholder,
+        defaultValue: input.defaultValue,
+      }}
+      rules={{
+        contentType: 'emailAddress',
+        keyboardType: 'default',
         autoCapitalize: 'none',
         autoCorrect: false,
         multiline:true,
