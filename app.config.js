@@ -12,7 +12,7 @@ export default ({ config }) => {
       ...config.ios,
       config: {
         googleSignIn: {
-          reservedClientId: process.env.IOS_RESERVED_CLIENT_ID,
+          reservedClientId: process.env.IOS_REVERSED_CLIENT_ID,
         },
       },
     },
