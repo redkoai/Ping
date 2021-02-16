@@ -7,6 +7,7 @@ import { View, Text, TextInput, StyleSheet, TouchableOpacity } from 'react-nativ
 import { Ionicons } from '@expo/vector-icons';
 import CalendarIcon from 'ping/src/icons/CalendarIcon';
 import LocationNearMeIcon from 'ping/src/icons/LocationNearMeIcon';
+// import LocationPicker from '../../components/LocationPicker';
 
 import { Controller } from 'react-hook-form';
 // control and errors are passed from the useForm hook of the react-hook-form package
@@ -27,6 +28,8 @@ function CustomTextInput({
     autoCapitalize,
     autoCorrect,
     autoFocus,
+    multiline,
+    numberOfLines,
     secureTextEntry,
   },
   forgotPassword = false,
@@ -36,8 +39,12 @@ function CustomTextInput({
 }) {
   const [focus, setFocus] = useState(rules.autoFocus);
   const [secure, setSecure] = useState(rules.secureTextEntry);
-
+  const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
   const error = errors?.[input.name];
+
+  const showDatePicker = () => {
+    setDatePickerVisibility(true);
+  };
 
   const iconToRender = () => {
     if (rules.secureTextEntry) {
@@ -54,12 +61,12 @@ function CustomTextInput({
     } else if (icon === 'calendar') {
       return {
         component: <CalendarIcon size={heightPercentageToDP(3)} color={colors.offBlack} />,
-        function: () => console.log('calendar icon pressed'),
+        function: () => inputProps.calendarClick(),
       };
     } else if (icon === 'location') {
       return {
         component: <LocationNearMeIcon size={heightPercentageToDP(4)} color={colors.offBlack} />,
-        function: () => console.log('location icon pressed'),
+        function: () =>inputProps.locationClick(),
       };
     } else return icon;
   };
@@ -200,6 +207,7 @@ export function CalendarInput(
     placeholder: '',
     defaultValue: '',
   },
+  
   icon = 'calendar',
   ...inputProps
 ) {
@@ -219,33 +227,236 @@ export function CalendarInput(
   );
 }
 
-export function LocationInput(
+// export function LocationInput(
+//   control,
+//   errors,
+//   input = {
+//     name: 'location',
+//     label: 'Location',
+//     placeholder: '',
+//     defaultValue: '',
+//   },
+//   icon = 'location',
+//   ...inputProps
+// ) {
+//   return (
+//     <CustomTextInput
+//       control={control}
+//       error={errors}
+//       input={{
+//         name: input.name,
+//         label: input.label,
+//         placeholder: input.placeholder,
+//         defaultValue: input.defaultValue,
+//       }}
+//       icon={icon}
+//       {...inputProps}
+//     />
+//   );
+// }
+
+export function EventInput({
   control,
   errors,
   input = {
-    name: 'location',
-    label: 'Location',
-    placeholder: '',
+    name: 'event',
+    label: 'Name your event',
+    placeholder: 'Halloween party,Jenns birthday dinner,etc.',
     defaultValue: '',
   },
-  icon = 'location',
   ...inputProps
-) {
+}) {
   return (
     <CustomTextInput
       control={control}
-      error={errors}
+      errors={errors}
       input={{
         name: input.name,
         label: input.label,
         placeholder: input.placeholder,
         defaultValue: input.defaultValue,
       }}
+      rules={{
+        contentType: 'emailAddress',
+        keyboardType: 'default',
+        autoCapitalize: 'none',
+        autoCorrect: false,
+      }}
+      {...inputProps}
+    />
+  );
+}
+export function StartInput({
+  control,
+  errors,
+  input = {
+    name: 'start',
+    label: 'Start',
+    placeholder: 'February 15, 2020 at 10:00 AM',
+    defaultValue: '',
+  },
+  icon = 'calendar',
+  ...inputProps
+}) {
+  return (
+    <CustomTextInput
+      control={control}
+      errors={errors}
+      input={{
+        name: input.name,
+        label: input.label,
+        placeholder: input.placeholder,
+        defaultValue: input.defaultValue,
+      }}
+      rules={{
+        contentType: 'emailAddress',
+        keyboardType: 'default',
+        autoCapitalize: 'none',
+        autoCorrect: false,
+      }}
       icon={icon}
       {...inputProps}
     />
   );
 }
+
+export function EndInput({
+  control,
+  errors,
+  input = {
+    name: 'end',
+    label: 'End',
+    placeholder: 'February 15, 2020 at 10:00 AM',
+    defaultValue: '',
+  },
+  icon = 'calendar',
+  ...inputProps
+}) {
+  return (
+    <CustomTextInput
+      control={control}
+      errors={errors}
+      input={{
+        name: input.name,
+        label: input.label,
+        placeholder: input.placeholder,
+        defaultValue: input.defaultValue,
+      }}
+      rules={{
+        contentType: 'emailAddress',
+        keyboardType: 'default',
+        autoCapitalize: 'none',
+        autoCorrect: false,
+      }}
+      icon={icon}
+      {...inputProps}
+    />
+  );
+}
+
+export function LocationInput({
+  control,
+  errors,
+  input = {
+    name: 'location',
+    label: 'Location',
+    placeholder: 'My house',
+    defaultValue: '',
+  },
+  icon = 'location',
+  ...inputProps
+}) {
+  return (
+    <CustomTextInput
+      control={control}
+      errors={errors}
+      input={{
+        name: input.name,
+        label: input.label,
+        placeholder: input.placeholder,
+        defaultValue: input.defaultValue,
+      }}
+      rules={{
+        contentType: 'emailAddress',
+        keyboardType: 'default',
+        autoCapitalize: 'none',
+        autoCorrect: false,
+      }}
+      icon={icon}
+      {...inputProps}
+    />
+  );
+}
+
+
+
+export function HostedInput({
+  control,
+  errors,
+  input = {
+    name: 'hosted',
+    label: 'Hosted by',
+    placeholder: 'Host/organization name',
+    defaultValue: '',
+  },
+  ...inputProps
+}) {
+  return (
+    <CustomTextInput
+      control={control}
+      errors={errors}
+      input={{
+        name: input.name,
+        label: input.label,
+        placeholder: input.placeholder,
+        defaultValue: input.defaultValue,
+      }}
+      rules={{
+        contentType: 'emailAddress',
+        keyboardType: 'email-address',
+        autoCapitalize: 'none',
+        autoCorrect: false,
+      }}
+      {...inputProps}
+    />
+  );
+}
+
+
+export function DescriptionInput({
+  control,
+  errors,
+  input = {
+    name: 'description',
+    label: 'Description',
+    placeholder: 'Let people know what this event is about at a glance!',
+    defaultValue: '',
+  },
+  ...inputProps
+}) {
+  return (
+    <CustomTextInput
+      control={control}
+      errors={errors}
+      input={{
+        name: input.name,
+        label: input.label,
+        placeholder: input.placeholder,
+        defaultValue: input.defaultValue,
+      }}
+      rules={{
+        contentType: 'emailAddress',
+        keyboardType: 'email-address',
+        autoCapitalize: 'none',
+        autoCorrect: false,
+        multiline:true,
+        
+      }}
+      {...inputProps}
+    />
+  );
+}
+
 
 const styles = StyleSheet.create({
   container: {
