@@ -24,10 +24,10 @@ function CustomTextInput({
   rules = {
     contentType: 'none',
     keyboardType: 'default',
-    autoCapitalize: 'true',
-    autoCorrect: 'true',
-    autoFocus: 'false',
-    secureTextEntry: 'false',
+    autoCapitalize: true,
+    autoCorrect: true,
+    autoFocus: false,
+    secureTextEntry: false,
   },
   forgotPassword = false,
   optional = false,
@@ -131,8 +131,9 @@ export function EmailInput({
     name: 'email',
     label: 'Email',
     placeholder: '',
-    defaultValue: '',
+    defaultValue: 'a',
   },
+  icon = 'calendar',
   ...inputProps
 }) {
   return (
@@ -163,7 +164,7 @@ export function PasswordInput({
     name: 'password',
     label: 'Password',
     placeholder: '',
-    defaultValue: '',
+    defaultValue: 'b',
   },
   forgotPassword,
   ...inputProps
@@ -194,27 +195,27 @@ export function PasswordInput({
 export function CalendarInput(
   control,
   errors,
-  //input = {
-  //  name: 'calendar',
-  //  label: 'Date',
-  //  placeholder: '',
-  //  defaultValue: '',
-  //},
-  //icon = 'calendar',
-  //...inputProps
+  input = {
+    name: 'calendar',
+    label: 'Date',
+    placeholder: '',
+    defaultValue: 'c',
+  },
+  icon = 'calendar',
+  ...inputProps
 ) {
   return (
     <CustomTextInput
       control={control}
       error={errors}
-      //input={{
-      //  name: input.name,
-      //  label: input.label,
-      //  placeholder: input.placeholder,
-      //  defaultValue: input.defaultValue,
-      //}}
-      //icon={icon}
-      //{...inputProps}
+      input={{
+        name: input.name,
+        label: input.label,
+        placeholder: input.placeholder,
+        defaultValue: input.defaultValue,
+      }}
+      icon={icon}
+      {...inputProps}
     />
   );
 }

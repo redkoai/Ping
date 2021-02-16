@@ -17,13 +17,18 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import AUTH_SCHEMA from 'ping/src/schema/authSchema';
 
 import Spacer from 'ping/src/components/Spacer';
-import { EmailInput, PasswordInput, CalendarInput, LocationInput } from './CustomTextInput';
+import CustomTextInput, {
+  EmailInput,
+  PasswordInput,
+  CalendarInput,
+  LocationInput,
+} from './CustomTextInput';
 import CustomButton from 'ping/src/components/CustomButton';
 
 function Form({ navigation }) {
-  const { control, handleSubmit, errors, reset, formState } = useForm({ defaultValues: {
-    calendar: ''
-  }});
+  const { control, handleSubmit, errors, reset, formState } = useForm({
+    reValidateMode: 'onBlur'
+  });
 
   return (
     <SafeAreaView
@@ -34,8 +39,9 @@ function Form({ navigation }) {
         minHeight: Math.round(Dimensions.get('window').height),
       }}
     >
-      {/*<EmailInput control={control} errors={errors} />*/}
-      {/*<PasswordInput control={control} errors={errors} />*/}
+      <CustomTextInput control={control} errors={errors} icon='calendar' />
+      <EmailInput control={control} errors={errors} />
+      <PasswordInput control={control} errors={errors} />
       <CalendarInput control={control} errors={errors} />
       {/*<LocationInput control={control} errors={errors} />*/}
     </SafeAreaView>

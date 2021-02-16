@@ -10,8 +10,6 @@ import SignInScreen from 'ping/src/screens/auth/SignInScreen';
 import SignUpScreen from 'ping/src/screens/auth/SignUpScreen';
 import PasswordResetScreen from 'ping/src/screens/auth/PasswordResetScreen';
 
-import Form from './Form'
-
 const AuthStack = createStackNavigator();
 
 function AuthStackNavigator() {
@@ -19,7 +17,7 @@ function AuthStackNavigator() {
     <AuthStack.Navigator screenOptions={headerOptions}>
       <AuthStack.Screen
         name="SignIn"
-        component={Form}
+        component={SignInScreen}
         options={{
           headerRight: () => <SkipButton />,
         }}
