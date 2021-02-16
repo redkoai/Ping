@@ -12,6 +12,8 @@ import PasswordResetScreen from 'ping/src/screens/auth/PasswordResetScreen';
 
 const AuthStack = createStackNavigator();
 
+import Form from './Form'
+
 function AuthStackNavigator() {
   return (
     <AuthStack.Navigator screenOptions={headerOptions}>
