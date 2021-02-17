@@ -129,8 +129,8 @@ export function AuthProvider({ children }) {
         singOutAsync,
         signUpWithEmailAsync,
         signInWithEmailAsync,
-        signInWithGoogleAsync,
         passwordResetEmailAsync,
+        signInWithGoogleAsync,
       }}
     >
       {children}
