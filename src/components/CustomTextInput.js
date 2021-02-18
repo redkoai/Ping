@@ -199,7 +199,7 @@ export function PasswordInput({
   );
 }
 
- export function CalendarInput(
+ export function CalendarInput({
    control,
    errors,
    input = {
@@ -211,7 +211,7 @@ export function PasswordInput({
   
    icon = 'calendar',
    ...inputProps
- ) {
+ }) {
    return (
      <CustomTextInput
        control={control}
