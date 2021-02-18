@@ -6,11 +6,11 @@ import ScreenTitle from 'ping/src/components/header/ScreenTitle';
 import SkipButton from 'ping/src/components/header/SkipButton';
 
 import { createStackNavigator } from '@react-navigation/stack';
-import Details from 'ping/src/screens/home/Details';
-import createnewtemplates from 'ping/src/screens/home/CreateNewTemplates';
-import Dresscode from 'ping/src/screens/home/Dresscode';
-import FAQ from 'ping/src/screens/home/FAQ';
-import RSVP from 'ping/src/screens/home/RSVP';
+import Details from 'ping/src/screens/home/new-invite-form/Details';
+import createnewtemplates from 'ping/src/screens/home/new-invite-form/CreateNewTemplates';
+import Dresscode from 'ping/src/screens/home/new-invite-form/Dresscode';
+import FAQ from 'ping/src/screens/home/new-invite-form/FAQ';
+import RSVP from 'ping/src/screens/home/new-invite-form/RSVP';
 
 const HomeStack = createStackNavigator();
 
