@@ -29,8 +29,8 @@ function CustomTextInput({
     autoCorrect: true,
     autoFocus: false,
     secureTextEntry: false,
-    multiline,
-    numberOfLines,
+    multiline: false,
+    numberOfLines: 1,
   },
   forgotPassword = false,
  
@@ -199,34 +199,34 @@ export function PasswordInput({
   );
 }
 
-// export function CalendarInput(
-//   control,
-//   errors,
-//   input = {
-//     name: 'calendar',
-//     label: 'Date',
-//     placeholder: '',
-//     defaultValue: '',
-//   },
+ export function CalendarInput(
+   control,
+   errors,
+   input = {
+     name: 'calendar',
+     label: 'Date',
+     placeholder: '',
+     defaultValue: '',
+   },
   
-//   icon = 'calendar',
-//   ...inputProps
-// ) {
-//   return (
-//     <CustomTextInput
-//       control={control}
-//       error={errors}
-//       input={{
-//         name: input.name,
-//         label: input.label,
-//         placeholder: input.placeholder,
-//         defaultValue: input.defaultValue,
-//       }}
-//       icon={icon}
-//       {...inputProps}
-//     />
-//   );
-// }
+   icon = 'calendar',
+   ...inputProps
+ ) {
+   return (
+     <CustomTextInput
+       control={control}
+       error={errors}
+       input={{
+         name: input.name,
+         label: input.label,
+         placeholder: input.placeholder,
+         defaultValue: input.defaultValue,
+       }}
+       icon={icon}
+       {...inputProps}
+     />
+   );
+ }
 
 // export function LocationInput(
 //   control,
@@ -277,21 +277,15 @@ export function EventInput({
         placeholder: input.placeholder,
         defaultValue: input.defaultValue,
       }}
-      rules={{
-        contentType: 'emailAddress',
-        keyboardType: 'default',
-        autoCapitalize: 'none',
-        autoCorrect: false,
-      }}
       {...inputProps}
     />
   );
 }
-export function StartInput({
+export function StartDateInput({
   control,
   errors,
   input = {
-    name: 'start',
+    name: 'start-date',
     label: 'Start',
     placeholder: 'February 15, 2020 at 10:00 AM',
     defaultValue: '',
@@ -309,23 +303,17 @@ export function StartInput({
         placeholder: input.placeholder,
         defaultValue: input.defaultValue,
       }}
-      rules={{
-        contentType: 'emailAddress',
-        keyboardType: 'default',
-        autoCapitalize: 'none',
-        autoCorrect: false,
-      }}
       icon={icon}
       {...inputProps}
     />
   );
 }
 
-export function EndInput({
+export function EndDateInput({
   control,
   errors,
   input = {
-    name: 'end',
+    name: 'end-date',
     label: 'End',
     placeholder: 'February 15, 2020 at 10:00 AM',
     defaultValue: '',
@@ -342,12 +330,6 @@ export function EndInput({
         label: input.label,
         placeholder: input.placeholder,
         defaultValue: input.defaultValue,
-      }}
-      rules={{
-        contentType: 'emailAddress',
-        keyboardType: 'default',
-        autoCapitalize: 'none',
-        autoCorrect: false,
       }}
       icon={icon}
       {...inputProps}
@@ -376,12 +358,6 @@ export function LocationInput({
         label: input.label,
         placeholder: input.placeholder,
         defaultValue: input.defaultValue,
-      }}
-      rules={{
-        contentType: 'emailAddress',
-        keyboardType: 'default',
-        autoCapitalize: 'none',
-        autoCorrect: false,
       }}
       icon={icon}
       {...inputProps}
@@ -412,12 +388,6 @@ export function HostedInput({
         placeholder: input.placeholder,
         defaultValue: input.defaultValue,
       }}
-      rules={{
-        contentType: 'emailAddress',
-        keyboardType: 'email-address',
-        autoCapitalize: 'none',
-        autoCorrect: false,
-      }}
       {...inputProps}
     />
   );
@@ -445,14 +415,6 @@ export function DescriptionInput({
         placeholder: input.placeholder,
         defaultValue: input.defaultValue,
       }}
-      rules={{
-        contentType: 'emailAddress',
-        keyboardType: 'email-address',
-        autoCapitalize: 'none',
-        autoCorrect: false,
-        multiline:true,
-        
-      }}
       {...inputProps}
     />
   );
@@ -478,14 +440,6 @@ export function DresscodeInput({
         label: input.label,
         placeholder: input.placeholder,
         defaultValue: input.defaultValue,
-      }}
-      rules={{
-        contentType: 'emailAddress',
-        keyboardType: 'default',
-        autoCapitalize: 'none',
-        autoCorrect: false,
-        multiline:true,
-        
       }}
       {...inputProps}
     />
