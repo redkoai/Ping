@@ -7,14 +7,13 @@ import { View, Text, TextInput, StyleSheet, TouchableOpacity } from 'react-nativ
 import { Ionicons } from '@expo/vector-icons';
 import CalendarIcon from 'ping/src/icons/CalendarIcon';
 import LocationNearMeIcon from 'ping/src/icons/LocationNearMeIcon';
-// import LocationPicker from '../../components/LocationPicker';
 
 import moment from 'moment';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import LocationPicker from 'ping/src/components/LocationPicker';
 import { Controller } from 'react-hook-form';
-// control and errors are passed from the useForm hook of the react-hook-form package
-// const { control, handleSubmit, errors } = useForm();
+// control, errors, and setValue are passed from the useForm hook of the react-hook-form package
+// const { control, handleSubmit, errors, setValue } = useForm();
 
 function CustomTextInput({
   control,
@@ -36,19 +35,19 @@ function CustomTextInput({
     numberOfLines: 1,
   },
   forgotPassword = false,
-
   optional = false,
   icon = rules.secureTextEntry,
-  setDateValue = null,
+  setValue = null,
   ...inputProps
 }) {
   const [focus, setFocus] = useState(rules.autoFocus);
   const [secure, setSecure] = useState(rules.secureTextEntry);
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
+  const [isLocationPickerVisible, setLocationPickerVisibility] = useState(false);
 
   const handleDateConfirm = (dateVal) => {
     const formattedDate = moment(dateVal).format('MMMM, Do YYYY hh:mm a');
-    setDateValue(input.name, formattedDate);
+    setValue(input.name, formattedDate);
     setDatePickerVisibility(false);
   };
 
@@ -74,7 +73,7 @@ function CustomTextInput({
     } else if (icon === 'location') {
       return {
         component: <LocationNearMeIcon size={heightPercentageToDP(4)} color={colors.offBlack} />,
-        function: () => inputProps.locationClick(),
+        function: () => setLocationPickerVisibility(true),
       };
     } else return icon;
   };
@@ -143,6 +142,7 @@ function CustomTextInput({
         onConfirm={handleDateConfirm}
         onCancel={() => setDatePickerVisibility(false)}
       />
+      {isLocationPickerVisible ? <LocationPicker /> : null}
     </View>
   );
 }
@@ -223,8 +223,8 @@ export function DateInput({
     placeholder: '',
     defaultValue: '',
   },
-
   icon = 'calendar',
+  setValue,
   ...inputProps
 }) {
   return (
@@ -238,11 +238,11 @@ export function DateInput({
         defaultValue: input.defaultValue,
       }}
       icon={icon}
+      setValue={setValue}
       {...inputProps}
     />
   );
 }
-
 
 export function LocationInput({
   control,
@@ -250,10 +250,11 @@ export function LocationInput({
   input = {
     name: 'location',
     label: 'Location',
-    placeholder: 'My house',
+    placeholder: '',
     defaultValue: '',
   },
   icon = 'location',
+  setValue,
   ...inputProps
 }) {
   return (
@@ -267,6 +268,7 @@ export function LocationInput({
         defaultValue: input.defaultValue,
       }}
       icon={icon}
+      setValue={setValue}
       {...inputProps}
     />
   );

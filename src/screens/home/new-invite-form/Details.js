@@ -37,7 +37,7 @@ import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import moment from 'moment';
 
 function Details({}) {
-  const { control, handleSubmit, errors, reset, formState } = useForm({
+  const { control, handleSubmit, errors, reset, formState, setValue } = useForm({
     resolver: yupResolver(AUTH_SCHEMA),
   });
   useFocusEffect(useCallback(reset));
