@@ -1,19 +1,19 @@
 import {useNavigation} from "@react-navigation/native";
 import {Image, ImageBackground, View, ScrollView} from "react-native";
 import {TouchableOpacity} from 'react-native';
-import emptyHome from "../../../assets/homeScreen/bg.png";
-import styles from "../../styles/styles";
+import emptyHome from "ping/assets/homeScreen/bg.png";
+import styles from "ping/src/styles/styles";
 import { Dimensions } from 'react-native';
-import {widthPercentageToDP,heightPercentageToDP,} from '../../../util/scaler';
+import {widthPercentageToDP,heightPercentageToDP,} from 'ping/util/scaler';
 import React, {useEffect, useState} from "react";
-import NavBar from "../../navbars/NarBar";
-import createNewEventBtn from "../../../assets/NavBarAssets/createNewEventBtn.png"
-import addFriendsBtn from "../../../assets/NavBarAssets/addFriendsBtn.png"
-import Accname from "../../../assets/Accounts/AccountName.png";
-import Accfriends from "../../../assets/Accounts/friends.png";
-import Accactivity from "../../../assets/Accounts/Accountactivity.png";
-import Acccenterone from "../../../assets/Accounts/Accountscenterone.png";
-import NavBar_accountsone from "../../navbars/NarBar_accountsone";
+import NavBar from "ping/src/navbars/NarBar";
+import createNewEventBtn from "ping/assets/NavBarAssets/createNewEventBtn.png"
+import addFriendsBtn from "ping/assets/NavBarAssets/addFriendsBtn.png"
+import Accname from "ping/assets/Accounts/AccountName.png";
+import Accfriends from "ping/assets/Accounts/friends.png";
+import Accactivity from "ping/assets/Accounts/Accountactivity.png";
+import Acccenterone from "ping/assets/Accounts/Accountscenterone.png";
+import NavBar_accountsone from "ping/src/navbars/NarBar_accountsone";
 
 
 function Accountsone({}) {

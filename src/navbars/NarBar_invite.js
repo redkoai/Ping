@@ -4,13 +4,13 @@ import {TouchableOpacity} from 'react-native';
 import React, {useEffect, useState}  from "react";
 import { Dimensions } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import Homebtn from '../../assets/navbar/home.png'
-import Eventsbtn from '../../assets/navbar/events.png'
-import Invitebtn from '../../assets/navbar/addg.png'
-import Messagesbtn from '../../assets/navbar/messages.png'
-import Accountsbtn from '../../assets/navbar/account.png'
-import navContainer from '../../assets/navbar/navCont.png'
-import {widthPercentageToDP,heightPercentageToDP,} from '../../util/scaler'
+import Homebtn from 'ping/assets/navbar/home.png'
+import Eventsbtn from 'ping/assets/navbar/events.png'
+import Invitebtn from 'ping/assets/navbar/addg.png'
+import Messagesbtn from 'ping/assets/navbar/messages.png'
+import Accountsbtn from 'ping/assets/navbar/account.png'
+import navContainer from 'ping/assets/navbar/navCont.png'
+import {widthPercentageToDP,heightPercentageToDP,} from 'ping/util/scaler'
 import {useRoute} from '@react-navigation/native';
 
 function NavBar_invite({}){

@@ -1,17 +1,17 @@
 import {useNavigation} from "@react-navigation/native";
 import {Image, ImageBackground, View, ScrollView} from "react-native";
 import {TouchableOpacity} from 'react-native';
-import emptyHome from "../../../assets/homeScreen/bg.png";
-import styles from "../../styles/styles";
+import emptyHome from "ping/assets/homeScreen/bg.png";
+import styles from "ping/src/styles/styles";
 import { Dimensions } from 'react-native';
-import {widthPercentageToDP,heightPercentageToDP,} from '../../../util/scaler';
+import {widthPercentageToDP,heightPercentageToDP,} from 'ping/util/scaler';
 import React, {useEffect, useState} from "react";
-import NavBar from "../../navbars/NarBar";
-import createNewEventBtn from "../../../assets/NavBarAssets/createNewEventBtn.png"
-import addFriendsBtn from "../../../assets/NavBarAssets/addFriendsBtn.png"
-import emptyPic from "../../../assets/messages/img.png";
-import homettl from "../../../assets/messages/messagettl.png";
-import NavBar_message from "../../navbars/NarBar_message";
+import NavBar from "ping/src/navbars/NarBar";
+import createNewEventBtn from "ping/assets/NavBarAssets/createNewEventBtn.png"
+import addFriendsBtn from "ping/assets/NavBarAssets/addFriendsBtn.png"
+import emptyPic from "ping/assets/messages/img.png";
+import homettl from "ping/assets/messages/messagettl.png";
+import NavBar_message from "ping/src/navbars/NarBar_message";
 
 
 function Messages({}) {

@@ -1,20 +1,20 @@
 import {useNavigation} from "@react-navigation/native";
 import {Image, ImageBackground, View, ScrollView} from "react-native";
 import {TouchableOpacity} from 'react-native';
-import emptyHome from "../../../assets/homeScreen/bg.png";
-import styles from "../../styles/styles";
+import emptyHome from "ping/assets/homeScreen/bg.png";
+import styles from "ping/src/styles/styles";
 import { Dimensions } from 'react-native';
-import {widthPercentageToDP,heightPercentageToDP,} from '../../../util/scaler';
+import {widthPercentageToDP,heightPercentageToDP,} from 'ping/util/scaler';
 import React, {useEffect, useState} from "react";
-import NavBar from "../../navbars/NarBar";
-import overlay from "../../../assets/createnew/templates/darkoverlay.png";
-import popup from "../../../assets/createnew/templates/popupbag.png";
-import icons from "../../../assets/createnew/templates/icons.png";
-import filter from "../../../assets/createnew/templates/filter.png";
-import event from "../../../assets/createnew/templates/Eventtype.png";
-import themes from "../../../assets/createnew/templates/Themes.png";
-import colors from "../../../assets/createnew/templates/Colors.png";
-import NavBar_invite from "../../navbars/NarBar_invite";
+import NavBar from "ping/src/navbars/NarBar";
+import overlay from "ping/assets/createnew/templates/darkoverlay.png";
+import popup from "ping/assets/createnew/templates/popupbag.png";
+import icons from "ping/assets/createnew/templates/icons.png";
+import filter from "ping/assets/createnew/templates/filter.png";
+import event from "ping/assets/createnew/templates/Eventtype.png";
+import themes from "ping/assets/createnew/templates/Themes.png";
+import colors from "ping/assets/createnew/templates/Colors.png";
+import NavBar_invite from "ping/src/navbars/NarBar_invite";
 
 
 function CreateNewTemplateFilters({}) {

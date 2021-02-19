@@ -1,16 +1,16 @@
 import {useNavigation} from "@react-navigation/native";
 import {Image, ImageBackground, View, ScrollView} from "react-native";
 import {TouchableOpacity} from 'react-native';
-import emptyHome from "../../../assets/homeScreen/bg.png";
-import styles from "../../styles/styles";
+import emptyHome from "ping/assets/homeScreen/bg.png";
+import styles from "ping/src/styles/styles";
 import { Dimensions } from 'react-native';
-import {widthPercentageToDP,heightPercentageToDP,} from '../../../util/scaler';
+import {widthPercentageToDP,heightPercentageToDP,} from 'ping/util/scaler';
 import React, {useEffect, useState} from "react";
-import NavBar from "../../navbars/NarBar";
-import createNewEventBtn from "../../../assets/NavBarAssets/createNewEventBtn.png"
-import addFriendsBtn from "../../../assets/NavBarAssets/addFriendsBtn.png"
-import emptyPic from "../../../assets/homeScreen/homeEmptyPic.png";
-import homettl from "../../../assets/homeScreen/homettl.png";
+import NavBar from "ping/src/navbars/NarBar";
+import createNewEventBtn from "ping/assets/NavBarAssets/createNewEventBtn.png"
+import addFriendsBtn from "ping/assets/NavBarAssets/addFriendsBtn.png"
+import emptyPic from "ping/assets/homeScreen/homeEmptyPic.png";
+import homettl from "ping/assets/homeScreen/homettl.png";
 
 
 function HomeScreenEmpty({}) {

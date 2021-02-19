@@ -101,6 +101,8 @@ function CustomTextInput({
               autoCapitalize={rules.autoCapitalize}
               autoCorrect={rules.autoCorrect}
               autoFocus={rules.autoFocus}
+              multiline={rules.multiline}
+              numberOfLines={rules.numberOfLines}
               onFocus={() => setFocus(true)}
               onBlur={() => setFocus(false)}
               secureTextEntry={secure}
@@ -228,59 +230,6 @@ export function PasswordInput({
    );
  }
 
-// export function LocationInput(
-//   control,
-//   errors,
-//   input = {
-//     name: 'location',
-//     label: 'Location',
-//     placeholder: '',
-//     defaultValue: '',
-//   },
-//   icon = 'location',
-//   ...inputProps
-// ) {
-//   return (
-//     <CustomTextInput
-//       control={control}
-//       error={errors}
-//       input={{
-//         name: input.name,
-//         label: input.label,
-//         placeholder: input.placeholder,
-//         defaultValue: input.defaultValue,
-//       }}
-//       icon={icon}
-//       {...inputProps}
-//     />
-//   );
-// }
-
-export function EventInput({
-  control,
-  errors,
-  input = {
-    name: 'event',
-    label: 'Name your event',
-    placeholder: 'Halloween party,Jenns birthday dinner,etc.',
-    defaultValue: '',
-  },
-  ...inputProps
-}) {
-  return (
-    <CustomTextInput
-      control={control}
-      errors={errors}
-      input={{
-        name: input.name,
-        label: input.label,
-        placeholder: input.placeholder,
-        defaultValue: input.defaultValue,
-      }}
-      {...inputProps}
-    />
-  );
-}
 export function StartDateInput({
   control,
   errors,
@@ -365,224 +314,6 @@ export function LocationInput({
   );
 }
 
-
-
-export function HostedInput({
-  control,
-  errors,
-  input = {
-    name: 'hosted',
-    label: 'Hosted by',
-    placeholder: 'Host/organization name',
-    defaultValue: '',
-  },
-  ...inputProps
-}) {
-  return (
-    <CustomTextInput
-      control={control}
-      errors={errors}
-      input={{
-        name: input.name,
-        label: input.label,
-        placeholder: input.placeholder,
-        defaultValue: input.defaultValue,
-      }}
-      {...inputProps}
-    />
-  );
-}
-
-
-export function DescriptionInput({
-  control,
-  errors,
-  input = {
-    name: 'description',
-    label: 'Description',
-    placeholder: 'Let people know what this event is about at a glance!',
-    defaultValue: '',
-  },
-  ...inputProps
-}) {
-  return (
-    <CustomTextInput
-      control={control}
-      errors={errors}
-      input={{
-        name: input.name,
-        label: input.label,
-        placeholder: input.placeholder,
-        defaultValue: input.defaultValue,
-      }}
-      {...inputProps}
-    />
-  );
-}
-
-export function DresscodeInput({
-  control,
-  errors,
-  input = {
-    name: 'dresscode',
-    label: '',
-    placeholder: "Do you have specific theme or color in mind? Don't make your guests guess!",
-    defaultValue: '',
-  },
-  ...inputProps
-}) {
-  return (
-    <CustomTextInput
-      control={control}
-      errors={errors}
-      input={{
-        name: input.name,
-        label: input.label,
-        placeholder: input.placeholder,
-        defaultValue: input.defaultValue,
-      }}
-      {...inputProps}
-    />
-  );
-}
-
-export function FaqpeopleparkInput({
-  control,
-  errors,
-  input = {
-    name: 'faqpeoplepark',
-    label: 'Where should people park?',
-    placeholder: "Street parking",
-    defaultValue: '',
-  },
-  ...inputProps
-}) {
-  return (
-    <CustomTextInput
-      control={control}
-      errors={errors}
-      input={{
-        name: input.name,
-        label: input.label,
-        placeholder: input.placeholder,
-        defaultValue: input.defaultValue,
-      }}
-      rules={{
-        contentType: 'emailAddress',
-        keyboardType: 'default',
-        autoCapitalize: 'none',
-        autoCorrect: false,
-        multiline:true,
-        
-      }}
-      {...inputProps}
-    />
-  );
-}
-
-export function FaqsecretcodeInput({
-  control,
-  errors,
-  input = {
-    name: 'faqsecretcode',
-    label: 'Is there a secret code?',
-    placeholder: "52301",
-    defaultValue: '',
-  },
-  ...inputProps
-}) {
-  return (
-    <CustomTextInput
-      control={control}
-      errors={errors}
-      input={{
-        name: input.name,
-        label: input.label,
-        placeholder: input.placeholder,
-        defaultValue: input.defaultValue,
-      }}
-      rules={{
-        contentType: 'emailAddress',
-        keyboardType: 'default',
-        autoCapitalize: 'none',
-        autoCorrect: false,
-        multiline:true,
-        
-      }}
-      {...inputProps}
-    />
-  );
-}
-
-export function FaqguestsInput({
-  control,
-  errors,
-  input = {
-    name: 'faqguests',
-    label: 'What should guests prepare?',
-    placeholder: "Bring some food for the potluck!",
-    defaultValue: '',
-  },
-  ...inputProps
-}) {
-  return (
-    <CustomTextInput
-      control={control}
-      errors={errors}
-      input={{
-        name: input.name,
-        label: input.label,
-        placeholder: input.placeholder,
-        defaultValue: input.defaultValue,
-      }}
-      rules={{
-        contentType: 'emailAddress',
-        keyboardType: 'default',
-        autoCapitalize: 'none',
-        autoCorrect: false,
-        multiline:true,
-        
-      }}
-      {...inputProps}
-    />
-  );
-}
-
-export function FaqquestionInput({
-  control,
-  errors,
-  input = {
-    name: 'faqquestion',
-    label: 'Type your question here',
-    placeholder: "Type the answer to your question",
-    defaultValue: '',
-  },
-  ...inputProps
-}) {
-  return (
-    <CustomTextInput
-      control={control}
-      errors={errors}
-      input={{
-        name: input.name,
-        label: input.label,
-        placeholder: input.placeholder,
-        defaultValue: input.defaultValue,
-      }}
-      rules={{
-        contentType: 'emailAddress',
-        keyboardType: 'default',
-        autoCapitalize: 'none',
-        autoCorrect: false,
-        multiline:true,
-        
-      }}
-      {...inputProps}
-    />
-  );
-}
-
-
 const styles = StyleSheet.create({
   container: {
     width: widthPercentageToDP(90),
@@ -605,6 +336,7 @@ const styles = StyleSheet.create({
   input: {
     flex: 1,
     color: colors.offBlack,
+    textAlignVertical:'top',
     paddingRight: 20,
     paddingLeft: 20,
     borderRadius: 12,

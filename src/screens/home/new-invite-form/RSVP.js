@@ -1,5 +1,5 @@
 import { useNavigation } from '@react-navigation/native';
-import { Image, ImageBackground, View, ScrollView, Switch, TouchableOpacity } from 'react-native';
+import { Image, ImageBackground, View, ScrollView, Switch, TouchableOpacity,TouchableWithoutFeedback,Keyboard } from 'react-native';
 import emptyHome from 'ping/assets/homeScreen/bg.png';
 import styles from 'ping/src/styles/styles';
 import { Dimensions } from 'react-native';
@@ -37,7 +37,15 @@ function RSVP({}) {
     }
   };
 
+  const submited=()=>{
+    console.log({eventname: event, start: start, end: end, location: showloc, hostedby: hosted, description: description});
+    // Alert.alert('FAQ RESULTS',"park:' + p + 'secret:' + s + 'guests:' + g + 'qsn:' + q",[{text:'okay',style:'destructive'}]);
+   }
+
   return (
+    <TouchableWithoutFeedback onPress={()=>{
+      Keyboard.dismiss();
+    }}>
     <View style={{ flex: 1 }}>
       <ImageBackground source={emptyHome} style={styles.homeEmpty}>
         <View
@@ -125,7 +133,7 @@ function RSVP({}) {
             }}
           >
             <NumericInput
-              onChange={(value) => setNumericInput(value)}
+              onChange={(value) => {setNumericInput(value);console.log(value)}}
               totalWidth={72}
               totalHeight={35}
               iconSize={25}
@@ -171,6 +179,7 @@ function RSVP({}) {
       </ImageBackground>
       <NavBar_invite />
     </View>
+    </TouchableWithoutFeedback>
   );
 }
 export default RSVP;

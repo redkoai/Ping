@@ -1,19 +1,19 @@
 import {useNavigation} from "@react-navigation/native";
 import {Image, ImageBackground, View, ScrollView} from "react-native";
 import {TouchableOpacity} from 'react-native';
-import emptyHome from "../../../assets/homeScreen/bg.png";
-import styles from "../../styles/styles";
+import emptyHome from "ping/assets/homeScreen/bg.png";
+import styles from "ping/src/styles/styles";
 import { Dimensions } from 'react-native';
-import {widthPercentageToDP,heightPercentageToDP,} from '../../../util/scaler';
+import {widthPercentageToDP,heightPercentageToDP,} from 'ping/util/scaler';
 import React, {useEffect, useState} from "react";
-import NavBar from "../../navbars/NarBar";
-import allset from "../../../assets/createnew/creationsuccess/allset.png";
-import tab from "../../../assets/createnew/creationsuccess/tab.png";
-import invitefriends from "../../../assets/createnew/creationsuccess/invitefriends.png";
-import addtocalendar from "../../../assets/createnew/creationsuccess/addtocalendar.png";
-import backtohome from "../../../assets/createnew/creationsuccess/backtohome.png";
-import viewevent from "../../../assets/createnew/creationsuccess/viewevent.png";
-import NavBar_invite from "../../navbars/NarBar_invite";
+import NavBar from "ping/src/navbars/NarBar";
+import allset from "ping/assets/createnew/creationsuccess/allset.png";
+import tab from "ping/assets/createnew/creationsuccess/tab.png";
+import invitefriends from "ping/assets/createnew/creationsuccess/invitefriends.png";
+import addtocalendar from "ping/assets/createnew/creationsuccess/addtocalendar.png";
+import backtohome from "ping/assets/createnew/creationsuccess/backtohome.png";
+import viewevent from "ping/assets/createnew/creationsuccess/viewevent.png";
+import NavBar_invite from "ping/src/navbars/NarBar_invite";
 
 
 function CreationSuccess({}) {

@@ -1,20 +1,20 @@
 import {useNavigation} from "@react-navigation/native";
 import {Image, ImageBackground, View, ScrollView} from "react-native";
 import {TouchableOpacity} from 'react-native';
-import emptyHome from "../../../assets/homeScreen/bg.png";
-import styles from "../../styles/styles";
+import emptyHome from "ping/assets/homeScreen/bg.png";
+import styles from "ping/src/styles/styles";
 import { Dimensions } from 'react-native';
-import {widthPercentageToDP,heightPercentageToDP,} from '../../../util/scaler';
+import {widthPercentageToDP,heightPercentageToDP,} from 'ping/util/scaler';
 import React, {useEffect, useState} from "react";
-import NavBar from "../../navbars/NarBar";
-import popup from "../../../assets/createnew/signinpopup/popup.png";
-import signin from "../../../assets/createnew/signinpopup/signin.png";
-import email from "../../../assets/createnew/signinpopup/email.png";
-import password from "../../../assets/createnew/signinpopup/password.png";
-import signinlarge from "../../../assets/createnew/signinpopup/signinlarge.png";
-import googlesignin from "../../../assets/createnew/signinpopup/googlesignin.png";
-import register from "../../../assets/createnew/signinpopup/register.png";
-import NavBar_invite from "../../navbars/NarBar_invite";
+import NavBar from "ping/src/navbars/NarBar";
+import popup from "ping/assets/createnew/signinpopup/popup.png";
+import signin from "ping/assets/createnew/signinpopup/signin.png";
+import email from "ping/assets/createnew/signinpopup/email.png";
+import password from "ping/assets/createnew/signinpopup/password.png";
+import signinlarge from "ping/assets/createnew/signinpopup/signinlarge.png";
+import googlesignin from "ping/assets/createnew/signinpopup/googlesignin.png";
+import register from "ping/assets/createnew/signinpopup/register.png";
+import NavBar_invite from "ping/src/navbars/NarBar_invite";
 
 
 function Signinpopup({}) {

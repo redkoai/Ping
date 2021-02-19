@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useCallback, useState } from 'react';
 import { useFocusEffect } from '@react-navigation/native';
 import { useNavigation } from '@react-navigation/native';
-import { Image, Text, ImageBackground, View, ScrollView, TouchableOpacity } from 'react-native';
+import { Image, Text, ImageBackground, View, ScrollView, TouchableOpacity, TouchableWithoutFeedback,Keyboard } from 'react-native';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import AUTH_SCHEMA from 'ping/src/schema/authSchema';
@@ -17,7 +17,7 @@ import rect from 'ping/assets/createnew/dresscode/rectangle.png';
 import optional from 'ping/assets/createnew/dresscode/optional.png';
 import ImagePicker from 'ping/src/components/ImagePicker';
 import upload from 'ping/assets/createnew/dresscode/upload.png';
-import { DresscodeInput } from 'ping/src/components/CustomTextInput';
+import CustomTextInput from 'ping/src/components/CustomTextInput';
 import denext from 'ping/assets/createnew/details/detailsnext.png';
 import NavBar_invite from 'ping/src/navbars/NarBar_invite';
 
@@ -25,16 +25,19 @@ function Dresscode({}) {
   const { control, handleSubmit, errors, reset, formState } = useForm({
     resolver: yupResolver(AUTH_SCHEMA),
   });
+  useFocusEffect(useCallback(reset));
 
   const navigation = useNavigation();
   const [radiobtn, setRadiobtn] = useState('');
   const [val, setVal] = useState('');
-
-  useFocusEffect(useCallback(reset));
+  const [description,setDescription] = useState('');
+  const [image,setImage] = useState('');
 
   function pressCircle(i) {
     setVal(i);
   }
+  const handleDescription = (text) => setDescription(text);
+
   const listData = [
     { label: 'Casual and Comfortable', value: 1 },
     { label: 'Business casual', value: 2 },
@@ -43,8 +46,17 @@ function Dresscode({}) {
     { label: 'custom', value: 5 },
   ];
 
+  const submited=(val,description)=>{
+    console.log({radiovalue: val, description: description});
+    // Alert.alert('FAQ RESULTS',"park:' + p + 'secret:' + s + 'guests:' + g + 'qsn:' + q",[{text:'okay',style:'destructive'}]);
+   }
+
   return (
+    <TouchableWithoutFeedback onPress={()=>{
+      Keyboard.dismiss();
+    }}>
     <View style={{ flex: 1 }}>
+    <ScrollView>
       <ImageBackground source={emptyHome} style={styles.homeEmpty}>
         <View
           style={{
@@ -63,7 +75,6 @@ function Dresscode({}) {
               left: heightPercentageToDP('2'),
             }}
           />
-          <ScrollView>
             <View style={{ position: 'relative', left: 10 }}>
               <RadioButton
                 outerWidth={30}
@@ -75,7 +86,7 @@ function Dresscode({}) {
                 wrapperStyle={{ padding: 4 }}
               />
             </View>
-            <View
+            {/* <View
               style={{
                 marginHorizontal: 10,
                 marginVertical: 10,
@@ -83,7 +94,7 @@ function Dresscode({}) {
               }}
             >
               <Text>{'clicked item value is: ' + val}</Text>
-            </View>
+            </View> */}
             <View
               style={{
                 height: heightPercentageToDP('12'),
@@ -93,7 +104,14 @@ function Dresscode({}) {
                 resizeMode: 'contain',
               }}
             >
-              <DresscodeInput control={control} errors={errors} />
+             <CustomTextInput input={{name:'dresscode',label:'',placeholder:"Do you have specific theme or color in mind? Don't make your guests guess!",defaultValue: ''}} 
+            control={control}
+             errors={errors}
+             value={description}
+             onChangeText={handleDescription}
+             rules={{multiline:'true',numberOfLines:'5'}} 
+           
+            />
             </View>
             {/* <Image source={rect} style={{height: heightPercentageToDP('12'), width :widthPercentageToDP('95'), marginTop: heightPercentageToDP('1'),right:heightPercentageToDP('-2'), resizeMode:'contain' }} />  */}
             <Image
@@ -107,9 +125,10 @@ function Dresscode({}) {
               }}
             />
             {/* <Image source={upload} style={{height: heightPercentageToDP('15'), width :widthPercentageToDP('65'), marginTop: heightPercentageToDP('-2.2'),left:heightPercentageToDP('0.5'), resizeMode:'contain' }} />  */}
-            <ImagePicker />
+            <ImagePicker/>
             <TouchableOpacity
               onPress={() => {
+                submited(val,description);
                 navigation.navigate('FAQ');
               }}
             >
@@ -124,11 +143,12 @@ function Dresscode({}) {
                 }}
               />
             </TouchableOpacity>
-          </ScrollView>
         </View>
       </ImageBackground>
+      </ScrollView>
       <NavBar_invite />
     </View>
+    </TouchableWithoutFeedback>
   );
 }
 

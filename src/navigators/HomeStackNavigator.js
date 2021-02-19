@@ -6,6 +6,13 @@ import ScreenTitle from 'ping/src/components/header/ScreenTitle';
 import SkipButton from 'ping/src/components/header/SkipButton';
 
 import { createStackNavigator } from '@react-navigation/stack';
+
+import HomeScreenEmpty from 'ping/src/screens/home/HomeScreenEmpty';
+import Events from 'ping/src/screens/home/Events';
+import Messages from 'ping/src/screens/home/Messages';
+import Accounts from 'ping/src/screens/home/Accounts';
+
+
 import Details from 'ping/src/screens/home/new-invite-form/Details';
 import createnewtemplates from 'ping/src/screens/home/new-invite-form/CreateNewTemplates';
 import Dresscode from 'ping/src/screens/home/new-invite-form/Dresscode';
@@ -17,6 +24,8 @@ const HomeStack = createStackNavigator();
 function HomeStackNavigator() {
   return (
     <HomeStack.Navigator screenOptions={headerOptions}>
+      <HomeStack.Screen name="HomeScreenEmpty" component={HomeScreenEmpty}/>
+      <HomeStack.Screen name="Events" component={Events}/>
       <HomeStack.Screen
         name="createnewtemplates"
         component={createnewtemplates}
@@ -61,6 +70,9 @@ function HomeStackNavigator() {
           headerRight: () => <ScreenTitle title="RSVP Options"/>,
         }}
       />
+      <HomeStack.Screen name="Messages" component={Messages}/>
+      <HomeStack.Screen name="Accounts" component={Accounts}/>
+
     </HomeStack.Navigator>
   );
 }
