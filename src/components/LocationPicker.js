@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import MapView from 'react-native-maps';
+import MapView, { Marker } from 'react-native-maps';
 import { StyleSheet, Text, View, Dimensions, Platform } from 'react-native';
 import { widthPercentageToDP, heightPercentageToDP } from 'ping/util/scaler';
 import * as Location from 'expo-location';
 
 function LocationPicker() {
-  const [location, setLocation] = useState({ latitude: 34.06739, longitude: -118.3917 });
+  const [userLocation, setUserLocation] = useState({ latitude: 34.06739, longitude: -118.3917 });
+  const [markerLocation, setMarkerLocation] = useState({});
   const [errorMsg, setErrorMsg] = useState(null);
+  const [isMarkerVisible, setMarkerVisibility] = useState(false);
 
   useEffect(() => {
     (async () => {
@@ -17,9 +19,18 @@ function LocationPicker() {
       }
 
       let locationResult = await Location.getCurrentPositionAsync({});
-      setLocation(locationResult.coords);
+      setUserLocation(locationResult.coords);
     })();
   }, []);
+
+  const handleMapLongPress = (e) => {
+    setMarkerLocation({
+      latitude: e.nativeEvent.coordinate.latitude,
+      longitude: e.nativeEvent.coordinate.longitude,
+    });
+    console.log(markerLocation);
+    setMarkerVisibility(true);
+  };
 
   return (
     <View style={styles.container}>
@@ -28,8 +39,8 @@ function LocationPicker() {
         showsUserLocation
         camera={{
           center: {
-            latitude: location.latitude,
-            longitude: location.longitude,
+            latitude: userLocation.latitude,
+            longitude: userLocation.longitude,
           },
           pitch: 0,
           heading: 0,
@@ -38,7 +49,10 @@ function LocationPicker() {
           // Only when using Google Maps.
           zoom: 17,
         }}
-      />
+        onLongPress={handleMapLongPress}
+      >
+        {isMarkerVisible ? <Marker coordinate={markerLocation} /> : null}
+      </MapView>
     </View>
   );
 }
