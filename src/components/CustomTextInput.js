@@ -9,6 +9,9 @@ import CalendarIcon from 'ping/src/icons/CalendarIcon';
 import LocationNearMeIcon from 'ping/src/icons/LocationNearMeIcon';
 // import LocationPicker from '../../components/LocationPicker';
 
+import moment from 'moment';
+import DateTimePickerModal from 'react-native-modal-datetime-picker';
+import LocationPicker from 'ping/src/components/LocationPicker';
 import { Controller } from 'react-hook-form';
 // control and errors are passed from the useForm hook of the react-hook-form package
 // const { control, handleSubmit, errors } = useForm();
@@ -33,19 +36,23 @@ function CustomTextInput({
     numberOfLines: 1,
   },
   forgotPassword = false,
- 
+
   optional = false,
   icon = rules.secureTextEntry,
+  setDateValue = null,
   ...inputProps
 }) {
   const [focus, setFocus] = useState(rules.autoFocus);
   const [secure, setSecure] = useState(rules.secureTextEntry);
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
-  const error = errors?.[input.name];
 
-  const showDatePicker = () => {
-    setDatePickerVisibility(true);
+  const handleDateConfirm = (dateVal) => {
+    const formattedDate = moment(dateVal).format('MMMM, Do YYYY hh:mm a');
+    setDateValue(input.name, formattedDate);
+    setDatePickerVisibility(false);
   };
+
+  const error = errors?.[input.name];
 
   const iconToRender = () => {
     if (rules.secureTextEntry) {
@@ -62,12 +69,12 @@ function CustomTextInput({
     } else if (icon === 'calendar') {
       return {
         component: <CalendarIcon size={heightPercentageToDP(3)} color={colors.offBlack} />,
-        function: () => inputProps.calendarClick(),
+        function: () => setDatePickerVisibility(true),
       };
     } else if (icon === 'location') {
       return {
         component: <LocationNearMeIcon size={heightPercentageToDP(4)} color={colors.offBlack} />,
-        function: () =>inputProps.locationClick(),
+        function: () => inputProps.locationClick(),
       };
     } else return icon;
   };
@@ -130,6 +137,12 @@ function CustomTextInput({
           </View>
         </View>
       }
+      <DateTimePickerModal
+        isVisible={isDatePickerVisible}
+        mode="datetime"
+        onConfirm={handleDateConfirm}
+        onCancel={() => setDatePickerVisibility(false)}
+      />
     </View>
   );
 }
@@ -201,51 +214,23 @@ export function PasswordInput({
   );
 }
 
- export function CalendarInput({
-   control,
-   errors,
-   input = {
-     name: 'calendar',
-     label: 'Date',
-     placeholder: '',
-     defaultValue: '',
-   },
-  
-   icon = 'calendar',
-   ...inputProps
- }) {
-   return (
-     <CustomTextInput
-       control={control}
-       error={errors}
-       input={{
-         name: input.name,
-         label: input.label,
-         placeholder: input.placeholder,
-         defaultValue: input.defaultValue,
-       }}
-       icon={icon}
-       {...inputProps}
-     />
-   );
- }
-
-export function StartDateInput({
+export function DateInput({
   control,
   errors,
   input = {
-    name: 'start-date',
-    label: 'Start',
-    placeholder: 'February 15, 2020 at 10:00 AM',
+    name: 'date',
+    label: 'Date',
+    placeholder: '',
     defaultValue: '',
   },
+
   icon = 'calendar',
   ...inputProps
 }) {
   return (
     <CustomTextInput
       control={control}
-      errors={errors}
+      error={errors}
       input={{
         name: input.name,
         label: input.label,
@@ -258,33 +243,6 @@ export function StartDateInput({
   );
 }
 
-export function EndDateInput({
-  control,
-  errors,
-  input = {
-    name: 'end-date',
-    label: 'End',
-    placeholder: 'February 15, 2020 at 10:00 AM',
-    defaultValue: '',
-  },
-  icon = 'calendar',
-  ...inputProps
-}) {
-  return (
-    <CustomTextInput
-      control={control}
-      errors={errors}
-      input={{
-        name: input.name,
-        label: input.label,
-        placeholder: input.placeholder,
-        defaultValue: input.defaultValue,
-      }}
-      icon={icon}
-      {...inputProps}
-    />
-  );
-}
 
 export function LocationInput({
   control,
@@ -336,7 +294,7 @@ const styles = StyleSheet.create({
   input: {
     flex: 1,
     color: colors.offBlack,
-    textAlignVertical:'top',
+    textAlignVertical: 'top',
     paddingRight: 20,
     paddingLeft: 20,
     borderRadius: 12,
