@@ -111,7 +111,7 @@ function Details({ navigation }) {
                 placeholder: 'Let people know what this event is about at a glance!',
                 defaultValue: '',
               }}
-              rules={{ multiline: 'true', numberOfLines: 5 }}
+              rules={{ multiline: true, numberOfLines: 5 }}
               optional
             />
           </View>
