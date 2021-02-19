@@ -295,7 +295,6 @@ const styles = StyleSheet.create({
   input: {
     flex: 1,
     color: colors.offBlack,
-    textAlignVertical: 'top',
     paddingRight: 20,
     paddingLeft: 20,
     borderRadius: 12,
