@@ -40,6 +40,7 @@ function CustomTextInput({
   setValue = null,
   ...inputProps
 }) {
+  const error = errors?.[input.name];
   const [focus, setFocus] = useState(rules.autoFocus);
   const [secure, setSecure] = useState(rules.secureTextEntry);
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
@@ -50,8 +51,6 @@ function CustomTextInput({
     setValue(input.name, formattedDate);
     setDatePickerVisibility(false);
   };
-
-  const error = errors?.[input.name];
 
   const iconToRender = () => {
     if (rules.secureTextEntry) {
