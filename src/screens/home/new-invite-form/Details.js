@@ -1,12 +1,9 @@
 import React, { useCallback } from 'react';
 import { useFocusEffect } from '@react-navigation/native';
-import {
-  Image,
-  View,
-} from 'react-native';
+import { StatusBar, Image, View } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import emptyHome from 'ping/assets/homeScreen/bg.png';
-import styles from 'ping/src/styles/styles';
+import styles, { colors } from 'ping/src/styles/styles';
 import { widthPercentageToDP, heightPercentageToDP } from 'ping/util/scaler';
 import AUTH_SCHEMA from 'ping/src/schema/authSchema';
 import Spacer from 'ping/src/components/Spacer';
@@ -35,6 +32,7 @@ function Details({ navigation }) {
         style={{ flex: 1, backgroundColor: 'white' }}
         contentContainerStyle={{ justifyContent: 'center', alignItems: 'center' }}
       >
+        <StatusBar backgroundColor={colors.primary} />
         <View
           style={{
             flexDirection: 'column',

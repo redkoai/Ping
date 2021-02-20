@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import MapView, { Marker } from 'react-native-maps';
-import { StyleSheet, Text, View, Dimensions, Platform } from 'react-native';
-import { widthPercentageToDP, heightPercentageToDP } from 'ping/util/scaler';
+import { StyleSheet } from 'react-native';
 import * as Location from 'expo-location';
 
 function LocationPicker() {
@@ -33,7 +32,6 @@ function LocationPicker() {
   };
 
   return (
-    <View style={styles.container}>
       <MapView
         style={styles.map}
         showsUserLocation
@@ -53,21 +51,10 @@ function LocationPicker() {
       >
         {isMarkerVisible ? <Marker coordinate={markerLocation} /> : null}
       </MapView>
-    </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    //backgroundColor: '#fff',
-    //alignItems: 'center',
-    //justifyContent: 'center',
-    //marginTop: heightPercentageToDP(1),
-    //marginBottom: heightPercentageToDP(5),
-    width: Dimensions.get('window').width,
-    height: Dimensions.get('window').height,
-  },
   map: {
     flex: 1,
   },
