@@ -11,7 +11,6 @@ import LocationNearMeIcon from 'ping/src/icons/LocationNearMeIcon';
 import moment from 'moment';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import LocationPickerModal from 'ping/src/components/inputs/LocationPickerModal';
-import ScreenDimmer from 'ping/src/components/modals/ScreenDimmer';
 
 import { Controller } from 'react-hook-form';
 // control, errors, and setValue are passed from the useForm hook of the react-hook-form package
@@ -148,11 +147,11 @@ function CustomTextInput({
         onConfirm={handleDateConfirm}
         onCancel={() => setDatePickerVisibility(false)}
       />
-      <ScreenDimmer
+      <LocationPickerModal
         isVisible={isLocationPickerVisible}
         onConfirm={handleLocationConfirm}
         onCancel={() => setLocationPickerVisibility(false)}
-      ><Text>text</Text></ScreenDimmer>
+      />
     </View>
   );
 }
