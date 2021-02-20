@@ -8,7 +8,7 @@ import {widthPercentageToDP,heightPercentageToDP,} from 'ping/util/scaler';
 import React, {useContext, useEffect, useState} from "react";
 import AuthContext from 'ping/src/contexts/AuthContext';
 import NavBar from "ping/src/navbars/NarBar";
-import CustomButton from 'ping/src/components/CustomButton';
+import CustomButton from 'ping/src/components/inputs/CustomButton';
 import createNewEventBtn from "ping/assets/NavBarAssets/createNewEventBtn.png"
 import addFriendsBtn from "ping/assets/NavBarAssets/addFriendsBtn.png"
 import Accname from "ping/assets/Accounts/AccountName.png";

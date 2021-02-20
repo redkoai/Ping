@@ -21,8 +21,8 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { EMAIL_SCHEMA } from 'ping/src/schema/authSchema';
 
 import Spacer from 'ping/src/components/Spacer';
-import { EmailInput } from 'ping/src/components/CustomTextInput';
-import CustomButton from 'ping/src/components/CustomButton';
+import { EmailInput } from 'ping/src/components/inputs/CustomTextInput';
+import CustomButton from 'ping/src/components/inputs/CustomButton';
 
 function PasswordResetScreen() {
   const { passwordResetEmailAsync } = useContext(AuthContext);

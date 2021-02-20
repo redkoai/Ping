@@ -5,7 +5,8 @@ import * as Location from 'expo-location';
 
 import { Ionicons } from '@expo/vector-icons';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-import { colors, textStyles } from '../styles/styles';
+import { colors, textStyles } from 'ping/src/styles/styles';
+import ScreenDimmer from 'ping/src/components/modals/ScreenDimmer';
 
 function LocationPickerModal({ isVisible, onConfirm, onCancel }) {
   const [userLocation, setUserLocation] = useState({ latitude: 34.06739, longitude: -118.3917 });
@@ -31,61 +32,55 @@ function LocationPickerModal({ isVisible, onConfirm, onCancel }) {
       latitude: e.nativeEvent.coordinate.latitude,
       longitude: e.nativeEvent.coordinate.longitude,
     });
-    console.log(markerLocation);
     setMarkerVisibility(true);
+    console.log(markerLocation);
   };
 
   return (
-    <Modal
-      animationType="slide"
-      transparent={true}
-      statusBarTranslucent={true}
-      visible={isVisible}
-      onRequestClose={onCancel}
-    >
-      <TouchableWithoutFeedback onPress={onCancel}>
-        <View style={styles.modalContainer}>
-          <TouchableWithoutFeedback>
-            <View style={styles.modalInner}>
-              <View style={styles.modalTopBar}>
-                <TouchableOpacity onPress={onCancel}>
-                  <Ionicons name="close" size={22} color={colors.offBlack} />
-                </TouchableOpacity>
-                <Text style={textStyles.normalBold}>Pick a Location</Text>
-                <View />
-              </View>
-              <MapView
-                style={styles.map}
-                showsUserLocation
-                camera={{
-                  center: {
-                    latitude: userLocation.latitude,
-                    longitude: userLocation.longitude,
-                  },
-                  pitch: 0,
-                  heading: 0,
-                  // Only on iOS MapKit, in meters. The property is ignored by Google Maps.
-                  altitude: 500,
-                  // Only when using Google Maps.
-                  zoom: 17,
-                }}
-                onLongPress={handleMapLongPress}
-              >
-                {isMarkerVisible ? <Marker coordinate={markerLocation} /> : null}
-              </MapView>
+    <ScreenDimmer>
+      <Modal
+        animationType="slide"
+        transparent={true}
+        statusBarTranslucent={true}
+        visible={isVisible}
+        onRequestClose={onCancel}
+      >
+        <TouchableWithoutFeedback>
+          <View style={styles.modalInner}>
+            <View style={styles.modalTopBar}>
+              <TouchableOpacity onPress={onCancel}>
+                <Ionicons name="close" size={22} color={colors.offBlack} />
+              </TouchableOpacity>
+              <Text style={textStyles.normalBold}>Pick a Location</Text>
+              <View />
             </View>
-          </TouchableWithoutFeedback>
-        </View>
-      </TouchableWithoutFeedback>
-    </Modal>
+            <MapView
+              style={styles.map}
+              showsUserLocation
+              camera={{
+                center: {
+                  latitude: userLocation.latitude,
+                  longitude: userLocation.longitude,
+                },
+                pitch: 0,
+                heading: 0,
+                // Only on iOS MapKit, in meters. The property is ignored by Google Maps.
+                altitude: 500,
+                // Only when using Google Maps.
+                zoom: 17,
+              }}
+              onLongPress={handleMapLongPress}
+            >
+              {isMarkerVisible ? <Marker coordinate={markerLocation} /> : null}
+            </MapView>
+          </View>
+        </TouchableWithoutFeedback>
+      </Modal>
+    </ScreenDimmer>
   );
 }
 
 const styles = StyleSheet.create({
-  modalContainer: {
-    flex: 1,
-    backgroundColor: 'rgba(0,0,0,0.5)',
-  },
   modalInner: {
     width: Dimensions.get('screen').width,
     height: Dimensions.get('screen').height / 1.5,

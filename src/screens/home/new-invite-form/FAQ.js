@@ -9,7 +9,7 @@ import { widthPercentageToDP, heightPercentageToDP } from 'ping/util/scaler';
 import AUTH_SCHEMA from 'ping/src/schema/authSchema';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import CustomTextInput from 'ping/src/components/CustomTextInput';
+import CustomTextInput from 'ping/src/components/inputs/CustomTextInput';
 import NavBar from 'ping/src/navbars/NarBar';
 import faqprogline from 'ping/assets/createnew/faq/faqprogline.png';
 import message from 'ping/assets/createnew/faq/message.png';

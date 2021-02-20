@@ -15,9 +15,9 @@ import NavBar from 'ping/src/navbars/NarBar';
 import deprogline from 'ping/assets/createnew/dresscode/dresscodeprogline.png';
 import rect from 'ping/assets/createnew/dresscode/rectangle.png';
 import optional from 'ping/assets/createnew/dresscode/optional.png';
-import ImagePicker from 'ping/src/components/ImagePicker';
+import ImagePicker from 'ping/src/components/inputs/ImagePicker';
 import upload from 'ping/assets/createnew/dresscode/upload.png';
-import CustomTextInput from 'ping/src/components/CustomTextInput';
+import CustomTextInput from 'ping/src/components/inputs/CustomTextInput';
 import denext from 'ping/assets/createnew/details/detailsnext.png';
 import NavBar_invite from 'ping/src/navbars/NarBar_invite';
 

@@ -3,8 +3,8 @@ import { View, Button, Image, Text, StyleSheet, Alert,TouchableOpacity } from 'r
 import * as ImagePicker from 'expo-image-picker';
 import * as Permissions from 'expo-permissions';
 // import imageupload from "../assets/upload.png"
-import {widthPercentageToDP,heightPercentageToDP,} from '../../util/scaler';
-import upload from "../../assets/createnew/dresscode/upload.png";
+import {widthPercentageToDP,heightPercentageToDP,} from 'ping/util/scaler';
+import upload from "ping/assets/createnew/dresscode/upload.png";
 
 
 const ImgPicker = props => {

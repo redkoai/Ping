@@ -25,8 +25,8 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import AUTH_SCHEMA from 'ping/src/schema/authSchema';
 
 import Spacer from 'ping/src/components/Spacer';
-import { EmailInput, PasswordInput } from 'ping/src/components/CustomTextInput';
-import CustomButton from 'ping/src/components/CustomButton';
+import { EmailInput, PasswordInput } from 'ping/src/components/inputs/CustomTextInput';
+import CustomButton from 'ping/src/components/inputs/CustomButton';
 
 function SignInScreen({ navigation }) {
   const { signInWithEmailAsync, signInWithGoogleAsync } = useContext(AuthContext);
