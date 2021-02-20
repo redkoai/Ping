@@ -60,15 +60,16 @@ function LocationPicker() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginTop: heightPercentageToDP(1),
-    marginBottom: heightPercentageToDP(5),
+    //backgroundColor: '#fff',
+    //alignItems: 'center',
+    //justifyContent: 'center',
+    //marginTop: heightPercentageToDP(1),
+    //marginBottom: heightPercentageToDP(5),
+    width: Dimensions.get('window').width,
+    height: Dimensions.get('window').height,
   },
   map: {
-    width: Dimensions.get('window').width,
-    height: Dimensions.get('window').height / 2.5,
+    flex: 1,
   },
 });
 

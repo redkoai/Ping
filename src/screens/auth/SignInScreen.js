@@ -80,7 +80,7 @@ function SignInScreen({ navigation }) {
           onPress={handleSubmit(
             async (data) => await signInWithEmailAsync(data, onSignInSuccess, onSignInFailure),
           )}
-          isPrimary={true}
+          primary
         />
         <CustomButton
           icon={googleLogo}

@@ -52,7 +52,7 @@ function Accounts({}) {
             <CustomButton
                 text="Sign Out"
                 onPress={async () => await singOutAsync(onSuccess, onFailure)}
-                isPrimary={true}
+                primary
             />
             <NavBar_account/>
         </View>

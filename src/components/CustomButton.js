@@ -4,19 +4,19 @@ import { heightPercentageToDP, widthPercentageToDP } from 'ping/util/scaler';
 import React from 'react';
 import { View, Image, Text, StyleSheet, TouchableOpacity } from 'react-native';
 
-function CustomButton({ icon, text, onPress, isPrimary, width = 80 }) {
+function CustomButton({ icon, text, onPress, primary = false, small = false }) {
   return (
     <View style={styles.container}>
       <TouchableOpacity
         style={[
-          { width: widthPercentageToDP(width) },
+          { width: widthPercentageToDP(small ? 47 : 80) },
           styles.button,
-          isPrimary ? styles.buttonPrimary : styles.buttonSecondary,
+          primary ? styles.buttonPrimary : styles.buttonSecondary,
         ]}
         onPress={onPress}
       >
         {icon && <Image source={icon} style={styles.icon} />}
-        <Text style={[textStyles.bigBold, isPrimary ? styles.textPrimary : styles.textSecondary]}>
+        <Text style={[textStyles.bigBold, primary ? styles.textPrimary : styles.textSecondary]}>
           {text}
         </Text>
       </TouchableOpacity>

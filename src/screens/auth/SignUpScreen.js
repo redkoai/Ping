@@ -73,7 +73,7 @@ function SignUpScreen() {
           onPress={handleSubmit(
             async (data) => await signUpWithEmailAsync(data, onSignUpSuccess, onSignUpFailure),
           )}
-          isPrimary={true}
+          primary
         />
         <CustomButton
           icon={googleLogo}

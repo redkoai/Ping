@@ -117,7 +117,7 @@ function Details({ navigation }) {
           </View>
 
           <View style={{ alignSelf: 'flex-end' }}>
-            <CustomButton text="next" onPress={handleSubmit(onSubmit)} width={47} isPrimary />
+            <CustomButton text="next" onPress={handleSubmit(onSubmit)} small primary />
           </View>
 
           <Spacer height={2} />

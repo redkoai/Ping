@@ -71,7 +71,7 @@ function PasswordResetScreen() {
           onPress={handleSubmit(
             async (data) => await passwordResetEmailAsync(data, onResetSuccess, onResetFailure),
           )}
-          isPrimary={true}
+          primary
         />
       </KeyboardAvoidingView>
     </SafeAreaView>
