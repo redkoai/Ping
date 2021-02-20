@@ -27,7 +27,7 @@ function CustomTextInput({
   rules = {
     contentType: 'none',
     keyboardType: 'default',
-    autoCapitalize: true,
+    autoCapitalize: 'sentences',
     autoCorrect: true,
     autoFocus: false,
     secureTextEntry: false,
