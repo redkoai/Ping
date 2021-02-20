@@ -71,7 +71,12 @@ function Details({ navigation }) {
             setValue={setValue}
             input={{ name: 'end-date', label: 'End Date' }}
           />
-          <LocationInput control={control} errors={errors} setValue={setValue} />
+          <LocationInput
+            control={control}
+            errors={errors}
+            setValue={setValue}
+            navigation={navigation}
+          />
           <CustomTextInput
             control={control}
             errors={errors}

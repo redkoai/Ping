@@ -10,14 +10,16 @@ import LocationNearMeIcon from 'ping/src/icons/LocationNearMeIcon';
 
 import moment from 'moment';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
-import LocationPicker from 'ping/src/components/LocationPicker';
+import LocationPickerModal from 'ping/src/components/LocationPickerModal';
 import { Controller } from 'react-hook-form';
 // control, errors, and setValue are passed from the useForm hook of the react-hook-form package
 // const { control, handleSubmit, errors, setValue } = useForm();
 
 function CustomTextInput({
+  navigation,
   control,
   errors,
+  setValue = null,
   input = {
     name: 'unknown-text-input',
     label: '',
@@ -37,7 +39,6 @@ function CustomTextInput({
   forgotPassword = false,
   optional = false,
   icon = rules.secureTextEntry,
-  setValue = null,
   ...inputProps
 }) {
   const error = errors?.[input.name];
@@ -50,6 +51,10 @@ function CustomTextInput({
     const formattedDate = moment(dateVal).format('MMMM, Do YYYY hh:mm a');
     setValue(input.name, formattedDate);
     setDatePickerVisibility(false);
+  };
+
+  const handleLocationConfirm = (data) => {
+    console.log(data);
   };
 
   const iconToRender = () => {
@@ -141,7 +146,11 @@ function CustomTextInput({
         onConfirm={handleDateConfirm}
         onCancel={() => setDatePickerVisibility(false)}
       />
-      {isLocationPickerVisible ? <LocationPicker /> : null}
+      <LocationPickerModal
+        isVisible={isLocationPickerVisible}
+        onConfirm={handleLocationConfirm}
+        onCancel={() => setLocationPickerVisibility(false)}
+      />
     </View>
   );
 }
