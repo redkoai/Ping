@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, View } from 'react-native';
+
 import CustomModal from 'ping/src/components/CustomModal';
+import CustomButton from 'ping/src/components/inputs/CustomButton';
 
 import MapView, { Marker } from 'react-native-maps';
 import * as Location from 'expo-location';
@@ -54,6 +56,9 @@ function LocationPickerModal({ isVisible, onConfirm, onCancel }) {
       >
         {isMarkerVisible ? <Marker coordinate={markerLocation} /> : null}
       </MapView>
+      <View style={styles.button}>
+        <CustomButton primary text="Select Location" style={styles.button} />
+      </View>
     </CustomModal>
   );
 }
@@ -61,6 +66,13 @@ function LocationPickerModal({ isVisible, onConfirm, onCancel }) {
 const styles = StyleSheet.create({
   map: {
     flex: 1,
+  },
+  button: {
+    display: 'flex',
+    //justifyContent: 'center'
+    alignItems: 'center',
+    marginBottom: 40,
+    marginTop: 20,
   },
 });
 

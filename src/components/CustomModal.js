@@ -6,7 +6,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { colors, textStyles } from 'ping/src/styles/styles';
 
-function CustomModal({ isVisible, onCancel, title, children }) {
+function CustomModal({ isVisible, onCancel, title, height = 1.6, children }) {
   return (
     <Modal
       isVisible={isVisible}
@@ -15,7 +15,7 @@ function CustomModal({ isVisible, onCancel, title, children }) {
       style={styles.container}
       useNativeDriverForBackdrop
     >
-      <View style={styles.modalInner}>
+      <View style={[styles.modalInner, { height: Dimensions.get('screen').height / height}]}>
         <View style={styles.modalTopBar}>
           <TouchableOpacity onPress={onCancel} style={styles.modalTopLeft}>
             <Ionicons name="close" size={22} color={colors.offBlack} />
@@ -35,7 +35,6 @@ const styles = StyleSheet.create({
   },
   modalInner: {
     width: Dimensions.get('screen').width,
-    height: Dimensions.get('screen').height / 1.8,
     position: 'absolute',
     bottom: 0,
     backgroundColor: 'white',
