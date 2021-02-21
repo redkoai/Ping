@@ -79,7 +79,7 @@ function CustomTextInput({
       };
     } else if (icon === 'location') {
       return {
-        component: <LocationNearMeIcon size={heightPercentageToDP(4)} color={colors.offBlack} />,
+        component: <LocationNearMeIcon size={heightPercentageToDP(3.4)} color={colors.offBlack} />,
         function: () => setLocationPickerVisibility(true),
       };
     } else return icon;
