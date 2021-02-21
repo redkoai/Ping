@@ -13,7 +13,6 @@ import {
 } from '@expo-google-fonts/fira-sans';
 
 import 'react-native-gesture-handler';
-import NavBar from 'ping/src/navbars/NarBar.js';
 import { StatusBar } from 'expo-status-bar';
 import NavigationContainer from 'ping/src/navigators/NavigationContainer';
 

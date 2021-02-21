@@ -6,14 +6,12 @@ import styles from "ping/src/styles/styles";
 import { Dimensions } from 'react-native';
 import {widthPercentageToDP,heightPercentageToDP,} from 'ping/util/scaler';
 import React, {useEffect, useState} from "react";
-import NavBar from "ping/src/navbars/NarBar";
 import createNewEventBtn from "ping/assets/NavBarAssets/createNewEventBtn.png"
 import addFriendsBtn from "ping/assets/NavBarAssets/addFriendsBtn.png"
 import Accname from "ping/assets/Accounts/AccountName.png";
 import Accfriends from "ping/assets/Accounts/friends.png";
 import Accactivity from "ping/assets/Accounts/Accountactivity.png";
 import Acccenterone from "ping/assets/Accounts/Accountscenterone.png";
-import NavBar_accountsone from "ping/src/navbars/NarBar_accountsone";
 
 
 function Accountsone({}) {
@@ -39,7 +37,6 @@ function Accountsone({}) {
                 </TouchableOpacity>
             </View>
             </ImageBackground>
-            <NavBar_accountsone/>
         </View>
     )
 }

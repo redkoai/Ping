@@ -6,12 +6,10 @@ import styles from "ping/src/styles/styles";
 import { Dimensions } from 'react-native';
 import {widthPercentageToDP,heightPercentageToDP,} from 'ping/util/scaler';
 import React, {useEffect, useState} from "react";
-import NavBar from "ping/src/navbars/NarBar";
 import createNewEventBtn from "ping/assets/NavBarAssets/createNewEventBtn.png"
 import addFriendsBtn from "ping/assets/NavBarAssets/addFriendsBtn.png"
 import emptyPic from "ping/assets/messages/img.png";
 import homettl from "ping/assets/messages/messagettl.png";
-import NavBar_message from "ping/src/navbars/NarBar_message";
 
 
 function Messages({}) {
@@ -35,7 +33,6 @@ function Messages({}) {
                 </TouchableOpacity>
             </View>
             </ImageBackground>
-            <NavBar_message/>
         </View>
     )
 }

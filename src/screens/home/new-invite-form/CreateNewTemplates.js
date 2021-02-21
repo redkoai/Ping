@@ -6,10 +6,8 @@ import styles from 'ping/src/styles/styles';
 import { Dimensions } from 'react-native';
 import { widthPercentageToDP, heightPercentageToDP } from 'ping/util/scaler';
 import React, { useEffect, useState } from 'react';
-import NavBar from 'ping/src/navbars/NarBar';
 import tempprogline from 'ping/assets/createnew/templates/tempprogline.png';
 import temp1 from 'ping/assets/createnew/templates/templates1.png';
-import NavBar_invite from 'ping/src/navbars/NarBar_invite';
 
 function createnewtemplates({}) {
   const navigation = useNavigation();
@@ -50,7 +48,6 @@ function createnewtemplates({}) {
           </TouchableOpacity>
         </View>
       </ImageBackground>
-      <NavBar_invite />
     </View>
   );
 }

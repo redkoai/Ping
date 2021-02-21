@@ -6,12 +6,10 @@ import styles from "ping/src/styles/styles";
 import { Dimensions } from 'react-native';
 import {widthPercentageToDP,heightPercentageToDP,} from 'ping/util/scaler';
 import React, {useEffect, useState} from "react";
-import NavBar from "ping/src/navbars/NarBar";
 import createNewEventBtn from "ping/assets/NavBarAssets/createNewEventBtn.png"
 import addFriendsBtn from "ping/assets/NavBarAssets/addFriendsBtn.png"
 import emptyPic from "ping/assets/events/calendar.png";
 import homettl from "ping/assets/events/eventsttl.png";
-import NavBar_events from "ping/src/navbars/NarBar_events";
 
 
 function Events({}) {
@@ -35,7 +33,6 @@ function Events({}) {
                 </TouchableOpacity>
             </View>
             </ImageBackground>
-            <NavBar_events/>
         </View>
     )
 }

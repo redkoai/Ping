@@ -6,14 +6,12 @@ import styles from "ping/src/styles/styles";
 import { Dimensions } from 'react-native';
 import {widthPercentageToDP,heightPercentageToDP,} from 'ping/util/scaler';
 import React, {useEffect, useState} from "react";
-import NavBar from "ping/src/navbars/NarBar";
 import allset from "ping/assets/createnew/creationsuccess/allset.png";
 import tab from "ping/assets/createnew/creationsuccess/tab.png";
 import invitefriends from "ping/assets/createnew/creationsuccess/invitefriends.png";
 import addtocalendar from "ping/assets/createnew/creationsuccess/addtocalendar.png";
 import backtohome from "ping/assets/createnew/creationsuccess/backtohome.png";
 import viewevent from "ping/assets/createnew/creationsuccess/viewevent.png";
-import NavBar_invite from "ping/src/navbars/NarBar_invite";
 
 
 function CreationSuccess({}) {
@@ -41,7 +39,6 @@ function CreationSuccess({}) {
                 </TouchableOpacity> */}
             </View>
             </ImageBackground>
-            <NavBar_invite/>
         </View>
     )
 }

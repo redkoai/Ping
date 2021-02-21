@@ -10,11 +10,9 @@ import AUTH_SCHEMA from 'ping/src/schema/authSchema';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import CustomTextInput from 'ping/src/components/inputs/CustomTextInput';
-import NavBar from 'ping/src/navbars/NarBar';
 import faqprogline from 'ping/assets/createnew/faq/faqprogline.png';
 import message from 'ping/assets/createnew/faq/message.png';
 import denext from 'ping/assets/createnew/details/detailsnext.png';
-import NavBar_invite from 'ping/src/navbars/NarBar_invite';
 
 function FAQ({}) {
   const navigation = useNavigation();
@@ -132,7 +130,6 @@ function FAQ({}) {
           </View>
         </View>
       </ImageBackground>
-      <NavBar_invite />
     </View>
     </TouchableWithoutFeedback>
   );

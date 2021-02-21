@@ -13,7 +13,6 @@ import deprogline from 'ping/assets/createnew/details/detailsprogressline.png';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import demsg from 'ping/assets/createnew/details/detailswritemessage.png';
-import NavBar_invite from 'ping/src/navbars/NarBar_invite';
 
 function Details({ navigation }) {
   const { data, control, handleSubmit, errors, reset, formState, setValue } = useForm({
@@ -126,7 +125,6 @@ function Details({ navigation }) {
           <Spacer height={2} />
         </View>
       </KeyboardAwareScrollView>
-      <NavBar_invite />
     </>
   );
 }
