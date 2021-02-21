@@ -8,13 +8,11 @@ import { useFocusEffect } from '@react-navigation/native';
 import AuthContext from 'ping/src/contexts/AuthContext';
 
 import {
-  StatusBar,
   KeyboardAvoidingView,
   SafeAreaView,
   View,
   Text,
   TouchableOpacity,
-  ActivityIndicator,
   StyleSheet,
   Dimensions,
   Platform,
@@ -51,7 +49,6 @@ function SignInScreen({ navigation }) {
         minHeight: Math.round(Dimensions.get('window').height),
       }}
     >
-      <StatusBar backgroundColor={colors.primary} />
       <KeyboardAvoidingView
         behavior={Platform.OS == 'ios' ? 'padding' : 'position'}
         keyboardVerticalOffset={-240}
@@ -68,12 +65,6 @@ function SignInScreen({ navigation }) {
           forgotPassword={() => navigation.navigate('PasswordReset')}
         />
         <Spacer height={2} />
-
-        {formState.isSubmitting && (
-          <View>
-            <ActivityIndicator size={'large'} color={colors.primary} />
-          </View>
-        )}
 
         <CustomButton
           text="Sign In"
