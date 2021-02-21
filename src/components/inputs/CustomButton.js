@@ -4,7 +4,7 @@ import { heightPercentageToDP, widthPercentageToDP } from 'ping/util/scaler';
 import React from 'react';
 import { View, Image, Text, StyleSheet, TouchableOpacity } from 'react-native';
 
-function CustomButton({ icon, text, onPress, primary = false, small = false }) {
+function CustomButton({ icon, text, onPress, primary = false, small = false, disabled = false }) {
   return (
     <View style={styles.container}>
       <TouchableOpacity
@@ -12,11 +12,21 @@ function CustomButton({ icon, text, onPress, primary = false, small = false }) {
           { width: widthPercentageToDP(small ? 47 : 80) },
           styles.button,
           primary ? styles.buttonPrimary : styles.buttonSecondary,
+          disabled && primary && styles.primaryDisabled,
+          disabled && !primary && styles.secondaryDisabled,
         ]}
         onPress={onPress}
+        disabled={disabled}
       >
         {icon && <Image source={icon} style={styles.icon} />}
-        <Text style={[textStyles.bigBold, primary ? styles.textPrimary : styles.textSecondary]}>
+        <Text
+          style={[
+            textStyles.bigBold,
+            primary ? styles.textPrimary : styles.textSecondary,
+            disabled && primary && styles.textPrimaryDisabled,
+            disabled && !primary && styles.textSecondaryDisabled,
+          ]}
+        >
           {text}
         </Text>
       </TouchableOpacity>
@@ -50,6 +60,12 @@ const styles = StyleSheet.create({
   buttonSecondary: {
     backgroundColor: 'white',
   },
+  primaryDisabled: {
+    backgroundColor: '#ccc',
+  },
+  secondaryDisabled: {
+    backgroundColor: '#f5f5f5',
+  },
   icon: {
     resizeMode: 'contain',
     width: 35,
@@ -61,6 +77,12 @@ const styles = StyleSheet.create({
   },
   textSecondary: {
     color: colors.primary,
+  },
+  textPrimaryDisabled: {
+    color: 'white',
+  },
+  textSecondaryDisabled: {
+    color: '#aaa',
   },
 });
 

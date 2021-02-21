@@ -9,7 +9,7 @@ import * as Location from 'expo-location';
 
 function LocationPickerModal({ isVisible, onConfirm, onCancel }) {
   const [userLocation, setUserLocation] = useState({ latitude: 34.06739, longitude: -118.3917 });
-  const [markerLocation, setMarkerLocation] = useState({});
+  const [markerLocation, setMarkerLocation] = useState(null);
   const [errorMsg, setErrorMsg] = useState(null);
   const [isMarkerVisible, setMarkerVisibility] = useState(false);
 
@@ -57,7 +57,7 @@ function LocationPickerModal({ isVisible, onConfirm, onCancel }) {
         {isMarkerVisible ? <Marker coordinate={markerLocation} /> : null}
       </MapView>
       <View style={styles.button}>
-        <CustomButton primary text="Select Location" style={styles.button} />
+        <CustomButton primary text="Select Location" style={styles.button} disabled={!markerLocation} />
       </View>
     </CustomModal>
   );

@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
   },
   modalTopLeft: {
     alignSelf: 'flex-start',
-    position: 'absolute',
+    //position: 'absolute',
     top: 0,
   },
   modalTopCenter: {
