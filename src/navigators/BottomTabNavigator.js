@@ -23,12 +23,12 @@ function BottomTabNavigator() {
     <BottomTab.Navigator
       tabBarOptions={{
         style: {
-          backgroundColor: colors.darkBackground,
+          backgroundColor: 'white',
           height: heightPercentageToDP(Platform.OS === 'ios' ? 12 : 10),
         },
         tabStyle: {
-          paddingTop: heightPercentageToDP(Platform.OS === 'ios' ? 1.5 : 2.5),
-          paddingBottom: heightPercentageToDP(Platform.OS === 'ios' ? 0.8 : 1),
+          paddingTop: heightPercentageToDP(Platform.OS === 'ios' ? 1.8 : 2.5),
+          paddingBottom: heightPercentageToDP(Platform.OS === 'ios' ? 2.2 : 2.8),
         },
         labelStyle: textStyles.tinyRegular,
         //iconStyle: {},
@@ -50,7 +50,7 @@ function BottomTabNavigator() {
       <BottomTab.Screen
         name="NewInvite"
         component={NewInviteStackNavigator}
-        options={{ tabBarIcon: NewInviteIcon }}
+        options={{ tabBarIcon: NewInviteIcon, title: 'New Invite' }}
       />
       <BottomTab.Screen
         name="Messages"
