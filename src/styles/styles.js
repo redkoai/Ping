@@ -107,7 +107,7 @@ export const headerPaddings = {
 };
 
 export const headerStyles = {
-  backgroundColor: 'white',
+  backgroundColor: colors.darkBackground,
   shadowColor: 'transparent',
   elevation: 0,
   shadowOpacity: 0,
@@ -117,6 +117,8 @@ export const headerStyles = {
 export const headerOptions = {
   headerTitle: false,
   headerStyle: headerStyles,
+  headerTitleAlign: 'right',
+  headerTitleStyle: textStyles.bigBold,
 };
 
 export default styles;
