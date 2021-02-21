@@ -55,7 +55,9 @@ function CustomTextInput({
   };
 
   const handleLocationConfirm = (data) => {
-    console.log(data);
+    const formattedLocation = `${data.latitude}, ${data.longitude}`;
+    setValue(input.name, formattedLocation);
+    setLocationPickerVisibility(false);
   };
 
   const iconToRender = () => {

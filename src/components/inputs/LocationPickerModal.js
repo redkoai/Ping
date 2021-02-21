@@ -32,7 +32,6 @@ function LocationPickerModal({ isVisible, onConfirm, onCancel }) {
       longitude: e.nativeEvent.coordinate.longitude,
     });
     setMarkerVisibility(true);
-    console.log(markerLocation);
   };
 
   return (
@@ -57,7 +56,13 @@ function LocationPickerModal({ isVisible, onConfirm, onCancel }) {
         {isMarkerVisible ? <Marker coordinate={markerLocation} /> : null}
       </MapView>
       <View style={styles.button}>
-        <CustomButton primary text="Select Location" style={styles.button} disabled={!markerLocation} />
+        <CustomButton
+          primary
+          text="Select Location"
+          style={styles.button}
+          disabled={!markerLocation}
+          onPress={() => onConfirm(markerLocation)}
+        />
       </View>
     </CustomModal>
   );
