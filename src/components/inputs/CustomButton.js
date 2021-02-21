@@ -37,10 +37,12 @@ function CustomButton({ icon, text, onPress, primary = false, small = false, dis
 const styles = StyleSheet.create({
   container: {
     marginTop: heightPercentageToDP(1.2),
-    marginBottom: heightPercentageToDP(1.2),
+    marginBottom: heightPercentageToDP(1.5),
+    //borderColor: 'red',
+    //borderWidth: 1,
   },
   button: {
-    height: heightPercentageToDP(6.3),
+    height: heightPercentageToDP(Platform.OS === 'ios' ? 5.8 : 6.3),
     paddingHorizontal: 30,
     borderRadius: 50,
     display: 'flex',

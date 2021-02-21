@@ -9,6 +9,7 @@ import CalendarIcon from 'ping/src/icons/CalendarIcon';
 import LocationNearMeIcon from 'ping/src/icons/LocationNearMeIcon';
 
 import moment from 'moment';
+import CustomInputLabel from 'ping/src/components/inputs/CustomInputLabel';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import LocationPickerModal from 'ping/src/components/inputs/LocationPickerModal';
 
@@ -66,7 +67,7 @@ function CustomTextInput({
         component: (
           <Ionicons
             name={secure ? 'ios-eye' : 'ios-eye-off'}
-            size={heightPercentageToDP(4.2)}
+            size={heightPercentageToDP(3.5)}
             color={colors.offBlack}
           />
         ),
@@ -74,12 +75,12 @@ function CustomTextInput({
       };
     } else if (icon === 'calendar') {
       return {
-        component: <CalendarIcon size={heightPercentageToDP(3)} color={colors.offBlack} />,
+        component: <CalendarIcon size={heightPercentageToDP(2.8)} color={colors.offBlack} />,
         function: () => setDatePickerVisibility(true),
       };
     } else if (icon === 'location') {
       return {
-        component: <LocationNearMeIcon size={heightPercentageToDP(3.4)} color={colors.offBlack} />,
+        component: <LocationNearMeIcon size={heightPercentageToDP(3)} color={colors.darkGrey} />,
         function: () => setLocationPickerVisibility(true),
       };
     } else return icon;
@@ -87,10 +88,7 @@ function CustomTextInput({
 
   return (
     <View style={styles.container}>
-      <View style={[styles.marginOffset, styles.label]}>
-        <Text style={[textStyles.normalSemiBold]}>{input.label}</Text>
-        {optional && <Text style={[textStyles.smallRegular, styles.optional]}>optional</Text>}
-      </View>
+      <CustomInputLabel text={input.label} optional={optional} />
       <Controller
         control={control}
         name={input.name}
@@ -288,14 +286,8 @@ export function LocationInput({
 const styles = StyleSheet.create({
   container: {
     width: widthPercentageToDP(90),
-  },
-  label: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  optional: {
-    color: colors.darkGrey,
-    paddingLeft: widthPercentageToDP(5),
+    //borderColor: 'red',
+    //borderWidth: 1,
   },
   inputContainer: {
     marginTop: heightPercentageToDP(0.5),
@@ -328,6 +320,7 @@ const styles = StyleSheet.create({
   },
   barBelowInput: {
     marginTop: -13,
+    marginBottom: -10,
     width: widthPercentageToDP(88),
     height: 45,
     display: 'flex',
