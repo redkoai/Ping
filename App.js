@@ -1,6 +1,7 @@
 import React from 'react';
+import { colors } from 'ping/src/styles/styles';
 import * as SplashScreen from 'expo-splash-screen';
-import { LogBox } from 'react-native';
+import { LogBox, Platform } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { AuthProvider } from 'ping/src/contexts/AuthContext';
 
@@ -13,7 +14,6 @@ import {
 } from '@expo-google-fonts/fira-sans';
 
 import 'react-native-gesture-handler';
-import NavBar from 'ping/src/navbars/NarBar.js';
 import { StatusBar } from 'expo-status-bar';
 import NavigationContainer from 'ping/src/navigators/NavigationContainer';
 
@@ -60,6 +60,7 @@ function App() {
   return (
     <AuthProvider>
       <SafeAreaProvider>
+        <StatusBar backgroundColor={colors.primary} style={Platform.OS === 'android' && 'light'} />
         <NavigationContainer />
       </SafeAreaProvider>
     </AuthProvider>

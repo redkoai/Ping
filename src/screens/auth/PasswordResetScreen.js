@@ -6,23 +6,15 @@ import React, { useContext, useCallback } from 'react';
 import { useFocusEffect } from '@react-navigation/native';
 import AuthContext from 'ping/src/contexts/AuthContext';
 
-import {
-  StatusBar,
-  KeyboardAvoidingView,
-  SafeAreaView,
-  View,
-  ActivityIndicator,
-  StyleSheet,
-  Dimensions,
-} from 'react-native';
+import { KeyboardAvoidingView, SafeAreaView, StyleSheet, Dimensions } from 'react-native';
 
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { EMAIL_SCHEMA } from 'ping/src/schema/authSchema';
 
 import Spacer from 'ping/src/components/Spacer';
-import { EmailInput } from 'ping/src/components/CustomTextInput';
-import CustomButton from 'ping/src/components/CustomButton';
+import { EmailInput } from 'ping/src/components/inputs/CustomTextInput';
+import CustomButton from 'ping/src/components/inputs/CustomButton';
 
 function PasswordResetScreen() {
   const { passwordResetEmailAsync } = useContext(AuthContext);
@@ -47,7 +39,6 @@ function PasswordResetScreen() {
         minHeight: Math.round(Dimensions.get('window').height),
       }}
     >
-      <StatusBar backgroundColor={colors.primary} />
       <KeyboardAvoidingView
         behavior={Platform.OS == 'ios' ? 'padding' : 'position'}
         keyboardVerticalOffset={-240}
@@ -60,18 +51,12 @@ function PasswordResetScreen() {
         <EmailInput control={control} errors={errors} />
         <Spacer height={1} />
 
-        {formState.isSubmitting && (
-          <View>
-            <ActivityIndicator size={'large'} />
-          </View>
-        )}
-
         <CustomButton
           text="Send Email"
           onPress={handleSubmit(
             async (data) => await passwordResetEmailAsync(data, onResetSuccess, onResetFailure),
           )}
-          isPrimary={true}
+          primary
         />
       </KeyboardAvoidingView>
     </SafeAreaView>

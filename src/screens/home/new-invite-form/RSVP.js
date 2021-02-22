@@ -5,7 +5,6 @@ import styles from 'ping/src/styles/styles';
 import { Dimensions } from 'react-native';
 import { widthPercentageToDP, heightPercentageToDP } from 'ping/util/scaler';
 import React, { useEffect, useState } from 'react';
-import NavBar from 'ping/src/navbars/NarBar';
 import rsvpprogline from 'ping/assets/createnew/rsvp/rsvpprogline.png';
 import collect from 'ping/assets/createnew/rsvp/collect.png';
 import request from 'ping/assets/createnew/rsvp/request.png';
@@ -13,7 +12,6 @@ import total from 'ping/assets/createnew/rsvp/total.png';
 import guestlist from 'ping/assets/createnew/rsvp/guestlist.png';
 import denext from 'ping/assets/createnew/details/detailsnext.png';
 import NumericInput from 'react-native-numeric-input';
-import NavBar_invite from 'ping/src/navbars/NarBar_invite';
 
 function RSVP({}) {
   const navigation = useNavigation();
@@ -177,7 +175,6 @@ function RSVP({}) {
             </TouchableOpacity> */}
         </View>
       </ImageBackground>
-      <NavBar_invite />
     </View>
     </TouchableWithoutFeedback>
   );

@@ -8,13 +8,11 @@ import { useFocusEffect } from '@react-navigation/native';
 import AuthContext from 'ping/src/contexts/AuthContext';
 
 import {
-  StatusBar,
   KeyboardAvoidingView,
   SafeAreaView,
   View,
   Text,
   TouchableOpacity,
-  ActivityIndicator,
   StyleSheet,
   Dimensions,
   Platform,
@@ -25,8 +23,8 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import AUTH_SCHEMA from 'ping/src/schema/authSchema';
 
 import Spacer from 'ping/src/components/Spacer';
-import { EmailInput, PasswordInput } from 'ping/src/components/CustomTextInput';
-import CustomButton from 'ping/src/components/CustomButton';
+import { EmailInput, PasswordInput } from 'ping/src/components/inputs/CustomTextInput';
+import CustomButton from 'ping/src/components/inputs/CustomButton';
 
 function SignInScreen({ navigation }) {
   const { signInWithEmailAsync, signInWithGoogleAsync } = useContext(AuthContext);
@@ -51,7 +49,6 @@ function SignInScreen({ navigation }) {
         minHeight: Math.round(Dimensions.get('window').height),
       }}
     >
-      <StatusBar backgroundColor={colors.primary} />
       <KeyboardAvoidingView
         behavior={Platform.OS == 'ios' ? 'padding' : 'position'}
         keyboardVerticalOffset={-240}
@@ -69,18 +66,12 @@ function SignInScreen({ navigation }) {
         />
         <Spacer height={2} />
 
-        {formState.isSubmitting && (
-          <View>
-            <ActivityIndicator size={'large'} color={colors.primary} />
-          </View>
-        )}
-
         <CustomButton
           text="Sign In"
           onPress={handleSubmit(
             async (data) => await signInWithEmailAsync(data, onSignInSuccess, onSignInFailure),
           )}
-          isPrimary={true}
+          primary
         />
         <CustomButton
           icon={googleLogo}

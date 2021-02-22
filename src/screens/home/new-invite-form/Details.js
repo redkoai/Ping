@@ -1,22 +1,18 @@
 import React, { useCallback } from 'react';
 import { useFocusEffect } from '@react-navigation/native';
-import {
-  Image,
-  View,
-} from 'react-native';
+import { StatusBar, Image, View } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import emptyHome from 'ping/assets/homeScreen/bg.png';
-import styles from 'ping/src/styles/styles';
+import styles, { colors } from 'ping/src/styles/styles';
 import { widthPercentageToDP, heightPercentageToDP } from 'ping/util/scaler';
 import AUTH_SCHEMA from 'ping/src/schema/authSchema';
 import Spacer from 'ping/src/components/Spacer';
-import CustomTextInput, { DateInput, LocationInput } from 'ping/src/components/CustomTextInput';
-import CustomButton from 'ping/src/components/CustomButton';
+import CustomTextInput, { DateInput, LocationInput } from 'ping/src/components/inputs/CustomTextInput';
+import CustomButton from 'ping/src/components/inputs/CustomButton';
 import deprogline from 'ping/assets/createnew/details/detailsprogressline.png';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import demsg from 'ping/assets/createnew/details/detailswritemessage.png';
-import NavBar_invite from 'ping/src/navbars/NarBar_invite';
 
 function Details({ navigation }) {
   const { data, control, handleSubmit, errors, reset, formState, setValue } = useForm({
@@ -35,6 +31,7 @@ function Details({ navigation }) {
         style={{ flex: 1, backgroundColor: 'white' }}
         contentContainerStyle={{ justifyContent: 'center', alignItems: 'center' }}
       >
+        <StatusBar backgroundColor={colors.primary} />
         <View
           style={{
             flexDirection: 'column',
@@ -73,7 +70,12 @@ function Details({ navigation }) {
             setValue={setValue}
             input={{ name: 'end-date', label: 'End Date' }}
           />
-          <LocationInput control={control} errors={errors} setValue={setValue} />
+          <LocationInput
+            control={control}
+            errors={errors}
+            setValue={setValue}
+            navigation={navigation}
+          />
           <CustomTextInput
             control={control}
             errors={errors}
@@ -117,13 +119,12 @@ function Details({ navigation }) {
           </View>
 
           <View style={{ alignSelf: 'flex-end' }}>
-            <CustomButton text="next" onPress={handleSubmit(onSubmit)} width={47} isPrimary />
+            <CustomButton text="next" onPress={handleSubmit(onSubmit)} small primary />
           </View>
 
           <Spacer height={2} />
         </View>
       </KeyboardAwareScrollView>
-      <NavBar_invite />
     </>
   );
 }

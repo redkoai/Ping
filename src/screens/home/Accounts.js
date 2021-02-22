@@ -7,16 +7,13 @@ import { Dimensions } from 'react-native';
 import {widthPercentageToDP,heightPercentageToDP,} from 'ping/util/scaler';
 import React, {useContext, useEffect, useState} from "react";
 import AuthContext from 'ping/src/contexts/AuthContext';
-import NavBar from "ping/src/navbars/NarBar";
-import CustomButton from 'ping/src/components/CustomButton';
+import CustomButton from 'ping/src/components/inputs/CustomButton';
 import createNewEventBtn from "ping/assets/NavBarAssets/createNewEventBtn.png"
 import addFriendsBtn from "ping/assets/NavBarAssets/addFriendsBtn.png"
 import Accname from "ping/assets/Accounts/AccountName.png";
 import Accfriends from "ping/assets/Accounts/friends.png";
 import Accevents from "ping/assets/Accounts/Accountevents.png";
 import Acccenter from "ping/assets/Accounts/Accountscenter.png";
-import NavBar_account from "ping/src/navbars/NarBar_account";
-
 
 function Accounts({}) {
     const navigation = useNavigation()
@@ -52,9 +49,8 @@ function Accounts({}) {
             <CustomButton
                 text="Sign Out"
                 onPress={async () => await singOutAsync(onSuccess, onFailure)}
-                isPrimary={true}
+                primary
             />
-            <NavBar_account/>
         </View>
     )
 }
