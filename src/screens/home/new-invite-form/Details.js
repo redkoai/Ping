@@ -7,11 +7,13 @@ import styles, { colors } from 'ping/src/styles/styles';
 import { widthPercentageToDP, heightPercentageToDP } from 'ping/util/scaler';
 import AUTH_SCHEMA from 'ping/src/schema/authSchema';
 import Spacer from 'ping/src/components/Spacer';
-import CustomTextInput, { DateInput, LocationInput } from 'ping/src/components/inputs/CustomTextInput';
+import CustomTextInput, { DateInput,LocationInput } from 'ping/src/components/inputs/CustomTextInput';
+import CustomText from 'ping/src/components/inputs/CustomText';
 import CustomButton from 'ping/src/components/inputs/CustomButton';
 import deprogline from 'ping/assets/createnew/details/detailsprogressline.png';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { Ionicons } from '@expo/vector-icons'; 
 import demsg from 'ping/assets/createnew/details/detailswritemessage.png';
 
 function Details({ navigation }) {
@@ -87,20 +89,30 @@ function Details({ navigation }) {
             }}
             optional
           />
-          <Image
-            source={demsg}
-            style={{
+         <View style={{
               height: heightPercentageToDP('40'),
-              width: widthPercentageToDP('35'),
-              marginTop: heightPercentageToDP('-20'),
+              width: widthPercentageToDP('80'),
+              marginTop: heightPercentageToDP('-1'),
+              left: heightPercentageToDP('0.5'),
               resizeMode: 'contain',
-            }}
-          />
+            }}>
+          <Ionicons name="add" size={24} color={colors.addsign} />
+          </View>
+          <View style={{
+              height: heightPercentageToDP('40'),
+              width: widthPercentageToDP('80'),
+              marginTop: heightPercentageToDP('-40.5'),
+              left: heightPercentageToDP('4'),
+              resizeMode: 'contain',
+            }}>
+          <CustomText text="Add a co-host" />
+          </View>
+
           <View
             style={{
               height: heightPercentageToDP(15),
               width: widthPercentageToDP(35),
-              marginTop: heightPercentageToDP(-15),
+              marginTop: heightPercentageToDP(-33),
               resizeMode: 'contain',
             }}
           >

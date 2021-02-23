@@ -3,17 +3,20 @@ import { useFocusEffect } from '@react-navigation/native';
 import { useNavigation } from '@react-navigation/native';
 import { Image,StatusBar, ImageBackground, View, ScrollView, TouchableOpacity,TouchableWithoutFeedback,Keyboard,Alert } from 'react-native';
 import Spacer from 'ping/src/components/Spacer';
-import styles,{ colors } from 'ping/src/styles/styles';
+import styles,{ colors,textStyles } from 'ping/src/styles/styles';
 import { Dimensions } from 'react-native';
 import { widthPercentageToDP, heightPercentageToDP } from 'ping/util/scaler';
 import AUTH_SCHEMA from 'ping/src/schema/authSchema';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import CustomTextInput from 'ping/src/components/inputs/CustomTextInput';
+import CustomText from 'ping/src/components/inputs/CustomText';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import faqprogline from 'ping/assets/createnew/faq/faqprogline.png';
 import message from 'ping/assets/createnew/faq/message.png';
 import CustomButton from 'ping/src/components/inputs/CustomButton';
+import { Ionicons } from '@expo/vector-icons'; 
+
 
 
 
@@ -94,17 +97,26 @@ import CustomButton from 'ping/src/components/inputs/CustomButton';
              value={question}
              onChangeText={handleQuestions}
             />
-          <Image
-            source={message}
-            style={{
-              height: heightPercentageToDP('5'),
-              width: widthPercentageToDP('45'),
-              marginTop: heightPercentageToDP('-3'),
-              left: heightPercentageToDP('0'),
+            <View style={{
+              height: heightPercentageToDP('40'),
+              width: widthPercentageToDP('80'),
+              marginTop: heightPercentageToDP('-1'),
+              left: heightPercentageToDP('0.5'),
               resizeMode: 'contain',
-            }}
-          />
-         <View style={{ alignSelf: 'flex-end' }}>
+            }}>
+          <Ionicons name="add" size={24} color={colors.addsign} />
+          </View>
+          <View style={{
+              height: heightPercentageToDP('40'),
+              width: widthPercentageToDP('80'),
+              marginTop: heightPercentageToDP('-40.5'),
+              left: heightPercentageToDP('4'),
+              resizeMode: 'contain',
+            }}>
+          <CustomText text="Add another question" />
+           </View>
+         
+         <View style={{ alignSelf: 'flex-end',position:'absolute',bottom:170 }}>
             <CustomButton text="next" onPress={handleSubmit(onSubmit)} small primary />
           </View>
           <Spacer height={2} />

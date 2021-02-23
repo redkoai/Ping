@@ -1,19 +1,16 @@
 import React, { useCallback,useEffect, useState  } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { useFocusEffect } from '@react-navigation/native';
-import { Image, StatusBar, ImageBackground, View, ScrollView, Switch,Keyboard } from 'react-native';
+import { Image,StyleSheet, StatusBar, ImageBackground, Text,View, ScrollView, Switch,Keyboard } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import Spacer from 'ping/src/components/Spacer';
-import styles, { colors } from 'ping/src/styles/styles';
+import globalStyles, { colors,textStyles } from 'ping/src/styles/styles';
 import { Dimensions } from 'react-native';
 import { widthPercentageToDP, heightPercentageToDP } from 'ping/util/scaler';
 import { useForm } from 'react-hook-form';
 import CustomButton from 'ping/src/components/inputs/CustomButton';
+import CustomText from 'ping/src/components/inputs/CustomText';
 import rsvpprogline from 'ping/assets/createnew/rsvp/rsvpprogline.png';
-import collect from 'ping/assets/createnew/rsvp/collect.png';
-import request from 'ping/assets/createnew/rsvp/request.png';
-import total from 'ping/assets/createnew/rsvp/total.png';
-import guestlist from 'ping/assets/createnew/rsvp/guestlist.png';
 import NumericInput from 'react-native-numeric-input';
 
 function RSVP({navigation}) {
@@ -25,7 +22,7 @@ function RSVP({navigation}) {
 
   const onSubmit = () => {
     console.log(data);
-    // navigation.navigate('Signinpopup');
+    //navigation.navigate('Signinpopup');
   };
 
   const [collectrsvp, setCollectrsvp] = useState(false);
@@ -70,76 +67,57 @@ function RSVP({navigation}) {
               width: widthPercentageToDP('85'),
               resizeMode: 'contain',
               marginTop: heightPercentageToDP('-5'),
-              left: heightPercentageToDP('0.5'),
+              left: heightPercentageToDP('0.7'),
             }}
           />
-          <Image
-            source={collect}
-            style={{
-              height: heightPercentageToDP('40'),
-              width: widthPercentageToDP('80'),
-              marginTop: heightPercentageToDP('-18'),
-              left: heightPercentageToDP('0.5'),
-              resizeMode: 'contain',
-            }}
-          />
-          <View>
+
+          <View style={styles.fieldContainer}>
+          <View style={styles.textConatiner}>
+          <CustomText text="Collect RSVPs" header/>
+          <CustomText text="Guests will be able to to let you know if they're attending or not"/>
             <Switch
               style={{
-                height: heightPercentageToDP('10'),
+                height: heightPercentageToDP('7'),
                 width: widthPercentageToDP('10'),
-                marginTop: heightPercentageToDP('-20'),
-                left: heightPercentageToDP('35'),
+                marginTop: heightPercentageToDP('-5'),
+                left: heightPercentageToDP('32'),
                 resizeMode: 'contain',
               }}
               trackColor={{ false: 'lightgray', true: '#3D8976' }}
               onValueChange={(value) => toggleSwitch(value, 'rsvp')}
               value={collectrsvp}
             />
+            </View>
           </View>
-          <Image
-            source={request}
-            style={{
-              height: heightPercentageToDP('40'),
-              width: widthPercentageToDP('80'),
-              marginTop: heightPercentageToDP('-28'),
-              left: heightPercentageToDP('0'),
-              resizeMode: 'contain',
-            }}
-          />
-          <View>
+
+          <View style={styles.fieldContainer}>
+          <View style={styles.textConatiner}>
+          <CustomText text="Request number of kids attending" header/>
+          <CustomText text="Get head count of both adults and kids attending"/>
             <Switch
               style={{
-                height: heightPercentageToDP('10'),
+                height: heightPercentageToDP('6'),
                 width: widthPercentageToDP('10'),
-                marginTop: heightPercentageToDP('-20'),
-                left: heightPercentageToDP('35'),
+                marginTop: heightPercentageToDP('-5'),
+                left: heightPercentageToDP('32'),
                 resizeMode: 'contain',
               }}
               trackColor={{ false: 'lightgray', true: '#3D8976' }}
               onValueChange={(value) => toggleSwitch(value, 'kids')}
               value={kidsattending}
             />
+            </View>
           </View>
-          <Image
-            source={total}
-            style={{
-              height: heightPercentageToDP('40'),
-              width: widthPercentageToDP('60'),
-              marginTop: heightPercentageToDP('-28'),
-              left: heightPercentageToDP('0'),
-              resizeMode: 'contain',
-            }}
-          />
-          <View
-            style={{
-              height: heightPercentageToDP('10'),
-              width: widthPercentageToDP('3'),
-              marginTop: heightPercentageToDP('-22.5'),
-              left: heightPercentageToDP('33'),
-              resizeMode: 'contain',
-            }}
-          >
+
+          <View style={styles.fieldContainer}>
+          <View style={styles.textConatiner}>
+          <CustomText text="Total invited per invitation" header/>
+          <CustomText text="This includes the person that receives the invite"/>
+          <View style={{height: heightPercentageToDP('4'),
+           width :widthPercentageToDP('95'),
+            marginTop: heightPercentageToDP('-2'), 
+            left: heightPercentageToDP('30'),
+            resizeMode:'contain' }}>
             <NumericInput
               onChange={(value) => {setNumericInput(value);console.log(value)}}
               totalWidth={72}
@@ -153,24 +131,20 @@ function RSVP({navigation}) {
               rightButtonBackgroundColor="#3D8976"
               leftButtonBackgroundColor="#3D8976"
             />
+            </View>
           </View>
-          <Image
-            source={guestlist}
-            style={{
-              height: heightPercentageToDP('40'),
-              width: widthPercentageToDP('75'),
-              marginTop: heightPercentageToDP('-15'),
-              left: heightPercentageToDP('0'),
-              resizeMode: 'contain',
-            }}
-          />
-          <View>
+          </View>
+
+          <View style={styles.fieldContainer}>
+          <View style={styles.textConatiner}>
+          <CustomText text="Show guest list" header/>
+          <CustomText text="Names of attending guests will be displayed on the invite"/>
             <Switch
               style={{
                 height: heightPercentageToDP('10'),
                 width: widthPercentageToDP('10'),
-                marginTop: heightPercentageToDP('-20'),
-                left: heightPercentageToDP('35'),
+                marginTop: heightPercentageToDP('-3'),
+                left: heightPercentageToDP('32'),
                 resizeMode: 'contain',
               }}
               trackColor={{ false: 'lightgray', true: '#3D8976' }}
@@ -178,13 +152,31 @@ function RSVP({navigation}) {
               value={guestlists}
             />
           </View>
-          <View style={{ alignSelf: 'flex-end' }}>
-            <CustomButton text="next" onPress={handleSubmit(onSubmit)} small primary />
           </View>
 
+           <View style={{ alignSelf: 'flex-end' }}>
+            <CustomButton text="next" onPress={handleSubmit(onSubmit)} small primary />
+          </View>
           <Spacer height={2} />
         </View>
-      </KeyboardAwareScrollView>
+        </KeyboardAwareScrollView>
   );
 }
+const styles = StyleSheet.create({
+
+  textConatiner:{
+    width: widthPercentageToDP(75),
+    flexDirection:'column',
+    justifyContent: 'center',
+    alignItems:'flex-start',
+    
+  },
+
+ fieldContainer:{
+   width: widthPercentageToDP(90),
+   flexDirection:'row',
+   justifyContent:'center',
+   alignItems:'center'
+ }
+})
 export default RSVP;
