@@ -1,31 +1,33 @@
 import React, { useContext, useEffect, useCallback, useState } from 'react';
 import { useFocusEffect } from '@react-navigation/native';
 import { useNavigation } from '@react-navigation/native';
-import { Image, Text, ImageBackground, View, ScrollView, TouchableOpacity, TouchableWithoutFeedback,Keyboard } from 'react-native';
+import { Image,StatusBar, Text, ImageBackground, View, ScrollView, TouchableOpacity, TouchableWithoutFeedback,Keyboard } from 'react-native';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import AUTH_SCHEMA from 'ping/src/schema/authSchema';
-
-import emptyHome from 'ping/assets/homeScreen/bg.png';
-import styles from 'ping/src/styles/styles';
+import styles,{ colors } from 'ping/src/styles/styles';
+import Spacer from 'ping/src/components/Spacer';
 import { Dimensions } from 'react-native';
 import { widthPercentageToDP, heightPercentageToDP } from 'ping/util/scaler';
 import RadioButton from 'rn-radio-button';
 import deprogline from 'ping/assets/createnew/dresscode/dresscodeprogline.png';
-import rect from 'ping/assets/createnew/dresscode/rectangle.png';
 import optional from 'ping/assets/createnew/dresscode/optional.png';
 import ImagePicker from 'ping/src/components/inputs/ImagePicker';
-import upload from 'ping/assets/createnew/dresscode/upload.png';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import CustomTextInput from 'ping/src/components/inputs/CustomTextInput';
-import denext from 'ping/assets/createnew/details/detailsnext.png';
+import CustomButton from 'ping/src/components/inputs/CustomButton';
 
-function Dresscode({}) {
-  const { control, handleSubmit, errors, reset, formState } = useForm({
-    resolver: yupResolver(AUTH_SCHEMA),
+
+function Dresscode({navigation}) {
+  const { data, control, handleSubmit, errors, reset, formState, setValue } = useForm({
+    //resolver: yupResolver(AUTH_SCHEMA),
   });
   useFocusEffect(useCallback(reset));
 
-  const navigation = useNavigation();
+  const onSubmit = () => {
+    console.log(data);
+    navigation.navigate('FAQ');
+  };
   const [radiobtn, setRadiobtn] = useState('');
   const [val, setVal] = useState('');
   const [description,setDescription] = useState('');
@@ -46,16 +48,14 @@ function Dresscode({}) {
 
   const submited=(val,description)=>{
     console.log({radiovalue: val, description: description});
-    // Alert.alert('FAQ RESULTS',"park:' + p + 'secret:' + s + 'guests:' + g + 'qsn:' + q",[{text:'okay',style:'destructive'}]);
    }
-
+  
   return (
-    <TouchableWithoutFeedback onPress={()=>{
-      Keyboard.dismiss();
-    }}>
-    <View style={{ flex: 1 }}>
-    <ScrollView>
-      <ImageBackground source={emptyHome} style={styles.homeEmpty}>
+      <KeyboardAwareScrollView
+        style={{ flex: 1, backgroundColor: 'white' }}
+        contentContainerStyle={{ justifyContent: 'center', alignItems: 'center' }}
+      >
+        <StatusBar backgroundColor={colors.primary} />
         <View
           style={{
             flexDirection: 'column',
@@ -84,15 +84,6 @@ function Dresscode({}) {
                 wrapperStyle={{ padding: 4 }}
               />
             </View>
-            {/* <View
-              style={{
-                marginHorizontal: 10,
-                marginVertical: 10,
-                alignItems: 'center',
-              }}
-            >
-              <Text>{'clicked item value is: ' + val}</Text>
-            </View> */}
             <View
               style={{
                 height: heightPercentageToDP('12'),
@@ -111,7 +102,6 @@ function Dresscode({}) {
            
             />
             </View>
-            {/* <Image source={rect} style={{height: heightPercentageToDP('12'), width :widthPercentageToDP('95'), marginTop: heightPercentageToDP('1'),right:heightPercentageToDP('-2'), resizeMode:'contain' }} />  */}
             <Image
               source={optional}
               style={{
@@ -122,30 +112,14 @@ function Dresscode({}) {
                 left: heightPercentageToDP('0.7'),
               }}
             />
-            {/* <Image source={upload} style={{height: heightPercentageToDP('15'), width :widthPercentageToDP('65'), marginTop: heightPercentageToDP('-2.2'),left:heightPercentageToDP('0.5'), resizeMode:'contain' }} />  */}
             <ImagePicker/>
-            <TouchableOpacity
-              onPress={() => {
-                submited(val,description);
-                navigation.navigate('FAQ');
-              }}
-            >
-              <Image
-                source={denext}
-                style={{
-                  height: heightPercentageToDP('47'),
-                  width: widthPercentageToDP('45'),
-                  marginTop: heightPercentageToDP('-12'),
-                  right: heightPercentageToDP('-23'),
-                  resizeMode: 'contain',
-                }}
-              />
-            </TouchableOpacity>
+          <View style={{ alignSelf: 'flex-end' }}>
+            <CustomButton text="next" onPress={handleSubmit(onSubmit)} small primary />
+          </View>
+          <Spacer height={2} />
         </View>
-      </ImageBackground>
-      </ScrollView>
-    </View>
-    </TouchableWithoutFeedback>
+        </KeyboardAwareScrollView>
+      
   );
 }
 

@@ -1,56 +1,53 @@
 import React, { useContext, useEffect, useCallback, useState } from 'react';
 import { useFocusEffect } from '@react-navigation/native';
 import { useNavigation } from '@react-navigation/native';
-import { Image, ImageBackground, View, ScrollView, TouchableOpacity,TouchableWithoutFeedback,Keyboard,Alert } from 'react-native';
-import emptyHome from 'ping/assets/homeScreen/bg.png';
-import styles from 'ping/src/styles/styles';
+import { Image,StatusBar, ImageBackground, View, ScrollView, TouchableOpacity,TouchableWithoutFeedback,Keyboard,Alert } from 'react-native';
+import Spacer from 'ping/src/components/Spacer';
+import styles,{ colors } from 'ping/src/styles/styles';
 import { Dimensions } from 'react-native';
 import { widthPercentageToDP, heightPercentageToDP } from 'ping/util/scaler';
 import AUTH_SCHEMA from 'ping/src/schema/authSchema';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import CustomTextInput from 'ping/src/components/inputs/CustomTextInput';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import faqprogline from 'ping/assets/createnew/faq/faqprogline.png';
 import message from 'ping/assets/createnew/faq/message.png';
-import denext from 'ping/assets/createnew/details/detailsnext.png';
+import CustomButton from 'ping/src/components/inputs/CustomButton';
 
-function FAQ({}) {
-  const navigation = useNavigation();
-  const [park,setPark]=useState('');
-  const [secretcode,setSecretcode]=useState('');
-  const [guests,setGuests]=useState('');
-  const [question,setQuestion]=useState('');
-  const [clear,setClear]=useState('');
 
-  // const resetHandler= () => {
-  //   setPark('');
-  //   setSecretcode('');
-  //   setGuests('');
-  //   setQuestion('');
-  // };
- 
-  const handlePark=(text)=>setPark(text);
-  const handleSecret=(text)=>setSecretcode(text);
-  const handleGuests=(text)=>setGuests(text);
-  const handleQuestions=(text)=>setQuestion(text);
 
-  const submited=(p,s,g,q)=>{
-   console.log({park:p, secretcode:s, guests:g, question:q});
-  //  Alert.alert('FAQ RESULTS',"park:' + p + 'secret:' + s + 'guests:' + g + 'qsn:' + q",[{text:'okay',style:'destructive'}]);
-  }
+  function FAQ ({ navigation }) {
+    const { data, control, handleSubmit, errors, reset, formState, setValue } = useForm({
+      //resolver: yupResolver(AUTH_SCHEMA),
+    });
+    useFocusEffect(useCallback(reset));
+    
+    const [park,setPark]=useState('');
+    const [secretcode,setSecretcode]=useState('');
+    const [guests,setGuests]=useState('');
+    const [question,setQuestion]=useState('');
+    const handlePark=(text)=>setPark(text);
+    const handleSecret=(text)=>setSecretcode(text);
+    const handleGuests=(text)=>setGuests(text);
+    const handleQuestions=(text)=>setQuestion(text);
+  
+    const submited=(p,s,g,q)=>{
+     console.log({park:p, secretcode:s, guests:g, question:q});
+    }
 
-  const { control, handleSubmit, errors, reset, formState } = useForm({
-    resolver: yupResolver(AUTH_SCHEMA),
-  });
-  useFocusEffect(useCallback(reset));
+  const onSubmit = () => {
+    console.log(data);
+    navigation.navigate('RSVP');
+  };
 
 
   return (
-    <TouchableWithoutFeedback onPress={()=>{
-      Keyboard.dismiss();
-    }}>
-    <View style={{ flex: 1 }}>
-      <ImageBackground source={emptyHome} style={styles.homeEmpty}>
+    <KeyboardAwareScrollView
+    style={{ flex: 1, backgroundColor: 'white' }}
+    contentContainerStyle={{ justifyContent: 'center', alignItems: 'center' }}
+    >
+    <StatusBar backgroundColor={colors.primary} />
         <View
           style={{
             flexDirection: 'column',
@@ -64,8 +61,8 @@ function FAQ({}) {
               height: heightPercentageToDP('10'),
               width: widthPercentageToDP('85'),
               resizeMode: 'contain',
-              marginTop: heightPercentageToDP('14'),
-              left: heightPercentageToDP('0'),
+              marginTop: heightPercentageToDP('-4'),
+              left: heightPercentageToDP('1'),
             }}
           />
             <CustomTextInput input={{name:'faqpeoplepark',label:'Where should people park?',placeholder:'Street parking',defaultValue: ''}} 
@@ -107,31 +104,13 @@ function FAQ({}) {
               resizeMode: 'contain',
             }}
           />
-          <View >
-          <TouchableOpacity
-            onPress={() => {
-              submited(park,secretcode,guests,question),
-              navigation.navigate('RSVP');
-
-            }}
-          > 
-            <Image
-              // onPress={resetHandler}
-              source={denext}
-              style={{
-                height: heightPercentageToDP('47'),
-                width: widthPercentageToDP('45'),
-                marginTop: heightPercentageToDP('-8'),
-                right: heightPercentageToDP('-20'),
-                resizeMode: 'contain',
-              } }
-            />
-          </TouchableOpacity>
+         <View style={{ alignSelf: 'flex-end' }}>
+            <CustomButton text="next" onPress={handleSubmit(onSubmit)} small primary />
           </View>
+          <Spacer height={2} />
         </View>
-      </ImageBackground>
-    </View>
-    </TouchableWithoutFeedback>
+        </KeyboardAwareScrollView>
+      
   );
 }
 export default FAQ;

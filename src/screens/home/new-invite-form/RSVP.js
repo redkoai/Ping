@@ -1,27 +1,38 @@
+import React, { useCallback,useEffect, useState  } from 'react';
 import { useNavigation } from '@react-navigation/native';
-import { Image, ImageBackground, View, ScrollView, Switch, TouchableOpacity,TouchableWithoutFeedback,Keyboard } from 'react-native';
-import emptyHome from 'ping/assets/homeScreen/bg.png';
-import styles from 'ping/src/styles/styles';
+import { useFocusEffect } from '@react-navigation/native';
+import { Image, StatusBar, ImageBackground, View, ScrollView, Switch,Keyboard } from 'react-native';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import Spacer from 'ping/src/components/Spacer';
+import styles, { colors } from 'ping/src/styles/styles';
 import { Dimensions } from 'react-native';
 import { widthPercentageToDP, heightPercentageToDP } from 'ping/util/scaler';
-import React, { useEffect, useState } from 'react';
+import { useForm } from 'react-hook-form';
+import CustomButton from 'ping/src/components/inputs/CustomButton';
 import rsvpprogline from 'ping/assets/createnew/rsvp/rsvpprogline.png';
 import collect from 'ping/assets/createnew/rsvp/collect.png';
 import request from 'ping/assets/createnew/rsvp/request.png';
 import total from 'ping/assets/createnew/rsvp/total.png';
 import guestlist from 'ping/assets/createnew/rsvp/guestlist.png';
-import denext from 'ping/assets/createnew/details/detailsnext.png';
 import NumericInput from 'react-native-numeric-input';
 
-function RSVP({}) {
-  const navigation = useNavigation();
-  // const [isEnabled, setIsEnabled] = useState(false);
+function RSVP({navigation}) {
+
+  const { data, control, handleSubmit, errors, reset, formState, setValue } = useForm({
+    //resolver: yupResolver(AUTH_SCHEMA),
+  });
+  useFocusEffect(useCallback(reset));
+
+  const onSubmit = () => {
+    console.log(data);
+    // navigation.navigate('Signinpopup');
+  };
+
   const [collectrsvp, setCollectrsvp] = useState(false);
   const [kidsattending, setKidsattending] = useState(false);
   const [guestlists, setGuestlists] = useState(false);
   const [numericInput, setNumericInput] = useState(0);
 
-  // const toggleSwitch = () => setIsEnabled(previousState => !previousState);
   const toggleSwitch = (value, label) => {
     console.log(value, label);
     if (label === 'kids') {
@@ -36,16 +47,15 @@ function RSVP({}) {
   };
 
   const submited=()=>{
-    console.log({eventname: event, start: start, end: end, location: showloc, hostedby: hosted, description: description});
-    // Alert.alert('FAQ RESULTS',"park:' + p + 'secret:' + s + 'guests:' + g + 'qsn:' + q",[{text:'okay',style:'destructive'}]);
+    console.log({eventname: eventname, start: start, end: end, location: showloc, hostedby: hosted, description: description});
    }
 
   return (
-    <TouchableWithoutFeedback onPress={()=>{
-      Keyboard.dismiss();
-    }}>
-    <View style={{ flex: 1 }}>
-      <ImageBackground source={emptyHome} style={styles.homeEmpty}>
+    <KeyboardAwareScrollView
+        style={{ flex: 1, backgroundColor: 'white' }}
+        contentContainerStyle={{ justifyContent: 'center', alignItems: 'center' }}
+      >
+        <StatusBar backgroundColor={colors.primary} />
         <View
           style={{
             flexDirection: 'column',
@@ -59,7 +69,7 @@ function RSVP({}) {
               height: heightPercentageToDP('10'),
               width: widthPercentageToDP('85'),
               resizeMode: 'contain',
-              marginTop: heightPercentageToDP('-17'),
+              marginTop: heightPercentageToDP('-5'),
               left: heightPercentageToDP('0.5'),
             }}
           />
@@ -168,15 +178,13 @@ function RSVP({}) {
               value={guestlists}
             />
           </View>
-          {/* <TouchableOpacity onPress={() => { 
-                navigation.navigate('Signinpopup')
-                }}>
-            <Image source={denext} style={{height: heightPercentageToDP('47'), width :widthPercentageToDP('45'), marginTop: heightPercentageToDP('-27'),right:heightPercentageToDP('-20'), resizeMode:'contain' }} />  
-            </TouchableOpacity> */}
+          <View style={{ alignSelf: 'flex-end' }}>
+            <CustomButton text="next" onPress={handleSubmit(onSubmit)} small primary />
+          </View>
+
+          <Spacer height={2} />
         </View>
-      </ImageBackground>
-    </View>
-    </TouchableWithoutFeedback>
+      </KeyboardAwareScrollView>
   );
 }
 export default RSVP;
