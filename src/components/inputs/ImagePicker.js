@@ -1,21 +1,20 @@
-import React,{useState} from 'react';
-import { View, Button, Image, Text, StyleSheet, Alert,TouchableOpacity } from 'react-native';
+import React, { useState } from 'react';
+import { View, Button, Image, Text, StyleSheet, Alert, TouchableOpacity } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import * as Permissions from 'expo-permissions';
 // import imageupload from "../assets/upload.png"
-import {widthPercentageToDP,heightPercentageToDP,} from 'ping/util/scaler';
-import upload from "ping/assets/createnew/dresscode/upload.png";
+import { widthPercentageToDP, heightPercentageToDP } from 'ping/util/scaler';
+import upload from 'ping/assets/createnew/dresscode/upload.png';
 
-
-const ImgPicker = props => {
-  const [pickedImage,setPickedImage]=useState();
+const ImgPicker = (props) => {
+  const [pickedImage, setPickedImage] = useState();
   const verifyPermissions = async () => {
-    const result = await Permissions.askAsync(Permissions.MEDIA_LIBRARY,Permissions.CAMERA);
+    const result = await Permissions.askAsync(Permissions.MEDIA_LIBRARY, Permissions.CAMERA);
     if (result.status !== 'granted') {
       Alert.alert(
         'Insufficient permissions!',
         'You need to grant camera permissions to use this app.',
-        [{ text: 'Okay' }]
+        [{ text: 'Okay' }],
       );
       return false;
     }
@@ -23,12 +22,12 @@ const ImgPicker = props => {
   };
 
   const takeImageHandler = async () => {
-    console.log("pressed");
+    console.log('pressed');
     const hasPermission = await verifyPermissions();
     if (!hasPermission) {
-        return;
+      return;
     }
-    const image= await ImagePicker.launchCameraAsync({
+    const image = await ImagePicker.launchCameraAsync({
       allowsEditing: true,
       aspect: [16, 9],
       quality: 1,
@@ -39,24 +38,35 @@ const ImgPicker = props => {
   return (
     <View style={styles.imagePicker}>
       <View style={styles.imagePreview}>
-        {!pickedImage?<Text>No image picked yet.</Text>
-        :<Image style={styles.image} source={{uri:pickedImage}}/>}
+        {!pickedImage ? (
+          <Text>No image picked yet.</Text>
+        ) : (
+          <Image style={styles.image} source={{ uri: pickedImage }} />
+        )}
       </View>
       <TouchableOpacity onPress={takeImageHandler}>
-      {/* <Button
+        {/* <Button
         title="Take Image"
         onPress={takeImageHandler}
       /> */}
-      <Image source={upload} style={{height: heightPercentageToDP('17'), width :widthPercentageToDP('95'), marginTop: heightPercentageToDP('1'),left:heightPercentageToDP('-4.5'), resizeMode:'contain' }} /> 
+        <Image
+          source={upload}
+          style={{
+            height: heightPercentageToDP('17'),
+            width: widthPercentageToDP('95'),
+            marginTop: heightPercentageToDP(2),
+            left: heightPercentageToDP('-4.5'),
+            resizeMode: 'contain',
+          }}
+        />
       </TouchableOpacity>
-     
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   imagePicker: {
-    alignItems: 'center'
+    alignItems: 'center',
   },
   imagePreview: {
     width: '100%',
@@ -65,15 +75,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     borderColor: '#ccc',
-    borderWidth: 1
+    borderWidth: 1,
   },
   image: {
     width: '100%',
     height: '100%',
-    
   },
-  
- 
 });
 
 export default ImgPicker;

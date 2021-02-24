@@ -10,7 +10,7 @@ import AUTH_SCHEMA from 'ping/src/schema/authSchema';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import CustomTextInput from 'ping/src/components/inputs/CustomTextInput';
-import CustomText from 'ping/src/components/inputs/CustomText';
+import CustomText from 'ping/src/components/CustomText';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import faqprogline from 'ping/assets/createnew/faq/faqprogline.png';
 import message from 'ping/assets/createnew/faq/message.png';

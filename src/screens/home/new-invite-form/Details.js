@@ -8,7 +8,7 @@ import { widthPercentageToDP, heightPercentageToDP } from 'ping/util/scaler';
 import AUTH_SCHEMA from 'ping/src/schema/authSchema';
 import Spacer from 'ping/src/components/Spacer';
 import CustomTextInput, { DateInput,LocationInput } from 'ping/src/components/inputs/CustomTextInput';
-import CustomText from 'ping/src/components/inputs/CustomText';
+import CustomText from 'ping/src/components/CustomText';
 import CustomButton from 'ping/src/components/inputs/CustomButton';
 import deprogline from 'ping/assets/createnew/details/detailsprogressline.png';
 import { useForm } from 'react-hook-form';

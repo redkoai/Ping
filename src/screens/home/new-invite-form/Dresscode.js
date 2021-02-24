@@ -1,11 +1,21 @@
 import React, { useContext, useEffect, useCallback, useState } from 'react';
 import { useFocusEffect } from '@react-navigation/native';
 import { useNavigation } from '@react-navigation/native';
-import { Image,StatusBar, Text, ImageBackground, View, ScrollView, TouchableOpacity, TouchableWithoutFeedback,Keyboard } from 'react-native';
+import {
+  Image,
+  StatusBar,
+  Text,
+  ImageBackground,
+  View,
+  ScrollView,
+  TouchableOpacity,
+  TouchableWithoutFeedback,
+  Keyboard,
+} from 'react-native';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import AUTH_SCHEMA from 'ping/src/schema/authSchema';
-import styles,{ colors } from 'ping/src/styles/styles';
+import styles, { colors } from 'ping/src/styles/styles';
 import Spacer from 'ping/src/components/Spacer';
 import { Dimensions } from 'react-native';
 import { widthPercentageToDP, heightPercentageToDP } from 'ping/util/scaler';
@@ -16,9 +26,9 @@ import ImagePicker from 'ping/src/components/inputs/ImagePicker';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import CustomTextInput from 'ping/src/components/inputs/CustomTextInput';
 import CustomButton from 'ping/src/components/inputs/CustomButton';
+import CustomInputLabel from 'ping/src/components/inputs/CustomInputLabel';
 
-
-function Dresscode({navigation}) {
+function Dresscode({ navigation }) {
   const { data, control, handleSubmit, errors, reset, formState, setValue } = useForm({
     //resolver: yupResolver(AUTH_SCHEMA),
   });
@@ -30,8 +40,8 @@ function Dresscode({navigation}) {
   };
   const [radiobtn, setRadiobtn] = useState('');
   const [val, setVal] = useState('');
-  const [description,setDescription] = useState('');
-  const [image,setImage] = useState('');
+  const [description, setDescription] = useState('');
+  const [image, setImage] = useState('');
 
   function pressCircle(i) {
     setVal(i);
@@ -46,80 +56,80 @@ function Dresscode({navigation}) {
     { label: 'custom', value: 5 },
   ];
 
-  const submited=(val,description)=>{
-    console.log({radiovalue: val, description: description});
-   }
-  
+  const submited = (val, description) => {
+    console.log({ radiovalue: val, description: description });
+  };
+
   return (
-      <KeyboardAwareScrollView
-        style={{ flex: 1, backgroundColor: 'white' }}
-        contentContainerStyle={{ justifyContent: 'center', alignItems: 'center' }}
+    <KeyboardAwareScrollView
+      style={{ flex: 1, backgroundColor: 'white' }}
+      contentContainerStyle={{ justifyContent: 'center', alignItems: 'center' }}
+    >
+      <StatusBar backgroundColor={colors.primary} />
+      <View
+        style={{
+          flexDirection: 'column',
+          justifyContent: 'center',
+          marginTop: widthPercentageToDP(3),
+        }}
       >
-        <StatusBar backgroundColor={colors.primary} />
+        <Image
+          source={deprogline}
+          style={{
+            height: heightPercentageToDP('10'),
+            width: widthPercentageToDP('85'),
+            resizeMode: 'contain',
+            marginTop: heightPercentageToDP('-2.5'),
+            left: heightPercentageToDP('2'),
+          }}
+        />
+        <View style={{ position: 'relative', left: 10 }}>
+          <RadioButton
+            outerWidth={30}
+            innerWidth={20}
+            borderWidth={1.5}
+            data={listData}
+            color={'black'}
+            onPress={pressCircle}
+            wrapperStyle={{ padding: 4 }}
+          />
+        </View>
         <View
           style={{
-            flexDirection: 'column',
-            justifyContent: 'center',
-            marginTop: widthPercentageToDP(3),
+            height: heightPercentageToDP('12'),
+            width: widthPercentageToDP('95'),
+            marginTop: heightPercentageToDP('1'),
+            right: heightPercentageToDP('-2'),
+            resizeMode: 'contain',
           }}
         >
-          <Image
-            source={deprogline}
-            style={{
-              height: heightPercentageToDP('10'),
-              width: widthPercentageToDP('85'),
-              resizeMode: 'contain',
-              marginTop: heightPercentageToDP('-2.5'),
-              left: heightPercentageToDP('2'),
+          <CustomTextInput
+            input={{
+              name: 'dresscode',
+              label: '',
+              placeholder:
+                "Do you have specific theme or color in mind? Don't make your guests guess!",
+              defaultValue: '',
             }}
-          />
-            <View style={{ position: 'relative', left: 10 }}>
-              <RadioButton
-                outerWidth={30}
-                innerWidth={20}
-                borderWidth={1.5}
-                data={listData}
-                color={'black'}
-                onPress={pressCircle}
-                wrapperStyle={{ padding: 4 }}
-              />
-            </View>
-            <View
-              style={{
-                height: heightPercentageToDP('12'),
-                width: widthPercentageToDP('95'),
-                marginTop: heightPercentageToDP('1'),
-                right: heightPercentageToDP('-2'),
-                resizeMode: 'contain',
-              }}
-            >
-             <CustomTextInput input={{name:'dresscode',label:'',placeholder:"Do you have specific theme or color in mind? Don't make your guests guess!",defaultValue: ''}} 
             control={control}
-             errors={errors}
-             value={description}
-             onChangeText={handleDescription}
-             rules={{multiline:'true',numberOfLines:'5'}} 
-           
-            />
-            </View>
-            <Image
-              source={optional}
-              style={{
-                height: heightPercentageToDP('10'),
-                width: widthPercentageToDP('65'),
-                marginTop: heightPercentageToDP('2'),
-                resizeMode: 'contain',
-                left: heightPercentageToDP('0.7'),
-              }}
-            />
-            <ImagePicker/>
-          <View style={{ alignSelf: 'flex-end' }}>
-            <CustomButton text="next" onPress={handleSubmit(onSubmit)} small primary />
-          </View>
-          <Spacer height={2} />
+            errors={errors}
+            value={description}
+            onChangeText={handleDescription}
+            rules={{ multiline: 'true', numberOfLines: '5' }}
+          />
         </View>
-        </KeyboardAwareScrollView>
-      
+
+        <CustomInputLabel text="Share some Inspo" optional />
+        <Spacer height={1} />
+        <ImagePicker />
+
+        <Spacer height={5} />
+        <View style={{ alignSelf: 'flex-end' }}>
+          <CustomButton text="next" onPress={handleSubmit(onSubmit)} small primary />
+        </View>
+        <Spacer height={2} />
+      </View>
+    </KeyboardAwareScrollView>
   );
 }
 
