@@ -3,17 +3,19 @@ import { useFocusEffect } from '@react-navigation/native';
 import { StatusBar, Image, View } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import emptyHome from 'ping/assets/homeScreen/bg.png';
-import styles, { colors } from 'ping/src/styles/styles';
+import { colors } from 'ping/src/styles/styles';
 import { widthPercentageToDP, heightPercentageToDP } from 'ping/util/scaler';
 import AUTH_SCHEMA from 'ping/src/schema/authSchema';
 import Spacer from 'ping/src/components/Spacer';
-import CustomTextInput, { DateInput,LocationInput } from 'ping/src/components/inputs/CustomTextInput';
-import CustomText from 'ping/src/components/CustomText';
+import CustomTextInput, {
+  DateInput,
+  LocationInput,
+} from 'ping/src/components/inputs/CustomTextInput';
 import CustomButton from 'ping/src/components/inputs/CustomButton';
+import CustomAddButton from 'ping/src/components/inputs/CustomAddButton';
 import deprogline from 'ping/assets/createnew/details/detailsprogressline.png';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Ionicons } from '@expo/vector-icons'; 
 import demsg from 'ping/assets/createnew/details/detailswritemessage.png';
 
 function Details({ navigation }) {
@@ -89,46 +91,22 @@ function Details({ navigation }) {
             }}
             optional
           />
-         <View style={{
-              height: heightPercentageToDP('40'),
-              width: widthPercentageToDP('80'),
-              marginTop: heightPercentageToDP('-1'),
-              left: heightPercentageToDP('0.5'),
-              resizeMode: 'contain',
-            }}>
-          <Ionicons name="add" size={24} color={colors.addsign} />
-          </View>
-          <View style={{
-              height: heightPercentageToDP('40'),
-              width: widthPercentageToDP('80'),
-              marginTop: heightPercentageToDP('-40.5'),
-              left: heightPercentageToDP('4'),
-              resizeMode: 'contain',
-            }}>
-          <CustomText text="Add a co-host" />
-          </View>
 
-          <View
-            style={{
-              height: heightPercentageToDP(15),
-              width: widthPercentageToDP(35),
-              marginTop: heightPercentageToDP(-33),
-              resizeMode: 'contain',
+          <CustomAddButton text="Add a co-host" onPress={() => console.log('Add a co-host pressed')} />
+          <Spacer height={5} />
+
+          <CustomTextInput
+            control={control}
+            errors={errors}
+            input={{
+              name: 'description',
+              label: 'Description',
+              placeholder: 'Let people know what this event is about at a glance!',
+              defaultValue: '',
             }}
-          >
-            <CustomTextInput
-              control={control}
-              errors={errors}
-              input={{
-                name: 'description',
-                label: 'Description',
-                placeholder: 'Let people know what this event is about at a glance!',
-                defaultValue: '',
-              }}
-              rules={{ multiline: true, numberOfLines: 5 }}
-              optional
-            />
-          </View>
+            rules={{ multiline: true, numberOfLines: 5 }}
+            optional
+          />
 
           <View style={{ alignSelf: 'flex-end' }}>
             <CustomButton text="next" onPress={handleSubmit(onSubmit)} small primary />

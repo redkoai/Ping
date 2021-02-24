@@ -3,12 +3,12 @@ import { widthPercentageToDP, heightPercentageToDP } from 'ping/util/scaler';
 import React from 'react';
 import { View } from 'react-native';
 
-function Spacer({ width = 0, height = 0 }) {
+function Spacer({ width = 0, height = 0, fixed = false }) {
   return (
     <View
       style={{
-        width: widthPercentageToDP(width),
-        height: heightPercentageToDP(height),
+        width: !fixed ? widthPercentageToDP(width) : width,
+        height: !fixed ? heightPercentageToDP(height) : height,
       }}
     />
   );

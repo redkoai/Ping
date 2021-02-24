@@ -99,7 +99,7 @@ export const colors = {
   offBlack: '#555',
   darkGrey: '#777',
   offWhite: '#F7F8FA',
-  addsign : '#3BB3D7'
+  addSign : '#3BB3D7'
 };
 
 export const headerPaddings = {
