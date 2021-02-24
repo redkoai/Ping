@@ -2,10 +2,8 @@ import React, { useCallback } from 'react';
 import { useFocusEffect } from '@react-navigation/native';
 import { StatusBar, Image, View } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import emptyHome from 'ping/assets/homeScreen/bg.png';
 import { colors } from 'ping/src/styles/styles';
 import { widthPercentageToDP, heightPercentageToDP } from 'ping/util/scaler';
-import AUTH_SCHEMA from 'ping/src/schema/authSchema';
 import Spacer from 'ping/src/components/Spacer';
 import CustomTextInput, {
   DateInput,
@@ -16,7 +14,7 @@ import CustomAddButton from 'ping/src/components/inputs/CustomAddButton';
 import deprogline from 'ping/assets/createnew/details/detailsprogressline.png';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import demsg from 'ping/assets/createnew/details/detailswritemessage.png';
+import AUTH_SCHEMA from 'ping/src/schema/authSchema';
 
 function Details({ navigation }) {
   const { data, control, handleSubmit, errors, reset, formState, setValue } = useForm({

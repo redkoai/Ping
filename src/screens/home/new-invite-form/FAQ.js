@@ -1,17 +1,6 @@
-import React, { useContext, useEffect, useCallback, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { useFocusEffect } from '@react-navigation/native';
-import { useNavigation } from '@react-navigation/native';
-import {
-  Image,
-  StatusBar,
-  ImageBackground,
-  View,
-  ScrollView,
-  TouchableOpacity,
-  TouchableWithoutFeedback,
-  Keyboard,
-  Alert,
-} from 'react-native';
+import { Image, StatusBar, View } from 'react-native';
 import Spacer from 'ping/src/components/Spacer';
 import { colors } from 'ping/src/styles/styles';
 import { widthPercentageToDP, heightPercentageToDP } from 'ping/util/scaler';
@@ -23,7 +12,6 @@ import CustomButton from 'ping/src/components/inputs/CustomButton';
 import CustomAddButton from 'ping/src/components/inputs/CustomAddButton';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import faqprogline from 'ping/assets/createnew/faq/faqprogline.png';
-import message from 'ping/assets/createnew/faq/message.png';
 
 function FAQ({ navigation }) {
   const { data, control, handleSubmit, errors, reset, formState, setValue } = useForm({
@@ -125,13 +113,16 @@ function FAQ({ navigation }) {
           onChangeText={handleQuestions}
         />
 
-        <CustomAddButton text="Add another question" onPress={() => console.log('Add another question pressed')} />
+        <CustomAddButton
+          text="Add another question"
+          onPress={() => console.log('Add another question pressed')}
+        />
         <Spacer height={5} />
 
         <View style={{ alignSelf: 'flex-end' }}>
           <CustomButton text="next" onPress={handleSubmit(onSubmit)} small primary />
         </View>
-        
+
         <Spacer height={2} />
       </View>
     </KeyboardAwareScrollView>

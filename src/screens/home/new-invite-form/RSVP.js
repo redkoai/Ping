@@ -20,8 +20,8 @@ import { widthPercentageToDP, heightPercentageToDP } from 'ping/util/scaler';
 import { useForm } from 'react-hook-form';
 import CustomButton from 'ping/src/components/inputs/CustomButton';
 import CustomText from 'ping/src/components/CustomText';
+import CustomNumberInput from 'ping/src/components/inputs/CustomNumberInput';
 import rsvpprogline from 'ping/assets/createnew/rsvp/rsvpprogline.png';
-import NumericInput from 'react-native-numeric-input';
 
 function RSVP({ navigation }) {
   const { data, control, handleSubmit, errors, reset, formState, setValue } = useForm({
@@ -117,22 +117,7 @@ function RSVP({ navigation }) {
             <CustomText text="Total invited per invitation" header />
             <CustomText text="This includes the person that receives the invite" />
           </View>
-          <NumericInput
-            onChange={(value) => {
-              setNumericInput(value);
-              console.log(value);
-            }}
-            totalWidth={72}
-            totalHeight={35}
-            iconSize={25}
-            step={1}
-            valueType="real"
-            rounded
-            textColor="#B0228C"
-            iconStyle={{ color: 'white' }}
-            rightButtonBackgroundColor={colors.primary}
-            leftButtonBackgroundColor={colors.primary}
-          />
+          <CustomNumberInput control={control} errors={errors} input={{name: 'total-invited'}} />
         </View>
 
         <View style={styles.wrapperContainer}>
@@ -151,6 +136,7 @@ function RSVP({ navigation }) {
         <View style={{ alignSelf: 'flex-end' }}>
           <CustomButton text="next" onPress={handleSubmit(onSubmit)} small primary />
         </View>
+
         <Spacer height={2} />
       </View>
     </KeyboardAwareScrollView>
