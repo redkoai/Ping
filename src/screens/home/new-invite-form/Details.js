@@ -90,7 +90,10 @@ function Details({ navigation }) {
             optional
           />
 
-          <CustomAddButton text="Add a co-host" onPress={() => console.log('Add a co-host pressed')} />
+          <CustomAddButton
+            text="Add a co-host"
+            onPress={() => console.log('Add a co-host pressed')}
+          />
           <Spacer height={5} />
 
           <CustomTextInput
@@ -116,4 +119,5 @@ function Details({ navigation }) {
     </>
   );
 }
+
 export default Details;

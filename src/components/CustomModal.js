@@ -1,4 +1,5 @@
 import React from 'react';
+import { widthPercentageToDP, heightPercentageToDP } from 'ping/util/scaler';
 import { StyleSheet, View, Text, Dimensions } from 'react-native';
 import Modal from 'react-native-modal';
 
@@ -15,7 +16,7 @@ function CustomModal({ isVisible, onCancel, title, height = 1.6, children }) {
       style={styles.container}
       useNativeDriverForBackdrop
     >
-      <View style={[styles.modalInner, { height: Dimensions.get('screen').height / height}]}>
+      <View style={[styles.modalInner, { height: Dimensions.get('screen').height / height }]}>
         <View style={styles.modalTopBar}>
           <TouchableOpacity onPress={onCancel} style={styles.modalTopLeft}>
             <Ionicons name="close" size={22} color={colors.offBlack} />
@@ -41,6 +42,7 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 30,
     borderTopRightRadius: 30,
     paddingTop: 15,
+    paddingBottom: widthPercentageToDP(2) + 45,
   },
   modalTopBar: {
     marginTop: 7,
