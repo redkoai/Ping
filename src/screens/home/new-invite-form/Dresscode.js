@@ -14,7 +14,7 @@ import {
 } from 'react-native';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import AUTH_SCHEMA from 'ping/src/schema/authSchema';
+import INVITE_SCHEMA from 'ping/src/schema/authSchema';
 import styles, { colors } from 'ping/src/styles/styles';
 import Spacer from 'ping/src/components/Spacer';
 import { Dimensions } from 'react-native';
@@ -30,7 +30,7 @@ import CustomInputLabel from 'ping/src/components/inputs/CustomInputLabel';
 
 function Dresscode({ navigation }) {
   const { data, control, handleSubmit, errors, reset, formState, setValue } = useForm({
-    //resolver: yupResolver(AUTH_SCHEMA),
+    resolver: yupResolver(INVITE_SCHEMA),
   });
   useFocusEffect(useCallback(reset));
 

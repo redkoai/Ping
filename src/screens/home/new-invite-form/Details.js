@@ -14,11 +14,11 @@ import CustomAddButton from 'ping/src/components/inputs/CustomAddButton';
 import deprogline from 'ping/assets/createnew/details/detailsprogressline.png';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import AUTH_SCHEMA from 'ping/src/schema/authSchema';
+import INVITE_SCHEMA from 'ping/src/schema/authSchema';
 
 function Details({ navigation }) {
   const { data, control, handleSubmit, errors, reset, formState, setValue } = useForm({
-    //resolver: yupResolver(AUTH_SCHEMA),
+    resolver: yupResolver(INVITE_SCHEMA),
   });
   useFocusEffect(useCallback(reset));
 
@@ -64,13 +64,13 @@ function Details({ navigation }) {
             control={control}
             errors={errors}
             setValue={setValue}
-            input={{ name: 'start-date', label: 'Start Date' }}
+            input={{ name: 'start-date', label: 'Start Date',placeholder:'',defaultValue:'' }}
           />
           <DateInput
             control={control}
             errors={errors}
             setValue={setValue}
-            input={{ name: 'end-date', label: 'End Date' }}
+            input={{ name: 'end-date', label: 'End Date',placeholder:'',defaultValue:'' }}
           />
           <LocationInput
             control={control}
