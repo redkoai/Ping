@@ -49,8 +49,8 @@ export const FAQQUESTION_SCHEMA = yup.object().shape({
 
 const INVITE_SCHEMA = yup.object().shape({
   ...EVENT_SCHEMA.fields,
-  ...STARTDATE_SCHEMA.fields,
-  ...ENDDATE_SCHEMA.fields,
+  //...STARTDATE_SCHEMA.fields,
+  //...ENDDATE_SCHEMA.fields,
   // ...DRESSCODE_SCHEMA.fields,
   ...DRESSCODECOLOR_SCHEMA.fields,
   ...FAQQUESTION_SCHEMA.fields,
