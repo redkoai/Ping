@@ -82,7 +82,7 @@ function RSVP({ navigation }) {
 
         <Spacer height={5} />
         <View style={{ alignSelf: 'flex-end' }}>
-          <CustomButton text="next" onPress={handleSubmit(onSubmit)} small primary />
+          <CustomButton text="next" onPress={handleSubmit(onSubmit)} narrow primary />
         </View>
 
         <Spacer height={2} />

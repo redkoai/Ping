@@ -4,14 +4,32 @@ import { heightPercentageToDP, widthPercentageToDP } from 'ping/util/scaler';
 import React from 'react';
 import { View, Image, Text, StyleSheet, TouchableOpacity } from 'react-native';
 
-function CustomButton({ icon, text, onPress, primary = false, small = false, disabled = false }) {
+function CustomButton({
+  icon,
+  text,
+  onPress,
+  shadow = false,
+  primary = false,
+  narrow = false,
+  small = false,
+  outline = false,
+  disabled = false,
+}) {
   return (
     <View style={styles.container}>
       <TouchableOpacity
         style={[
-          { width: widthPercentageToDP(small ? 47 : 80) },
+          { width: widthPercentageToDP(narrow ? 47 : 80) },
           styles.button,
-          primary ? styles.buttonPrimary : styles.buttonSecondary,
+          small ? styles.buttonSmall : styles.buttonLarge,
+          primary
+            ? outline
+              ? styles.buttonPrimaryOutline
+              : styles.buttonPrimary
+            : outline
+            ? styles.buttonSecondaryOutline
+            : styles.buttonSecondary,
+          shadow && styles.buttonShadow,
           disabled && primary && styles.primaryDisabled,
           disabled && !primary && styles.secondaryDisabled,
         ]}
@@ -22,7 +40,13 @@ function CustomButton({ icon, text, onPress, primary = false, small = false, dis
         <Text
           style={[
             textStyles.bigBold,
-            primary ? styles.textPrimary : styles.textSecondary,
+            primary
+              ? outline
+                ? styles.textPrimaryOutline
+                : styles.textPrimary
+              : outline
+              ? styles.textSecondaryOutline
+              : styles.textSecondary,
             disabled && primary && styles.textPrimaryDisabled,
             disabled && !primary && styles.textSecondaryDisabled,
           ]}
@@ -47,20 +71,32 @@ const styles = StyleSheet.create({
     borderRadius: 50,
     display: 'flex',
     alignItems: 'center',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  buttonShadow: {
     shadowColor: colors.offBlack,
     shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.3,
     shadowRadius: 4,
     elevation: 5,
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
   },
   buttonPrimary: {
     backgroundColor: colors.primary,
   },
+  buttonPrimaryOutline: {
+    backgroundColor: 'white',
+    borderColor: colors.primary,
+    borderWidth: 4,
+  },
   buttonSecondary: {
     backgroundColor: 'white',
+  },
+  buttonSecondaryOutline: {
+    backgroundColor: 'white',
+    borderColor: colors.offBlack,
+    borderWidth: 3,
   },
   primaryDisabled: {
     backgroundColor: '#ccc',
@@ -77,8 +113,14 @@ const styles = StyleSheet.create({
   textPrimary: {
     color: 'white',
   },
+  textPrimaryOutline: {
+    color: colors.primary,
+  },
   textSecondary: {
     color: colors.primary,
+  },
+  textSecondaryOutline: {
+    color: colors.offBlack,
   },
   textPrimaryDisabled: {
     color: 'white',

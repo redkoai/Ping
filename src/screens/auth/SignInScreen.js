@@ -72,11 +72,13 @@ function SignInScreen({ navigation }) {
             async (data) => await signInWithEmailAsync(data, onSignInSuccess, onSignInFailure),
           )}
           primary
+          shadow
         />
         <CustomButton
           icon={googleLogo}
           text="Continue with Google"
           onPress={async () => await signInWithGoogleAsync(onSignInSuccess, onSignInFailure)}
+          shadow
         />
 
         <View style={styles.registerButton}>
