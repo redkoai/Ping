@@ -1,12 +1,9 @@
-import React, { useCallback, useState } from 'react';
-import { useFocusEffect } from '@react-navigation/native';
+import React, { useState } from 'react';
 import { Image, StatusBar, View } from 'react-native';
 import Spacer from 'ping/src/components/Spacer';
 import { colors } from 'ping/src/styles/styles';
 import { widthPercentageToDP, heightPercentageToDP } from 'ping/util/scaler';
-import { useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
-import INVITE_SCHEMA from 'ping/src/schema/authSchema';
+import { useFormContext } from 'react-hook-form';
 import CustomTextInput from 'ping/src/components/inputs/CustomTextInput';
 import CustomButton from 'ping/src/components/inputs/CustomButton';
 import CustomAddButton from 'ping/src/components/inputs/CustomAddButton';
@@ -14,10 +11,7 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import faqprogline from 'ping/assets/createnew/faq/faqprogline.png';
 
 function FAQ({ navigation }) {
-  const { data, control, handleSubmit, errors, reset, formState, setValue } = useForm({
-    resolver: yupResolver(INVITE_SCHEMA),
-  });
-  useFocusEffect(useCallback(reset));
+  const { control, errors } = useFormContext();
 
   const [park, setPark] = useState('');
   const [secretcode, setSecretcode] = useState('');
@@ -27,14 +21,12 @@ function FAQ({ navigation }) {
   const handleSecret = (text) => setSecretcode(text);
   const handleGuests = (text) => setGuests(text);
   const handleQuestions = (text) => setQuestion(text);
+  const [btnpress, setBtnpress] = useState(false);
+
+  const showBtn = () => setBtnpress(true);
 
   const submited = (p, s, g, q) => {
     console.log({ park: p, secretcode: s, guests: g, question: q });
-  };
-
-  const onSubmit = () => {
-    console.log(data);
-    navigation.navigate('RSVP');
   };
 
   return (
@@ -100,27 +92,30 @@ function FAQ({ navigation }) {
           onChangeText={handleGuests}
           optional="true"
         />
-        <CustomTextInput
-          input={{
-            name: 'faqquestion',
-            label: 'Type your question here',
-            placeholder: 'Type the answer to your question',
-            defaultValue: '',
-          }}
-          control={control}
-          errors={errors}
-          value={question}
-          onChangeText={handleQuestions}
-        />
 
-        <CustomAddButton
-          text="Add another question"
-          onPress={() => console.log('Add another question pressed')}
-        />
+        <CustomAddButton text="Add another question" onPress={showBtn} />
+
+        <Spacer height={3} />
+
+        {btnpress ? (
+          <CustomTextInput
+            input={{
+              name: 'faqquestion',
+              label: 'Type your question here',
+              placeholder: 'Type the answer to your question',
+              defaultValue: '',
+            }}
+            control={control}
+            errors={errors}
+            value={question}
+            onChangeText={handleQuestions}
+          />
+        ) : null}
+
         <Spacer height={5} />
 
         <View style={{ alignSelf: 'flex-end' }}>
-          <CustomButton text="next" onPress={handleSubmit(onSubmit)} narrow primary />
+          <CustomButton text="next" onPress={() => navigation.navigate('RSVP')} narrow primary />
         </View>
 
         <Spacer height={2} />

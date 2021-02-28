@@ -50,6 +50,8 @@ captures/
 # Visual Studio Code
 .vscode/
 
+.expo/
+
 # Keystore files
 *.jks
 
