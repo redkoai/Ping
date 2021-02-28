@@ -16,8 +16,8 @@ import { useFormContext } from 'react-hook-form';
 function Details({ navigation }) {
   const { control, errors, setValue } = useFormContext();
 
-  const [btnpress, setBtnpress] = useState(false);
-  const showBtn = () => setBtnpress(true);
+  const [coHosts, setCoHosts] = useState([]);
+  const addCoHost = () => setCoHosts([...coHosts, 1]);
 
   return (
     <KeyboardAwareScrollView
@@ -80,10 +80,9 @@ function Details({ navigation }) {
           }}
           optional
         />
-        <Spacer height={7} />
-        <CustomAddButton text="Add a co-host" onPress={showBtn} />
-        {btnpress ? (
-          <View style={{ resizeMode: 'contain', marginTop: heightPercentageToDP('-15') }}>
+
+        {coHosts.map((item) => (
+          <View style={{ resizeMode: 'contain', marginTop: heightPercentageToDP('-3') }}>
             <CustomTextInput
               control={control}
               errors={errors}
@@ -94,8 +93,9 @@ function Details({ navigation }) {
               }}
             />
           </View>
-        ) : null}
+        ))}
 
+        <CustomAddButton text="Add a co-host" onPress={addCoHost} />
         <Spacer height={5} />
 
         <CustomTextInput
