@@ -1,7 +1,7 @@
 import {useNavigation} from "@react-navigation/native";
-import {Image, ImageBackground, View, ScrollView, Text} from "react-native";
+// import {Image, ImageBackground, View, ScrollView, Text} from "react-native";
 import {TouchableOpacity} from 'react-native';
-import {Calendar, CalendarList, Agenda} from 'react-native-calendars';
+
 import emptyHome from "ping/assets/homeScreen/bg.png";
 import styles from "ping/src/styles/styles";
 import { Dimensions } from 'react-native';
@@ -12,9 +12,65 @@ import addFriendsBtn from "ping/assets/NavBarAssets/addFriendsBtn.png"
 import emptyPic from "ping/assets/events/calendar.png";
 import homettl from "ping/assets/events/eventsttl.png";
 
+import {Alert, StyleSheet, Text, View} from 'react-native';
+import {Calendar, CalendarList, Agenda} from 'react-native-calendars';
+import {Card} from 'react-native-paper'
+
+
+
+const timeToString = (time) => {
+    const date = new Date(time);
+    return date.toISOString().split('T')[0];
+  }
+
+
 
 function Events({}) {
     const navigation = useNavigation()
+
+    const [items, setItems] = useState({})
+
+    const loadItems = (day) => {
+        setTimeout(() => {
+          for (let i = -15; i < 85; i++) {
+            const time = day.timestamp + i * 24 * 60 * 60 * 1000;
+            const strTime = timeToString(time);
+            if (!items[strTime]) {
+              items[strTime] = [];
+              const numItems = Math.floor(Math.random() * 3 + 1);
+              for (let j = 0; j < numItems; j++) {
+                items[strTime].push({
+                  name: 'Item for ' + strTime + ' #' + j,
+                  height: Math.max(50, Math.floor(Math.random() * 150))
+                });
+              }
+            }
+          }
+          const newItems = {};
+          Object.keys(items).forEach((key) => {
+            newItems[key] = items[key];
+          });
+          setItems(newItems)
+        }, 1000);
+      }
+
+      renderItem = (item) => {
+          return(
+          <TouchableOpacity style={{
+              marginRight: 10,
+              marginTop: 30,
+              padding: 10
+            }}>
+              <Card >
+                  <Card.Content >
+                      <View style={{flexDirection:"row", justifyContent:"center"}}>
+                        <Text>{item.name}</Text>
+                      </View>
+                  </Card.Content>
+              </Card>
+          </TouchableOpacity>)
+
+      }
 
     return (
         // <View style={{flex: 1}}>    
@@ -35,8 +91,8 @@ function Events({}) {
         //     </View>
         //     </ImageBackground>
         // </View>
-        <View>
-            <Calendar
+        <View style={{flex: 1}}>
+            {/* <Calendar
                 // Specify style for calendar container element. Default = {}
                 style={{
                     height: 350
@@ -49,10 +105,24 @@ function Events({}) {
                     todayTextColor: 'green',
                     arrowColor: 'green'
                 }}
-            />
+                markedDates={{
+                    // '2021-02-16': {selected: true, marked: true, selectedColor: 'blue'},
+                    '2021-02-17': {marked: true},
+                    '2021-02-18': {marked: true, dotColor: 'red', activeOpacity: 0},
+                    '2021-02-19': {marked: true, dotColor: 'orange', activeOpacity: 0}
+                  }}
+            /> */}
+            <Agenda
+                items={items}
+                loadItemsForMonth={loadItems}
+                // selected={'2021-02-18'}
+                renderItem={renderItem}
 
+            />
         </View>
     )
 }
 
 export default Events
+
+
