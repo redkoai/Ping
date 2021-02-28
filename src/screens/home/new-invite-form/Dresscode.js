@@ -92,7 +92,7 @@ function Dresscode({ navigation }) {
             errors={errors}
             value={description}
             onChangeText={handleDescription}
-            rules={{ multiline: 'true', numberOfLines: '5' }}
+            rules={{ multiline: true, numberOfLines: 5 }}
           />
         </View>
 
