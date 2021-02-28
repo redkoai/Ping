@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback ,useState} from 'react';
 import { useFocusEffect } from '@react-navigation/native';
 import { StatusBar, Image, View } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
@@ -11,10 +11,11 @@ import CustomTextInput, {
 } from 'ping/src/components/inputs/CustomTextInput';
 import CustomButton from 'ping/src/components/inputs/CustomButton';
 import CustomAddButton from 'ping/src/components/inputs/CustomAddButton';
+import styles from "ping/src/styles/styles";
 import deprogline from 'ping/assets/createnew/details/detailsprogressline.png';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import INVITE_SCHEMA from 'ping/src/schema/authSchema';
+import INVITE_SCHEMA from 'ping/src/schema/inviteSchema';
 
 function Details({ navigation }) {
   const { data, control, handleSubmit, errors, reset, formState, setValue } = useForm({
@@ -22,7 +23,17 @@ function Details({ navigation }) {
   });
   useFocusEffect(useCallback(reset));
 
+  const [btnpress,setBtnpress]=useState(false);
+
+  const showBtn = ()=> setBtnpress(true);
+
+  // const onSubmit = useCallback(formData => {
+  //   console.log(formData);
+    
+  // }, []);
+
   const onSubmit = () => {
+    console.log("pressed button")
     console.log(data);
     navigation.navigate('Dresscode');
   };
@@ -64,13 +75,13 @@ function Details({ navigation }) {
             control={control}
             errors={errors}
             setValue={setValue}
-            input={{ name: 'start-date', label: 'Start Date',placeholder:'',defaultValue:'' }}
+            input={{ name: 'startdate', label: 'Start Date',placeholder:'',defaultValue:'' }}
           />
           <DateInput
             control={control}
             errors={errors}
             setValue={setValue}
-            input={{ name: 'end-date', label: 'End Date',placeholder:'',defaultValue:'' }}
+            input={{ name: 'enddate', label: 'End Date',placeholder:'',defaultValue:'' }}
           />
           <LocationInput
             control={control}
@@ -89,11 +100,25 @@ function Details({ navigation }) {
             }}
             optional
           />
-
+  <Spacer height={7} />
           <CustomAddButton
             text="Add a co-host"
-            onPress={() => console.log('Add a co-host pressed')}
+            onPress={showBtn}
           />
+          {btnpress?
+          <View style={{resizeMode:'contain',marginTop: heightPercentageToDP('-15')}}>
+            <CustomTextInput
+            control={control}
+            errors={errors}
+            input={{
+              name: 'hosted',
+              placeholder: 'Host/organization name',
+              defaultValue: '',
+            }}/>
+            </View>
+            
+            :null}
+
           <Spacer height={5} />
 
           <CustomTextInput
@@ -121,3 +146,6 @@ function Details({ navigation }) {
 }
 
 export default Details;
+
+
+// style={{height: heightPercentageToDP('20'), width :widthPercentageToDP('95'),  resizeMode:'contain',marginTop: heightPercentageToDP('17'), }} 
