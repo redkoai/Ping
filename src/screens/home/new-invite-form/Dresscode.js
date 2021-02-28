@@ -14,7 +14,7 @@ import {
 } from 'react-native';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import INVITE_SCHEMA from 'ping/src/schema/authSchema';
+import INVITE_SCHEMA from 'ping/src/schema/inviteSchema';
 import styles, { colors } from 'ping/src/styles/styles';
 import Spacer from 'ping/src/components/Spacer';
 import { Dimensions } from 'react-native';

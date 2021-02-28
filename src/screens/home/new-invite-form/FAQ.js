@@ -6,7 +6,7 @@ import { colors } from 'ping/src/styles/styles';
 import { widthPercentageToDP, heightPercentageToDP } from 'ping/util/scaler';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import INVITE_SCHEMA from 'ping/src/schema/authSchema';
+import INVITE_SCHEMA from 'ping/src/schema/inviteSchema';
 import CustomTextInput from 'ping/src/components/inputs/CustomTextInput';
 import CustomButton from 'ping/src/components/inputs/CustomButton';
 import CustomAddButton from 'ping/src/components/inputs/CustomAddButton';
@@ -27,6 +27,9 @@ function FAQ({ navigation }) {
   const handleSecret = (text) => setSecretcode(text);
   const handleGuests = (text) => setGuests(text);
   const handleQuestions = (text) => setQuestion(text);
+  const [btnpress,setBtnpress]=useState(false);
+
+  const showBtn = ()=> setBtnpress(true);
 
   const submited = (p, s, g, q) => {
     console.log({ park: p, secretcode: s, guests: g, question: q });
@@ -100,23 +103,26 @@ function FAQ({ navigation }) {
           onChangeText={handleGuests}
           optional="true"
         />
-        <CustomTextInput
-          input={{
-            name: 'faqquestion',
-            label: 'Type your question here',
-            placeholder: 'Type the answer to your question',
-            defaultValue: '',
-          }}
-          control={control}
-          errors={errors}
-          value={question}
-          onChangeText={handleQuestions}
-        />
-
+        
         <CustomAddButton
           text="Add another question"
-          onPress={() => console.log('Add another question pressed')}
-        />
+          onPress={showBtn}/>
+
+        <Spacer height={3} />
+
+          {btnpress?<CustomTextInput
+            input={{
+              name: 'faqquestion',
+              label: 'Type your question here',
+              placeholder: 'Type the answer to your question',
+              defaultValue: '',
+            }}
+            control={control}
+            errors={errors}
+            value={question}
+            onChangeText={handleQuestions}
+          />:null}
+        
         <Spacer height={5} />
 
         <View style={{ alignSelf: 'flex-end' }}>

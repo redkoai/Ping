@@ -6,15 +6,8 @@ export const EVENT_SCHEMA = yup.object().shape({
     .required('Please enter event name'),
 });
 
-export const LOCATION_SCHEMA = yup.object().shape({
-  location: yup
-    .string()
-    .required('Please select location'),
-    
-});
-
 export const DRESSCODE_SCHEMA = yup.object().shape({
-    password: yup
+    dresscode: yup
       .string()
       .required('Please select any dress code')
       
@@ -36,7 +29,6 @@ export const FAQQUESTION_SCHEMA = yup.object().shape({
 
 const INVITE_SCHEMA = yup.object().shape({
   ...EVENT_SCHEMA.fields,
-  ...LOCATION_SCHEMA.fields,
   ...DRESSCODE_SCHEMA.fields,
   ...DRESSCODECOLOR_SCHEMA.fields,
   ...FAQQUESTION_SCHEMA.fields,

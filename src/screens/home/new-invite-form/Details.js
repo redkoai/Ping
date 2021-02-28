@@ -14,7 +14,7 @@ import CustomAddButton from 'ping/src/components/inputs/CustomAddButton';
 import deprogline from 'ping/assets/createnew/details/detailsprogressline.png';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import INVITE_SCHEMA from 'ping/src/schema/authSchema';
+import INVITE_SCHEMA from 'ping/src/schema/inviteSchema';
 
 function Details({ navigation }) {
   const { data, control, handleSubmit, errors, reset, formState, setValue } = useForm({
@@ -22,7 +22,13 @@ function Details({ navigation }) {
   });
   useFocusEffect(useCallback(reset));
 
+  // const onSubmit = useCallback(formData => {
+  //   console.log(formData);
+    
+  // }, []);
+
   const onSubmit = () => {
+    console.log("pressed button")
     console.log(data);
     navigation.navigate('Dresscode');
   };
