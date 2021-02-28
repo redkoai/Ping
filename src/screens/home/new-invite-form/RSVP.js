@@ -14,9 +14,12 @@ import rsvpprogline from 'ping/assets/createnew/rsvp/rsvpprogline.png';
 function RSVP({ navigation }) {
   const { control, errors, handleSubmit } = useFormContext();
 
-  const onSubmit = (data) => {
-    console.log(data);
+  const onSubmit = (data, d) => {
+    console.log(data, d);
     //navigation.navigate('Signinpopup');
+  };
+  const onError = (error, e) => {
+    console.log(error, e);
   };
 
   return (
@@ -78,7 +81,7 @@ function RSVP({ navigation }) {
 
         <Spacer height={5} />
         <View style={{ alignSelf: 'flex-end' }}>
-          <CustomButton text="next" onPress={handleSubmit(onSubmit)} narrow primary />
+          <CustomButton text="next" onPress={handleSubmit(onSubmit, onError)} narrow primary />
         </View>
 
         <Spacer height={2} />
