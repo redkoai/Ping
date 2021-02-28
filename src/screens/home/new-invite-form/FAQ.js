@@ -4,8 +4,6 @@ import Spacer from 'ping/src/components/Spacer';
 import { colors } from 'ping/src/styles/styles';
 import { widthPercentageToDP, heightPercentageToDP } from 'ping/util/scaler';
 import { useFormContext } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
-import INVITE_SCHEMA from 'ping/src/schema/inviteSchema';
 import CustomTextInput from 'ping/src/components/inputs/CustomTextInput';
 import CustomButton from 'ping/src/components/inputs/CustomButton';
 import CustomAddButton from 'ping/src/components/inputs/CustomAddButton';
@@ -13,9 +11,7 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import faqprogline from 'ping/assets/createnew/faq/faqprogline.png';
 
 function FAQ({ navigation }) {
-  const { control, errors } = useFormContext({
-    resolver: yupResolver(INVITE_SCHEMA),
-  });
+  const { control, errors } = useFormContext();
 
   const [park, setPark] = useState('');
   const [secretcode, setSecretcode] = useState('');

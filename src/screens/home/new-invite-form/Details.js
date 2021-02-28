@@ -12,13 +12,9 @@ import CustomButton from 'ping/src/components/inputs/CustomButton';
 import CustomAddButton from 'ping/src/components/inputs/CustomAddButton';
 import deprogline from 'ping/assets/createnew/details/detailsprogressline.png';
 import { useFormContext } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
-import INVITE_SCHEMA from 'ping/src/schema/inviteSchema';
 
 function Details({ navigation }) {
-  const { control, errors, setValue } = useFormContext({
-    resolver: yupResolver(INVITE_SCHEMA),
-  });
+  const { control, errors, setValue } = useFormContext();
 
   const [btnpress, setBtnpress] = useState(false);
   const showBtn = () => setBtnpress(true);

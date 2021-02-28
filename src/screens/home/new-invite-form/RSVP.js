@@ -12,9 +12,7 @@ import CustomSwitch from 'ping/src/components/inputs/CustomSwitch';
 import rsvpprogline from 'ping/assets/createnew/rsvp/rsvpprogline.png';
 
 function RSVP({ navigation }) {
-  const { control, handleSubmit, errors } = useFormContext({
-    //resolver: yupResolver(AUTH_SCHEMA),
-  });
+  const { control, errors, handleSubmit } = useFormContext();
 
   const onSubmit = (data) => {
     console.log(data);

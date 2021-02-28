@@ -1,21 +1,23 @@
 import React from 'react';
 import { useForm, FormProvider } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import INVITE_SCHEMA from 'ping/src/schema/inviteSchema';
 
 import { headerOptions } from 'ping/src/styles/styles';
 import BackChevron from 'ping/src/components/header/BackChevron';
 import ScreenTitle from 'ping/src/components/header/ScreenTitle';
 
+import { createStackNavigator } from '@react-navigation/stack';
 import Details from 'ping/src/screens/home/new-invite-form/Details';
 import createnewtemplates from 'ping/src/screens/home/new-invite-form/CreateNewTemplates';
 import Dresscode from 'ping/src/screens/home/new-invite-form/Dresscode';
 import FAQ from 'ping/src/screens/home/new-invite-form/FAQ';
 import RSVP from 'ping/src/screens/home/new-invite-form/RSVP';
 
-import { createStackNavigator } from '@react-navigation/stack';
 const NewInviteStack = createStackNavigator();
 
 function NewInviteStackNavigator() {
-  const methods = useForm();
+  const methods = useForm({ resolver: yupResolver(INVITE_SCHEMA) });
 
   return (
     <FormProvider {...methods}>

@@ -1,9 +1,6 @@
-import React, { useCallback, useState } from 'react';
-import { useFocusEffect } from '@react-navigation/native';
+import React, { useState } from 'react';
 import { Image, StatusBar, View } from 'react-native';
 import { useFormContext } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
-import INVITE_SCHEMA from 'ping/src/schema/inviteSchema';
 import { colors } from 'ping/src/styles/styles';
 import Spacer from 'ping/src/components/Spacer';
 import { widthPercentageToDP, heightPercentageToDP } from 'ping/util/scaler';
@@ -16,10 +13,7 @@ import CustomButton from 'ping/src/components/inputs/CustomButton';
 import CustomInputLabel from 'ping/src/components/inputs/CustomInputLabel';
 
 function Dresscode({ navigation }) {
-  const { control, errors, reset } = useFormContext({
-    resolver: yupResolver(INVITE_SCHEMA),
-  });
-  useFocusEffect(useCallback(reset));
+  const { control, errors } = useFormContext();
 
   const [radiobtn, setRadiobtn] = useState('');
   const [val, setVal] = useState('');
