@@ -1,11 +1,10 @@
-import React, { useCallback, useEffect, useState } from 'react';
-import { useFocusEffect } from '@react-navigation/native';
+import React from 'react';
 import { Image, StyleSheet, StatusBar, View } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import Spacer from 'ping/src/components/Spacer';
 import { colors } from 'ping/src/styles/styles';
 import { widthPercentageToDP, heightPercentageToDP } from 'ping/util/scaler';
-import { useForm } from 'react-hook-form';
+import { useFormContext } from 'react-hook-form';
 import CustomButton from 'ping/src/components/inputs/CustomButton';
 import CustomText from 'ping/src/components/CustomText';
 import CustomNumberInput from 'ping/src/components/inputs/CustomNumberInput';
@@ -13,10 +12,9 @@ import CustomSwitch from 'ping/src/components/inputs/CustomSwitch';
 import rsvpprogline from 'ping/assets/createnew/rsvp/rsvpprogline.png';
 
 function RSVP({ navigation }) {
-  const { control, handleSubmit, errors, reset, formState } = useForm({
+  const { control, handleSubmit, errors } = useFormContext({
     //resolver: yupResolver(AUTH_SCHEMA),
   });
-  useFocusEffect(useCallback(reset));
 
   const onSubmit = (data) => {
     console.log(data);
