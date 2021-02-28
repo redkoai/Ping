@@ -19,16 +19,10 @@ function CustomButton({
     <View style={styles.container}>
       <TouchableOpacity
         style={[
-          { width: widthPercentageToDP(narrow ? 47 : 80) },
           styles.button,
-          small ? styles.buttonSmall : styles.buttonLarge,
-          primary
-            ? outline
-              ? styles.buttonPrimaryOutline
-              : styles.buttonPrimary
-            : outline
-            ? styles.buttonSecondaryOutline
-            : styles.buttonSecondary,
+          small ? styles.buttonSmall : narrow ? styles.buttonNarrow : styles.buttonLarge,
+          primary ? styles.buttonPrimary : styles.buttonSecondary,
+          outline && styles.buttonOutline,
           shadow && styles.buttonShadow,
           disabled && primary && styles.primaryDisabled,
           disabled && !primary && styles.secondaryDisabled,
@@ -40,13 +34,9 @@ function CustomButton({
         <Text
           style={[
             textStyles.bigBold,
-            primary
-              ? outline
-                ? styles.textPrimaryOutline
-                : styles.textPrimary
-              : outline
-              ? styles.textSecondaryOutline
-              : styles.textSecondary,
+            //small ? textStyles.normalBold : textStyles.bigBold,
+            primary ? styles.textPrimary : styles.textSecondary,
+            outline && styles.textOutline,
             disabled && primary && styles.textPrimaryDisabled,
             disabled && !primary && styles.textSecondaryDisabled,
           ]}
@@ -75,6 +65,18 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  buttonLarge: {
+    width: widthPercentageToDP(80),
+    height: heightPercentageToDP(Platform.OS === 'ios' ? 5.8 : 6.3),
+  },
+  buttonNarrow: {
+    width: widthPercentageToDP(47),
+    height: heightPercentageToDP(Platform.OS === 'ios' ? 5.8 : 6.3),
+  },
+  buttonSmall: {
+    minWidth: widthPercentageToDP(28),
+    height: heightPercentageToDP(Platform.OS === 'ios' ? 4.2 : 4.8),
+  },
   buttonShadow: {
     shadowColor: colors.offBlack,
     shadowOffset: { width: 0, height: 4 },
@@ -85,18 +87,13 @@ const styles = StyleSheet.create({
   buttonPrimary: {
     backgroundColor: colors.primary,
   },
-  buttonPrimaryOutline: {
+  buttonOutline: {
     backgroundColor: 'white',
     borderColor: colors.primary,
-    borderWidth: 4,
+    borderWidth: 3,
   },
   buttonSecondary: {
     backgroundColor: 'white',
-  },
-  buttonSecondaryOutline: {
-    backgroundColor: 'white',
-    borderColor: colors.offBlack,
-    borderWidth: 3,
   },
   primaryDisabled: {
     backgroundColor: '#ccc',
@@ -113,14 +110,11 @@ const styles = StyleSheet.create({
   textPrimary: {
     color: 'white',
   },
-  textPrimaryOutline: {
+  textOutline: {
     color: colors.primary,
   },
   textSecondary: {
     color: colors.primary,
-  },
-  textSecondaryOutline: {
-    color: colors.offBlack,
   },
   textPrimaryDisabled: {
     color: 'white',
