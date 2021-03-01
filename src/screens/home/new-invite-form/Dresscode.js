@@ -13,7 +13,10 @@ import CustomButton from 'ping/src/components/inputs/CustomButton';
 import CustomInputLabel from 'ping/src/components/inputs/CustomInputLabel';
 
 function Dresscode({ navigation }) {
-  const { control, errors } = useFormContext();
+  const { control, errors, handleSubmit } = useFormContext();
+  const onSubmit = () => {
+    navigation.navigate('FAQ');
+  };
 
   const [radiobtn, setRadiobtn] = useState('');
   const [val, setVal] = useState('');
@@ -102,7 +105,7 @@ function Dresscode({ navigation }) {
 
         <Spacer height={5} />
         <View style={{ alignSelf: 'flex-end' }}>
-          <CustomButton text="next" onPress={() => navigation.navigate('FAQ')} narrow primary />
+          <CustomButton text="next" onPress={handleSubmit(onSubmit)} narrow primary />
         </View>
         <Spacer height={2} />
       </View>

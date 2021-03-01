@@ -11,7 +11,10 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import faqprogline from 'ping/assets/createnew/faq/faqprogline.png';
 
 function FAQ({ navigation }) {
-  const { control, errors } = useFormContext();
+  const { control, errors, handleSubmit } = useFormContext();
+  const onSubmit = () => {
+    navigation.navigate('RSVP');
+  };
 
   const [park, setPark] = useState('');
   const [secretcode, setSecretcode] = useState('');
@@ -115,7 +118,7 @@ function FAQ({ navigation }) {
         <Spacer height={5} />
 
         <View style={{ alignSelf: 'flex-end' }}>
-          <CustomButton text="next" onPress={() => navigation.navigate('RSVP')} narrow primary />
+          <CustomButton text="next" onPress={handleSubmit(onSubmit)} narrow primary />
         </View>
 
         <Spacer height={2} />

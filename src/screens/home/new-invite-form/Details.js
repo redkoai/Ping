@@ -14,7 +14,11 @@ import deprogline from 'ping/assets/createnew/details/detailsprogressline.png';
 import { useFormContext } from 'react-hook-form';
 
 function Details({ navigation }) {
-  const { control, errors, setValue } = useFormContext();
+  const { control, errors, trigger, formState, setValue } = useFormContext();
+  const onSubmit = () => {
+    trigger('event');
+    formState.errors?.event ? console.log(formState.errors) : navigation.navigate('Dresscode');
+  };
 
   const [coHosts, setCoHosts] = useState([]);
   const addCoHost = () => setCoHosts([...coHosts, 1]);
@@ -112,12 +116,7 @@ function Details({ navigation }) {
         />
 
         <View style={{ alignSelf: 'flex-end' }}>
-          <CustomButton
-            text="next"
-            onPress={() => navigation.navigate('Dresscode')}
-            narrow
-            primary
-          />
+          <CustomButton text="next" onPress={onSubmit} narrow primary />
         </View>
 
         <Spacer height={2} />
