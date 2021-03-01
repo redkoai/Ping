@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import NewInviteContext from 'ping/src/contexts/NewInviteContext';
 import { StatusBar, Image, View } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { colors } from 'ping/src/styles/styles';
@@ -11,13 +12,15 @@ import CustomTextInput, {
 import CustomButton from 'ping/src/components/inputs/CustomButton';
 import CustomAddButton from 'ping/src/components/inputs/CustomAddButton';
 import deprogline from 'ping/assets/createnew/details/detailsprogressline.png';
-import { useFormContext } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 
 function Details({ navigation }) {
-  const { control, errors, trigger, formState, setValue } = useFormContext();
-  const onSubmit = () => {
-    trigger('event');
-    formState.errors?.event ? console.log(formState.errors) : navigation.navigate('Dresscode');
+  const { updateFormData } = useContext(NewInviteContext);
+
+  const { control, errors, setValue, handleSubmit } = useForm();
+  const onSubmit = (data) => {
+    updateFormData(data)
+    navigation.navigate('Dresscode');
   };
 
   const [coHosts, setCoHosts] = useState([]);
@@ -116,7 +119,7 @@ function Details({ navigation }) {
         />
 
         <View style={{ alignSelf: 'flex-end' }}>
-          <CustomButton text="next" onPress={onSubmit} narrow primary />
+          <CustomButton text="next" onPress={handleSubmit(onSubmit)} narrow primary />
         </View>
 
         <Spacer height={2} />

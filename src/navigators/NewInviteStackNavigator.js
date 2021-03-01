@@ -1,7 +1,5 @@
 import React from 'react';
-import { useForm, FormProvider } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
-import INVITE_SCHEMA from 'ping/src/schema/inviteSchema';
+import { NewInviteProvider } from 'ping/src/contexts/NewInviteContext';
 
 import { headerOptions } from 'ping/src/styles/styles';
 import BackChevron from 'ping/src/components/header/BackChevron';
@@ -17,10 +15,8 @@ import RSVP from 'ping/src/screens/home/new-invite-form/RSVP';
 const NewInviteStack = createStackNavigator();
 
 function NewInviteStackNavigator() {
-  const methods = useForm({ resolver: yupResolver(INVITE_SCHEMA) });
-
   return (
-    <FormProvider {...methods}>
+    <NewInviteProvider>
       <NewInviteStack.Navigator screenOptions={headerOptions}>
         <NewInviteStack.Screen
           name="createnewtemplates"
@@ -63,7 +59,7 @@ function NewInviteStackNavigator() {
           }}
         />
       </NewInviteStack.Navigator>
-    </FormProvider>
+    </NewInviteProvider>
   );
 }
 

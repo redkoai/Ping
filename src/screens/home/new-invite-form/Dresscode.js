@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import NewInviteContext from 'ping/src/contexts/NewInviteContext';
 import { Image, StatusBar, View } from 'react-native';
-import { useFormContext } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { colors } from 'ping/src/styles/styles';
 import Spacer from 'ping/src/components/Spacer';
 import { widthPercentageToDP, heightPercentageToDP } from 'ping/util/scaler';
@@ -13,8 +14,11 @@ import CustomButton from 'ping/src/components/inputs/CustomButton';
 import CustomInputLabel from 'ping/src/components/inputs/CustomInputLabel';
 
 function Dresscode({ navigation }) {
-  const { control, errors, handleSubmit } = useFormContext();
-  const onSubmit = () => {
+  const { updateFormData } = useContext(NewInviteContext);
+
+  const { control, errors, handleSubmit } = useForm();
+  const onSubmit = (data) => {
+    updateFormData(data);
     navigation.navigate('FAQ');
   };
 

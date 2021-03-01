@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import NewInviteContext from 'ping/src/contexts/NewInviteContext';
 import { Image, StatusBar, View } from 'react-native';
 import Spacer from 'ping/src/components/Spacer';
 import { colors } from 'ping/src/styles/styles';
 import { widthPercentageToDP, heightPercentageToDP } from 'ping/util/scaler';
-import { useFormContext } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import CustomTextInput from 'ping/src/components/inputs/CustomTextInput';
 import CustomButton from 'ping/src/components/inputs/CustomButton';
 import CustomAddButton from 'ping/src/components/inputs/CustomAddButton';
@@ -11,8 +12,11 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import faqprogline from 'ping/assets/createnew/faq/faqprogline.png';
 
 function FAQ({ navigation }) {
-  const { control, errors, handleSubmit } = useFormContext();
-  const onSubmit = () => {
+  const { updateFormData } = useContext(NewInviteContext);
+
+  const { control, errors, handleSubmit } = useForm();
+  const onSubmit = (data) => {
+    updateFormData(data);
     navigation.navigate('RSVP');
   };
 

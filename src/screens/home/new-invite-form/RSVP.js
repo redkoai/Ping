@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import NewInviteContext from 'ping/src/contexts/NewInviteContext';
 import { Image, StyleSheet, StatusBar, View } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import Spacer from 'ping/src/components/Spacer';
 import { colors } from 'ping/src/styles/styles';
 import { widthPercentageToDP, heightPercentageToDP } from 'ping/util/scaler';
-import { useFormContext } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import CustomButton from 'ping/src/components/inputs/CustomButton';
 import CustomText from 'ping/src/components/CustomText';
 import CustomNumberInput from 'ping/src/components/inputs/CustomNumberInput';
@@ -12,9 +13,12 @@ import CustomSwitch from 'ping/src/components/inputs/CustomSwitch';
 import rsvpprogline from 'ping/assets/createnew/rsvp/rsvpprogline.png';
 
 function RSVP({ navigation }) {
-  const { control, errors, handleSubmit } = useFormContext();
-  const onSubmit = (data, d) => {
-    console.log(data, d);
+  const { formData, updateFormData } = useContext(NewInviteContext);
+
+  const { control, errors, handleSubmit } = useForm();
+  const onSubmit = (data) => {
+    updateFormData(data);
+    console.log(formData);
     //navigation.navigate('Signinpopup');
   };
 
