@@ -5,7 +5,7 @@ const NewInviteContext = React.createContext();
 export function NewInviteProvider({ children }) {
   const [formData, setFormData] = useState({});
 
-  const updateFormData = (newData) => setFormData({ ...formData, newData });
+  const updateFormData = (newData) => setFormData({ ...formData, ...newData });
   const resetFormData = () => setFormData({});
 
   return (

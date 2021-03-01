@@ -1,5 +1,7 @@
 import React, { useState, useContext } from 'react';
 import NewInviteContext from 'ping/src/contexts/NewInviteContext';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { EVENT_SCHEMA } from 'ping/src/schema/inviteSchema';
 import { Image, StatusBar, View } from 'react-native';
 import { useForm } from 'react-hook-form';
 import { colors } from 'ping/src/styles/styles';
@@ -16,7 +18,9 @@ import CustomInputLabel from 'ping/src/components/inputs/CustomInputLabel';
 function Dresscode({ navigation }) {
   const { updateFormData } = useContext(NewInviteContext);
 
-  const { control, errors, handleSubmit } = useForm();
+  const { control, errors, handleSubmit } = useForm({
+    //resolver: yupResolver(EVENT_SCHEMA),
+  });
   const onSubmit = (data) => {
     updateFormData(data);
     navigation.navigate('FAQ');

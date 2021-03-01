@@ -1,5 +1,7 @@
 import React, { useState, useContext } from 'react';
 import NewInviteContext from 'ping/src/contexts/NewInviteContext';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { EVENT_SCHEMA } from 'ping/src/schema/inviteSchema';
 import { StatusBar, Image, View } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { colors } from 'ping/src/styles/styles';
@@ -17,9 +19,11 @@ import { useForm } from 'react-hook-form';
 function Details({ navigation }) {
   const { updateFormData } = useContext(NewInviteContext);
 
-  const { control, errors, setValue, handleSubmit } = useForm();
+  const { control, errors, setValue, handleSubmit } = useForm({
+    resolver: yupResolver(EVENT_SCHEMA),
+  });
   const onSubmit = (data) => {
-    updateFormData(data)
+    updateFormData(data);
     navigation.navigate('Dresscode');
   };
 

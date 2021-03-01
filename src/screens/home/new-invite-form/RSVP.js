@@ -1,5 +1,7 @@
 import React, { useContext } from 'react';
 import NewInviteContext from 'ping/src/contexts/NewInviteContext';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { EVENT_SCHEMA } from 'ping/src/schema/inviteSchema';
 import { Image, StyleSheet, StatusBar, View } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import Spacer from 'ping/src/components/Spacer';
@@ -15,7 +17,9 @@ import rsvpprogline from 'ping/assets/createnew/rsvp/rsvpprogline.png';
 function RSVP({ navigation }) {
   const { formData, updateFormData } = useContext(NewInviteContext);
 
-  const { control, errors, handleSubmit } = useForm();
+  const { control, errors, handleSubmit } = useForm({
+    //resolver: yupResolver(EVENT_SCHEMA),
+  });
   const onSubmit = (data) => {
     updateFormData(data);
     console.log(formData);
