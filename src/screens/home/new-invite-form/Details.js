@@ -29,14 +29,13 @@ function Details({ navigation }) {
   const [coHosts, setCoHosts] = useState([]);
   const addCoHost = () => setCoHosts([...coHosts, 1]);
 
-
   return (
     <KeyboardAwareScrollView
       style={{ flex: 1, backgroundColor: 'white' }}
       contentContainerStyle={{ justifyContent: 'center', alignItems: 'center' }}
     >
       <StatusBar backgroundColor={colors.primary} />
-      <View 
+      <View
         style={{
           flexDirection: 'column',
           justifyContent: 'center',
@@ -84,7 +83,7 @@ function Details({ navigation }) {
           control={control}
           errors={errors}
           input={{
-            name: 'hosted',
+            name: 'co-host-0',
             label: 'Hosted by',
             placeholder: 'Host/organization name',
             defaultValue: '',
@@ -92,13 +91,13 @@ function Details({ navigation }) {
           optional
         />
 
-        {coHosts.map((item) => (
+        {coHosts.map((item, index) => (
           <View style={{ resizeMode: 'contain', marginTop: heightPercentageToDP('-3') }}>
             <CustomTextInput
               control={control}
               errors={errors}
               input={{
-                name: 'hosted',
+                name: `co-host-${index + 1}`,
                 placeholder: 'Host/organization name',
                 defaultValue: '',
               }}
@@ -133,5 +132,3 @@ function Details({ navigation }) {
 }
 
 export default Details;
-
-
