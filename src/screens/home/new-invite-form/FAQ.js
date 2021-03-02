@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 import NewInviteContext from 'ping/src/contexts/NewInviteContext';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { EVENT_SCHEMA } from 'ping/src/schema/inviteSchema';
+import { FAQQUESTION_SCHEMA } from 'ping/src/schema/inviteSchema';
 import { Image, StatusBar, View } from 'react-native';
 import Spacer from 'ping/src/components/Spacer';
 import { colors } from 'ping/src/styles/styles';
@@ -17,7 +17,7 @@ function FAQ({ navigation }) {
   const { updateFormData } = useContext(NewInviteContext);
 
   const { control, errors, handleSubmit } = useForm({
-    //resolver: yupResolver(EVENT_SCHEMA),
+    resolver: yupResolver(FAQQUESTION_SCHEMA),
   });
   const onSubmit = (data) => {
     updateFormData(data);
@@ -32,13 +32,9 @@ function FAQ({ navigation }) {
   const handleSecret = (text) => setSecretcode(text);
   const handleGuests = (text) => setGuests(text);
   const handleQuestions = (text) => setQuestion(text);
-  const [btnpress, setBtnpress] = useState(false);
 
-  const showBtn = () => setBtnpress(true);
-
-  const submited = (p, s, g, q) => {
-    console.log({ park: p, secretcode: s, guests: g, question: q });
-  };
+  const [anotherQuestion, setAnotherQuestion] = useState([]);
+  const addAnotherQuestion = () => setAnotherQuestion([...anotherQuestion,1]);
 
   return (
     <KeyboardAwareScrollView
@@ -72,8 +68,8 @@ function FAQ({ navigation }) {
           }}
           control={control}
           errors={errors}
-          value={park}
-          onChangeText={handlePark}
+          // value={park}
+          // onChangeText={handlePark}
           optional="true"
         />
 
@@ -86,8 +82,8 @@ function FAQ({ navigation }) {
           }}
           control={control}
           errors={errors}
-          value={secretcode}
-          onChangeText={handleSecret}
+          // value={secretcode}
+          // onChangeText={handleSecret}
           optional="true"
         />
         <CustomTextInput
@@ -99,16 +95,13 @@ function FAQ({ navigation }) {
           }}
           control={control}
           errors={errors}
-          value={guests}
-          onChangeText={handleGuests}
+          // value={guests}
+          // onChangeText={handleGuests}
           optional="true"
         />
 
-        <CustomAddButton text="Add another question" onPress={showBtn} />
-
-        <Spacer height={3} />
-
-        {btnpress ? (
+        {anotherQuestion.map((item)=> (
+          <View style={{ resizeMode: 'contain', marginTop: heightPercentageToDP('-1') }}>
           <CustomTextInput
             input={{
               name: 'faqquestion',
@@ -118,10 +111,15 @@ function FAQ({ navigation }) {
             }}
             control={control}
             errors={errors}
-            value={question}
-            onChangeText={handleQuestions}
           />
-        ) : null}
+        </View>
+        ))}
+
+        <CustomAddButton text="Add another question" onPress={addAnotherQuestion} />
+
+        <Spacer height={3} />
+
+    
 
         <Spacer height={5} />
 
