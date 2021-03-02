@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 import NewInviteContext from 'ping/src/contexts/NewInviteContext';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { DRESSCODECOLOR_SCHEMA } from 'ping/src/schema/inviteSchema';
+import { DRESSCODE_SCHEMA } from 'ping/src/schema/dresscodeSchema';
 import { Image, StatusBar, View, Text } from 'react-native';
 import { useForm, Controller } from 'react-hook-form';
 import { colors } from 'ping/src/styles/styles';
@@ -18,12 +18,13 @@ import CustomInputLabel from 'ping/src/components/inputs/CustomInputLabel';
 function Dresscode({ navigation }) {
   const { updateFormData } = useContext(NewInviteContext);
 
-  const { control, errors, setValue, handleSubmit } = useForm({
-    //resolver: yupResolver(DRESSCODECOLOR_SCHEMA),
+  const { control, errors, setValue,reset, handleSubmit } = useForm({
+    resolver: yupResolver(DRESSCODE_SCHEMA),
   });
   const onSubmit = (data) => {
     updateFormData(data);
     navigation.navigate('FAQ');
+    reset();
   };
 
   const listData = [

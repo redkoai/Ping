@@ -2,6 +2,7 @@ import { colors } from 'ping/src/styles/styles';
 import React from 'react';
 import { Switch } from 'react-native';
 import { Controller } from 'react-hook-form';
+
 // control, errors, and setValue are passed from the useForm hook of the react-hook-form package
 // const { control, handleSubmit, errors, setValue } = useForm();
 

@@ -11,6 +11,7 @@ import createnewtemplates from 'ping/src/screens/home/new-invite-form/CreateNewT
 import Dresscode from 'ping/src/screens/home/new-invite-form/Dresscode';
 import FAQ from 'ping/src/screens/home/new-invite-form/FAQ';
 import RSVP from 'ping/src/screens/home/new-invite-form/RSVP';
+import Signinpopup from 'ping/src/screens/home/Signinpopup';
 
 const NewInviteStack = createStackNavigator();
 
@@ -56,6 +57,14 @@ function NewInviteStackNavigator() {
           options={{
             headerLeft: () => <BackChevron />,
             headerRight: () => <ScreenTitle title="RSVP Options" />,
+          }}
+        />
+         <NewInviteStack.Screen
+          name="Signinpopup"
+          component={Signinpopup}
+          options={{
+            // headerLeft: () => <BackChevron />,
+            // headerRight: () => <ScreenTitle title="RSVP Options" />,
           }}
         />
       </NewInviteStack.Navigator>

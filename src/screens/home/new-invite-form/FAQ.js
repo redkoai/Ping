@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 import NewInviteContext from 'ping/src/contexts/NewInviteContext';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { FAQQUESTION_SCHEMA } from 'ping/src/schema/inviteSchema';
+import { FAQ_SCHEMA } from 'ping/src/schema/faqSchema';
 import { Image, StatusBar, View } from 'react-native';
 import Spacer from 'ping/src/components/Spacer';
 import { colors } from 'ping/src/styles/styles';
@@ -16,12 +16,13 @@ import faqprogline from 'ping/assets/createnew/faq/faqprogline.png';
 function FAQ({ navigation }) {
   const { updateFormData } = useContext(NewInviteContext);
 
-  const { control, errors, handleSubmit } = useForm({
-    resolver: yupResolver(FAQQUESTION_SCHEMA),
+  const { control, errors,reset, handleSubmit } = useForm({
+    resolver: yupResolver(FAQ_SCHEMA),
   });
   const onSubmit = (data) => {
     updateFormData(data);
     navigation.navigate('RSVP');
+    reset();
   };
 
   const [park, setPark] = useState('');
