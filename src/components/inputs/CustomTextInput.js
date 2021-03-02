@@ -144,8 +144,6 @@ function CustomTextInput({
       <DateTimePickerModal
         isVisible={isDatePickerVisible}
         mode="datetime"
-        minimumDate={new Date(2021, 2, 1)} 
-        maximumDate={new Date(2022, 2, 1)}
         onConfirm={handleDateConfirm}
         onCancel={() => setDatePickerVisibility(false)}
       />

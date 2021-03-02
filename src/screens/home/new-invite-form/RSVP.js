@@ -17,7 +17,7 @@ import rsvpprogline from 'ping/assets/createnew/rsvp/rsvpprogline.png';
 function RSVP({ navigation }) {
   const { formData, updateFormData } = useContext(NewInviteContext);
 
-  const { control, errors, handleSubmit } = useForm({
+  const { control, errors, setValue, handleSubmit } = useForm({
     //resolver: yupResolver(EVENT_SCHEMA),
   });
   const onSubmit = (data) => {
@@ -54,7 +54,7 @@ function RSVP({ navigation }) {
         <View style={styles.wrapperContainer}>
           <View style={styles.textConatiner}>
             <CustomText text="Collect RSVPs" header />
-            <CustomText text="Guests will be able to to let you know if they're attending or not" />
+            <CustomText text="Guests will be able to to let you know if they're attending or not"  />
           </View>
           <CustomSwitch control={control} errors={errors} input={{ name: 'collect-rsvp' }} />
         </View>
@@ -62,7 +62,7 @@ function RSVP({ navigation }) {
         <View style={styles.wrapperContainer}>
           <View style={styles.textConatiner}>
             <CustomText text="Request number of kids attending" header />
-            <CustomText text="Get head count of both adults and kids attending" />
+            <CustomText text="Get head count of both adults and kids attending"  />
           </View>
           <CustomSwitch control={control} errors={errors} input={{ name: 'request-num-of-kids' }} />
         </View>
@@ -70,7 +70,7 @@ function RSVP({ navigation }) {
         <View style={styles.wrapperContainer}>
           <View style={styles.textConatiner}>
             <CustomText text="Total invited per invitation" header />
-            <CustomText text="This includes the person that receives the invite" />
+            <CustomText text="This includes the person that receives the invite"  />
           </View>
           <CustomNumberInput control={control} errors={errors} input={{ name: 'total-invited' }} />
         </View>
@@ -78,7 +78,7 @@ function RSVP({ navigation }) {
         <View style={styles.wrapperContainer}>
           <View style={styles.textConatiner}>
             <CustomText text="Show guest list" header />
-            <CustomText text="Names of attending guests will be displayed on the invite" />
+            <CustomText text="Names of attending guests will be displayed on the invite"  />
           </View>
           <CustomSwitch control={control} errors={errors} input={{ name: 'show-guest-list' }} />
         </View>

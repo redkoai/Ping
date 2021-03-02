@@ -26,9 +26,9 @@ function Details({ navigation }) {
     updateFormData(data);
     navigation.navigate('Dresscode');
   };
-
   const [coHosts, setCoHosts] = useState([]);
   const addCoHost = () => setCoHosts([...coHosts, 1]);
+
 
   return (
     <KeyboardAwareScrollView
@@ -36,7 +36,7 @@ function Details({ navigation }) {
       contentContainerStyle={{ justifyContent: 'center', alignItems: 'center' }}
     >
       <StatusBar backgroundColor={colors.primary} />
-      <View
+      <View 
         style={{
           flexDirection: 'column',
           justifyContent: 'center',
@@ -134,4 +134,4 @@ function Details({ navigation }) {
 
 export default Details;
 
-// style={{height: heightPercentageToDP('20'), width :widthPercentageToDP('95'),  resizeMode:'contain',marginTop: heightPercentageToDP('17'), }}
+

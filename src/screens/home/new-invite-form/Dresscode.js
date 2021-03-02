@@ -1,8 +1,8 @@
 import React, { useState, useContext } from 'react';
 import NewInviteContext from 'ping/src/contexts/NewInviteContext';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { EVENT_SCHEMA } from 'ping/src/schema/inviteSchema';
-import { Image, StatusBar, View } from 'react-native';
+import { DRESSCODECOLOR_SCHEMA } from 'ping/src/schema/inviteSchema';
+import { Image, StatusBar, View, Text } from 'react-native';
 import { useForm } from 'react-hook-form';
 import { colors } from 'ping/src/styles/styles';
 import Spacer from 'ping/src/components/Spacer';
@@ -18,8 +18,8 @@ import CustomInputLabel from 'ping/src/components/inputs/CustomInputLabel';
 function Dresscode({ navigation }) {
   const { updateFormData } = useContext(NewInviteContext);
 
-  const { control, errors, handleSubmit } = useForm({
-    //resolver: yupResolver(EVENT_SCHEMA),
+  const { control, errors, setValue, handleSubmit } = useForm({
+    //resolver: yupResolver(DRESSCODECOLOR_SCHEMA),
   });
   const onSubmit = (data) => {
     updateFormData(data);
@@ -30,6 +30,11 @@ function Dresscode({ navigation }) {
   const [val, setVal] = useState('');
   const [description, setDescription] = useState('');
   const [image, setImage] = useState('');
+
+  // const pressCircle = (dateVal) => {
+  //   const formatted = setVal(dateVal);
+  //   setValue(formatted);
+  // };
 
   function pressCircle(i) {
     setVal(i);
@@ -76,11 +81,21 @@ function Dresscode({ navigation }) {
             outerWidth={30}
             innerWidth={20}
             borderWidth={1.5}
+            setValue={setValue}
             data={listData}
             color={'black'}
             onPress={pressCircle}
             wrapperStyle={{ padding: 4 }}
           />
+        </View>
+        <View
+          style={{
+            marginHorizontal: 10,
+            marginVertical: 10,
+            alignItems: "center"
+          }}
+        >
+          <Text>{"clicked item value is: " + val}</Text>
         </View>
         <View
           style={{
@@ -101,8 +116,6 @@ function Dresscode({ navigation }) {
             }}
             control={control}
             errors={errors}
-            value={description}
-            onChangeText={handleDescription}
             rules={{ multiline: true, numberOfLines: 5 }}
           />
         </View>

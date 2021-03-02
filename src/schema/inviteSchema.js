@@ -34,7 +34,7 @@ export const ENDDATE_SCHEMA = yup.object().shape({
 export const DRESSCODECOLOR_SCHEMA = yup.object().shape({
     dresscode: yup
       .string()
-      .min(2, "Dress color should be greater than 2 characters")
+      // .min(2, "Dress color should be greater than 2 characters")
       .required('Please write any color on your mind')
       
   });
