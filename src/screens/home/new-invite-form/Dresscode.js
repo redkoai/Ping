@@ -3,7 +3,7 @@ import NewInviteContext from 'ping/src/contexts/NewInviteContext';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { DRESSCODECOLOR_SCHEMA } from 'ping/src/schema/inviteSchema';
 import { Image, StatusBar, View, Text } from 'react-native';
-import { useForm } from 'react-hook-form';
+import { useForm, Controller } from 'react-hook-form';
 import { colors } from 'ping/src/styles/styles';
 import Spacer from 'ping/src/components/Spacer';
 import { widthPercentageToDP, heightPercentageToDP } from 'ping/util/scaler';
@@ -26,32 +26,13 @@ function Dresscode({ navigation }) {
     navigation.navigate('FAQ');
   };
 
-  const [radiobtn, setRadiobtn] = useState('');
-  const [val, setVal] = useState('');
-  const [description, setDescription] = useState('');
-  const [image, setImage] = useState('');
-
-  // const pressCircle = (dateVal) => {
-  //   const formatted = setVal(dateVal);
-  //   setValue(formatted);
-  // };
-
-  function pressCircle(i) {
-    setVal(i);
-  }
-  const handleDescription = (text) => setDescription(text);
-
   const listData = [
-    { label: 'Casual and Comfortable', value: 1 },
-    { label: 'Business casual', value: 2 },
-    { label: 'Semi-formal', value: 3 },
-    { label: 'Formal/Black tie', value: 4 },
-    { label: 'custom', value: 5 },
+    { label: 'Casual and Comfortable', value: 'casual-and-comfortable' },
+    { label: 'Business casual', value: 'business-casual' },
+    { label: 'Semi-formal', value: 'semi-formal' },
+    { label: 'Formal/Black tie', value: 'formal-black-tie' },
+    { label: 'custom', value: 'custom' },
   ];
-
-  const submited = (val, description) => {
-    console.log({ radiovalue: val, description: description });
-  };
 
   return (
     <KeyboardAwareScrollView
@@ -77,25 +58,21 @@ function Dresscode({ navigation }) {
           }}
         />
         <View style={{ position: 'relative', left: 10 }}>
-          <RadioButton
-            outerWidth={30}
-            innerWidth={20}
-            borderWidth={1.5}
-            setValue={setValue}
-            data={listData}
-            color={'black'}
-            onPress={pressCircle}
-            wrapperStyle={{ padding: 4 }}
+          <Controller
+            control={control}
+            name="radio-buttons"
+            render={({ onChange }) => (
+              <RadioButton
+                outerWidth={30}
+                innerWidth={20}
+                borderWidth={1.5}
+                data={listData}
+                color={'black'}
+                onPress={onChange}
+                wrapperStyle={{ padding: 4 }}
+              />
+            )}
           />
-        </View>
-        <View
-          style={{
-            marginHorizontal: 10,
-            marginVertical: 10,
-            alignItems: "center"
-          }}
-        >
-          <Text>{"clicked item value is: " + val}</Text>
         </View>
         <View
           style={{
