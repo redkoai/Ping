@@ -35,22 +35,22 @@ function Accounts({}) {
             <Image source={Accevents} style={{height: heightPercentageToDP('20'), width :widthPercentageToDP('85'), marginTop: heightPercentageToDP('-7'), resizeMode:'contain' }} />
             <Image source={Acccenter} style={{height: heightPercentageToDP('40'), width :widthPercentageToDP('95'), marginTop: heightPercentageToDP('-2'), resizeMode:'contain' }} />
                 <TouchableOpacity onPress={() => { 
-                    // navigation.navigate('HomeScreenEmpty')
+                     navigation.navigate('NewInvite')
                 }}>
                     <Image source={createNewEventBtn} style={{height: heightPercentageToDP('7'), width :widthPercentageToDP('70'), marginTop: heightPercentageToDP('5'), resizeMode:'contain', left:heightPercentageToDP('5') }} />
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => { 
-                    // navigation.navigate('HomeScreenEmpty')
+                    navigation.navigate('SignUpScreen')
                 }}>
                     <Image source={addFriendsBtn} style={{height: heightPercentageToDP('7'), width :widthPercentageToDP('70'), marginBottom: heightPercentageToDP('15'), resizeMode:'contain' , left:heightPercentageToDP('5')}} />
                 </TouchableOpacity>
             </View>
             </ImageBackground>
-            <CustomButton
+           {/* <CustomButton
                 text="Sign Out"
                 onPress={async () => await singOutAsync(onSuccess, onFailure)}
                 primary
-            />
+            />*/}
         </View>
     )
 }
