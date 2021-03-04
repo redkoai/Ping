@@ -1,5 +1,5 @@
 import {useNavigation} from "@react-navigation/native";
-import {Image, ImageBackground, View, ScrollView} from "react-native";
+import {Image, ImageBackground, View, ScrollView, SafeAreaView,StyleSheet} from "react-native";
 import {TouchableOpacity} from 'react-native';
 import emptyHome from "ping/assets/homeScreen/bg.png";
 import styles from "ping/src/styles/styles";
@@ -8,15 +8,13 @@ import {widthPercentageToDP,heightPercentageToDP,} from 'ping/util/scaler';
 import React, {useContext, useEffect, useState} from "react";
 import AuthContext from 'ping/src/contexts/AuthContext';
 import CustomButton from 'ping/src/components/inputs/CustomButton';
-import createNewEventBtn from "ping/assets/NavBarAssets/createNewEventBtn.png"
-import addFriendsBtn from "ping/assets/NavBarAssets/addFriendsBtn.png"
-import Accname from "ping/assets/Accounts/AccountName.png";
+import Spacer from 'ping/src/components/Spacer';
+import settings from "ping/assets/Accounts/settings.png";
 import Accfriends from "ping/assets/Accounts/friends.png";
-import Accevents from "ping/assets/Accounts/Accountevents.png";
 import Acccenter from "ping/assets/Accounts/Accountscenter.png";
 
 function Accounts({}) {
-    const navigation = useNavigation()
+    const navigation = useNavigation();
     const { singOutAsync } = useContext(AuthContext);
 
     const onSuccess = () => {
@@ -25,33 +23,81 @@ function Accounts({}) {
     const onFailure = (errorMessage) => {
         alert(errorMessage)
     };
-
     return (
-        <View style={{flex: 1}}>    
-            <ImageBackground source={emptyHome} style={styles.homeEmpty}>
-            <View style={{ flexDirection: 'column', justifyContent: 'center',marginTop:widthPercentageToDP(3)}}>
-            <Image source={Accname} style={{height: heightPercentageToDP('10'), width :widthPercentageToDP('95'),  resizeMode:'contain',marginTop: heightPercentageToDP('10'), }} />
-            <Image source={Accfriends} style={{height: heightPercentageToDP('4'), width :widthPercentageToDP('30'),  resizeMode:'contain',marginTop: heightPercentageToDP('-2'), }} />
-            <Image source={Accevents} style={{height: heightPercentageToDP('20'), width :widthPercentageToDP('85'), marginTop: heightPercentageToDP('-7'), resizeMode:'contain' }} />
-            <Image source={Acccenter} style={{height: heightPercentageToDP('40'), width :widthPercentageToDP('95'), marginTop: heightPercentageToDP('-2'), resizeMode:'contain' }} />
-                <TouchableOpacity onPress={() => { 
-                    // navigation.navigate('HomeScreenEmpty')
-                }}>
-                    <Image source={createNewEventBtn} style={{height: heightPercentageToDP('7'), width :widthPercentageToDP('70'), marginTop: heightPercentageToDP('5'), resizeMode:'contain', left:heightPercentageToDP('5') }} />
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => { 
-                    // navigation.navigate('HomeScreenEmpty')
-                }}>
-                    <Image source={addFriendsBtn} style={{height: heightPercentageToDP('7'), width :widthPercentageToDP('70'), marginBottom: heightPercentageToDP('15'), resizeMode:'contain' , left:heightPercentageToDP('5')}} />
-                </TouchableOpacity>
-            </View>
-            </ImageBackground>
+
+        <View style={{ flex: 1 }}>
+          <ImageBackground source={emptyHome} style={styles.homeEmpty}>
+            <View
+              style={{
+                flexDirection: 'column',
+                justifyContent: 'center',
+                marginTop: widthPercentageToDP(3),
+              }}
+            >
+            {/* <Image source={Accname} style={{height: heightPercentageToDP('10'), width :widthPercentageToDP('95'),  resizeMode:'contain',marginTop: heightPercentageToDP('10'), }} /> */}
+             <TouchableOpacity>
+            <Image 
+            source={settings} 
+            style={{
+            height: heightPercentageToDP('3'),
+            width :widthPercentageToDP('30'), 
+            resizeMode:'contain',
+            marginTop: heightPercentageToDP('1'), 
+            left: heightPercentageToDP('32'),
+            
+            }} />
+            </TouchableOpacity>
+            
+            <Image 
+            source={Accfriends} 
+            style={{
+            height: heightPercentageToDP('4'),
+            width :widthPercentageToDP('30'), 
+            resizeMode:'contain',
+            marginTop: heightPercentageToDP('1'), 
+            left: heightPercentageToDP('1'),
+            
+            }} /> 
+            {/* <Image source={Accevents} style={{height: heightPercentageToDP('20'), width :widthPercentageToDP('85'), marginTop: heightPercentageToDP('-7'), resizeMode:'contain' }} /> */}
+            <Image 
+            source={Acccenter} 
+            style={{height: heightPercentageToDP('32'),
+            width :widthPercentageToDP('95'), 
+            marginTop: heightPercentageToDP('4'), 
+            left: heightPercentageToDP('1'),
+            resizeMode:'contain' 
+            }} />
+        </View>
+        <Spacer height={2} />
+         <TouchableOpacity>     
+        <CustomButton
+          text="Create a new event"
+          primary
+          shadow
+        />
+        </TouchableOpacity> 
+        
+        <TouchableOpacity>
+        <CustomButton
+          text="Add friends"
+          shadow
+        />
+        </TouchableOpacity>
             <CustomButton
                 text="Sign Out"
                 onPress={async () => await singOutAsync(onSuccess, onFailure)}
                 primary
             />
-        </View>
-    )
+        
+      </ImageBackground>
+    </View>
+  );
 }
+
 export default Accounts
+
+const stylesone = StyleSheet.create({
+    scene: {
+      flex: 1,
+    },
+  });

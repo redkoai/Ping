@@ -42,7 +42,8 @@ function NavBar_account({}){
                     <Image source={Messagesbtn} style={{height: heightPercentageToDP('15'), width :widthPercentageToDP('12'),  resizeMode:'contain', bottom: heightPercentageToDP('3')}} />
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() =>{
-                     navigation.navigate('Accounts')
+                     //navigation.navigate('Accounts')
+                     navigation.navigate('TabViewExample')
                     }}>
                     <Image source={Accountsbtn} style={{height: heightPercentageToDP('15'), width :widthPercentageToDP('12'),  resizeMode:'contain', bottom: heightPercentageToDP('3')}}/>
                 </TouchableOpacity>

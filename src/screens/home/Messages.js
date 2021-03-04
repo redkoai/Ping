@@ -6,8 +6,8 @@ import styles from "ping/src/styles/styles";
 import { Dimensions } from 'react-native';
 import {widthPercentageToDP,heightPercentageToDP,} from 'ping/util/scaler';
 import React, {useEffect, useState} from "react";
-import createNewEventBtn from "ping/assets/NavBarAssets/createNewEventBtn.png"
-import addFriendsBtn from "ping/assets/NavBarAssets/addFriendsBtn.png"
+import CustomButton from 'ping/src/components/inputs/CustomButton';
+import Spacer from 'ping/src/components/Spacer';
 import emptyPic from "ping/assets/messages/img.png";
 import homettl from "ping/assets/messages/messagettl.png";
 
@@ -18,21 +18,40 @@ function Messages({}) {
     return (
         <View style={{flex: 1}}>    
             <ImageBackground source={emptyHome} style={styles.homeEmpty}>
-            <View style={{ flexDirection: 'column', justifyContent: 'center',marginTop:widthPercentageToDP(3)}}>
-            <Image source={homettl} style={{height: heightPercentageToDP('15'), width :widthPercentageToDP('90'),  resizeMode:'contain',marginTop: heightPercentageToDP('10'), }} />
-            <Image source={emptyPic} style={{height: heightPercentageToDP('40'), width :widthPercentageToDP('85'), marginTop: heightPercentageToDP('0'), resizeMode:'contain' }} />
-                <TouchableOpacity onPress={() => { 
-                    // navigation.navigate('HomeScreenEmpty')
-                }}>
-                    <Image source={createNewEventBtn} style={{height: heightPercentageToDP('7'), width :widthPercentageToDP('70'), marginTop: heightPercentageToDP('5'), resizeMode:'contain', left:heightPercentageToDP('5') }} />
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => { 
-                    // navigation.navigate('HomeScreenEmpty')
-                }}>
-                    <Image source={addFriendsBtn} style={{height: heightPercentageToDP('7'), width :widthPercentageToDP('70'), marginBottom: heightPercentageToDP('15'), resizeMode:'contain' , left:heightPercentageToDP('5')}} />
-                </TouchableOpacity>
-            </View>
-            </ImageBackground>
+        <View 
+        style={{ 
+            flexDirection: 'column', 
+            justifyContent: 'center',
+            marginTop:widthPercentageToDP(3)
+            }}>
+
+        <Image 
+        source={emptyPic}
+         style={{height: heightPercentageToDP('40'), 
+          width :widthPercentageToDP('85'),
+          marginTop: heightPercentageToDP('0'),
+          resizeMode:'contain'
+           }} />
+        
+        </View>
+        <Spacer height={2} />
+        <TouchableOpacity>     
+        <CustomButton
+          text="Create new message"
+          primary
+          shadow
+        />
+        </TouchableOpacity> 
+        
+        <TouchableOpacity>
+        <CustomButton
+          text="Add friends"
+          shadow
+        />
+        </TouchableOpacity>
+            
+        
+        </ImageBackground>
         </View>
     )
 }
