@@ -22,12 +22,12 @@ function HomeScreenEmpty({}) {
             <Image source={homettl} style={{height: heightPercentageToDP('15'), width :widthPercentageToDP('90'),  resizeMode:'contain',marginTop: heightPercentageToDP('10'), }} />
             <Image source={emptyPic} style={{height: heightPercentageToDP('40'), width :widthPercentageToDP('85'), marginTop: heightPercentageToDP('0'), resizeMode:'contain' }} />
                 <TouchableOpacity onPress={() => { 
-                    // navigation.navigate('HomeScreenEmpty')
+                    navigation.navigate('NewInvite')
                 }}>
                     <Image source={createNewEventBtn} style={{height: heightPercentageToDP('7'), width :widthPercentageToDP('70'), marginTop: heightPercentageToDP('5'), resizeMode:'contain', left:heightPercentageToDP('5') }} />
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => { 
-                    // navigation.navigate('HomeScreenEmpty')
+                    navigation.navigate('SignUp')
                 }}>
                     <Image source={addFriendsBtn} style={{height: heightPercentageToDP('7'), width :widthPercentageToDP('70'), marginBottom: heightPercentageToDP('15'), resizeMode:'contain' , left:heightPercentageToDP('5')}} />
                 </TouchableOpacity>
