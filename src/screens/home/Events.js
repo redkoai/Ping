@@ -72,6 +72,22 @@ function Events({}) {
 
       }
 
+      // const styles = StyleSheet.create({
+      //   item: {
+      //     backgroundColor: 'red',
+      //     flex: 1,
+      //     borderRadius: 5,
+      //     padding: 10,
+      //     marginRight: 10,
+      //     marginTop: 17
+      //   },
+      //   emptyDate: {
+      //     height: 15,
+      //     flex: 1,
+      //     paddingTop: 30
+      //   }
+      // });
+
     return (
         // <View style={{flex: 1}}>    
         //     <ImageBackground source={emptyHome} style={styles.homeEmpty}>
@@ -117,7 +133,17 @@ function Events({}) {
                 loadItemsForMonth={loadItems}
                 // selected={'2021-02-18'}
                 renderItem={renderItem}
-
+                theme={{
+                  monthTextColor: "#3D8976",
+                  selectedDayBackgroundColor: "#3D8976",
+                  agendaDayTextColor: '#3D8976',
+                  agendaDayNumColor: '#3D8976',
+                  agendaTodayColor: '#3D8976',
+                  agendaKnobColor: '#3D8976',
+                  dotColor: "#3D8976",
+                  todayTextColor: "#3D8976"
+                }}
+                // style={{}}
             />
         </View>
     )
