@@ -21,7 +21,7 @@ function FAQ({ navigation }) {
   });
   const onSubmit = (data) => {
     updateFormData(data);
-    navigation.navigate('RSVP');
+    navigation.navigate('People');
     reset();
   };
 
