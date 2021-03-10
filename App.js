@@ -18,6 +18,7 @@ import { StatusBar } from 'expo-status-bar';
 import NavigationContainer from 'ping/src/navigators/NavigationContainer';
 
 import firebase from 'firebase';
+import 'firebase/firestore'
 import {
   API_KEY,
   AUTH_DOMAIN,
