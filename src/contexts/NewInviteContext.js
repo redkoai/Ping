@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 
-const NewInviteContext = React.createContext();
+const NewInviteContext = React.createContext(null);
 
 export function NewInviteProvider({ children }) {
   const [formData, setFormData] = useState({});
 
   const updateFormData = (newData) => {
     console.log("New Data",newData)
-    setFormData({ ...formData,...newData });
+    setFormData({ ...formData, ...newData });
     console.log("FOrm Existing Data",formData);
   }
   const resetFormData = () => setFormData({});

@@ -1,8 +1,9 @@
 import React, { useState, useContext } from 'react';
 import NewInviteContext from 'ping/src/contexts/NewInviteContext';
+
 import { yupResolver } from '@hookform/resolvers/yup';
 import { DETAILS_SCHEMA } from 'ping/src/schema/detailsSchema';
-import { StatusBar, Image, View } from 'react-native';
+import { StatusBar, Image, View, Text } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { colors } from 'ping/src/styles/styles';
 import { widthPercentageToDP, heightPercentageToDP } from 'ping/util/scaler';
@@ -17,15 +18,30 @@ import deprogline from 'ping/assets/createnew/details/detailsprogressline.png';
 import { useForm } from 'react-hook-form';
 
 function Details({ navigation }) {
-  const { updateFormData } = useContext(NewInviteContext);
+  const { formData, updateFormData } = useContext(NewInviteContext);
+
+  const [errorMsg, setErrorMsg] = useState(false)
 
   const { control, errors, setValue,reset, handleSubmit } = useForm({
     resolver: yupResolver(DETAILS_SCHEMA),
   });
   const onSubmit = (data) => {
+    const {startdate, enddate} = data;
+    const convertedStartDate = startdate.replace("th", '')
+    const convertedEndDate = enddate.replace("th", '')
+console.log(new Date(convertedEndDate).getTime(), "end date");
+console.log(new Date(convertedStartDate).getTime(), "start date");
+    if(new Date(convertedStartDate).getTime() - new Date(convertedEndDate).getTime() > 0) {
+      console.log("error")
+      setErrorMsg(true)
+      return;
+    }
     updateFormData(data);
     navigation.navigate('Dresscode');
     reset();
+  
+    console.log("New context", userData);
+    console.log("After Submit ---", formData);
   };
   const [coHosts, setCoHosts] = useState([]);
   const addCoHost = () => setCoHosts([...coHosts, 1]);
@@ -43,6 +59,7 @@ function Details({ navigation }) {
           marginTop: widthPercentageToDP(3),
         }}
       >
+        
         <Image
           source={deprogline}
           style={{
@@ -52,6 +69,7 @@ function Details({ navigation }) {
             marginTop: heightPercentageToDP('-2'),
           }}
         />
+        {errorMsg ? <Text style={{color:'red'}}>Start Date can't be greater than end Date</Text> : null}
         <CustomTextInput
           control={control}
           errors={errors}
