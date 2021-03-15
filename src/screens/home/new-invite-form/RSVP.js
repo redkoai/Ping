@@ -21,24 +21,25 @@ function RSVP({ navigation }) {
   const { formData, updateFormData } = useContext(NewInviteContext);
   const [isSignInVisible, setSignInVisibility] = useState(false);
 
-  const { control, errors, reset, setValue, handleSubmit } = useForm();
+  const { control, errors, reset, setValue, handleSubmit, formState } = useForm();
   //resolver: yupResolver(RSVP_SCHEMA),
   //});
 
-  useEffect(() => {
-    console.log('formData changed');
-  }, [formData]);
+  //console.log('formState:', formState);
 
   const onSubmit = (data) => {
-    console.log('this page data: ', data);
     updateFormData(data);
-    // console.log(formData);
-    // console.log(data);
     //navigation.navigate('Signinpopup');
     //reset();
-    console.log('After Submit ---', formData);
-    !user && setSignInVisibility(true);
   };
+
+  useEffect(() => {
+    //console.log('formData:', formData);
+  }, [formData]);
+
+  useEffect(() => {
+    formState.isSubmitSuccessful && !user && setSignInVisibility(true);
+  }, [formState.isSubmitSuccessful]);
 
   return (
     <KeyboardAwareScrollView
