@@ -17,12 +17,12 @@ function FAQ({ navigation }) {
   const { updateFormData } = useContext(NewInviteContext);
 
   const { control, errors,reset, handleSubmit } = useForm({
-    resolver: yupResolver(FAQ_SCHEMA),
+    //resolver: yupResolver(FAQ_SCHEMA),
   });
   const onSubmit = (data) => {
     updateFormData(data);
     navigation.navigate('People');
-    reset();
+    //reset();
   };
 
   const [park, setPark] = useState('');
