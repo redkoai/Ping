@@ -11,6 +11,8 @@ import Spacer from 'ping/src/components/Spacer';
 import emptyPic from "ping/assets/messages/img.png";
 import homettl from "ping/assets/messages/messagettl.png";
 
+import newMessageBtn from "ping/assets/newMessage.png"
+
 
 function Messages({}) {
     const navigation = useNavigation()
@@ -35,13 +37,24 @@ function Messages({}) {
         
         </View>
         <Spacer height={2} />
-        <TouchableOpacity>     
-        <CustomButton
-          text="Create new message"
-          primary
-          shadow
-        />
-        </TouchableOpacity> 
+        {/* <TouchableOpacity
+        onPress={() => {
+          console.log("button pressed")
+          navigation.navigate('NewChat');
+        }}>     
+          <CustomButton
+            text="Create new message"
+            primary
+            shadow
+          />
+        </TouchableOpacity>  */}
+
+        <TouchableOpacity onPress={() => { 
+            navigation.navigate('NewChat')
+        }}>
+            <Image source={newMessageBtn} style={{height: heightPercentageToDP('7'), width :widthPercentageToDP('70'), marginTop: heightPercentageToDP('5'), resizeMode:'contain', left:heightPercentageToDP('0') }} />
+        </TouchableOpacity>
+        
         
         <TouchableOpacity>
         <CustomButton
