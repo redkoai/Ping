@@ -18,19 +18,16 @@ function CustomSwitch({
       control={control}
       name={input.name}
       defaultValue={input.defaultValue}
-      render={({ onChange, onBlur, value }) => (
+      render={({ onChange, onBlur, value = input.defaultValue }) => (
         <Switch
-        style={[
-          error && { borderColor: colors.redError },
-        ]}
+          style={[error && { borderColor: colors.redError }]}
           trackColor={{ false: 'lightgray', true: colors.primary }}
-          onValueChange={(value)=>onChange(value)}
+          onValueChange={(value) => onChange(value)}
           onBlur={onBlur}
           value={value}
         />
       )}
     />
-   
   );
 }
 

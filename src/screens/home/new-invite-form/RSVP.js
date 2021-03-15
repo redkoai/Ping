@@ -1,4 +1,5 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+import AuthContext from 'ping/src/contexts/AuthContext';
 import NewInviteContext from 'ping/src/contexts/NewInviteContext';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { RSVP_SCHEMA } from 'ping/src/schema/rsvpSchema';
@@ -13,21 +14,32 @@ import CustomText from 'ping/src/components/CustomText';
 import CustomNumberInput from 'ping/src/components/inputs/CustomNumberInput';
 import CustomSwitch from 'ping/src/components/inputs/CustomSwitch';
 import rsvpprogline from 'ping/assets/createnew/rsvp/rsvpprogline.png';
+import SignInModal from 'ping/src/components/inputs/SignInModal';
 
 function RSVP({ navigation }) {
+  const { user } = useContext(AuthContext);
   const { formData, updateFormData } = useContext(NewInviteContext);
+  const [isSignInVisible, setSignInVisibility] = useState(false);
 
-  const { control, errors, reset, setValue, handleSubmit } = useForm({
-    //resolver: yupResolver(RSVP_SCHEMA),
-  });
+  const { control, errors, reset, setValue, handleSubmit, formState } = useForm();
+  //resolver: yupResolver(RSVP_SCHEMA),
+  //});
+
+  //console.log('formState:', formState);
+
   const onSubmit = (data) => {
     updateFormData(data);
-    // console.log(formData);
-    // console.log(data);
-    navigation.navigate('Signinpopup');
+    //navigation.navigate('Signinpopup');
     //reset();
-    console.log("After Submit ---", formData)
   };
+
+  useEffect(() => {
+    console.log('formData:', formData);
+  }, [formData]);
+
+  useEffect(() => {
+    formState.isSubmitSuccessful && !user && setSignInVisibility(true);
+  }, [formState.isSubmitSuccessful]);
 
   return (
     <KeyboardAwareScrollView
@@ -57,7 +69,10 @@ function RSVP({ navigation }) {
         <View style={styles.wrapperContainer}>
           <View style={styles.textConatiner}>
             <CustomText text="Collect RSVPs" header />
-            <CustomText text="Guests will be able to to let you know if they're attending or not" header={false} />
+            <CustomText
+              text="Guests will be able to to let you know if they're attending or not"
+              header={false}
+            />
           </View>
           <CustomSwitch control={control} errors={errors} input={{ name: 'collect-rsvp' }} />
         </View>
@@ -65,7 +80,7 @@ function RSVP({ navigation }) {
         <View style={styles.wrapperContainer}>
           <View style={styles.textConatiner}>
             <CustomText text="Request number of kids attending" header />
-            <CustomText text="Get head count of both adults and kids attending" header={false}  />
+            <CustomText text="Get head count of both adults and kids attending" header={false} />
           </View>
           <CustomSwitch control={control} errors={errors} input={{ name: 'request-num-of-kids' }} />
         </View>
@@ -81,7 +96,10 @@ function RSVP({ navigation }) {
         <View style={styles.wrapperContainer}>
           <View style={styles.textConatiner}>
             <CustomText text="Show guest list" header />
-            <CustomText text="Names of attending guests will be displayed on the invite" header={false}  />
+            <CustomText
+              text="Names of attending guests will be displayed on the invite"
+              header={false}
+            />
           </View>
           <CustomSwitch control={control} errors={errors} input={{ name: 'show-guest-list' }} />
         </View>
@@ -93,6 +111,7 @@ function RSVP({ navigation }) {
 
         <Spacer height={2} />
       </View>
+      <SignInModal isVisible={isSignInVisible} onCancel={() => setSignInVisibility(false)} />
     </KeyboardAwareScrollView>
   );
 }
