@@ -34,7 +34,7 @@ function RSVP({ navigation }) {
   };
 
   useEffect(() => {
-    //console.log('formData:', formData);
+    console.log('formData:', formData);
   }, [formData]);
 
   useEffect(() => {
