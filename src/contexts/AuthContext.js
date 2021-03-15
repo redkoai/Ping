@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import * as SplashScreen from 'expo-splash-screen';
 
 import 'firebase/firestore';
@@ -18,6 +18,8 @@ export function AuthProvider({ children }) {
       await SplashScreen.hideAsync();
     });
   }, []);
+
+  
 
   const singOutAsync = async (handleSuccess, handleFailure) => {
     try {

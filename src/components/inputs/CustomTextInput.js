@@ -27,6 +27,7 @@ function CustomTextInput({
     label: '',
     placeholder: '',
     defaultValue: '',
+    placeholderTextColor:'',
   },
   rules = {
     contentType: 'none',
@@ -107,6 +108,7 @@ function CustomTextInput({
               onChangeText={(value) => onChange(value)}
               value={value}
               placeholder={input.placeholder}
+              placeholderTextColor={input.placeholderTextColor}
               textContentType={rules.contentType}
               keyboardType={rules.keyboardType}
               autoCapitalize={rules.autoCapitalize}

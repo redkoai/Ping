@@ -23,6 +23,7 @@ function RSVP({ navigation }) {
   const onSubmit = (data) => {
     updateFormData(data);
     // console.log(formData);
+    // console.log(data);
     navigation.navigate('Signinpopup');
     reset();
   };
