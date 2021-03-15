@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext ,useEffect} from 'react';
 import NewInviteContext from 'ping/src/contexts/NewInviteContext';
 
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -23,7 +23,7 @@ function Details({ navigation }) {
   const [errorMsg, setErrorMsg] = useState(false);
 
   const { control, errors, setValue, reset, handleSubmit } = useForm({
-    //resolver: yupResolver(DETAILS_SCHEMA),
+    resolver: yupResolver(DETAILS_SCHEMA),
   });
   const onSubmit = (data) => {
     const { startdate, enddate } = data;
@@ -43,6 +43,13 @@ function Details({ navigation }) {
     //console.log('New context', userData);
     //console.log('After Submit ---', formData);
   };
+
+  // useEffect(() => {
+  //   console.log('DetailsData:', formData);
+  //   navigation.navigate('Dresscode');
+  // }, [formData]);
+
+
   const [coHosts, setCoHosts] = useState([]);
   const addCoHost = () => setCoHosts([...coHosts, 1]);
 

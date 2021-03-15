@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext,useEffect } from 'react';
 import NewInviteContext from 'ping/src/contexts/NewInviteContext';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { DRESSCODE_SCHEMA } from 'ping/src/schema/dresscodeSchema';
@@ -19,7 +19,7 @@ function Dresscode({ navigation }) {
   const { formData, updateFormData } = useContext(NewInviteContext);
 
   const { control, errors, setValue,reset, handleSubmit } = useForm({
-    //resolver: yupResolver(DRESSCODE_SCHEMA),
+    resolver: yupResolver(DRESSCODE_SCHEMA),
   });
   const onSubmit = (data) => {
     updateFormData(data);
@@ -27,6 +27,10 @@ function Dresscode({ navigation }) {
     //reset();
     //console.log("After Submit Dresscode---", formData)
   };
+  // useEffect(() => {
+  //   console.log('DresscodeData:', formData);
+  //   navigation.navigate('FAQ');
+  // }, [formData]);
 
   const listData = [
     { label: 'Casual and Comfortable', value: 'casual-and-comfortable' },

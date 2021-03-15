@@ -1,5 +1,5 @@
 import { colors } from 'ping/src/styles/styles';
-import React from 'react';
+import React, { useState} from 'react';
 import { Switch } from 'react-native';
 import { Controller } from 'react-hook-form';
 
@@ -12,6 +12,8 @@ function CustomSwitch({
   input = { name: 'unknown-switch-input', defaultValue: false },
 }) {
   const error = errors?.[input.name];
+  const [isEnabled, setIsEnabled] = useState(false);
+  const toggleSwitch = () => setIsEnabled(!isEnabled);
 
   return (
     <Controller

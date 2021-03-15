@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState,useCallback } from 'react';
 import AuthContext from 'ping/src/contexts/AuthContext';
 import NewInviteContext from 'ping/src/contexts/NewInviteContext';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -16,25 +16,48 @@ import CustomSwitch from 'ping/src/components/inputs/CustomSwitch';
 import rsvpprogline from 'ping/assets/createnew/rsvp/rsvpprogline.png';
 import SignInModal from 'ping/src/components/inputs/SignInModal';
 
+import firebase from 'firebase';
+import 'firebase/firestore'
+
 function RSVP({ navigation }) {
   const { user } = useContext(AuthContext);
   const { formData, updateFormData } = useContext(NewInviteContext);
   const [isSignInVisible, setSignInVisibility] = useState(false);
 
-  const { control, errors, reset, setValue, handleSubmit, formState } = useForm();
-  //resolver: yupResolver(RSVP_SCHEMA),
-  //});
+
+
+const UserInfo = { "uid": user.uid, "email": user.email }
+
+
+
+const writeUserData = (formData)=>{
+  firebase.database().ref('InviteForms/').push({
+    formData
+  }).then((data)=>{
+      //success callback
+      console.log('data ' , data)
+  }).catch((error)=>{
+      //error callback
+      console.log('error ' , error)
+  })
+}
+  const { control, errors, reset, setValue, handleSubmit, formState } = useForm({
+  resolver: yupResolver(RSVP_SCHEMA),
+  });
 
   //console.log('formState:', formState);
 
   const onSubmit = (data) => {
     updateFormData(data);
-    //navigation.navigate('Signinpopup');
+    navigation.navigate('Signinpopup');
+    
     //reset();
   };
 
   useEffect(() => {
-    console.log('formData:', formData);
+    console.log('RSVPData:', formData);
+    writeUserData(formData);
+    //navigation.navigate('Signinpopup');
   }, [formData]);
 
   useEffect(() => {
