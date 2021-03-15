@@ -26,6 +26,7 @@ function RSVP({ navigation }) {
     // console.log(data);
     navigation.navigate('Signinpopup');
     reset();
+    console.log("After Submit ---", formData)
   };
 
   return (
@@ -56,7 +57,7 @@ function RSVP({ navigation }) {
         <View style={styles.wrapperContainer}>
           <View style={styles.textConatiner}>
             <CustomText text="Collect RSVPs" header />
-            <CustomText text="Guests will be able to to let you know if they're attending or not"  />
+            <CustomText text="Guests will be able to to let you know if they're attending or not" header={false} />
           </View>
           <CustomSwitch control={control} errors={errors} input={{ name: 'collect-rsvp' }} />
         </View>
@@ -64,7 +65,7 @@ function RSVP({ navigation }) {
         <View style={styles.wrapperContainer}>
           <View style={styles.textConatiner}>
             <CustomText text="Request number of kids attending" header />
-            <CustomText text="Get head count of both adults and kids attending"  />
+            <CustomText text="Get head count of both adults and kids attending" header={false}  />
           </View>
           <CustomSwitch control={control} errors={errors} input={{ name: 'request-num-of-kids' }} />
         </View>
@@ -72,7 +73,7 @@ function RSVP({ navigation }) {
         <View style={styles.wrapperContainer}>
           <View style={styles.textConatiner}>
             <CustomText text="Total invited per invitation" header />
-            <CustomText text="This includes the person that receives the invite"  />
+            <CustomText text="This includes the person that receives the invite" header={false} />
           </View>
           <CustomNumberInput control={control} errors={errors} input={{ name: 'total-invited' }} />
         </View>
@@ -80,7 +81,7 @@ function RSVP({ navigation }) {
         <View style={styles.wrapperContainer}>
           <View style={styles.textConatiner}>
             <CustomText text="Show guest list" header />
-            <CustomText text="Names of attending guests will be displayed on the invite"  />
+            <CustomText text="Names of attending guests will be displayed on the invite" header={false}  />
           </View>
           <CustomSwitch control={control} errors={errors} input={{ name: 'show-guest-list' }} />
         </View>

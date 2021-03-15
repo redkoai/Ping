@@ -16,7 +16,7 @@ import CustomButton from 'ping/src/components/inputs/CustomButton';
 import CustomInputLabel from 'ping/src/components/inputs/CustomInputLabel';
 
 function Dresscode({ navigation }) {
-  const { updateFormData } = useContext(NewInviteContext);
+  const { formData, updateFormData } = useContext(NewInviteContext);
 
   const { control, errors, setValue,reset, handleSubmit } = useForm({
     resolver: yupResolver(DRESSCODE_SCHEMA),
@@ -25,6 +25,7 @@ function Dresscode({ navigation }) {
     updateFormData(data);
     navigation.navigate('FAQ');
     reset();
+    console.log("After Submit Dresscode---", formData)
   };
 
   const listData = [
@@ -71,6 +72,7 @@ function Dresscode({ navigation }) {
                 color={'black'}
                 onPress={onChange}
                 wrapperStyle={{ padding: 4 }}
+                horizontal={false}
               />
             )}
           />

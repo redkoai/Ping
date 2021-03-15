@@ -1,5 +1,6 @@
 import React from 'react';
 import { NewInviteProvider } from 'ping/src/contexts/NewInviteContext';
+// import {SampleContexntProvider} from './../contexts/SampleContext';
 
 import { headerOptions } from 'ping/src/styles/styles';
 import BackChevron from 'ping/src/components/header/BackChevron';

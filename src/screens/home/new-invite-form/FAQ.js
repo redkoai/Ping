@@ -69,8 +69,6 @@ function FAQ({ navigation }) {
           }}
           control={control}
           errors={errors}
-          // value={park}
-          // onChangeText={handlePark}
           optional="true"
         />
 
@@ -83,8 +81,6 @@ function FAQ({ navigation }) {
           }}
           control={control}
           errors={errors}
-          // value={secretcode}
-          // onChangeText={handleSecret}
           optional="true"
         />
         <CustomTextInput
@@ -96,8 +92,6 @@ function FAQ({ navigation }) {
           }}
           control={control}
           errors={errors}
-          // value={guests}
-          // onChangeText={handleGuests}
           optional="true"
         />
 
