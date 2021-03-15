@@ -25,7 +25,7 @@ function RSVP({ navigation }) {
     // console.log(formData);
     // console.log(data);
     navigation.navigate('Signinpopup');
-    reset();
+    //reset();
     console.log("After Submit ---", formData)
   };
 

@@ -24,8 +24,8 @@ function Dresscode({ navigation }) {
   const onSubmit = (data) => {
     updateFormData(data);
     navigation.navigate('FAQ');
-    reset();
-    console.log("After Submit Dresscode---", formData)
+    //reset();
+   // console.log("After Submit Dresscode---", formData)
   };
 
   const listData = [

@@ -22,7 +22,7 @@ function FAQ({ navigation }) {
   const onSubmit = (data) => {
     updateFormData(data);
     navigation.navigate('People');
-    reset();
+   // reset();
   };
 
   const [park, setPark] = useState('');

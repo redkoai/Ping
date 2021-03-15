@@ -38,10 +38,10 @@ console.log(new Date(convertedStartDate).getTime(), "start date");
     }
     updateFormData(data);
     navigation.navigate('Dresscode');
-    reset();
+    //reset();
   
-    console.log("New context", userData);
-    console.log("After Submit ---", formData);
+    //console.log("New context", userData);
+    //console.log("After Submit ---", formData);
   };
   const [coHosts, setCoHosts] = useState([]);
   const addCoHost = () => setCoHosts([...coHosts, 1]);
