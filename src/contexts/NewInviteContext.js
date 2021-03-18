@@ -6,9 +6,9 @@ export function NewInviteProvider({ children }) {
   const [formData, setFormData] = useState({});
 
   const updateFormData = (newData) => {
-    console.log("New Data",newData)
+    //console.log("New Data",newData)
     setFormData({ ...formData, ...newData });
-    console.log("FOrm Existing Data",formData);
+    //console.log("FOrm Existing Data",formData);
   }
   const resetFormData = () => setFormData({});
 

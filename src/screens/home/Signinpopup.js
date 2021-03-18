@@ -20,7 +20,7 @@ function Signinpopup({}) {
     const navigation = useNavigation()
     const { formData, updateFormData } = useContext(NewInviteContext);
     const [isSignInVisible, setSignInVisibility] = useState(true);
-    console.log("in signin popup", formData);
+    //console.log("in signin popup", formData);
     return (
         <View style={{flex: 1}}>
         <SignInModal

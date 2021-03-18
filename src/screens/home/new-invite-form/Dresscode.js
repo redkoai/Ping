@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext,useEffect } from 'react';
 import NewInviteContext from 'ping/src/contexts/NewInviteContext';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { DRESSCODE_SCHEMA } from 'ping/src/schema/dresscodeSchema';
@@ -24,9 +24,13 @@ function Dresscode({ navigation }) {
   const onSubmit = (data) => {
     updateFormData(data);
     navigation.navigate('FAQ');
-    reset();
-    console.log("After Submit Dresscode---", formData)
+    //reset();
+    //console.log("After Submit Dresscode---", formData)
   };
+  // useEffect(() => {
+  //   console.log('DresscodeData:', formData);
+  //   navigation.navigate('FAQ');
+  // }, [formData]);
 
   const listData = [
     { label: 'Casual and Comfortable', value: 'casual-and-comfortable' },

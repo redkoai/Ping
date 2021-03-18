@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext,useEffect } from 'react';
 import NewInviteContext from 'ping/src/contexts/NewInviteContext';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { FAQ_SCHEMA } from 'ping/src/schema/faqSchema';
@@ -14,7 +14,8 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import faqprogline from 'ping/assets/createnew/faq/faqprogline.png';
 
 function FAQ({ navigation }) {
-  const { updateFormData } = useContext(NewInviteContext);
+  const { formData, updateFormData } = useContext(NewInviteContext);
+ 
 
   const { control, errors,reset, handleSubmit } = useForm({
     resolver: yupResolver(FAQ_SCHEMA),
@@ -22,8 +23,12 @@ function FAQ({ navigation }) {
   const onSubmit = (data) => {
     updateFormData(data);
     navigation.navigate('People');
-    reset();
+    //reset();
   };
+  // useEffect(() => {
+  //   console.log('FAQData:', formData);
+  //   navigation.navigate('People');
+  // }, [formData]);
 
   const [park, setPark] = useState('');
   const [secretcode, setSecretcode] = useState('');

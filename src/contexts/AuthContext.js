@@ -36,7 +36,7 @@ export function AuthProvider({ children }) {
     await firebase
       .auth()
       .createUserWithEmailAndPassword(data.email, data.password)
-      .then(handleSuccess())
+      .then(handleSuccess)
       .catch((error) => {
         let errorCode = error.code;
         let errorMessage = error.message;
@@ -68,7 +68,8 @@ export function AuthProvider({ children }) {
     await firebase
       .auth()
       .signInWithEmailAndPassword(data.email, data.password)
-      .then(handleSuccess())
+      .then(handleSuccess)
+      .then(() => setSkipped(false))
       .catch((error) => {
         let errorCode = error.code;
         let errorMessage = error.message;
