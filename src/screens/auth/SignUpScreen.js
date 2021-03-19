@@ -2,6 +2,7 @@ import { colors } from 'ping/src/styles/styles';
 import { widthPercentageToDP, heightPercentageToDP } from 'ping/util/scaler';
 import PingIcon from 'ping/src/icons/PingIcon';
 import googleLogo from 'ping/assets/Google_G_Logo.png';
+import firebase from 'firebase';
 
 import React, { useContext, useCallback } from 'react';
 import { useFocusEffect } from '@react-navigation/native';
@@ -18,13 +19,17 @@ import { EmailInput, PasswordInput } from 'ping/src/components/inputs/CustomText
 import CustomButton from 'ping/src/components/inputs/CustomButton';
 
 function SignUpScreen() {
-  const { signUpWithEmailAsync, signInWithGoogleAsync } = useContext(AuthContext);
+  const db = firebase.database().ref("users")
+  const { signUpWithEmailAsync, signInWithGoogleAsync, user } = useContext(AuthContext);
   const { control, handleSubmit, errors, reset, formState } = useForm({
     resolver: yupResolver(AUTH_SCHEMA),
   });
   useFocusEffect(useCallback(reset));
 
   const onSignUpSuccess = () => {
+    // console.log("user = ", user)
+    db.push({"email":user.email, "uid": user.uid})
+    console.log("user info pushed")
     // navigation.navigate('HomeScreenEmpty');
   };
   const onSignUpFailure = (errorMessage) => {
