@@ -42,7 +42,7 @@ const writeUserData = (formData)=>{
   })
 }
   const { control, errors, reset, setValue, handleSubmit, formState } = useForm({
-  resolver: yupResolver(RSVP_SCHEMA),
+    resolver: yupResolver(RSVP_SCHEMA),
   });
 
   //console.log('formState:', formState);
@@ -56,12 +56,12 @@ const writeUserData = (formData)=>{
 
   useEffect(() => {
     console.log('RSVPData:', formData);
-    writeUserData(formData);
     //navigation.navigate('Signinpopup');
   }, [formData]);
 
   useEffect(() => {
     formState.isSubmitSuccessful && !user && setSignInVisibility(true);
+    formState.isSubmitSuccessful && user && writeUserData(formData);
   }, [formState.isSubmitSuccessful]);
 
   return (
