@@ -19,50 +19,66 @@ import SignInModal from 'ping/src/components/inputs/SignInModal';
 import firebase from 'firebase';
 import 'firebase/firestore'
 
+
 function RSVP({ navigation }) {
   const { user } = useContext(AuthContext);
   const { formData, updateFormData } = useContext(NewInviteContext);
   const [isSignInVisible, setSignInVisibility] = useState(false);
-
-
-
+  //const [saveData,setSaveData] = useState(false);
+  const [state,setState]=useState({});
 const UserInfo = { "uid": user.uid, "email": user.email }
 
-
-
-const writeUserData = (formData)=>{
-  firebase.database().ref('InviteForms/').push({
-    formData
-  }).then((data)=>{
-      //success callback
-      console.log('data ' , data)
-  }).catch((error)=>{
-      //error callback
-      console.log('error ' , error)
-  })
-}
   const { control, errors, reset, setValue, handleSubmit, formState } = useForm({
-  resolver: yupResolver(RSVP_SCHEMA),
+    resolver: yupResolver(RSVP_SCHEMA),
   });
-
-  //console.log('formState:', formState);
-
-  const onSubmit = (data) => {
-    updateFormData(data);
-    navigation.navigate('Signinpopup');
+  const writeUserData =  (formData)=>{
+    firebase.database().ref('InviteForms/').push({
+      formData
+    }).then((data)=>{
+        //success callback
+        console.log('data ' , data)
+    }).catch((error)=>{
+        //error callback
+        console.log('error ' , error)
+    })
     
-    //reset();
-  };
+  }
+  //console.log('formState:', formState);
+  const fetchdata = () => {
+  firebase.database().ref('InviteForms/').once('value').then(function(snapshot){
+    const exists=(snapshot.val() !== null);
+    if(exists) data = snapshot.val();
+    console.log("fetched data:",data);
+  }).catch(error => console.log(error));
+}
 
   useEffect(() => {
     console.log('RSVPData:', formData);
-    writeUserData(formData);
     //navigation.navigate('Signinpopup');
   }, [formData]);
 
   useEffect(() => {
     formState.isSubmitSuccessful && !user && setSignInVisibility(true);
+    formState.isSubmitSuccessful && user && writeUserData(formData);
   }, [formState.isSubmitSuccessful]);
+  
+  
+  
+  
+
+//   useEffect(() => {
+//     const recentPostsRef = firebase.database().ref('/InviteForms/MW0mc10GZmceTBCTXvQ');
+//     recentPostsRef.once('value').then(snapshot => {
+//   // snapshot.val() is the dictionary with all your keys/values from the '/store' path
+//     setState({ stores: snapshot.val() })
+//     console.log("received data",snapshot.val());
+// })
+//   },[]);
+
+  const onSubmit = (data) => {
+    updateFormData(data);
+    navigation.navigate('Signinpopup');
+  };
 
   return (
     <KeyboardAwareScrollView
