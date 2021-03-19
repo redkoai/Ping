@@ -49,8 +49,13 @@ function Messages({}) {
           />
         </TouchableOpacity>  */}
 
+        {/* <TouchableOpacity onPress={() => { 
+            navigation.navigate('Chat')
+        }}>
+            <Image source={newMessageBtn} style={{height: heightPercentageToDP('7'), width :widthPercentageToDP('70'), marginTop: heightPercentageToDP('5'), resizeMode:'contain', left:heightPercentageToDP('0') }} />
+        </TouchableOpacity> */}
         <TouchableOpacity onPress={() => { 
-            navigation.navigate('NewChat')
+            navigation.navigate('CreateNewMessage')
         }}>
             <Image source={newMessageBtn} style={{height: heightPercentageToDP('7'), width :widthPercentageToDP('70'), marginTop: heightPercentageToDP('5'), resizeMode:'contain', left:heightPercentageToDP('0') }} />
         </TouchableOpacity>

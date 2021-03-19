@@ -6,7 +6,7 @@ import firebase from 'firebase';
 import 'firebase/firestore'
 
 
-function NewChat({ }) {
+function Chat({ }) {
 
     const [messages, setMessages] = useState([])
     const db = firebase.database().ref("messages")
@@ -60,7 +60,7 @@ function NewChat({ }) {
 }
 
 
-export default NewChat;
+export default Chat;
 
 
 

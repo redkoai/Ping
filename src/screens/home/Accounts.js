@@ -20,7 +20,7 @@ function Accounts({}) {
   const { user } = useContext(AuthContext);
   const UserInfo = { "uid": user.uid, "email": user.email }
     const navigation = useNavigation();
-    const { singOutAsync } = useContext(AuthContext);
+    const { singOutAsync, skipped } = useContext(AuthContext);
 
     const onSuccess = () => {
         // navigation.navigate('SignIn');
@@ -102,12 +102,14 @@ function Accounts({}) {
           shadow
         />
         </TouchableOpacity>
-            <CustomButton
-                text="Sign Out"
-                onPress={async () => await singOutAsync(onSuccess, onFailure)}
-                primary
-            />
-        
+            {!skipped &&
+              <CustomButton
+                  text="Sign Out"
+                  onPress={async () => await singOutAsync(onSuccess, onFailure)}
+                  shadow
+                  primary
+              />
+            }
       </ImageBackground>
     </View>
   );

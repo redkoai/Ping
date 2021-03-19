@@ -29,7 +29,7 @@ function RSVP({ navigation }) {
 const UserInfo = { "uid": user.uid, "email": user.email }
 
   const { control, errors, reset, setValue, handleSubmit, formState } = useForm({
-  resolver: yupResolver(RSVP_SCHEMA),
+    resolver: yupResolver(RSVP_SCHEMA),
   });
   const writeUserData =  (formData)=>{
     firebase.database().ref('InviteForms/').push({
@@ -52,14 +52,14 @@ const UserInfo = { "uid": user.uid, "email": user.email }
   }).catch(error => console.log(error));
 }
 
-   useEffect(() => {
-     console.log('RSVPData FInal:', formData);
-    writeUserData(formData);
-    fetchdata();
+  useEffect(() => {
+    console.log('RSVPData:', formData);
+    //navigation.navigate('Signinpopup');
   }, [formData]);
 
   useEffect(() => {
     formState.isSubmitSuccessful && !user && setSignInVisibility(true);
+    formState.isSubmitSuccessful && user && writeUserData(formData);
   }, [formState.isSubmitSuccessful]);
   
   

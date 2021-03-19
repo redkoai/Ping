@@ -1,7 +1,8 @@
 import React from 'react';
 import { headerOptions } from 'ping/src/styles/styles';
 import Messages from 'ping/src/screens/home/Messages';
-import NewChat from 'ping/src/screens/home/messages/NewChat'
+import Chat from 'ping/src/screens/home/messages/Chat'
+import CreateNewMessage from 'ping/src/screens/home/messages/CreateNewMessage'
 import ScreenTitle from 'ping/src/components/header/ScreenTitle';
 import { createStackNavigator } from '@react-navigation/stack';
 
@@ -18,10 +19,17 @@ function MessagesStackNavigator() {
       }}
        />
        <MessagesStack.Screen 
-      name="NewChat" 
-      component={NewChat}
+      name="CreateNewMessage" 
+      component={CreateNewMessage}
       options={{
-        headerLeft: () => <ScreenTitle title="New Chat" />,
+        headerLeft: () => <ScreenTitle title="Create New Message" />,
+      }}
+       />
+       <MessagesStack.Screen 
+      name="Chat" 
+      component={Chat}
+      options={{
+        headerLeft: () => <ScreenTitle title="Chat" />,
       }}
        />
     </MessagesStack.Navigator>
