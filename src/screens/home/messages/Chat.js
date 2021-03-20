@@ -7,6 +7,8 @@ import 'firebase/firestore'
 import CreateNewMessage from './CreateNewMessage';
 
 
+
+
 function Chat({route, navigation }) {
 
     const [messages, setMessages] = useState([])
