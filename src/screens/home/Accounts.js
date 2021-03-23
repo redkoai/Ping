@@ -16,12 +16,13 @@ import Acccenter from "ping/assets/Accounts/Accountscenter.png";
 import * as firebase from 'firebase';
 
 function Accounts({}) {
-  const [loggedInUser,setLoggedInUser]=useState('');
+  const [loggedInUser,setLoggedInUser]=useState([]);
+  const [state,setState]=useState([]);
   const { user } = useContext(AuthContext);
   const UserInfo = { "uid": user.uid, "email": user.email }
     const navigation = useNavigation();
     const { singOutAsync, skipped } = useContext(AuthContext);
-
+ 
     const onSuccess = () => {
         // navigation.navigate('SignIn');
     }
@@ -30,12 +31,14 @@ function Accounts({}) {
     };
 
     useEffect(() => {
-      // const userUID=firebase.auth().currentUser.uid;
       const userUID=UserInfo.uid;
-      firebase.database().ref(`InviteForms/${userUID}`).once('value',(user)=>{
-        setLoggedInUser({
-          event:user.val().event,
-        });
+      console.log("userid: ", userUID);
+     firebase.database().ref('/InviteForms').on('value',(snapshot)=>{
+     let data = snapshot.val() ? snapshot.val() : {};
+     console.log("snapshot value",data);
+      let todoItems = {...data};
+      setState(todoItems );
+      console.log("useritem: ",todoItems)
       })
    }, []);
 
@@ -75,7 +78,11 @@ function Accounts({}) {
             
             }} /> 
             <View>
-            <Text>Event name:{loggedInUser.event}</Text>
+            <Text>Event name:{state.event}</Text>
+            <Text>Event enddate:{state.enddate}</Text>
+            <Text>Event faqsecretcode:{state.faqsecretcode}</Text>
+           {/* <Text>Event radio:{state.radio-buttons}</Text> */}
+            {/* <Text>Event guestlist:{state.show-guest-list}</Text> */}
             </View>
             {/* <Image source={Accevents} style={{height: heightPercentageToDP('20'), width :widthPercentageToDP('85'), marginTop: heightPercentageToDP('-7'), resizeMode:'contain' }} /> */}
             <Image 

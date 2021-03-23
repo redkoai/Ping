@@ -43,7 +43,6 @@ const UserInfo = { "uid": user.uid, "email": user.email }
     })
     
   }
-  //console.log('formState:', formState);
   const fetchdata = () => {
   firebase.database().ref('InviteForms/').once('value').then(function(snapshot){
     const exists=(snapshot.val() !== null);
@@ -54,30 +53,18 @@ const UserInfo = { "uid": user.uid, "email": user.email }
 
   useEffect(() => {
     console.log('RSVPData:', formData);
-    //navigation.navigate('Signinpopup');
   }, [formData]);
 
   useEffect(() => {
     formState.isSubmitSuccessful && !user && setSignInVisibility(true);
     formState.isSubmitSuccessful && user && writeUserData(formData);
   }, [formState.isSubmitSuccessful]);
-  
-  
-  
-  
 
-//   useEffect(() => {
-//     const recentPostsRef = firebase.database().ref('/InviteForms/MW0mc10GZmceTBCTXvQ');
-//     recentPostsRef.once('value').then(snapshot => {
-//   // snapshot.val() is the dictionary with all your keys/values from the '/store' path
-//     setState({ stores: snapshot.val() })
-//     console.log("received data",snapshot.val());
-// })
-//   },[]);
 
   const onSubmit = (data) => {
     updateFormData(data);
-    navigation.navigate('Signinpopup');
+    // navigation.navigate('Signinpopup');
+    navigation.navigate('MyEvents');
   };
 
   return (

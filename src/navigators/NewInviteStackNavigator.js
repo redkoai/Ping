@@ -14,6 +14,7 @@ import FAQ from 'ping/src/screens/home/new-invite-form/FAQ';
 import People from 'ping/src/screens/home/new-invite-form/People';
 import RSVP from 'ping/src/screens/home/new-invite-form/RSVP';
 import Signinpopup from 'ping/src/screens/home/Signinpopup';
+import MyEvents from 'ping/src/screens/home/new-invite-form/MyEvents';
 
 const NewInviteStack = createStackNavigator();
 
@@ -69,6 +70,16 @@ function NewInviteStackNavigator() {
             headerRight: () => <ScreenTitle title="RSVP Options" />,
           }}
         />
+
+        <NewInviteStack.Screen
+          name="MyEvents"
+          component={MyEvents}
+          options={{
+            headerLeft: () => <ScreenTitle title="My Events" />,
+            headerRight: () => <ScreenTitle title="Events" />,
+          }}
+        />  
+
          <NewInviteStack.Screen
           name="Signinpopup"
           component={Signinpopup}
@@ -78,6 +89,7 @@ function NewInviteStackNavigator() {
           }}
         />
 
+        
 
       </NewInviteStack.Navigator>
     </NewInviteProvider>
