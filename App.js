@@ -4,6 +4,7 @@ import * as SplashScreen from 'expo-splash-screen';
 import { LogBox, Platform } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { AuthProvider } from 'ping/src/contexts/AuthContext';
+import PropTypes from 'prop-types'
 
 import {
   useFonts,

@@ -15,6 +15,10 @@ import People from 'ping/src/screens/home/new-invite-form/People';
 import RSVP from 'ping/src/screens/home/new-invite-form/RSVP';
 import Signinpopup from 'ping/src/screens/home/Signinpopup';
 import MyEvents from 'ping/src/screens/home/new-invite-form/MyEvents';
+import EventInvited from 'ping/src/screens/home/new-invite-form/EventInvited';
+import MyEventsGoing from '../screens/home/new-invite-form/MyEventsGoing';
+import MyEventsInvited from '../screens/home/new-invite-form/MyEventsInvited';
+import MyEventsDeclined from '../screens/home/new-invite-form/MyEventsDeclined';
 
 const NewInviteStack = createStackNavigator();
 
@@ -71,11 +75,40 @@ function NewInviteStackNavigator() {
           }}
         />
 
+      <NewInviteStack.Screen
+          name="EventInvited"
+          component={EventInvited}
+          options={{
+            headerLeft: () => <BackChevron  text="RSVP" />,
+          }}
+        />  
+         {/* <NewInviteStack.Screen
+          name="MyEventsInvited"
+          component={MyEventsInvited}
+          options={{
+            
+          }}
+        />  
+         <NewInviteStack.Screen
+          name="MyEventsGoing"
+          component={MyEventsGoing}
+          options={{
+            
+          }}
+        />  
+         <NewInviteStack.Screen
+          name="MyEventsDeclined"
+          component={MyEventsDeclined}
+          options={{
+            
+          }}
+        />   */}
+
         <NewInviteStack.Screen
           name="MyEvents"
           component={MyEvents}
           options={{
-            headerLeft: () => <ScreenTitle title="My Events" />,
+            headerLeft: () => <BackChevron  text="My Events" />,
             headerRight: () => <ScreenTitle title="Events" />,
           }}
         />  

@@ -64,7 +64,7 @@ const UserInfo = { "uid": user.uid, "email": user.email }
   const onSubmit = (data) => {
     updateFormData(data);
     // navigation.navigate('Signinpopup');
-    navigation.navigate('MyEvents');
+    navigation.navigate('EventInvited');
   };
 
   return (

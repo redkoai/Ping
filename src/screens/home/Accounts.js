@@ -33,7 +33,7 @@ function Accounts({}) {
     useEffect(() => {
       const userUID=UserInfo.uid;
       console.log("userid: ", userUID);
-     firebase.database().ref('/InviteForms').on('value',(snapshot)=>{
+      firebase.database().ref('/InviteForms').limitToLast(1).on('value',(snapshot)=>{
      let data = snapshot.val() ? snapshot.val() : {};
      console.log("snapshot value",data);
       let todoItems = {...data};
@@ -77,13 +77,6 @@ function Accounts({}) {
             left: heightPercentageToDP('1'),
             
             }} /> 
-            <View>
-            <Text>Event name:{state.event}</Text>
-            <Text>Event enddate:{state.enddate}</Text>
-            <Text>Event faqsecretcode:{state.faqsecretcode}</Text>
-           {/* <Text>Event radio:{state.radio-buttons}</Text> */}
-            {/* <Text>Event guestlist:{state.show-guest-list}</Text> */}
-            </View>
             {/* <Image source={Accevents} style={{height: heightPercentageToDP('20'), width :widthPercentageToDP('85'), marginTop: heightPercentageToDP('-7'), resizeMode:'contain' }} /> */}
             <Image 
             source={Acccenter} 
@@ -122,7 +115,7 @@ function Accounts({}) {
   );
 }
 
-export default Accounts
+export default Accounts;
 
 const stylesone = StyleSheet.create({
     scene: {
