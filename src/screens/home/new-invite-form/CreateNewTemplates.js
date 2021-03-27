@@ -38,7 +38,7 @@ function createnewtemplates({}) {
             flexDirection: 'column',
             justifyContent: 'center',
             marginTop: widthPercentageToDP(3),
-            marginLeft:widthPercentageToDP(4),
+            marginLeft:widthPercentageToDP(5),
           }}
         >
           
@@ -78,7 +78,7 @@ function createnewtemplates({}) {
             flexDirection: 'row',
             justifyContent: 'space-between',
             marginTop: widthPercentageToDP(3),
-            marginLeft: widthPercentageToDP(3),
+            marginLeft: widthPercentageToDP(0),
           }}
         >
           <ScrollView  horizontal={true}>
@@ -92,7 +92,7 @@ function createnewtemplates({}) {
               style={{
                 height: heightPercentageToDP('25'),
                 width: widthPercentageToDP('45'),
-                marginTop: heightPercentageToDP('-0.5'),
+                marginTop: heightPercentageToDP('-4.5'),
                 resizeMode: 'contain',
                 
               }}
@@ -109,7 +109,7 @@ function createnewtemplates({}) {
               style={{
                 height: heightPercentageToDP('25'),
                 width: widthPercentageToDP('45'),
-                marginTop: heightPercentageToDP('-0.5'),
+                marginTop: heightPercentageToDP('-4.5'),
                 resizeMode: 'contain',
               }}
             />
@@ -126,7 +126,7 @@ function createnewtemplates({}) {
               style={{
                 height: heightPercentageToDP('25'),
                 width: widthPercentageToDP('45'),
-                marginTop: heightPercentageToDP('-0.5'),
+                marginTop: heightPercentageToDP('-4.5'),
                 resizeMode: 'contain',
               }}
             />
@@ -153,7 +153,7 @@ function createnewtemplates({}) {
               style={{
                 height: heightPercentageToDP('25'),
                 width: widthPercentageToDP('45'),
-                marginTop: heightPercentageToDP('-0.5'),
+                marginTop: heightPercentageToDP('-4.5'),
                 resizeMode: 'contain',
               }}
             />
@@ -170,7 +170,7 @@ function createnewtemplates({}) {
               style={{
                 height: heightPercentageToDP('25'),
                 width: widthPercentageToDP('45'),
-                marginTop: heightPercentageToDP('-0.5'),
+                marginTop: heightPercentageToDP('-4.5'),
                 resizeMode: 'contain',
               }}
             />
@@ -195,7 +195,7 @@ function createnewtemplates({}) {
               style={{
                 height: heightPercentageToDP('25'),
                 width: widthPercentageToDP('45'),
-                marginTop: heightPercentageToDP('-0.5'),
+                marginTop: heightPercentageToDP('-4.5'),
                 resizeMode: 'contain',
               }}
             />
@@ -212,7 +212,7 @@ function createnewtemplates({}) {
               style={{
                 height: heightPercentageToDP('25'),
                 width: widthPercentageToDP('45'),
-                marginTop: heightPercentageToDP('-0.5'),
+                marginTop: heightPercentageToDP('-4.5'),
                 resizeMode: 'contain',
               }}
             />
@@ -236,7 +236,7 @@ function createnewtemplates({}) {
               style={{
                 height: heightPercentageToDP('25'),
                 width: widthPercentageToDP('45'),
-                marginTop: heightPercentageToDP('-0.5'),
+                marginTop: heightPercentageToDP('-4.5'),
                 resizeMode: 'contain',
               }}
             />
@@ -253,7 +253,7 @@ function createnewtemplates({}) {
               style={{
                 height: heightPercentageToDP('25'),
                 width: widthPercentageToDP('45'),
-                marginTop: heightPercentageToDP('-0.5'),
+                marginTop: heightPercentageToDP('-4.5'),
                 resizeMode: 'contain',
               }}
             />
@@ -278,7 +278,7 @@ function createnewtemplates({}) {
               style={{
                 height: heightPercentageToDP('25'),
                 width: widthPercentageToDP('45'),
-                marginTop: heightPercentageToDP('-0.5'),
+                marginTop: heightPercentageToDP('-8.5'),
                 resizeMode: 'contain',
               }}
             />
@@ -295,7 +295,7 @@ function createnewtemplates({}) {
               style={{
                 height: heightPercentageToDP('25'),
                 width: widthPercentageToDP('45'),
-                marginTop: heightPercentageToDP('-0.5'),
+                marginTop: heightPercentageToDP('-8.5'),
                 resizeMode: 'contain',
               }}
             />
@@ -319,7 +319,7 @@ function createnewtemplates({}) {
               style={{
                 height: heightPercentageToDP('25'),
                 width: widthPercentageToDP('45'),
-                marginTop: heightPercentageToDP('-0.5'),
+                marginTop: heightPercentageToDP('-8.5'),
                 resizeMode: 'contain',
               }}
             />
@@ -336,7 +336,7 @@ function createnewtemplates({}) {
               style={{
                 height: heightPercentageToDP('25'),
                 width: widthPercentageToDP('45'),
-                marginTop: heightPercentageToDP('-0.5'),
+                marginTop: heightPercentageToDP('-8.5'),
                 resizeMode: 'contain',
               }}
             />
