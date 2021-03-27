@@ -38,6 +38,7 @@ function createnewtemplates({}) {
             flexDirection: 'column',
             justifyContent: 'center',
             marginTop: widthPercentageToDP(3),
+            marginLeft:widthPercentageToDP(4),
           }}
         >
           
@@ -51,13 +52,7 @@ function createnewtemplates({}) {
               marginTop: heightPercentageToDP('0'),
             }}
           />
-          <View
-          style={{
-            flexDirection: 'row',
-            justifyContent: 'center',
-            marginTop: widthPercentageToDP(3),
-          }}
-        >
+        
           <TouchableOpacity
             onPress={() => {
               navigation.navigate('Details');
@@ -75,8 +70,7 @@ function createnewtemplates({}) {
           </TouchableOpacity>
 
          
-         
-          </View>
+      
           <Text style={[textStyles.bigBold,{left:widthPercentageToDP('3'),marginTop:heightPercentageToDP('3')} ]}>Brunch</Text>
           
           <View
