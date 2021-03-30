@@ -75,6 +75,13 @@ function CreateNewMessage({ }) {
             
             <SearchBar
                 placeholder="Search for user email..."
+                autoCapitalize = "none"
+                containerStyle = {{backgroundColor: "white"}}
+                inputStyle = {{color: "white"}}
+                inputContainerStyle = {{backgroundColor: "#3D8976"}}
+                searchIcon = {{color: "white"}}
+                clearIcon = {{color: "white"}}
+                placeholderTextColor = {"white"}
                 onChangeText={updateSearch}
                 value={search}
             />

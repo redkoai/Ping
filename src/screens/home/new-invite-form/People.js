@@ -13,6 +13,10 @@ import rsvpprogline from 'ping/assets/createnew/rsvp/rsvpprogline.png';
 import CustomButton from 'ping/src/components/inputs/CustomButton';
 import CustomTextInput from 'ping/src/components/inputs/CustomTextInput';
 
+import {SearchBar} from "react-native-elements"
+import firebase from 'firebase';
+import 'firebase/firestore'
+
 function People({ navigation }) {
     const { formData, updateFormData } = useContext(NewInviteContext);
   
@@ -24,7 +28,50 @@ function People({ navigation }) {
      navigation.navigate('RSVP');
       reset();
     };
-  
+
+
+
+    ///////////////////////////////////////////////////////////
+    // Adding firebase query to check if email searched exists
+    ///////////////////////////////////////////////////////////
+    const db = firebase.database().ref("users")
+    const [search, setSearch] = useState([])
+
+    const [foundUser, setFoundUser] = useState({
+        email:null,
+        uid:null
+    })
+
+    const updateSearch = (search) => {
+        setSearch(search)
+    }
+
+    const searchUser = (email) => {
+        let foundUser = {email:null, uid:null, found:false}
+        db.ref.orderByKey().on("child_added", function(snapshot) {
+            if (snapshot.val().email == email) {
+                console.log("found user", snapshot.val())
+                foundUser = {email:snapshot.val().email, uid: snapshot.val().uid, found:true}
+                return 
+            } 
+        })
+        return foundUser
+    }
+
+    useEffect(() => {
+        let foundUser = searchUser(search)
+        console.log("foundUser (use effect) = ", foundUser)
+        if (foundUser.found) {
+            setFoundUser({email:foundUser.email,uid:foundUser.uid})
+            console.log("setting found user state")
+        }
+        
+      }, [search]);
+
+
+
+
+
     return (
       <KeyboardAwareScrollView
         style={{ flex: 1, backgroundColor: 'white' }}
@@ -55,7 +102,7 @@ function People({ navigation }) {
             resizeMode: 'contain',
             marginTop: heightPercentageToDP('-4'),
           }}>
-        <CustomTextInput
+        {/* <CustomTextInput
           control={control}
           errors={errors}
           input={{
@@ -64,10 +111,25 @@ function People({ navigation }) {
             placeholderTextColor:'#303033',
             defaultValue: '',
           }} 
-        />
+        /> */}
+        <SearchBar
+                placeholder="Search for user email..."
+                autoCapitalize = "none"
+                containerStyle = {{backgroundColor: "white"}}
+                inputStyle = {{color: "white"}}
+                inputContainerStyle = {{backgroundColor: "#3D8976"}}
+                searchIcon = {{color: "white"}}
+                clearIcon = {{color: "white"}}
+                placeholderTextColor = {"white"}
+                onChangeText={updateSearch}
+                value={search}
+            />
+            <View style={styles.container}>
+                <Text>{foundUser.email}</Text>
+            </View>
         </View>
 
-        <TouchableOpacity
+        {/* <TouchableOpacity
         style={{
         marginTop: heightPercentageToDP('-4.5'),
         left: heightPercentageToDP('15'),
@@ -82,7 +144,7 @@ function People({ navigation }) {
      }}
  >
    <Icon name={"arrow-forward"}  size={30} color="#FFFFFF" />
- </TouchableOpacity>
+ </TouchableOpacity> */}
 
 <TouchableOpacity>
  <Card style={{padding: 15, margin: 22,height: 50}}>

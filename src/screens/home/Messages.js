@@ -115,7 +115,14 @@ function Messages({}) {
             </View>
           )
           : (
-            <View>{userHistoryLoop}</View>
+            <View>
+              {userHistoryLoop}
+              <TouchableOpacity onPress={() => { 
+                navigation.navigate('CreateNewMessage')
+              }}>
+                  <Image source={newMessageBtn} style={{height: heightPercentageToDP('7'), width :widthPercentageToDP('70'), marginTop: heightPercentageToDP('5'), resizeMode:'contain', left:heightPercentageToDP('0') }} />
+              </TouchableOpacity>
+            </View>
             )
         }
       </View>
