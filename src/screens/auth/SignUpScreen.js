@@ -20,19 +20,26 @@ import CustomButton from 'ping/src/components/inputs/CustomButton';
 
 function SignUpScreen() {
   const db = firebase.database().ref("users")
-  const { signUpWithEmailAsync, signInWithGoogleAsync, user } = useContext(AuthContext);
+  const { signUpWithEmailAsync, signInWithGoogleAsync } = useContext(AuthContext);
   const { control, handleSubmit, errors, reset, formState } = useForm({
     resolver: yupResolver(AUTH_SCHEMA),
   });
   useFocusEffect(useCallback(reset));
+  
 
-  const onSignUpSuccess = () => {
+  const onSignUpSuccess = (user) => {
     // console.log("user = ", user)
-    db.push({"email":user.email, "uid": user.uid})
+    db.child(user.user.uid).set({"email" : user.user.email})
+    // db.push({"email":user.user.email, "uid": user.user.uid, "messages":{}})
+    // db.child(`${user.user.uid}/messages`).push({text: "text", timestamp: "timestamp"})
+    // db.child(`${user.user.uid}/messages`).push({text: "text2", timestamp: "timestamp2"})
     console.log("user info pushed")
+    console.log("user success =", user)
     // navigation.navigate('HomeScreenEmpty');
   };
   const onSignUpFailure = (errorMessage) => {
+    console.log("user failure = ", user)
+    console.log("error message = ", errorMessage)
     alert(errorMessage);
   };
 

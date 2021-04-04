@@ -26,17 +26,27 @@ import Spacer from 'ping/src/components/Spacer';
 import { EmailInput, PasswordInput } from 'ping/src/components/inputs/CustomTextInput';
 import CustomButton from 'ping/src/components/inputs/CustomButton';
 
+import firebase from 'firebase';
+
 function SignInScreen({ navigation }) {
-  const { signInWithEmailAsync, signInWithGoogleAsync } = useContext(AuthContext);
+  const { signInWithEmailAsync, signInWithGoogleAsync} = useContext(AuthContext);
   const { control, handleSubmit, errors, reset, formState } = useForm({
     resolver: yupResolver(AUTH_SCHEMA),
   });
   useFocusEffect(useCallback(reset));
 
+  // const db = firebase.database().ref("users")
+  // console.log("user = ", user)
+  // console.log("user.email =", user.email)
   const onSignInSuccess = () => {
+    // console.log("user = ", user)
+    // db.push({"email":user.email, "uid": user.uid, "messages":{}})
+    // console.log("user info pushed")
+    // console.log("user.email =", user.email)
     // navigation.navigate('HomeScreenEmpty');
   };
   const onSignInFailure = (errorMessage) => {
+    // console.log("user failure =", user)
     alert(errorMessage);
   };
 

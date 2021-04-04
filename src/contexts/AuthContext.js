@@ -67,7 +67,7 @@ export function AuthProvider({ children }) {
     await firebase
       .auth()
       .createUserWithEmailAndPassword(data.email, data.password)
-      console.log(data)
+      // console.log(data)
       .then(handleSuccess)
       .catch((error) => {
         let errorCode = error.code;

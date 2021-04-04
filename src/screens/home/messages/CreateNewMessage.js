@@ -36,7 +36,7 @@ function CreateNewMessage({ }) {
         db.ref.orderByKey().on("child_added", function(snapshot) {
             if (snapshot.val().email == email) {
                 console.log("found user", snapshot.val())
-                foundUser = {email:snapshot.val().email, uid: snapshot.val().uid, found:true}
+                foundUser = {email:snapshot.val().email, uid: snapshot.key, found:true}
                 return 
             } 
         })

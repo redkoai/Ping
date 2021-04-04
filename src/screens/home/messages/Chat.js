@@ -12,7 +12,7 @@ import CreateNewMessage from './CreateNewMessage';
 function Chat({route, navigation }) {
 
     const [messages, setMessages] = useState([])
-    const db = firebase.database().ref("messages")
+    const db = firebase.database().ref("users")
 
     const { user } = useContext(AuthContext);
 
@@ -26,12 +26,13 @@ function Chat({route, navigation }) {
     const send = (messages) => {
         messages.forEach(item => {
             const message = {
-            text: item.text,
-            timestamp: firebase.database.ServerValue.TIMESTAMP,
-            user: item.user,
-            userTo: OtherUserInfo
+                text: item.text,
+                timestamp: firebase.database.ServerValue.TIMESTAMP,
+                user: item.user,
+                userTo: OtherUserInfo
             }
-            db.push(message)
+            db.child(`${user.uid}/messages/${OtherUserInfo._id}`).push(message)
+            db.child(`${OtherUserInfo._id}/messages/${user.uid}`).push(message)
         })
     }
 
@@ -49,16 +50,17 @@ function Chat({route, navigation }) {
     }
 
     const getMessage = (callback) => { // pass in a callback that adds the message to the page
-        db.on("child_added", snapshot => {
-            if (snapshot.val().user._id == user.uid && snapshot.val().userTo._id == OtherUserInfo._id){
-                console.log("snapshot.val()1 = ",snapshot.val())
-                callback(parse(snapshot))
-            }
-            console.log("After first check = ", snapshot.val())
-            if (snapshot.val().userTo._id == user.uid && snapshot.val().user._id == OtherUserInfo._id){
-                console.log("snapshot.val()2 = ",snapshot.val())
-                callback(parse(snapshot))
-            }
+        db.child(`${user.uid}/messages/${OtherUserInfo._id}`).on("child_added", snapshot => {
+            callback(parse(snapshot))
+            // if (snapshot.val().user._id == user.uid && snapshot.val().userTo._id == OtherUserInfo._id){
+            //     console.log("snapshot.val()1 = ",snapshot.val())
+            //     callback(parse(snapshot))
+            // }
+            // console.log("After first check = ", snapshot.val())
+            // if (snapshot.val().userTo._id == user.uid && snapshot.val().user._id == OtherUserInfo._id){
+            //     console.log("snapshot.val()2 = ",snapshot.val())
+            //     callback(parse(snapshot))
+            // }
         })
     }    
 
