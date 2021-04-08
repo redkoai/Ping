@@ -74,14 +74,14 @@ function CreateNewMessage({ }) {
         <View>
             
             <SearchBar
-                placeholder="Search for user email..."
+                placeholder="Search for user to mesage..."
                 autoCapitalize = "none"
                 containerStyle = {{backgroundColor: "white"}}
-                inputStyle = {{color: "white"}}
-                inputContainerStyle = {{backgroundColor: "#3D8976"}}
-                searchIcon = {{color: "white"}}
-                clearIcon = {{color: "white"}}
-                placeholderTextColor = {"white"}
+                inputStyle = {{color: "black"}}
+                inputContainerStyle = {{backgroundColor: "white"}}
+                searchIcon = {{color: "black"}}
+                clearIcon = {{color: "black"}}
+                placeholderTextColor = {"black"}
                 onChangeText={updateSearch}
                 value={search}
             />
@@ -94,7 +94,7 @@ function CreateNewMessage({ }) {
                     email: foundUser.email
                 }})
             }}>
-                <Image source={newMessageBtn} style={{height: heightPercentageToDP('7'), width :widthPercentageToDP('70'), marginTop: heightPercentageToDP('5'), resizeMode:'contain', left:heightPercentageToDP('0') }} />
+                <Image source={newMessageBtn} style={{height: heightPercentageToDP('7'), width :widthPercentageToDP('70'), marginTop: heightPercentageToDP('5'),  marginLeft: widthPercentageToDP('15'), resizeMode:'contain'}} />
             </TouchableOpacity>
         </View>
     )

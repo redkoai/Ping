@@ -12,7 +12,6 @@ import CustomButton from 'ping/src/components/inputs/CustomButton';
 import Spacer from 'ping/src/components/Spacer';
 import emptyPic from "ping/assets/messages/img.png";
 import homettl from "ping/assets/messages/messagettl.png";
-
 import AuthContext from 'ping/src/contexts/AuthContext';
 import firebase from 'firebase';
 import newMessageBtn from "ping/assets/newMessage.png"
@@ -99,7 +98,7 @@ function Messages({}) {
             <TouchableOpacity onPress={() => { 
                 navigation.navigate('CreateNewMessage')
             }}>
-                <Image source={newMessageBtn} style={{height: heightPercentageToDP('7'), width :widthPercentageToDP('70'), marginTop: heightPercentageToDP('5'), resizeMode:'contain', left:heightPercentageToDP('0') }} />
+                <Image source={newMessageBtn} style={{height: heightPercentageToDP('7'), width :widthPercentageToDP('70'), marginTop: heightPercentageToDP('5'), left:heightPercentageToDP('7'),resizeMode:'contain', }} />
             </TouchableOpacity>
             
             
@@ -117,10 +116,31 @@ function Messages({}) {
           : (
             <View>
               {userHistoryLoop}
+              <View 
+            style={{ 
+                flexDirection: 'column', 
+                justifyContent: 'center',
+                marginTop:widthPercentageToDP(3)
+                }}>
+
+            <Image 
+            source={emptyPic}
+            style={{height: heightPercentageToDP('40'), 
+              width :widthPercentageToDP('85'),
+              marginTop: heightPercentageToDP('10'),
+              resizeMode:'contain', 
+              left:heightPercentageToDP('5') 
+              
+              }} />
+            
+            </View>
+
+
+
               <TouchableOpacity onPress={() => { 
                 navigation.navigate('CreateNewMessage')
               }}>
-                  <Image source={newMessageBtn} style={{height: heightPercentageToDP('7'), width :widthPercentageToDP('70'), marginTop: heightPercentageToDP('5'), resizeMode:'contain', left:heightPercentageToDP('0') }} />
+                  <Image source={newMessageBtn} style={{height: heightPercentageToDP('7'), width :widthPercentageToDP('70'), marginTop: heightPercentageToDP('5'), resizeMode:'contain', left:heightPercentageToDP('7') }} />
               </TouchableOpacity>
             </View>
             )
