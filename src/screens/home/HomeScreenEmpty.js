@@ -92,69 +92,82 @@ function HomeScreenEmpty({}) {
         <View style={{flex: 1}}>    
             <ImageBackground source={emptyHome} style={styles.homeEmpty}>
                  {isLoggedIn ? (
-            <View style={{ flexDirection: 'column', justifyContent: 'center',marginTop:widthPercentageToDP(3)}}>
-            <Image source={homettl} style={{height: heightPercentageToDP('15'), width :widthPercentageToDP('90'),  resizeMode:'contain',marginTop: heightPercentageToDP('10'), }} />
-           
-            <Image source={emptyPic} style={{height: heightPercentageToDP('40'), width :widthPercentageToDP('85'), marginTop: heightPercentageToDP('0'), resizeMode:'contain' }} />
-                <TouchableOpacity onPress={() => { 
-                    navigation.navigate('NewInvite')
+       
 
-                }}>
-                    <Image source={createNewEventBtn} style={{height: heightPercentageToDP('7'), width :widthPercentageToDP('70'), marginTop: heightPercentageToDP('5'), resizeMode:'contain', left:heightPercentageToDP('5') }} />
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => { 
-                   navigation.navigate('SignUp')
-                  //navigation.navigate('SecretCode')
-                }}>
-                    <Image source={addFriendsBtn} style={{height: heightPercentageToDP('7'), width :widthPercentageToDP('70'), marginBottom: heightPercentageToDP('15'), resizeMode:'contain' , left:heightPercentageToDP('5')}} />
-                </TouchableOpacity>
-                </View>
-                ) : (
-                    <View style={{ flexDirection: 'column', marginLeft:'-10%',justifyContent: 'flex-end',marginTop:widthPercentageToDP(-43)}}>
+
+
+<View style={{ flexDirection: 'column', marginLeft:'-10%',justifyContent: 'flex-end',marginTop:widthPercentageToDP(-43)}}>
                         
-                        <View style={{ flexDirection: 'row', justifyContent: 'space-between',marginTop:widthPercentageToDP(3),marginBottom:heightPercentageToDP('3')}}>
-                    <Text style={[textStyles.bigBold,{left:heightPercentageToDP('0')} ]}>Home</Text>
-                    <TouchableOpacity onPress={() => { 
-                            navigation.navigate('NewInvite')
-        
-                        }}>
-                  <Image source={profileIm} style={{height: heightPercentageToDP('4'), width :widthPercentageToDP('8'), marginBottom: heightPercentageToDP('2'), resizeMode:'contain' , left:heightPercentageToDP('2')}} />
-                    </TouchableOpacity>
+<View style={{ flexDirection: 'row', justifyContent: 'space-between',marginTop:widthPercentageToDP(3),marginBottom:heightPercentageToDP('3')}}>
+<Text style={[textStyles.bigBold,{left:heightPercentageToDP('0')} ]}>Home</Text>
+<TouchableOpacity
+                  onPress={() =>
+                    navigation.navigate("Account", { screen: "SignUp" })
+                  }
+                >
+<Image source={profileIm} style={{height: heightPercentageToDP('4'), width :widthPercentageToDP('8'), marginBottom: heightPercentageToDP('2'), resizeMode:'contain' , left:heightPercentageToDP('2')}} />
+</TouchableOpacity>
 </View>
 
 
-                   
-                    <View style={{ flexDirection: 'row', justifyContent: 'space-between',marginTop:widthPercentageToDP(3)}}>
-                    <Text style={[textStyles.bigBold,{left:heightPercentageToDP('0'),marginBottom:heightPercentageToDP('3')} ]}>My Events</Text>
-                    <TouchableOpacity onPress={() => { 
-                            navigation.navigate('NewInvite')
-        
-                        }}>
-                    <Text style={[textStyles.smallSemiBold,{color:'gray', fontSize:actuatedNormalize(12),left:heightPercentageToDP('3')} ]}>See all</Text>
-                    </TouchableOpacity>
+
+<View style={{ flexDirection: 'row', justifyContent: 'space-between',marginTop:widthPercentageToDP(3)}}>
+<Text style={[textStyles.bigBold,{left:heightPercentageToDP('0'),marginBottom:heightPercentageToDP('3')} ]}>My Events</Text>
+<TouchableOpacity onPress={() => { 
+    navigation.navigate('NewInvite')
+
+}}>
+<Text style={[textStyles.smallSemiBold,{color:'gray', fontSize:actuatedNormalize(12),left:heightPercentageToDP('3')} ]}>See all</Text>
+</TouchableOpacity>
 </View>
 <View style={{ flexDirection: 'row', justifyContent: 'space-between',marginTop:widthPercentageToDP(3),marginBottom:heightPercentageToDP('3')}}>
-                    <Text style={[textStyles.bigBold,{left:heightPercentageToDP('0')} ]}>My Invites</Text>
-                    <TouchableOpacity onPress={() => { 
-                            navigation.navigate('NewInvite')
-        
-                        }}>
-                    <Text style={[textStyles.smallSemiBold,{color:'gray', fontSize:actuatedNormalize(12),left:heightPercentageToDP('3')} ]}>See all</Text>
-                    </TouchableOpacity>
+<Text style={[textStyles.bigBold,{left:heightPercentageToDP('0')} ]}>My Invites</Text>
+<TouchableOpacity onPress={() => { 
+    navigation.navigate('NewInvite')
+
+}}>
+<Text style={[textStyles.smallSemiBold,{color:'gray', fontSize:actuatedNormalize(12),left:heightPercentageToDP('3')} ]}>See all</Text>
+</TouchableOpacity>
 </View>
-                
+
+<TouchableOpacity onPress={() => { 
+    navigation.navigate('NewInvite')
+
+}}>
+    <Image source={createNewEventBtn} style={{height: heightPercentageToDP('7'), width :widthPercentageToDP('70'), marginTop: heightPercentageToDP('5'), resizeMode:'contain', left:heightPercentageToDP('2') }} />
+</TouchableOpacity>
+<TouchableOpacity onPress={() => { 
+   navigation.navigate('SignUp')
+  //navigation.navigate('SecretCode')
+}}>
+    <Image source={addFriendsBtn} style={{height: heightPercentageToDP('7'), width :widthPercentageToDP('70'), marginBottom: heightPercentageToDP('15'), resizeMode:'contain' , left:heightPercentageToDP('2')}} />
+</TouchableOpacity>
+</View>
+                ) : (
+                    <View style={{ flexDirection: 'column', justifyContent: 'center',marginTop:widthPercentageToDP(3)}}>
+                   <View style={{ flexDirection: 'row', justifyContent: 'space-between',marginTop:widthPercentageToDP(10),marginBottom:heightPercentageToDP('3')}}>
+<Text style={[textStyles.bigBold,{left:heightPercentageToDP('0')} ]}>Home</Text>
+<TouchableOpacity
+                  onPress={() =>
+                    navigation.navigate("Account", { screen: "SignUp" })
+                  }
+                >
+<Image source={profileIm} style={{height: heightPercentageToDP('4'), width :widthPercentageToDP('8'), marginBottom: heightPercentageToDP('2'), resizeMode:'contain' , left:heightPercentageToDP('0')}} />
+</TouchableOpacity>
+</View>
+                    <Image source={emptyPic} style={{height: heightPercentageToDP('40'), width :widthPercentageToDP('85'), marginTop: heightPercentageToDP('0'), resizeMode:'contain' }} />
                         <TouchableOpacity onPress={() => { 
                             navigation.navigate('NewInvite')
         
                         }}>
-                            <Image source={createNewEventBtn} style={{height: heightPercentageToDP('7'), width :widthPercentageToDP('70'), marginTop: heightPercentageToDP('5'), resizeMode:'contain', left:heightPercentageToDP('2') }} />
+                            <Image source={createNewEventBtn} style={{height: heightPercentageToDP('7'), width :widthPercentageToDP('70'), marginTop: heightPercentageToDP('5'), resizeMode:'contain', left:heightPercentageToDP('5'),marginBottom:heightPercentageToDP('20') }} />
                         </TouchableOpacity>
-                        <TouchableOpacity onPress={() => { 
+                        {/* <TouchableOpacity onPress={() => { 
                            navigation.navigate('SignUp')
                           //navigation.navigate('SecretCode')
                         }}>
-                            <Image source={addFriendsBtn} style={{height: heightPercentageToDP('7'), width :widthPercentageToDP('70'), marginBottom: heightPercentageToDP('15'), resizeMode:'contain' , left:heightPercentageToDP('2')}} />
-                        </TouchableOpacity>
+                            <Image source={addFriendsBtn} style={{height: heightPercentageToDP('7'), width :widthPercentageToDP('70'), marginBottom: heightPercentageToDP('15'), resizeMode:'contain' , left:heightPercentageToDP('5')}} />
+                        </TouchableOpacity> */}
                         </View>
                 )}
             </ImageBackground>
