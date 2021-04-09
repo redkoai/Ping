@@ -110,7 +110,6 @@ function Details({route,navigation }) {
         />
         <CustomTextInput
           control={control}
-          errors={errors}
           input={{
             name: 'co-host-0',
             label: 'Hosted by',
@@ -124,7 +123,6 @@ function Details({route,navigation }) {
           <View style={{ resizeMode: 'contain', marginTop: heightPercentageToDP('-3') }}>
             <CustomTextInput
               control={control}
-              errors={errors}
               input={{
                 name: `co-host-${index + 1}`,
                 placeholder: 'Host/organization name',
@@ -139,7 +137,6 @@ function Details({route,navigation }) {
 
         <CustomTextInput
           control={control}
-          errors={errors}
           input={{
             name: 'description',
             label: 'Description',
