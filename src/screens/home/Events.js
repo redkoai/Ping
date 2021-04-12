@@ -6,7 +6,7 @@ import emptyHome from "ping/assets/homeScreen/bg.png";
 import styles from "ping/src/styles/styles";
 import { Dimensions } from 'react-native';
 import {widthPercentageToDP,heightPercentageToDP,} from 'ping/util/scaler';
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useState, useContext} from "react";
 import createNewEventBtn from "ping/assets/NavBarAssets/createNewEventBtn.png"
 import addFriendsBtn from "ping/assets/NavBarAssets/addFriendsBtn.png"
 import emptyPic from "ping/assets/events/calendar.png";
@@ -15,6 +15,8 @@ import homettl from "ping/assets/events/eventsttl.png";
 import {Alert, StyleSheet, Text, View} from 'react-native';
 import {Calendar, CalendarList, Agenda} from 'react-native-calendars';
 import {Card} from 'react-native-paper'
+import AuthContext from 'ping/src/contexts/AuthContext';
+import firebase from 'firebase'
 
 
 
@@ -26,49 +28,111 @@ const timeToString = (time) => {
 
 
 function Events({}) {
-    const navigation = useNavigation()
 
-    const [items, setItems] = useState({})
+  const navigation = useNavigation()
 
-    const loadItems = (day) => {
-        setTimeout(() => {
-          for (let i = -15; i < 85; i++) {
-            const time = day.timestamp + i * 24 * 60 * 60 * 1000;
-            const strTime = timeToString(time);
-            if (!items[strTime]) {
-              items[strTime] = [];
-              const numItems = Math.floor(Math.random() * 3 + 1);
-              for (let j = 0; j < numItems; j++) {
-                items[strTime].push({
-                  name: 'Item for ' + strTime + ' #' + j,
-                  height: Math.max(50, Math.floor(Math.random() * 150))
-                });
-              }
-            }
-          }
-          const newItems = {};
-          Object.keys(items).forEach((key) => {
-            newItems[key] = items[key];
-          });
-          setItems(newItems)
-        }, 1000);
-      }
+  const [items, setItems] = useState({})
+
+
+  ///////////////////////////////////////
+  // firebase query
+  ///////////////////////////////////////
+  const db = firebase.database().ref("users")
+  const {user} = useContext(AuthContext)
+  // console.log(user)
+
+  const newItems = {}
+
+  // const getData = () => {
+  //   console.log("get Data is running")
+  //   db.child(`${user.uid}/Events`).on("child_added", function(snapshot) {
+  //     console.log("snapshot = ", snapshot)
+  //     console.log("enddate = ", snapshot.val().enddate)
+  //     let date = new Date(snapshot.val().enddate.replace('th', ''))
+  //     console.log("date =", date.toDateString())
+  //     newItems[date.toISOString().split('T')[0]] = {
+  //       name: snapshot.val().event,
+  //       height: Math.max(50, Math.floor(Math.random() * 150))
+  //     }
+      
+  //     console.log("newItems = ", newItems)
+  // })
+  // setItems(newItems)
+  // }
+
+  const loadItems = () => {
+      setTimeout(() => {
+        db.child(`${user.uid}/Events`).on("child_added", function(snapshot) {
+          console.log("snapshot = ", snapshot)
+          console.log("enddate = ", snapshot.val().enddate)
+          let date = new Date(snapshot.val().enddate.replace('th', ''))
+          console.log("date =", date.toDateString())
+          newItems[date.toISOString().split('T')[0]] = []
+          
+          newItems[date.toISOString().split('T')[0]].push( {
+            name: snapshot.val().event,
+            height: Math.max(50, Math.floor(Math.random() * 150)),
+            info: snapshot
+          })
+          
+          console.log("newItems = ", newItems)
+      });
+        setItems(newItems)
+      }, 1000);
+    }
+  
+
+  
+
+
+
+
+
+
+    // const loadItems = (day) => {
+    //     setTimeout(() => {
+    //       console.log("poop3")
+    //       for (let i = -15; i < 85; i++) {
+    //         const time = day.timestamp + i * 24 * 60 * 60 * 1000;
+    //         const strTime = timeToString(time);
+    //         if (!items[strTime]) {
+    //           items[strTime] = [];
+    //           const numItems = Math.floor(Math.random() * 3 + 1);
+    //           for (let j = 0; j < numItems; j++) {
+    //             // console.log("String time = ", strTime)
+    //             items[strTime].push({
+    //               name: 'Item for ' + strTime + ' #' + j,
+    //               height: Math.max(50, Math.floor(Math.random() * 150))
+    //             });
+    //           }
+    //         }
+    //       }
+    //       const newItems = {};
+    //       Object.keys(items).forEach((key) => {
+    //         newItems[key] = items[key];
+    //       });
+    //       setItems(newItems)
+    //     }, 1000);
+    //   }
 
       renderItem = (item) => {
           return(
-          <TouchableOpacity style={{
-              marginRight: 10,
-              marginTop: 30,
-              padding: 10
-            }}>
-              <Card >
-                  <Card.Content >
-                      <View style={{flexDirection:"row", justifyContent:"center"}}>
-                        <Text>{item.name}</Text>
-                      </View>
-                  </Card.Content>
-              </Card>
-          </TouchableOpacity>)
+          <TouchableOpacity onPress={() => { 
+            console.log("button pressed and item info =", item.info)
+          }}
+          style={{
+                marginRight: 10,
+                marginTop: 30,
+                padding: 10
+              }}>
+                <Card >
+                    <Card.Content >
+                        <View style={{flexDirection:"row", justifyContent:"center"}}>
+                          <Text>{item.name}</Text>
+                        </View>
+                    </Card.Content>
+                </Card>
+            </TouchableOpacity>)
 
       }
 

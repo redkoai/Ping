@@ -16,6 +16,7 @@ import CustomTextInput from 'ping/src/components/inputs/CustomTextInput';
 import {SearchBar} from "react-native-elements"
 import firebase from 'firebase';
 import 'firebase/firestore'
+import { Button } from 'react-native-paper';
 
 function People({ navigation }) {
     const { formData, updateFormData } = useContext(NewInviteContext);
@@ -31,11 +32,22 @@ function People({ navigation }) {
 
 
 
+
+
     ///////////////////////////////////////////////////////////
     // Adding firebase query to check if email searched exists
     ///////////////////////////////////////////////////////////
     const db = firebase.database().ref("users")
     const [search, setSearch] = useState([])
+
+    const sendData = () => {
+      console.log(foundUser)
+      console.log(formData)
+      db.child(foundUser.uid)
+      db.child(`${foundUser.uid}/Events/`).push(formData)
+      console.log("Data pushed")
+      // db.child(user.user.uid).set({"email" : user.user.email})
+    }
 
     const [foundUser, setFoundUser] = useState({
         email:null,
@@ -51,7 +63,7 @@ function People({ navigation }) {
         db.ref.orderByKey().on("child_added", function(snapshot) {
             if (snapshot.val().email == email) {
                 console.log("found user", snapshot.val())
-                foundUser = {email:snapshot.val().email, uid: snapshot.val().uid, found:true}
+                foundUser = {email:snapshot.val().email, uid: snapshot.key, found:true}
                 return 
             } 
         })
@@ -125,7 +137,12 @@ function People({ navigation }) {
                 value={search}
             />
             <View style={styles.container}>
-                <Text>{foundUser.email}</Text>
+                <Text>
+                  {foundUser.email} 
+                  <Button onPress={sendData}>
+                    Send Invite
+                  </Button>
+                </Text>
             </View>
         </View>
 
@@ -146,11 +163,11 @@ function People({ navigation }) {
    <Icon name={"arrow-forward"}  size={30} color="#FFFFFF" />
  </TouchableOpacity> */}
 
-<TouchableOpacity>
+{/* <TouchableOpacity>
  <Card style={{padding: 15, margin: 22,height: 50}}>
         <Text>Search for friends...</Text>
 </Card>
-</TouchableOpacity>
+</TouchableOpacity> */}
    
 
 <Spacer height={45} />
