@@ -111,7 +111,7 @@ function FAQ({ navigation }) {
         </View>
         ))}
 
-        <CustomAddButton text="Add another question" onPress={addAnotherQuestion} />
+        <CustomAddButton text="Add another question and an answer" onPress={addAnotherQuestion} />
 
         <Spacer height={3} />
 
