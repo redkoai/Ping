@@ -26,7 +26,7 @@ function RSVP({ navigation }) {
   const [isSignInVisible, setSignInVisibility] = useState(false);
   //const [saveData,setSaveData] = useState(false);
   const [state,setState]=useState({});
-const UserInfo = { "uid": user.uid, "email": user.email }
+// const UserInfo = { "uid": user.uid, "email": user.email }
 
   const { control, errors, reset, setValue, handleSubmit, formState } = useForm({
     resolver: yupResolver(RSVP_SCHEMA),

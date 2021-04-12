@@ -18,7 +18,7 @@ import StoreData from "../../../util/SaveItemInStorage";
 import RetrieveData from "../../../util/GetItemInStorage";
 import LoginChecker from "../../../util/validators/LoginChecker";
 
-function Settings({}) {
+function Accounts({}) {
   const [loggedInUser,setLoggedInUser]=useState([]);
   const [state,setState]=useState([]);
   const { user } = useContext(AuthContext);
@@ -196,7 +196,7 @@ function Settings({}) {
 
 )}
 
-export default Settings;
+export default Accounts;
 
 const stylesone = StyleSheet.create({
     scene: {

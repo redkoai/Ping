@@ -102,7 +102,7 @@ function HomeScreenEmpty({}) {
 <Text style={[textStyles.bigBold,{left:heightPercentageToDP('0')} ]}>Home</Text>
 <TouchableOpacity
                   onPress={() =>
-                    navigation.navigate("Account", { screen: "SignUp" })
+                    navigation.navigate("Account", { screen: "SignIn" })
                   }
                 >
 <Image source={profileIm} style={{height: heightPercentageToDP('4'), width :widthPercentageToDP('8'), marginBottom: heightPercentageToDP('2'), resizeMode:'contain' , left:heightPercentageToDP('2')}} />

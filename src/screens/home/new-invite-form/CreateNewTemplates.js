@@ -71,7 +71,7 @@ function createnewtemplates({}) {
 
          
       
-          <Text style={[textStyles.bigBold,{left:widthPercentageToDP('3'),marginTop:heightPercentageToDP('3')} ]}>Brunch</Text>
+          <Text style={[textStyles.bigBold,{left:widthPercentageToDP('3'),marginTop:heightPercentageToDP('2')} ]}>Brunch</Text>
           
           <View
           style={{
@@ -133,7 +133,7 @@ function createnewtemplates({}) {
           </TouchableOpacity>
           </ScrollView>
           </View>
-          <Text style={[textStyles.bigBold,{left:widthPercentageToDP('3'),marginTop:heightPercentageToDP('3')} ]}>Party</Text>
+          <Text style={[textStyles.bigBold,{left:widthPercentageToDP('3'),marginTop:heightPercentageToDP('0')} ]}>Party</Text>
           <ScrollView  horizontal={true}>
           <View
           style={{
@@ -177,7 +177,7 @@ function createnewtemplates({}) {
           </TouchableOpacity>
           </View>
           </ScrollView>
-          <Text style={[textStyles.bigBold,{left:widthPercentageToDP('3'),marginTop:heightPercentageToDP('3')} ]}>Birthday</Text>
+          <Text style={[textStyles.bigBold,{left:widthPercentageToDP('3'),marginTop:heightPercentageToDP('0')} ]}>Birthday</Text>
           <View
           style={{
             flexDirection: 'row',
@@ -218,7 +218,7 @@ function createnewtemplates({}) {
             />
           </TouchableOpacity>
           </View>
-          <Text style={[textStyles.bigBold,{left:widthPercentageToDP('3'),marginTop:heightPercentageToDP('3')} ]}>Holidays</Text>
+          <Text style={[textStyles.bigBold,{left:widthPercentageToDP('3'),marginTop:heightPercentageToDP('0')} ]}>Holidays</Text>
           <View
           style={{
             flexDirection: 'row',
