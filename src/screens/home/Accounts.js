@@ -102,7 +102,7 @@ function Settings({}) {
             }} />
             </TouchableOpacity>
             
-            <Image 
+            {/* <Image 
             source={Accfriends} 
             style={{
             height: heightPercentageToDP('4'),
@@ -111,7 +111,7 @@ function Settings({}) {
             marginTop: heightPercentageToDP('1'), 
             left: heightPercentageToDP('1'),
             
-            }} /> 
+            }} />  */}
             {/* <Image source={Accevents} style={{height: heightPercentageToDP('20'), width :widthPercentageToDP('85'), marginTop: heightPercentageToDP('-7'), resizeMode:'contain' }} /> */}
             <Image 
             source={Acccenter} 
@@ -122,8 +122,8 @@ function Settings({}) {
             resizeMode:'contain' 
             }} />
         </View>
-        <Spacer height={2} />
-         <TouchableOpacity>     
+        <Spacer height={2}  />
+         <TouchableOpacity  style={{left: heightPercentageToDP('3.5')}}>     
         <CustomButton
           text="Create a new event"
           primary
@@ -131,12 +131,12 @@ function Settings({}) {
         />
         </TouchableOpacity> 
         
-        <TouchableOpacity>
+        {/* <TouchableOpacity  style={{left: heightPercentageToDP('3.5')}}>     
         <CustomButton
           text="Add friends"
           shadow
         />
-        </TouchableOpacity>
+        </TouchableOpacity> */}
 
 
 </View>

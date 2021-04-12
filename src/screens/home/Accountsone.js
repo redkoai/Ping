@@ -14,9 +14,7 @@ import Accname from "ping/assets/Accounts/AccountName.png";
 import Accfriends from "ping/assets/Accounts/friends.png";
 import Accactivity from "ping/assets/Accounts/Accountactivity.png";
 import Acccenterone from "ping/assets/Accounts/Accountscenterone.png";
-import {SearchBar} from "react-native-elements"
 import newMessageBtn from "ping/assets/newMessage.png"
-import {widthPercentageToDP,heightPercentageToDP,} from 'ping/util/scaler';
 import {SearchBar} from "react-native-elements"
 import AuthContext from 'ping/src/contexts/AuthContext';
 import firebase from 'firebase';
@@ -26,7 +24,7 @@ import 'firebase/firestore'
 
 
 function Accountsone({}) {
-    const navigation = useNavigation()
+    // const navigation = useNavigation()
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [loggedInUser,setLoggedInUser]=useState([]);
 
@@ -189,13 +187,13 @@ function Accountsone({}) {
 
             {/* <Image source={Accname} style={{height: heightPercentageToDP('10'), width :widthPercentageToDP('95'),  resizeMode:'contain',marginTop: heightPercentageToDP('10'), }} /> */}
             
-            <Image 
+            {/* <Image 
             source={Accfriends} 
             style={{height: heightPercentageToDP('4'),
              width :widthPercentageToDP('30'), 
              resizeMode:'contain',
              marginTop: heightPercentageToDP('1'),
-              }} />
+              }} /> */}
 
             {/* <Image source={Accactivity} style={{height: heightPercentageToDP('20'), width :widthPercentageToDP('85'), marginTop: heightPercentageToDP('-7'), resizeMode:'contain' }} /> */}
             
@@ -210,15 +208,15 @@ function Accountsone({}) {
             </View>
 
         <Spacer height={2} />
-        <TouchableOpacity>     
+        {/* <TouchableOpacity  style={{left: heightPercentageToDP('3.5')}}>       
         <CustomButton
           text="Create a new event"
           primary
           shadow
         />
-        </TouchableOpacity> 
+        </TouchableOpacity>  */}
         
-        <TouchableOpacity>
+        <TouchableOpacity  style={{left: heightPercentageToDP('3.5')}}>     
         <CustomButton
           text="Add friends"
           shadow

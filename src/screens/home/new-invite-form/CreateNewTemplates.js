@@ -8,7 +8,7 @@ import { colors, textStyles } from 'ping/src/styles/styles';
 import { widthPercentageToDP, heightPercentageToDP } from 'ping/util/scaler';
 import React, { useContext, useEffect, useState } from 'react';
 import tempprogline from 'ping/assets/createnew/templates/tempprogline.png';
-import temp1 from 'ping/assets/createnew/templates/templates1.png';
+// import temp1 from 'ping/assets/createnew/templates/templates1.png';
 import inv1 from 'ping/assets/invites/1.png';
 import inv2 from 'ping/assets/invites/2.png';
 import inv3 from 'ping/assets/invites/3.png';
@@ -25,7 +25,7 @@ import inv13 from 'ping/assets/invites/13.png';
 import inv14 from 'ping/assets/invites/14.png';
 import inv15 from 'ping/assets/invites/15.png';
 import NewInviteContext from 'ping/src/contexts/NewInviteContext';
-
+import CreatePicker from 'ping/src/components/inputs/CreatePicker';
 
 
 function createnewtemplates({}) {
@@ -62,7 +62,8 @@ function createnewtemplates({}) {
             }}
           />
         
-          <TouchableOpacity
+        <CreatePicker />
+          {/* <TouchableOpacity
             onPress={() => {
               //navigation.navigate('SecretCode');
               navigation.navigate('Details');
@@ -77,7 +78,7 @@ function createnewtemplates({}) {
                 resizeMode: 'contain',
               }}
             />
-          </TouchableOpacity>
+          </TouchableOpacity> */}
 
          
       
@@ -99,6 +100,8 @@ function createnewtemplates({}) {
               
             }}
           >
+       
+
             <Image
               source={inv1}
               style={{

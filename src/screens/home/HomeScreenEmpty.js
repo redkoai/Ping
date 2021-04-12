@@ -18,6 +18,7 @@ import { colors, textStyles } from 'ping/src/styles/styles';
 import AuthContext from 'ping/src/contexts/AuthContext';
 import { actuatedNormalize } from "../../../util/fontScaler";
 import profileIm from "ping/assets/NavBarAssets/prof.png"
+import CustomButton from 'ping/src/components/inputs/CustomButton';
 
 
 function HomeScreenEmpty({}) {
@@ -130,18 +131,26 @@ function HomeScreenEmpty({}) {
 </TouchableOpacity>
 </View>
 
-<TouchableOpacity onPress={() => { 
+        <TouchableOpacity  style={{left: heightPercentageToDP('2.5')}}  onPress={() => { 
     navigation.navigate('NewInvite')
 
-}}>
-    <Image source={createNewEventBtn} style={{height: heightPercentageToDP('7'), width :widthPercentageToDP('70'), marginTop: heightPercentageToDP('5'), resizeMode:'contain', left:heightPercentageToDP('2') }} />
-</TouchableOpacity>
-<TouchableOpacity onPress={() => { 
-   navigation.navigate('SignUp')
-  //navigation.navigate('SecretCode')
-}}>
-    <Image source={addFriendsBtn} style={{height: heightPercentageToDP('7'), width :widthPercentageToDP('70'), marginBottom: heightPercentageToDP('15'), resizeMode:'contain' , left:heightPercentageToDP('2')}} />
-</TouchableOpacity>
+}}>     
+        <CustomButton
+          text="Create a new event"
+          primary
+          shadow
+        />
+        </TouchableOpacity> 
+        
+        <TouchableOpacity  style={{left: heightPercentageToDP('2.5')}} onPress={() => { 
+    navigation.navigate('NewInvite')
+
+}}>      
+        <CustomButton
+          text="Add friends"
+          shadow
+        />
+        </TouchableOpacity>
 </View>
                 ) : (
                     <View style={{ flexDirection: 'column', justifyContent: 'center',marginTop:widthPercentageToDP(3)}}>

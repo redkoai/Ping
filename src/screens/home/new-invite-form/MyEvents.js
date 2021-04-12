@@ -99,7 +99,7 @@ function MyEvents({navigation }) {
           marginTop: heightPercentageToDP('3'),
           left:heightPercentageToDP('1')
           }}>
-          <CustomButton text="Invite" narrow primary onPress={handleSubmit(onSubmit)} />
+          <CustomButton text="Secret Code" narrow primary onPress={handleSubmit(onSubmit)} />
           </View>
 
           <TouchableOpacity >
@@ -108,7 +108,7 @@ function MyEvents({navigation }) {
           width :widthPercentageToDP('20'), 
           resizeMode:'contain',
           marginTop: heightPercentageToDP('-8'),
-          left:heightPercentageToDP('34')}}>
+          left:heightPercentageToDP('32')}}>
           <Text style={[textStyles.bigBold,{ color: colors.primary }]}>Edit</Text>
           <View style={{marginTop: heightPercentageToDP('-3.5'),left:heightPercentageToDP('5')}}>
           <MaterialIcons name="edit" size={32} color="#3D8976" />
@@ -218,7 +218,7 @@ function MyEvents({navigation }) {
 
           <Spacer height={5} />
 
-          <View>
+          {/* <View>
           <Text style={[textStyles.bigSemiBold,{left:heightPercentageToDP('2')}]}>
            Send message to all guests
           </Text>
@@ -234,18 +234,19 @@ function MyEvents({navigation }) {
           }}
           rules={{ multiline: true, numberOfLines: 5 }}  
         />
+        </View> */}
         </View>
-        </View>
+        
 
 
           <Spacer height={5} />
   
-          <View style={{ alignSelf: 'flex-end' }}>
-            <CustomButton text="Send" narrow primary />
+          <View style={{ alignSelf: 'flex-end', marginLeft:'10%' }}>
+            <CustomButton text="Invite" narrow primary />
           </View>
   
           <Spacer height={2} />
-        </View>
+      
       </KeyboardAwareScrollView>
     );
   }
