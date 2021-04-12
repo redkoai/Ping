@@ -143,7 +143,7 @@ function HomeScreenEmpty({}) {
         </TouchableOpacity> 
         
         <TouchableOpacity  style={{left: heightPercentageToDP('2.5')}} onPress={() => { 
-    navigation.navigate('NewInvite')
+    navigation.navigate('addFriends')
 
 }}>      
         <CustomButton

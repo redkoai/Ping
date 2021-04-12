@@ -1,5 +1,5 @@
 import {useNavigation} from "@react-navigation/native";
-import {Image, ImageBackground,TouchableOpacity, View, ScrollView,StyleSheet} from "react-native";
+import {Image, ImageBackground,TouchableOpacity, View, ScrollView,StyleSheet,Text} from "react-native";
 import emptyHome from "ping/assets/homeScreen/bg.png";
 import styles from "ping/src/styles/styles";
 import { Dimensions } from 'react-native';
@@ -172,7 +172,7 @@ function Accountsone({}) {
     }}
   >
 
-            <TouchableOpacity>
+<TouchableOpacity onPress={() => navigation.navigate('settings')}>
             <Image 
             source={settings} 
             style={{

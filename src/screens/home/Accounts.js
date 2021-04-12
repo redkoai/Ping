@@ -89,7 +89,7 @@ function Settings({}) {
               }}
             >
             {/* <Image source={Accname} style={{height: heightPercentageToDP('10'), width :widthPercentageToDP('95'),  resizeMode:'contain',marginTop: heightPercentageToDP('10'), }} /> */}
-             <TouchableOpacity>
+             <TouchableOpacity onPress={() => navigation.navigate('settings')}>
             <Image 
             source={settings} 
             style={{
@@ -139,6 +139,7 @@ function Settings({}) {
         </TouchableOpacity> */}
 
 
+
 </View>
           ):( 
             <View>
@@ -150,7 +151,7 @@ function Settings({}) {
             }}
           >
           {/* <Image source={Accname} style={{height: heightPercentageToDP('10'), width :widthPercentageToDP('95'),  resizeMode:'contain',marginTop: heightPercentageToDP('10'), }} /> */}
-           <TouchableOpacity>
+          <TouchableOpacity onPress={() => navigation.navigate('settings')}>
           <Image 
           source={settings} 
           style={{
@@ -181,14 +182,14 @@ function Settings({}) {
           )
 
 }
-            {/* {!skipped &&
+            {!skipped &&
               <CustomButton
                   text="Sign Out"
                   onPress={async () => await singOutAsync(onSuccess, onFailure)}
                   shadow
                   primary
               />
-            } */}
+            }
       </ImageBackground>
     </View>
 
