@@ -48,13 +48,15 @@ function MyEventsInvited({}) {
           shadow
         />
         </TouchableOpacity>
-           
+        
+        <TouchableOpacity>
         <CustomButton
          text="View Event"
          onPress={navigation.navigate('MyEvents')}
          shadow
          primary
          />
+         </TouchableOpacity>
 
         </View> 
       </ImageBackground>

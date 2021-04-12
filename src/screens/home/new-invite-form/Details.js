@@ -17,11 +17,11 @@ import CustomAddButton from 'ping/src/components/inputs/CustomAddButton';
 import deprogline from 'ping/assets/createnew/details/detailsprogressline.png';
 import { useForm } from 'react-hook-form';
 
-function Details({ navigation }) {
+function Details({route,navigation }) {
   const { formData, updateFormData } = useContext(NewInviteContext);
 
   const [errorMsg, setErrorMsg] = useState(false);
-
+  
   const { control, errors, setValue, reset, handleSubmit } = useForm({
     resolver: yupResolver(DETAILS_SCHEMA),
   });
@@ -52,6 +52,7 @@ function Details({ navigation }) {
 
   const [coHosts, setCoHosts] = useState([]);
   const addCoHost = () => setCoHosts([...coHosts, 1]);
+  //const [img,setImg] = route.params;
 
   return (
     <KeyboardAwareScrollView
@@ -88,6 +89,7 @@ function Details({ navigation }) {
             defaultValue: '',
           }}
         />
+        {/* <Text>{img}</Text> */}
         <DateInput
           control={control}
           errors={errors}

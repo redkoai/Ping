@@ -6,10 +6,16 @@ export function NewInviteProvider({ children }) {
   const [formDataPrev, setFormDataPrev] = useState({});
   const [formData, setFormData] = useState({});
   const [saveData,setSaveData] = useState(false);
+  const [bgImage, setBgImage] = useState(null);
   const updateFormData = (newData) => {
     //console.log("New Data",newData)
     setFormDataPrev({ ...formDataPrev, ...newData });
     //console.log("FOrm Existing Data",formData);
+  }
+
+  const setSelectedImage = (imageSelected) => {
+    console.log("image selected is",imageSelected)
+    setBgImage(imageSelected);
   }
 
   useEffect(() => {
@@ -26,6 +32,8 @@ export function NewInviteProvider({ children }) {
         formData,
         updateFormData,
         resetFormData,
+        setSelectedImage,
+        bgImage
       }}
     >
       {children}
