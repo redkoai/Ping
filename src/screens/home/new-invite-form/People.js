@@ -113,6 +113,7 @@ function People({ navigation }) {
             width: widthPercentageToDP('88'),
             resizeMode: 'contain',
             marginTop: heightPercentageToDP('-4'),
+            marginLeft:widthPercentageToDP('-13'),
           }}>
         {/* <CustomTextInput
           control={control}
@@ -124,18 +125,20 @@ function People({ navigation }) {
             defaultValue: '',
           }} 
         /> */}
-        <SearchBar
-                placeholder="Search for user email..."
+         <Card style={{padding: 5, margin: 22,height: 80}}>
+            <SearchBar
+                placeholder="Search for user to mesage..."
                 autoCapitalize = "none"
                 containerStyle = {{backgroundColor: "white"}}
-                inputStyle = {{color: "white"}}
-                inputContainerStyle = {{backgroundColor: "#3D8976"}}
-                searchIcon = {{color: "white"}}
-                clearIcon = {{color: "white"}}
-                placeholderTextColor = {"white"}
+                inputStyle = {{color: "black"}}
+                inputContainerStyle = {{backgroundColor: "white"}}
+                searchIcon = {{color: "black"}}
+                clearIcon = {{color: "black"}}
+                placeholderTextColor = {"black"}
                 onChangeText={updateSearch}
                 value={search}
             />
+            </Card>
             <View style={styles.container}>
                 <Text>
                   {foundUser.email} 

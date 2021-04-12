@@ -6,13 +6,9 @@ export const DETAILS_SCHEMA = yup.object().shape({
     .min(2, "Event name should be greater than 2 characters")
     .required('Please enter event name'),
 
-  'co-host-0': yup
+  location: yup
     .string()
-    .required('Please enter co host name'),
-
-  description: yup
-    .string()
-    .required('Please enter description'),
+    .required('Please select any location'), 
   
 });
 
@@ -32,11 +28,7 @@ export const DETAILS_SCHEMA = yup.object().shape({
 //     .required('Please select end date'),
 // });
 
-// export const LOCATION_SCHEMA = yup.object().shape({
-//   location: yup
-//     .string()
-//     .required('Please select any location'),
-// });
+
 
 export default DETAILS_SCHEMA;
 

@@ -6,9 +6,9 @@ import styles from 'ping/src/styles/styles';
 import { Dimensions } from 'react-native';
 import { colors, textStyles } from 'ping/src/styles/styles';
 import { widthPercentageToDP, heightPercentageToDP } from 'ping/util/scaler';
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import tempprogline from 'ping/assets/createnew/templates/tempprogline.png';
-// import temp1 from 'ping/assets/createnew/templates/templates1.png';
+import temp1 from 'ping/assets/createnew/templates/templates1.png';
 import inv1 from 'ping/assets/invites/1.png';
 import inv2 from 'ping/assets/invites/2.png';
 import inv3 from 'ping/assets/invites/3.png';
@@ -24,20 +24,11 @@ import inv12 from 'ping/assets/invites/12.png';
 import inv13 from 'ping/assets/invites/13.png';
 import inv14 from 'ping/assets/invites/14.png';
 import inv15 from 'ping/assets/invites/15.png';
-import NewInviteContext from 'ping/src/contexts/NewInviteContext';
-import CreatePicker from 'ping/src/components/inputs/CreatePicker';
 
 
-function createnewtemplates({}) {
+
+function Invites({}) {
   const navigation = useNavigation();
-  const {bgImage, setSelectedImage} = useContext(NewInviteContext);
-
-  // const [img,setImg] = useState([{idnum:1}]);
-
-  const handlePress = (imagePath) => {
-    setSelectedImage(imagePath);
-    navigation.navigate('Details');
-  }
 
   return (
     <ScrollView style={{ flex: 1 }}>
@@ -62,10 +53,8 @@ function createnewtemplates({}) {
             }}
           />
         
-        <CreatePicker />
-          {/* <TouchableOpacity
+          <TouchableOpacity
             onPress={() => {
-              //navigation.navigate('SecretCode');
               navigation.navigate('Details');
             }}
           >
@@ -78,11 +67,11 @@ function createnewtemplates({}) {
                 resizeMode: 'contain',
               }}
             />
-          </TouchableOpacity> */}
+          </TouchableOpacity>
 
          
       
-          <Text style={[textStyles.bigBold,{left:widthPercentageToDP('3'),marginTop:heightPercentageToDP('2')} ]}>Brunch</Text>
+          <Text style={[textStyles.bigBold,{left:widthPercentageToDP('3'),marginTop:heightPercentageToDP('3')} ]}>Brunch</Text>
           
           <View
           style={{
@@ -95,13 +84,9 @@ function createnewtemplates({}) {
           <ScrollView  horizontal={true}>
           <TouchableOpacity
             onPress={() => {
-              //setImg(inv1)  
-              handlePress(inv1)
-              
+              navigation.navigate('Details');
             }}
           >
-       
-
             <Image
               source={inv1}
               style={{
@@ -115,8 +100,7 @@ function createnewtemplates({}) {
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => {
-              handlePress(inv2)
-              //navigation.navigate('Details');
+              navigation.navigate('Details');
             }}
           >
             
@@ -134,7 +118,7 @@ function createnewtemplates({}) {
          
           <TouchableOpacity
             onPress={() => {
-              handlePress(inv3);
+              navigation.navigate('Details');
             }}
           >
             <Image
@@ -149,7 +133,7 @@ function createnewtemplates({}) {
           </TouchableOpacity>
           </ScrollView>
           </View>
-          <Text style={[textStyles.bigBold,{left:widthPercentageToDP('3'),marginTop:heightPercentageToDP('0')} ]}>Party</Text>
+          <Text style={[textStyles.bigBold,{left:widthPercentageToDP('3'),marginTop:heightPercentageToDP('3')} ]}>Party</Text>
           <ScrollView  horizontal={true}>
           <View
           style={{
@@ -161,7 +145,7 @@ function createnewtemplates({}) {
         >
           <TouchableOpacity
             onPress={() => {
-              handlePress(inv4);
+              navigation.navigate('Details');
             }}
           >
             <Image
@@ -178,7 +162,7 @@ function createnewtemplates({}) {
          
           <TouchableOpacity
             onPress={() => {
-              handlePress(inv5);
+              navigation.navigate('Details');
             }}
           >
             <Image
@@ -193,7 +177,7 @@ function createnewtemplates({}) {
           </TouchableOpacity>
           </View>
           </ScrollView>
-          <Text style={[textStyles.bigBold,{left:widthPercentageToDP('3'),marginTop:heightPercentageToDP('0')} ]}>Birthday</Text>
+          <Text style={[textStyles.bigBold,{left:widthPercentageToDP('3'),marginTop:heightPercentageToDP('3')} ]}>Birthday</Text>
           <View
           style={{
             flexDirection: 'row',
@@ -203,7 +187,7 @@ function createnewtemplates({}) {
         >
           <TouchableOpacity
             onPress={() => {
-              handlePress(inv6);
+              navigation.navigate('Details');
             }}
           >
             <Image
@@ -220,7 +204,7 @@ function createnewtemplates({}) {
          
           <TouchableOpacity
             onPress={() => {
-              handlePress(inv7);
+              navigation.navigate('Details');
             }}
           >
             <Image
@@ -234,7 +218,7 @@ function createnewtemplates({}) {
             />
           </TouchableOpacity>
           </View>
-          <Text style={[textStyles.bigBold,{left:widthPercentageToDP('3'),marginTop:heightPercentageToDP('0')} ]}>Holidays</Text>
+          <Text style={[textStyles.bigBold,{left:widthPercentageToDP('3'),marginTop:heightPercentageToDP('3')} ]}>Holidays</Text>
           <View
           style={{
             flexDirection: 'row',
@@ -244,7 +228,7 @@ function createnewtemplates({}) {
         >
           <TouchableOpacity
             onPress={() => {
-              handlePress(inv8);
+              navigation.navigate('Details');
             }}
           >
             <Image
@@ -261,7 +245,7 @@ function createnewtemplates({}) {
          
           <TouchableOpacity
             onPress={() => {
-              handlePress(inv10);
+              navigation.navigate('Details');
             }}
           >
             <Image
@@ -286,7 +270,7 @@ function createnewtemplates({}) {
         >
           <TouchableOpacity
             onPress={() => {
-              handlePress(inv11);
+              navigation.navigate('Details');
             }}
           >
             <Image
@@ -303,7 +287,7 @@ function createnewtemplates({}) {
          
           <TouchableOpacity
             onPress={() => {
-              handlePress(inv12);
+              navigation.navigate('Details');
             }}
           >
             <Image
@@ -327,7 +311,7 @@ function createnewtemplates({}) {
         >
           <TouchableOpacity
             onPress={() => {
-              handlePress(inv13);
+              navigation.navigate('Details');
             }}
           >
             <Image
@@ -344,7 +328,7 @@ function createnewtemplates({}) {
          
           <TouchableOpacity
             onPress={() => {
-              handlePress(inv14);
+              navigation.navigate('Details');
             }}
           >
             <Image
@@ -366,4 +350,4 @@ function createnewtemplates({}) {
   );
 }
 
-export default createnewtemplates;
+export default Invites;

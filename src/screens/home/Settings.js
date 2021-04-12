@@ -18,7 +18,7 @@ import StoreData from "../../../util/SaveItemInStorage";
 import RetrieveData from "../../../util/GetItemInStorage";
 import LoginChecker from "../../../util/validators/LoginChecker";
 
-function Settings({}) {
+function Accounts({}) {
   const [loggedInUser,setLoggedInUser]=useState([]);
   const [state,setState]=useState([]);
   const { user } = useContext(AuthContext);
@@ -89,7 +89,7 @@ function Settings({}) {
               }}
             >
             {/* <Image source={Accname} style={{height: heightPercentageToDP('10'), width :widthPercentageToDP('95'),  resizeMode:'contain',marginTop: heightPercentageToDP('10'), }} /> */}
-             <TouchableOpacity onPress={() => navigation.navigate('settings')}>
+             <TouchableOpacity>
             <Image 
             source={settings} 
             style={{
@@ -102,7 +102,7 @@ function Settings({}) {
             }} />
             </TouchableOpacity>
             
-            {/* <Image 
+            <Image 
             source={Accfriends} 
             style={{
             height: heightPercentageToDP('4'),
@@ -111,7 +111,7 @@ function Settings({}) {
             marginTop: heightPercentageToDP('1'), 
             left: heightPercentageToDP('1'),
             
-            }} />  */}
+            }} /> 
             {/* <Image source={Accevents} style={{height: heightPercentageToDP('20'), width :widthPercentageToDP('85'), marginTop: heightPercentageToDP('-7'), resizeMode:'contain' }} /> */}
             <Image 
             source={Acccenter} 
@@ -122,8 +122,8 @@ function Settings({}) {
             resizeMode:'contain' 
             }} />
         </View>
-        <Spacer height={2}  />
-         <TouchableOpacity  style={{left: heightPercentageToDP('3.5')}}>     
+        <Spacer height={2} />
+         <TouchableOpacity>     
         <CustomButton
           text="Create a new event"
           primary
@@ -131,13 +131,12 @@ function Settings({}) {
         />
         </TouchableOpacity> 
         
-        {/* <TouchableOpacity  style={{left: heightPercentageToDP('3.5')}}>     
+        <TouchableOpacity>
         <CustomButton
           text="Add friends"
           shadow
         />
-        </TouchableOpacity> */}
-
+        </TouchableOpacity>
 
 
 </View>
@@ -151,7 +150,7 @@ function Settings({}) {
             }}
           >
           {/* <Image source={Accname} style={{height: heightPercentageToDP('10'), width :widthPercentageToDP('95'),  resizeMode:'contain',marginTop: heightPercentageToDP('10'), }} /> */}
-          <TouchableOpacity onPress={() => navigation.navigate('settings')}>
+           <TouchableOpacity>
           <Image 
           source={settings} 
           style={{
@@ -182,14 +181,14 @@ function Settings({}) {
           )
 
 }
-            {!skipped &&
+            {/* {!skipped &&
               <CustomButton
                   text="Sign Out"
                   onPress={async () => await singOutAsync(onSuccess, onFailure)}
                   shadow
                   primary
               />
-            }
+            } */}
       </ImageBackground>
     </View>
 
@@ -197,7 +196,7 @@ function Settings({}) {
 
 )}
 
-export default Settings;
+export default Accounts;
 
 const stylesone = StyleSheet.create({
     scene: {

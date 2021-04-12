@@ -24,16 +24,28 @@ function RSVP({ navigation }) {
   const { user } = useContext(AuthContext);
   const { formData, updateFormData } = useContext(NewInviteContext);
   const [isSignInVisible, setSignInVisibility] = useState(false);
+
+  
   //const [saveData,setSaveData] = useState(false);
   const [state,setState]=useState({});
-const UserInfo = { "uid": user.uid, "email": user.email }
+// const UserInfo = { "uid": user.uid, "email": user.email }
+
+const rand= () => {
+  let text = "";
+  let possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+
+  for (let i = 0; i < 10; i++)
+    text += possible.charAt(Math.floor(Math.random() * possible.length));
+
+  return text;
+}
 
   const { control, errors, reset, setValue, handleSubmit, formState } = useForm({
     resolver: yupResolver(RSVP_SCHEMA),
   });
   const writeUserData =  (formData)=>{
     firebase.database().ref('InviteForms/').push({
-      formData
+      formData, secret_code: rand()
     }).then((data)=>{
         //success callback
         console.log('data ' , data)

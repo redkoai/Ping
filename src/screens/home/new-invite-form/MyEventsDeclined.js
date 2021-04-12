@@ -17,7 +17,7 @@ function MyEventsDeclined({navigation}) {
   const [loggedInUser,setLoggedInUser]=useState([]);
   const [state,setState]=useState([]);
   const { user } = useContext(AuthContext);
-  const UserInfo = { "uid": user.uid, "email": user.email }
+  // const UserInfo = { "uid": user.uid, "email": user.email }
     const { singOutAsync, skipped } = useContext(AuthContext);
  
  

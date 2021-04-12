@@ -99,7 +99,6 @@ function Dresscode({ navigation }) {
               defaultValue: '',
             }}
             control={control}
-            errors={errors}
             rules={{ multiline: true, numberOfLines: 5 }}
           />
         </View>

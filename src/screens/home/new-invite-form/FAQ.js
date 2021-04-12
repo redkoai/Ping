@@ -73,7 +73,6 @@ function FAQ({ navigation }) {
             defaultValue: '',
           }}
           control={control}
-          errors={errors}
           optional="true"
         />
 
@@ -85,7 +84,6 @@ function FAQ({ navigation }) {
             defaultValue: '',
           }}
           control={control}
-          errors={errors}
           optional="true"
         />
         <CustomTextInput
@@ -96,7 +94,6 @@ function FAQ({ navigation }) {
             defaultValue: '',
           }}
           control={control}
-          errors={errors}
           optional="true"
         />
 
@@ -110,7 +107,6 @@ function FAQ({ navigation }) {
               defaultValue: '',
             }}
             control={control}
-            errors={errors}
           />
         </View>
         ))}

@@ -16,8 +16,9 @@ const styles= StyleSheet.create({
 })
 
 
-function CreateNewMessage({ }) {
+function addFriends({ }) {
     const navigation = useNavigation()
+    
 
     const db = firebase.database().ref("users")
     const [search, setSearch] = useState([])
@@ -74,7 +75,7 @@ function CreateNewMessage({ }) {
         <View>
             
             <SearchBar
-                placeholder="Search for user to mesage..."
+                placeholder="Search for users..."
                 autoCapitalize = "none"
                 containerStyle = {{backgroundColor: "white"}}
                 inputStyle = {{color: "black"}}
@@ -102,4 +103,4 @@ function CreateNewMessage({ }) {
 }
 
 
-export default CreateNewMessage;
+export default addFriends;

@@ -17,7 +17,7 @@ function MyEventsInvited({}) {
   const [loggedInUser,setLoggedInUser]=useState([]);
   const [state,setState]=useState([]);
   const { user } = useContext(AuthContext);
-  const UserInfo = { "uid": user.uid, "email": user.email }
+  // const UserInfo = { "uid": user.uid, "email": user.email }
     const navigation = useNavigation();
     const { singOutAsync, skipped } = useContext(AuthContext);
  
@@ -48,13 +48,15 @@ function MyEventsInvited({}) {
           shadow
         />
         </TouchableOpacity>
-           
+        
+        <TouchableOpacity>
         <CustomButton
          text="View Event"
          onPress={navigation.navigate('MyEvents')}
          shadow
          primary
          />
+         </TouchableOpacity>
 
         </View> 
       </ImageBackground>

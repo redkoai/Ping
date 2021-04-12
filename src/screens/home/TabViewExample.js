@@ -20,7 +20,7 @@ export default function TabViewExample() {
   const [index, setIndex] = React.useState(0);
   const [routes] = React.useState([
     { key: 'Accounts', title: 'Events' },
-    { key: 'Accountsone', title: 'Activity' },
+    { key: 'Accountsone', title: 'Friends' },
   ]);
  
 //   const renderScene = SceneMap({
