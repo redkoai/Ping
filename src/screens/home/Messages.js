@@ -15,10 +15,14 @@ import homettl from "ping/assets/messages/messagettl.png";
 import AuthContext from 'ping/src/contexts/AuthContext';
 import firebase from 'firebase';
 import newMessageBtn from "ping/assets/newMessage.png"
+import StoreData from "../../../util/SaveItemInStorage";
+import RetrieveData from "../../../util/GetItemInStorage";
+import LoginChecker from "../../../util/validators/LoginChecker";
 
 
 function Messages({}) {
     const navigation = useNavigation()
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
 
     const [userHistory, setUserHistory] = useState({
 
@@ -27,6 +31,34 @@ function Messages({}) {
     const { user } = useContext(AuthContext);
 
     const db = firebase.database().ref("messages")
+
+    const pullProfileInfo = () => {
+      try {
+        db.collection("users").doc(firebase.auth().currentUser.uid).get();
+      } catch (e) {
+        console.log(e);
+      }
+    };
+
+
+  useEffect(() => {
+      const unsubscribe = navigation.addListener("focus", () => {
+        // Login Checker
+    
+        LoginChecker().then((results) => {
+          console.log("USER IS LOGGED IN : ", results);
+          setIsLoggedIn(results);
+  
+          if (results) {
+            pullProfileInfo();
+          } else {
+            console.log("User isn't logged in");
+          }
+        });
+      });
+  
+      return unsubscribe;
+    }, [navigation]);
 
 
     const queryUserHistory = () => {
@@ -73,6 +105,7 @@ function Messages({}) {
 
     return (
       <View>
+        
         {
           userHistory == {}
           ? (
@@ -145,6 +178,10 @@ function Messages({}) {
             </View>
             )
         }
+
+
+
+        
       </View>
     )
 }
