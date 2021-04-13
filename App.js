@@ -1,10 +1,10 @@
-import React from 'react';
-import { colors } from 'ping/src/styles/styles';
-import * as SplashScreen from 'expo-splash-screen';
-import { LogBox, Platform } from 'react-native';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
-import { AuthProvider } from 'ping/src/contexts/AuthContext';
-import PropTypes from 'prop-types'
+import React from "react";
+import { colors } from "ping/src/styles/styles";
+import * as SplashScreen from "expo-splash-screen";
+import { LogBox, Platform } from "react-native";
+import { SafeAreaProvider } from "react-native-safe-area-context";
+import { AuthProvider } from "ping/src/contexts/AuthContext";
+import PropTypes from "prop-types";
 
 import {
   useFonts,
@@ -12,14 +12,14 @@ import {
   FiraSans_500Medium,
   FiraSans_600SemiBold,
   FiraSans_700Bold,
-} from '@expo-google-fonts/fira-sans';
+} from "@expo-google-fonts/fira-sans";
 
-import 'react-native-gesture-handler';
-import { StatusBar } from 'expo-status-bar';
-import NavigationContainer from 'ping/src/navigators/NavigationContainer';
+import "react-native-gesture-handler";
+import { StatusBar } from "expo-status-bar";
+import NavigationContainer from "ping/src/navigators/NavigationContainer";
 
-import firebase from 'firebase';
-import 'firebase/firestore'
+import firebase from "firebase";
+import "firebase/firestore";
 import {
   API_KEY,
   AUTH_DOMAIN,
@@ -29,7 +29,7 @@ import {
   MESSAGING_SENDER_ID,
   APP_ID,
   MEASUREMENT_ID,
-} from '@env';
+} from "@env";
 
 const FIREBASE_CONFIG = {
   apiKey: API_KEY,
@@ -42,12 +42,14 @@ const FIREBASE_CONFIG = {
   measurementId: MEASUREMENT_ID,
 };
 
-!firebase.apps.length ? firebase.initializeApp(FIREBASE_CONFIG) : firebase.app();
+!firebase.apps.length
+  ? firebase.initializeApp(FIREBASE_CONFIG)
+  : firebase.app();
 
 SplashScreen.preventAutoHideAsync().catch(() =>
   LogBox.ignoreLogs([
-    'Unhandled promise rejection: Error: Native splash screen is already hidden.',
-  ]),
+    "Unhandled promise rejection: Error: Native splash screen is already hidden.",
+  ])
 );
 
 function App() {
@@ -62,7 +64,10 @@ function App() {
   return (
     <AuthProvider>
       <SafeAreaProvider>
-        <StatusBar backgroundColor={colors.primary} style={Platform.OS === 'android' && 'light'} />
+        <StatusBar
+          backgroundColor={colors.primary}
+          style={Platform.OS === "android" && "light"}
+        />
         <NavigationContainer />
       </SafeAreaProvider>
     </AuthProvider>

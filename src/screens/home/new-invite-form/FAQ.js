@@ -22,7 +22,7 @@ function FAQ({ navigation }) {
   });
   const onSubmit = (data) => {
     updateFormData(data);
-    navigation.navigate('People');
+    navigation.navigate('RSVP');
     //reset();
   };
   // useEffect(() => {

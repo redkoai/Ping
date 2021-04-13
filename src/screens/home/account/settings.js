@@ -7,24 +7,26 @@ import {
   View,
   ScrollView,
   Text,
-  Linking
+  Linking,
 } from "react-native";
 // import { textStyles, colors } from "redvest/util/styles";
-import { widthPercentageToDP, heightPercentageToDP } from "../util/scaler.js";
-import { actuatedNormalize } from "../util/fontScaler";
+import {
+  widthPercentageToDP,
+  heightPercentageToDP,
+} from "../../../../util/scaler";
+import { actuatedNormalize } from "../../../../util/fontScaler";
 import { enableScreens } from "react-native-screens";
 import { Dimensions } from "react-native";
 //import alpacaApi from '../services/alpaca'
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { SafeAreaView } from "react-native-safe-area-context";
 import { TextInput } from "react-native-gesture-handler";
-import React, {useContext, useEffect, useState} from "react";
-import AuthContext from 'ping/src/contexts/AuthContext';
-import CustomButton from 'ping/src/components/inputs/CustomButton';
-import * as firebase from 'firebase';
-import StoreData from "../util/SaveItemInStorage";
-import RetrieveData from "../util/GetItemInStorage";
-import LoginChecker from "../util/validators/LoginChecker";
-
+import React, { useContext, useEffect, useState } from "react";
+import AuthContext from "ping/src/contexts/AuthContext";
+import CustomButton from "ping/src/components/inputs/CustomButton";
+import * as firebase from "firebase";
+//import StoreData from "../util/SaveItemInStorage";
+//import RetrieveData from "../util/GetItemInStorage";
+//import LoginChecker from "../util/validators/LoginChecker";
 
 const chartConfig = {
   backgroundGradientFrom: "#1E2923",
@@ -37,19 +39,14 @@ const chartConfig = {
   useShadowColorFromDataset: false, // optional
 };
 
-
-
 const screenWidth = Dimensions.get("window").width;
 
 enableScreens(false);
 
 function Settings() {
-    const { singOutAsync, skipped } = useContext(AuthContext);
+  const { singOutAsync, skipped } = useContext(AuthContext);
 
   const navigation = useNavigation();
-
-  
-
 
   OpenWeb = () => {
     Linking.openURL("https://theredko.com");
@@ -59,53 +56,48 @@ function Settings() {
     let mounted = true;
   });
   return (
-    <SafeAreaView >
-    <View style={{ flex: 1 }}>
-      <ImageBackground
-        
-        style={{
-          width: widthPercentageToDP(100),
-          height: heightPercentageToDP(105),
-        }}
-      >
-        <View
+    <SafeAreaView>
+      <View style={{ flex: 1 }}>
+        <ImageBackground
           style={{
-            flexDirection: "row",
-            width: "100%",
-            justifyContent: "center",
-            marginTop: widthPercentageToDP(1),
+            width: widthPercentageToDP(100),
+            height: heightPercentageToDP(105),
           }}
-        >
-            <Text
-                style={
-                  {
-                    marginLeft: "13%",
-                    marginTop: "-10%",
-                    fontSize: actuatedNormalize(22),
-                  }}
-                
-              >
-                Settings and Information
-              </Text>
-        </View>
-
-        <ScrollView
-          style={{ height: "200%", flex: 1 }}
-          contentContainerStyle={{ alignItems: "center" }}
         >
           <View
             style={{
-              flex: 0.03,
-              flexDirection: "column",
+              flexDirection: "row",
               width: "100%",
               justifyContent: "center",
-              padding: 15,
-              marginLeft: "3%",
+              marginTop: widthPercentageToDP(1),
             }}
           >
-          
-             
-                {/* <Image
+            <Text
+              style={{
+                marginLeft: "13%",
+                marginTop: "-10%",
+                fontSize: actuatedNormalize(22),
+              }}
+            >
+              Settings and Information
+            </Text>
+          </View>
+
+          <ScrollView
+            style={{ height: "200%", flex: 1 }}
+            contentContainerStyle={{ alignItems: "center" }}
+          >
+            <View
+              style={{
+                flex: 0.03,
+                flexDirection: "column",
+                width: "100%",
+                justifyContent: "center",
+                padding: 15,
+                marginLeft: "3%",
+              }}
+            >
+              {/* <Image
                   source={cashBalance}
                   style={{
                     resizeMode: "contain",
@@ -261,23 +253,20 @@ function Settings() {
                   }}
                 />
               </TouchableOpacity> */}
-                       {!skipped &&
-              <CustomButton
+              {!skipped && (
+                <CustomButton
                   text="Sign Out"
                   onPress={async () => await singOutAsync(onSuccess, onFailure)}
                   shadow
                   primary
-              />
-            }
-      
-          </View>
-        </ScrollView>
-      </ImageBackground>
-    
-    </View>
+                />
+              )}
+            </View>
+          </ScrollView>
+        </ImageBackground>
+      </View>
     </SafeAreaView>
   );
 }
-
 
 export default Settings;
