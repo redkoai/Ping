@@ -10,23 +10,17 @@ import {
   Linking,
 } from "react-native";
 // import { textStyles, colors } from "redvest/util/styles";
-import {
-  widthPercentageToDP,
-  heightPercentageToDP,
-} from "../../../../util/scaler";
+import { widthPercentageToDP, heightPercentageToDP } from "../../../../util/scaler.js";
 import { actuatedNormalize } from "../../../../util/fontScaler";
 import { enableScreens } from "react-native-screens";
 import { Dimensions } from "react-native";
 //import alpacaApi from '../services/alpaca'
 import { SafeAreaView } from "react-native-safe-area-context";
 import { TextInput } from "react-native-gesture-handler";
-import React, { useContext, useEffect, useState } from "react";
-import AuthContext from "ping/src/contexts/AuthContext";
-import CustomButton from "ping/src/components/inputs/CustomButton";
-import * as firebase from "firebase";
-//import StoreData from "../util/SaveItemInStorage";
-//import RetrieveData from "../util/GetItemInStorage";
-//import LoginChecker from "../util/validators/LoginChecker";
+import React, {useContext, useEffect, useState} from "react";
+import AuthContext from 'ping/src/contexts/AuthContext';
+import CustomButton from 'ping/src/components/inputs/CustomButton';
+
 
 const chartConfig = {
   backgroundGradientFrom: "#1E2923",
