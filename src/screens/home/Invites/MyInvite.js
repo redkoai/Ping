@@ -11,7 +11,7 @@ import CalendarIcon from 'ping/src/icons/CalendarIcon';
 import LocationNearMeIcon from 'ping/src/icons/LocationNearMeIcon';
 import { Entypo, MaterialIcons, MaterialCommunityIcons  } from '@expo/vector-icons'; 
 import ReactRoundedImage from "react-rounded-image";
-import MyPhoto from 'ping/assets/createnew/MyInvite/men.jpg';
+// import MyPhoto from 'ping/assets/createnew/MyInvite/men.jpg';
 import CustomText from 'ping/src/components/CustomText';
 import CustomTextInput from 'ping/src/components/inputs/CustomTextInput';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
@@ -192,10 +192,10 @@ function MyInvite({navigation }) {
           </View>
 
           <View style={{left:heightPercentageToDP('2')}}>
-          <Image
+          {/* <Image
             style={styles.image}
             source={MyPhoto}
-            resizeMode={"cover"} />
+            resizeMode={"cover"} /> */}
           </View>
           
 
@@ -211,10 +211,10 @@ function MyInvite({navigation }) {
         </View>
 
         <View style={{left:heightPercentageToDP('2')}}>
-          <Image
+          {/* <Image
             style={styles.image}
             source={MyPhoto}
-            resizeMode={"cover"} />
+            resizeMode={"cover"} /> */}
            <Text>{state['co-host-1']}</Text> 
           </View>
 

@@ -4,6 +4,7 @@ import Events from 'ping/src/screens/home/Events';
 import { createStackNavigator } from '@react-navigation/stack';
 import BackChevron from 'ping/src/components/header/BackChevron';
 import ScreenTitle from 'ping/src/components/header/ScreenTitle';
+import MyInvite from 'ping/src/screens/home/Invites/MyInvite.js'
 
 
 const EventsStack = createStackNavigator();
@@ -17,6 +18,14 @@ function EventsStackNavigator() {
       options={{
         headerLeft: () => <BackChevron />,
         headerRight: () => <ScreenTitle title="Events" />,
+      }} 
+      />
+      <EventsStack.Screen 
+      name="MyInvite" 
+      component={MyInvite}
+      options={{
+        headerLeft: () => <BackChevron />,
+        headerRight: () => <ScreenTitle title="MyInvite" />,
       }} 
       />
     </EventsStack.Navigator>

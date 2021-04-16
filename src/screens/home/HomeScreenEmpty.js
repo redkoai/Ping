@@ -116,7 +116,7 @@ function HomeScreenEmpty({}) {
 <View style={{ flexDirection: 'row', justifyContent: 'space-between',marginTop:widthPercentageToDP(3)}}>
 <Text style={[textStyles.bigBold,{left:heightPercentageToDP('0'),marginBottom:heightPercentageToDP('2')} ]}>My Events</Text>
 <TouchableOpacity onPress={() => { 
-    navigation.navigate('NewInvite')
+    navigation.navigate("Events", { screen: "MyInvite" })
 
 }}>
 <Text style={[textStyles.smallSemiBold,{color:'gray', fontSize:actuatedNormalize(12),left:heightPercentageToDP('3')} ]}>See all</Text>
