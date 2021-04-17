@@ -6,6 +6,7 @@ import {widthPercentageToDP,heightPercentageToDP,} from 'ping/util/scaler';
 import {SearchBar} from "react-native-elements"
 import AuthContext from 'ping/src/contexts/AuthContext';
 import firebase from 'firebase';
+import CustomButton from 'ping/src/components/inputs/CustomButton';
 import 'firebase/firestore'
 
 
@@ -88,14 +89,19 @@ function CreateNewMessage({ }) {
             <View style={styles.container}>
                 <Text>{foundUser.email}</Text>
             </View>
-            <TouchableOpacity onPress={() => { 
+            <TouchableOpacity style={{alignContent:'center',marginLeft:widthPercentageToDP(10)}} onPress={() => { 
                 navigation.navigate('Chat', { OtherUserInfo: {
                     _id: foundUser.uid,
                     email: foundUser.email
                 }})
             }}>
-                <Image source={newMessageBtn} style={{height: heightPercentageToDP('7'), width :widthPercentageToDP('70'), marginTop: heightPercentageToDP('5'),  marginLeft: widthPercentageToDP('15'), resizeMode:'contain'}} />
-            </TouchableOpacity>
+                
+        <CustomButton
+          text="Create a new message"
+          primary
+          shadow
+        />
+        </TouchableOpacity> 
         </View>
     )
 

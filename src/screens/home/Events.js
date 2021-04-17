@@ -207,14 +207,14 @@ function Events({navigation, route}) {
                 // selected={'2021-02-18'}
                 renderItem={renderItem}
                 theme={{
-                  monthTextColor: "#3D8976",
-                  selectedDayBackgroundColor: "#3D8976",
-                  agendaDayTextColor: '#3D8976',
-                  agendaDayNumColor: '#3D8976',
-                  agendaTodayColor: '#3D8976',
-                  agendaKnobColor: '#3D8976',
-                  dotColor: "#3D8976",
-                  todayTextColor: "#3D8976"
+                  monthTextColor: "#A6ACE9",
+                  selectedDayBackgroundColor: "#A6ACE9",
+                  agendaDayTextColor: '#A6ACE9',
+                  agendaDayNumColor: '#A6ACE9',
+                  agendaTodayColor: '#A6ACE9',
+                  agendaKnobColor: '#A6ACE9',
+                  dotColor: "#A6ACE9",
+                  todayTextColor: "#A6ACE9"
                 }}
                 // style={{}}
             />

@@ -111,7 +111,7 @@ function MyEvents({navigation }) {
           left:heightPercentageToDP('32')}}>
           <Text style={[textStyles.bigBold,{ color: colors.primary }]}>Edit</Text>
           <View style={{marginTop: heightPercentageToDP('-3.5'),left:heightPercentageToDP('5')}}>
-          <MaterialIcons name="edit" size={32} color="#3D8976" />
+          <MaterialIcons name="edit" size={32} color="#A6ACE9" />
           </View> 
           </View>
           </TouchableOpacity>

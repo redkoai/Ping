@@ -1,7 +1,7 @@
 import React, { useState, useContext, useEffect, useCallback} from 'react';
 import AuthContext from 'ping/src/contexts/AuthContext';
 import { GiftedChat } from 'react-native-gifted-chat'
-
+import CustomButton from 'ping/src/components/inputs/CustomButton';
 import firebase from 'firebase';
 import 'firebase/firestore'
 import CreateNewMessage from './CreateNewMessage';

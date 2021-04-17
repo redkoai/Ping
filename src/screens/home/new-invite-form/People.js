@@ -19,12 +19,16 @@ import { Card } from "react-native-shadow-cards";
 import rsvpprogline from "ping/assets/createnew/rsvp/rsvpprogline.png";
 import CustomButton from "ping/src/components/inputs/CustomButton";
 import CustomTextInput from "ping/src/components/inputs/CustomTextInput";
-
 import { SearchBar } from "react-native-elements";
 import firebase from "firebase";
 import "firebase/firestore";
 import { Button } from "react-native-paper";
 import AuthContext from 'ping/src/contexts/AuthContext';
+import send from 'ping/assets/invites/sends.png';
+import sends from 'ping/assets/invites/send.png';
+import adds from 'ping/assets/invites/add.png';
+import add from 'ping/assets/invites/adds.png';
+import { actuatedNormalize } from "ping/util/fontScaler";
 
 
 
@@ -173,13 +177,30 @@ function People({ navigation }) {
             />
           </Card>
           <View style={styles.container}>
-            <Text>
-              {foundUser.email}
-              <Button onPress={sendInvite}>Send Invite</Button>
-            </Text>
-            <Text>
-              <Button onPress={addFriend}>Add Friend</Button>
-            </Text>
+            <View style={{flexDirection:'row'}}>
+          <Text  style={{marginLeft:widthPercentageToDP('10'), fontSize:actuatedNormalize(15), marginTop: heightPercentageToDP('3'), }}>
+              {foundUser.email}</Text>
+          <TouchableOpacity onPress={sendInvite}>
+
+                <Image source={send}  style={{height: heightPercentageToDP('10'), width :widthPercentageToDP('10'), marginTop: heightPercentageToDP('0'),marginLeft:widthPercentageToDP('23'), resizeMode:'contain' }} />
+             
+              {/* <Button onPress={sendInvite}>Send Invite</Button> */}
+              
+            
+            </TouchableOpacity>
+            <TouchableOpacity onPress={addFriend}>
+   
+   <Image source={add}  style={{height: heightPercentageToDP('10'), width :widthPercentageToDP('10'), marginTop: heightPercentageToDP('0'), marginLeft:widthPercentageToDP('2'), resizeMode:'contain' }} />
+     {/* <Button onPress={addFriend}>Add Friend</Button> */}
+
+   </TouchableOpacity>
+            </View>
+            {/* <TouchableOpacity onPress={addFriend}> */}
+   
+            {/* <Image source={add}  style={{height: heightPercentageToDP('10'), width :widthPercentageToDP('10'), marginTop: heightPercentageToDP('0'), marginLeft:widthPercentageToDP('30'), resizeMode:'contain' }} /> */}
+              {/* <Button onPress={addFriend}>Add Friend</Button> */}
+       
+            {/* </TouchableOpacity> */}
           </View>
         </View>
 

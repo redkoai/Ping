@@ -20,6 +20,7 @@ import RetrieveData from "../../../util/GetItemInStorage";
 import LoginChecker from "../../../util/validators/LoginChecker";
 
 
+
 function Messages({}) {
     const navigation = useNavigation()
     const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -128,11 +129,15 @@ function Messages({}) {
             
             </View>
             <Spacer height={2} />
-            <TouchableOpacity onPress={() => { 
-                navigation.navigate('CreateNewMessage')
-            }}>
-                <Image source={newMessageBtn} style={{height: heightPercentageToDP('7'), width :widthPercentageToDP('70'), marginTop: heightPercentageToDP('5'), left:heightPercentageToDP('7'),resizeMode:'contain', }} />
-            </TouchableOpacity>
+
+            <TouchableOpacity style={{alignContent:'center',marginLeft:widthPercentageToDP(10)}} onPress={() => { 
+                navigation.navigate('CreateNewMessage') }}>
+                    <CustomButton
+          text="Create a new message"
+          primary
+          shadow
+        />
+        </TouchableOpacity> 
             
             
             <TouchableOpacity>
@@ -170,11 +175,14 @@ function Messages({}) {
 
 
 
-              <TouchableOpacity onPress={() => { 
-                navigation.navigate('CreateNewMessage')
-              }}>
-                  <Image source={newMessageBtn} style={{height: heightPercentageToDP('7'), width :widthPercentageToDP('70'), marginTop: heightPercentageToDP('5'), resizeMode:'contain', left:heightPercentageToDP('7') }} />
-              </TouchableOpacity>
+              <TouchableOpacity style={{alignContent:'center',marginLeft:widthPercentageToDP(10)}} onPress={() => { 
+                navigation.navigate('CreateNewMessage') }}>
+                    <CustomButton
+          text="Create a new message"
+          primary
+          shadow
+        />
+        </TouchableOpacity> 
             </View>
             )
         }

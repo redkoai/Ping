@@ -94,7 +94,7 @@ export const textStyles = StyleSheet.create({
 });
 
 export const colors = {
-  primary: '#3D8976',
+  primary: '#A6ACE9',
   redError: '#FE5F5F',
   offBlack: '#555',
   darkGrey: '#777',

@@ -16,6 +16,9 @@ import CustomText from 'ping/src/components/CustomText';
 import CustomTextInput from 'ping/src/components/inputs/CustomTextInput';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import Moment from 'moment';
+import add from "ping/assets/invites/add.png";
+import send from "ping/assets/invites/send.png";
+
 
 
 import firebase from 'firebase';
@@ -136,7 +139,7 @@ function MyInvite({navigation, route }) {
           left:heightPercentageToDP('32')}}>
           <Text style={[textStyles.bigBold,{ color: colors.primary }]}>Edit</Text>
           <View style={{marginTop: heightPercentageToDP('-3.5'),left:heightPercentageToDP('5')}}>
-          <MaterialIcons name="edit" size={32} color="#3D8976" />
+          <MaterialIcons name="edit" size={32} color="#A6ACE9" />
           </View> 
           </View>
           </TouchableOpacity>
