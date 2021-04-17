@@ -49,14 +49,12 @@ function addFriends({ }) {
         let foundUser = searchUser(search)
         console.log("foundUser (use effect) = ", foundUser)
         if (foundUser.found) {
-            console.log("poop")
             setFoundUser({email:foundUser.email,uid:foundUser.uid})
             console.log("setting found user state")
         }
         
       }, [search]);
     // if (searchUser(search)) {
-    //     console.log("poop")
     //     setFoundUser(search)
     //     console.log("setting found user state")
     // }

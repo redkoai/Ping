@@ -20,6 +20,8 @@ import { actuatedNormalize } from "../../../util/fontScaler";
 import profileIm from "ping/assets/NavBarAssets/prof.png"
 import CustomButton from 'ping/src/components/inputs/CustomButton';
 
+import firebase from "firebase"
+
 
 function HomeScreenEmpty({}) {
     const navigation = useNavigation()
@@ -28,6 +30,23 @@ function HomeScreenEmpty({}) {
     const [state,setState]=useState([]);
     const { user } = useContext(AuthContext);
 
+
+    //////////////////////////
+    //  Firebase query
+    //////////////////////////
+    const db = firebase.database().ref("users");
+
+
+    const eventQuery = () => {
+      db.child(`${user.uid}/Events/`).on("child_added", function (snapshot) {
+        console.log("snapshot event = ", snapshot)
+        console.log("snapshot event cohost", snapshot.val()["co-host-0"])
+        console.log("user uid =", user.uid)
+        if (snapshot.val()["co-host-0"] == user.uid) {
+          console.log("user is the host of:", snapshot)
+        }
+      });
+    }
 
 
    
@@ -71,6 +90,7 @@ function HomeScreenEmpty({}) {
       }
 
     useEffect(() => {
+      eventQuery()
         const unsubscribe = navigation.addListener("focus", () => {
           // Login Checker
           _CheckOnboarding().then((r) => console.log("Checked on Boarding"));

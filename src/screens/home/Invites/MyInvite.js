@@ -22,8 +22,10 @@ import firebase from 'firebase';
 import 'firebase/firestore'
 
 
-function MyInvite({navigation }) {
+function MyInvite({navigation, route }) {
 
+  const { eventID } = route.params
+  console.log(eventID.eventID)
   const { control, errors, setValue, reset, handleSubmit } = useForm({
     //resolver: yupResolver(DETAILS_SCHEMA),
   });
@@ -41,9 +43,30 @@ function MyInvite({navigation }) {
     const UserInfo = { "uid": user.uid, "email": user.email }
     const [secretCode, setSecretCode] = useState('');
 
+    const [event, setEvent] = useState({})
+
+
+    /////////////////////////
+    // Firebase query
+    /////////////////////////
+    const db = firebase.database().ref("users")
+
+    const getEvent = () => {
+      const event = {}
+      db.child(`${user.uid}/Events/${eventID}`).on("child_added", function(snapshot) {
+        // console.log("snapshot =", snapshot)
+        event[snapshot.key] = snapshot.val()
+    })
+    setEvent(event)
+    console.log("event description = ", event.description)
+
+    }
+
+
    
 
     useEffect(() => {
+        getEvent()
         const userUID=UserInfo.uid;
         // console.log("userid: ", userUID);
        //firebase.database().ref('/InviteForms').child("-MW_XbsJOLm2BCA6nA_K").child("formData").on('value',(snapshot)=>{
@@ -58,7 +81,7 @@ function MyInvite({navigation }) {
             })
      }, []);
 
-    const { formData, updateFormData, bgImage } = useContext(NewInviteContext);
+    // const { formData, updateFormData, bgImage } = useContext(NewInviteContext);
     return (
       <KeyboardAwareScrollView
         style={{ flex: 1, backgroundColor: 'white' }}
@@ -73,7 +96,7 @@ function MyInvite({navigation }) {
           }}
         >    
         <View>
-              <ImageBackground
+              {/* <ImageBackground
               source={bgImage}
               style={{
                 height: heightPercentageToDP('35'),
@@ -82,16 +105,16 @@ function MyInvite({navigation }) {
                 resizeMode: 'contain',
                 
               }}
-        >
-          <Text style={[textStyles.bigBold,{marginTop: heightPercentageToDP('29'),left:heightPercentageToDP('3')}]}>{state.event}</Text> 
-          <Text style={[textStyles.normalBold,{left:heightPercentageToDP('25'),marginTop: heightPercentageToDP('-22')}]}>{state.startdate}</Text>
-          <Text style={[textStyles.normalBold,{left:heightPercentageToDP('13'),marginTop: heightPercentageToDP('3')}]}>{state.location}</Text>
-          </ImageBackground> 
+        > */}
+          <Text style={[textStyles.bigBold,{marginTop: heightPercentageToDP('29'),left:heightPercentageToDP('3')}]}>{event.event}</Text> 
+          <Text style={[textStyles.normalBold,{left:heightPercentageToDP('25'),marginTop: heightPercentageToDP('-22')}]}>{event.startdate}</Text>
+          <Text style={[textStyles.normalBold,{left:heightPercentageToDP('13'),marginTop: heightPercentageToDP('3')}]}>{event.location}</Text>
+          {/* </ImageBackground>  */}
         </View>
 
 
           <View  >
-          <Text style={[textStyles.bigBold,{marginTop: heightPercentageToDP('3'),left:heightPercentageToDP('3')} ]}>{state.event}</Text>
+          <Text style={[textStyles.bigBold,{marginTop: heightPercentageToDP('3'),left:heightPercentageToDP('3')} ]}>{event.event}</Text>
           </View>
 
           <View style={{ 
@@ -134,16 +157,16 @@ function MyInvite({navigation }) {
           resizeMode:'contain',
           marginTop: heightPercentageToDP('0'),
           left:heightPercentageToDP('25')}}>
-          <Text style={[ { color: colors.darkGrey }]}>{state.startdate}</Text>
+          <Text style={[ { color: colors.darkGrey }]}>{event.startdate}</Text>
           </View>
 
         <View style={{left:heightPercentageToDP('1.5'),textAlign: 'center',marginTop: heightPercentageToDP('-6')}}>
-          <Text style={[ { color: colors.darkGrey }]}>{state.description}</Text>
+          <Text style={[ { color: colors.darkGrey }]}>{event.description}</Text>
           </View>
 
           <View>
           <Entypo name="location-pin" size={28} color="black" />
-          <Text style={[textStyles.normalBold,{left:heightPercentageToDP('4'),marginTop: heightPercentageToDP('-2.8')}]}>{state.location}</Text>
+          <Text style={[textStyles.normalBold,{left:heightPercentageToDP('4'),marginTop: heightPercentageToDP('-2.8')}]}>{event.location}</Text>
           <TouchableOpacity >
           <LocationNearMeIcon style={{left:heightPercentageToDP('40'),marginTop: heightPercentageToDP('-2.2')}} size={heightPercentageToDP(3)} color={colors.darkGrey} />
           </TouchableOpacity>
@@ -153,7 +176,7 @@ function MyInvite({navigation }) {
 
           <View>
           <CalendarIcon style={{left:heightPercentageToDP('0.5')}} size={heightPercentageToDP(2.8)} color="black" />
-          <Text style={[textStyles.normalBold,{marginTop: heightPercentageToDP('-2.5'),left:heightPercentageToDP('5')}]}>{state.startdate}</Text>
+          <Text style={[textStyles.normalBold,{marginTop: heightPercentageToDP('-2.5'),left:heightPercentageToDP('5')}]}>{event.startdate}</Text>
           </View>
 
           <Spacer height={1} />
@@ -162,7 +185,7 @@ function MyInvite({navigation }) {
           <View style={{left:heightPercentageToDP('0.5')}} size={heightPercentageToDP(2.8)}>
           <MaterialCommunityIcons name="hanger" size={32} color="black" />
           </View>
-          <Text style={[textStyles.normalBold,{left:heightPercentageToDP('5'),marginTop: heightPercentageToDP('-2.6')}]}>{state['radio-buttons']}</Text>
+          <Text style={[textStyles.normalBold,{left:heightPercentageToDP('5'),marginTop: heightPercentageToDP('-2.6')}]}>{event['radio-buttons']}</Text>
           <View  style={{left:heightPercentageToDP('40'),marginTop: heightPercentageToDP('-3')}} size={heightPercentageToDP(3)} >
           <TouchableOpacity>
           <MaterialIcons name="arrow-drop-down" size={32} color="black" />
@@ -191,12 +214,12 @@ function MyInvite({navigation }) {
           </TouchableOpacity>
           </View>
 
-          <View style={{left:heightPercentageToDP('2')}}>
-          {/* <Image
+          {/* <View style={{left:heightPercentageToDP('2')}}>
+          <Image
             style={styles.image}
             source={MyPhoto}
-            resizeMode={"cover"} /> */}
-          </View>
+            resizeMode={"cover"} />
+          </View> */}
           
 
         <Spacer height={5} />
@@ -210,13 +233,13 @@ function MyInvite({navigation }) {
           </TouchableOpacity>
         </View>
 
-        <View style={{left:heightPercentageToDP('2')}}>
-          {/* <Image
+        {/* <View style={{left:heightPercentageToDP('2')}}>
+          <Image
             style={styles.image}
             source={MyPhoto}
-            resizeMode={"cover"} /> */}
-           <Text>{state['co-host-1']}</Text> 
-          </View>
+            resizeMode={"cover"} />
+           <Text>{event['co-host-1']}</Text> 
+          </View> */}
 
           <Spacer height={5} />
 

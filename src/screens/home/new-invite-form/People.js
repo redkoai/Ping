@@ -24,18 +24,31 @@ import { SearchBar } from "react-native-elements";
 import firebase from "firebase";
 import "firebase/firestore";
 import { Button } from "react-native-paper";
+import AuthContext from 'ping/src/contexts/AuthContext';
+
+
 
 function People({ navigation }) {
   const { formData, updateFormData } = useContext(NewInviteContext);
 
+  const { user } = useContext(AuthContext)
+
   const { control, errors, reset, setValue, handleSubmit } = useForm({
     //resolver: yupResolver(RSVP_SCHEMA),
   });
-  const onSubmit = (data) => {
-    //updateFormData(data);
+
+  // Trying to update form with the guestlist, need help
+  const guests = {}
+
+  const onSubmit = () => {
+    updateFormData(guests);
     navigation.navigate("EventInvited");
     reset();
   };
+
+  const consoleLog = () => {
+    console.log("guestlist = ", guests)
+  }
 
   ///////////////////////////////////////////////////////////
   // Adding firebase query to check if email searched exists
@@ -43,11 +56,27 @@ function People({ navigation }) {
   const db = firebase.database().ref("users");
   const [search, setSearch] = useState([]);
 
-  const sendData = () => {
+  const sendInvite = () => {
+    guests[foundUser.uid] = "no"
     console.log(foundUser);
     console.log(formData);
     db.child(foundUser.uid);
     db.child(`${foundUser.uid}/Events/`).push(formData);
+    console.log("Data pushed");
+    // db.child(user.user.uid).set({"email" : user.user.email})
+  };
+
+  const sendHostEvent = () => {
+    db.child(`${user.uid}/Events/`).push(formData);
+    console.log("host data pushed")
+  }
+
+  const addFriend = () => {
+    db.child(foundUser.uid);
+    // Adding friend 
+    db.child(`${foundUser.uid}/Friends/`).push(user);
+    // 
+    db.child(`${user.uid}/Friends/`).push(foundUser);
     console.log("Data pushed");
     // db.child(user.user.uid).set({"email" : user.user.email})
   };
@@ -146,7 +175,10 @@ function People({ navigation }) {
           <View style={styles.container}>
             <Text>
               {foundUser.email}
-              <Button onPress={sendData}>Send Invite</Button>
+              <Button onPress={sendInvite}>Send Invite</Button>
+            </Text>
+            <Text>
+              <Button onPress={addFriend}>Add Friend</Button>
             </Text>
           </View>
         </View>
@@ -182,6 +214,8 @@ function People({ navigation }) {
           <CustomButton
             text="next"
             onPress={handleSubmit(onSubmit)}
+            onPress={sendHostEvent}
+            onPress={consoleLog}
             narrow
             primary
           />

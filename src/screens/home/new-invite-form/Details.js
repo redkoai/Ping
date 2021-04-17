@@ -17,8 +17,13 @@ import CustomAddButton from 'ping/src/components/inputs/CustomAddButton';
 import deprogline from 'ping/assets/createnew/details/detailsprogressline.png';
 import { useForm } from 'react-hook-form';
 
+import AuthContext from 'ping/src/contexts/AuthContext';
+
+
 function Details({route,navigation }) {
   const { formData, updateFormData } = useContext(NewInviteContext);
+
+  const { user } = useContext(AuthContext)
 
   const [errorMsg, setErrorMsg] = useState(false);
   
@@ -51,6 +56,7 @@ function Details({route,navigation }) {
 
 
   const [coHosts, setCoHosts] = useState([]);
+  // const [host, setHost] = useState([user.uid]);
   const addCoHost = () => setCoHosts([...coHosts, 1]);
   //const [img,setImg] = route.params;
 
@@ -114,9 +120,8 @@ function Details({route,navigation }) {
             name: 'co-host-0',
             label: 'Hosted by',
             placeholder: 'Host/organization name',
-            defaultValue: '',
+            defaultValue: `${user.uid}`,
           }}
-          optional
         />
 
         {coHosts.map((item, index) => (
