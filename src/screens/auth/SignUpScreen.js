@@ -18,7 +18,7 @@ import Spacer from 'ping/src/components/Spacer';
 import { EmailInput, PasswordInput, UserNameInput } from 'ping/src/components/inputs/CustomTextInput';
 import CustomButton from 'ping/src/components/inputs/CustomButton';
 
-function SignUpScreen() {
+function SignUpScreen({ navigation }) {
   const db = firebase.database().ref("users")
   const { signUpWithEmailAsync, signInWithGoogleAsync } = useContext(AuthContext);
   const { control, handleSubmit, errors, reset, formState } = useForm({
@@ -30,6 +30,7 @@ function SignUpScreen() {
   const onSignUpSuccess = (user) => {
     // console.log("user = ", user)
     db.child(user.user.uid).set({"email" : user.user.email})
+    db.child(user.user.uid).set({"username" : user.user.username})
     // db.push({"email":user.user.email, "uid": user.user.uid, "messages":{}})
     // db.child(`${user.user.uid}/messages`).push({text: "text", timestamp: "timestamp"})
     // db.child(`${user.user.uid}/messages`).push({text: "text2", timestamp: "timestamp2"})
@@ -79,12 +80,12 @@ function SignUpScreen() {
           text="Continue with Google"
           onPress={async () => await signInWithGoogleAsync(onSignUpSuccess, onSignUpFailure)}
         /> */}
-        <View style={styles.registerButton}>
+        <View style={[styles.registerButton], {flexDirection:'row'}}>
           <Text style={[textStyles.smallRegular, { color: colors.offBlack }]}>
             Have an account? 
           </Text>
           <TouchableOpacity onPress={() => navigation.navigate('SignIn')}>
-            <Text style={[textStyles.normalSemiBold, { color: colors.primary }]}>Sign In</Text>
+            <Text style={[textStyles.normalSemiBold, { color: colors.primary }]}>  Sign In</Text>
           </TouchableOpacity>
         </View>
       </KeyboardAvoidingView>
