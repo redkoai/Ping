@@ -45,6 +45,7 @@ function SignInScreen({ navigation }) {
     // console.log("user.email =", user.email)
     // navigation.navigate('HomeScreenEmpty');
   };
+  // const UserInfo = { "uid": user.uid, "email": user.email };
   const onSignInFailure = (errorMessage) => {
     // console.log("user failure =", user)
     alert(errorMessage);

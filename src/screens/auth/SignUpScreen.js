@@ -30,7 +30,7 @@ function SignUpScreen({ navigation }) {
   const onSignUpSuccess = (user) => {
     // console.log("user = ", user)
     db.child(user.user.uid).set({"email" : user.user.email})
-    db.child(user.user.uid).set({"username" : user.user.username})
+    // db.child(user.user.uid).set({"username" : user.user.username})
     // db.push({"email":user.user.email, "uid": user.user.uid, "messages":{}})
     // db.child(`${user.user.uid}/messages`).push({text: "text", timestamp: "timestamp"})
     // db.child(`${user.user.uid}/messages`).push({text: "text2", timestamp: "timestamp2"})
