@@ -7,7 +7,7 @@ import {SearchBar} from "react-native-elements"
 import AuthContext from 'ping/src/contexts/AuthContext';
 import firebase from 'firebase';
 import 'firebase/firestore'
-
+import CustomButton from 'ping/src/components/inputs/CustomButton';
 
 const styles= StyleSheet.create({
     container: {
@@ -93,8 +93,11 @@ function addFriends({ }) {
                     email: foundUser.email
                 }})
             }}>
-                <Image source={newMessageBtn} style={{height: heightPercentageToDP('7'), width :widthPercentageToDP('70'), marginTop: heightPercentageToDP('5'),  marginLeft: widthPercentageToDP('15'), resizeMode:'contain'}} />
-            </TouchableOpacity>
+          <CustomButton
+          text="Add friends"
+          shadow
+        />
+        </TouchableOpacity>
         </View>
     )
 

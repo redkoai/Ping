@@ -1,4 +1,4 @@
-import { colors } from 'ping/src/styles/styles';
+import { textStyles, colors } from 'ping/src/styles/styles';
 import { widthPercentageToDP, heightPercentageToDP } from 'ping/util/scaler';
 import PingIcon from 'ping/src/icons/PingIcon';
 import googleLogo from 'ping/assets/Google_G_Logo.png';
@@ -8,14 +8,14 @@ import React, { useContext, useCallback } from 'react';
 import { useFocusEffect } from '@react-navigation/native';
 import AuthContext from 'ping/src/contexts/AuthContext';
 
-import { KeyboardAvoidingView, SafeAreaView, StyleSheet, Dimensions } from 'react-native';
+import { KeyboardAvoidingView, SafeAreaView, StyleSheet, Dimensions, View,Text, TouchableOpacity } from 'react-native';
 
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import AUTH_SCHEMA from 'ping/src/schema/authSchema';
 
 import Spacer from 'ping/src/components/Spacer';
-import { EmailInput, PasswordInput } from 'ping/src/components/inputs/CustomTextInput';
+import { EmailInput, PasswordInput, UserNameInput } from 'ping/src/components/inputs/CustomTextInput';
 import CustomButton from 'ping/src/components/inputs/CustomButton';
 
 function SignUpScreen() {
@@ -61,8 +61,10 @@ function SignUpScreen() {
         <PingIcon size={heightPercentageToDP(20)} color={colors.primary} style={styles.logo} />
         <Spacer height={6.5} />
 
+        <UserNameInput control={control} errors={errors} />
         <EmailInput control={control} errors={errors} />
         <PasswordInput control={control} errors={errors} />
+       
         <Spacer height={2} />
 
         <CustomButton
@@ -72,11 +74,19 @@ function SignUpScreen() {
           )}
           primary
         />
-        <CustomButton
+        {/* <CustomButton
           icon={googleLogo}
           text="Continue with Google"
           onPress={async () => await signInWithGoogleAsync(onSignUpSuccess, onSignUpFailure)}
-        />
+        /> */}
+        <View style={styles.registerButton}>
+          <Text style={[textStyles.smallRegular, { color: colors.offBlack }]}>
+            Have an account? 
+          </Text>
+          <TouchableOpacity onPress={() => navigation.navigate('SignIn')}>
+            <Text style={[textStyles.normalSemiBold, { color: colors.primary }]}>Sign In</Text>
+          </TouchableOpacity>
+        </View>
       </KeyboardAvoidingView>
     </SafeAreaView>
   );

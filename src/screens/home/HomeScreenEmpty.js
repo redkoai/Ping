@@ -37,16 +37,16 @@ function HomeScreenEmpty({}) {
     const db = firebase.database().ref("users");
 
 
-    const eventQuery = () => {
-      db.child(`${user.uid}/Events/`).on("child_added", function (snapshot) {
-        console.log("snapshot event = ", snapshot)
-        console.log("snapshot event cohost", snapshot.val()["co-host-0"])
-        console.log("user uid =", user.uid)
-        if (snapshot.val()["co-host-0"] == user.uid) {
-          console.log("user is the host of:", snapshot)
-        }
-      });
-    }
+    // const eventQuery = () => {
+    //   db.child(`${user.uid}/Events/`).on("child_added", function (snapshot) {
+    //     console.log("snapshot event = ", snapshot)
+    //     console.log("snapshot event cohost", snapshot.val()["co-host-0"])
+    //     console.log("user uid =", user.uid)
+    //     if (snapshot.val()["co-host-0"] == user.uid) {
+    //       console.log("user is the host of:", snapshot)
+    //     }
+    //   });
+    // }
 
 
    
@@ -63,13 +63,13 @@ function HomeScreenEmpty({}) {
     //     })
     //  }, []);
 
-    const pullProfileInfo = () => {
-        try {
-          db.collection("users").doc(firebase.auth().currentUser.uid).get();
-        } catch (e) {
-          console.log(e);
-        }
-      };
+    // const pullProfileInfo = () => {
+    //     try {
+    //       db.collection("users").doc(firebase.auth().currentUser.uid).get();
+    //     } catch (e) {
+    //       console.log(e);
+    //     }
+    //   };
 
 
       const _CheckOnboarding = async () => {
@@ -89,25 +89,25 @@ function HomeScreenEmpty({}) {
         )
       }
 
-    useEffect(() => {
-      eventQuery()
-        const unsubscribe = navigation.addListener("focus", () => {
-          // Login Checker
-          _CheckOnboarding().then((r) => console.log("Checked on Boarding"));
-          LoginChecker().then((results) => {
-            console.log("USER IS LOGGED IN : ", results);
-            setIsLoggedIn(results);
+    // useEffect(() => {
+    //   eventQuery()
+    //     const unsubscribe = navigation.addListener("focus", () => {
+    //       // Login Checker
+    //       _CheckOnboarding().then((r) => console.log("Checked on Boarding"));
+    //       LoginChecker().then((results) => {
+    //         console.log("USER IS LOGGED IN : ", results);
+    //         setIsLoggedIn(results);
     
-            if (results) {
-              pullProfileInfo();
-            } else {
-              console.log("User isn't logged in");
-            }
-          });
-        });
+    //         if (results) {
+    //           pullProfileInfo();
+    //         } else {
+    //           console.log("User isn't logged in");
+    //         }
+    //       });
+    //     });
     
-        return unsubscribe;
-      }, [navigation]);
+    //     return unsubscribe;
+    //   }, [navigation]);
 
     return (
         <View style={{flex: 1}}>    
@@ -161,7 +161,7 @@ function HomeScreenEmpty({}) {
 <TouchableOpacity >
 </TouchableOpacity>
 </ScrollView>
-        <TouchableOpacity  style={{left: heightPercentageToDP('2.5')}}  onPress={() => { 
+        <TouchableOpacity  style={{left: heightPercentageToDP('2.5'), marginBottom:widthPercentageToDP(5)}}  onPress={() => { 
     navigation.navigate('NewInvite')
 
 }}>     
@@ -172,7 +172,7 @@ function HomeScreenEmpty({}) {
         />
         </TouchableOpacity> 
         
-        <TouchableOpacity  style={{left: heightPercentageToDP('2.5')}} onPress={() => { 
+        {/* <TouchableOpacity  style={{left: heightPercentageToDP('2.5')}} onPress={() => { 
     navigation.navigate('Account', {screen: " Accountsone"})
 
 }}>      
@@ -180,11 +180,11 @@ function HomeScreenEmpty({}) {
           text="Add friends"
           shadow
         />
-        </TouchableOpacity>
+        </TouchableOpacity> */}
 </View>
                 ) : (
                     <View style={{ flexDirection: 'column', justifyContent: 'center',marginTop:widthPercentageToDP(3)}}>
-                   <View style={{ flexDirection: 'row', justifyContent: 'space-between',marginTop:widthPercentageToDP(10),marginBottom:heightPercentageToDP('3')}}>
+                   <View style={{ flexDirection: 'row', justifyContent: 'space-between',marginTop:widthPercentageToDP(-10),marginBottom:heightPercentageToDP('3')}}>
 <Text style={[textStyles.bigBold,{left:heightPercentageToDP('0')} ]}>Home</Text>
 <TouchableOpacity
                   onPress={() =>
@@ -195,12 +195,23 @@ function HomeScreenEmpty({}) {
 </TouchableOpacity>
 </View>
                     <Image source={emptyPic} style={{height: heightPercentageToDP('40'), width :widthPercentageToDP('85'), marginTop: heightPercentageToDP('0'), resizeMode:'contain' }} />
-                        <TouchableOpacity onPress={() => { 
+
+                    <TouchableOpacity  style={{left: heightPercentageToDP('1'), marginBottom:widthPercentageToDP(5), marginTop:widthPercentageToDP(30)}}  onPress={() => { 
+    navigation.navigate('NewInvite')
+
+}}>     
+        <CustomButton
+          text="Create a new event"
+          primary
+          shadow
+        />
+        </TouchableOpacity> 
+                        {/* <TouchableOpacity onPress={() => { 
                             navigation.navigate('NewInvite')
         
                         }}>
                             <Image source={createNewEventBtn} style={{height: heightPercentageToDP('7'), width :widthPercentageToDP('70'), marginTop: heightPercentageToDP('5'), resizeMode:'contain', left:heightPercentageToDP('5'),marginBottom:heightPercentageToDP('20') }} />
-                        </TouchableOpacity>
+                        </TouchableOpacity> */}
                         {/* <TouchableOpacity onPress={() => { 
                            navigation.navigate('SignUp')
                           //navigation.navigate('SecretCode')

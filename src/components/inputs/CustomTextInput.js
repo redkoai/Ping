@@ -225,6 +225,73 @@ export function PasswordInput({
   );
 }
 
+// export function userNameInput({
+//   control,
+//   errors,
+//   input = {
+//     name: 'username',
+//     label: 'Username',
+//     placeholder: '',
+//     defaultValue: '',
+//   },
+//   ...inputProps
+// }) {
+//   return (
+//     <CustomTextInput
+//       control={control}
+//       errors={errors}
+//       input={{
+//         name: input.name,
+//         label: input.label,
+//         placeholder: input.placeholder,
+//         defaultValue: input.defaultValue,
+//       }}
+//       rules={{
+//         contentType: 'username',
+//         keyboardType: 'default',
+//         autoCapitalize: 'none',
+//         autoCorrect: false,
+//         secureTextEntry: true,
+//       }}
+   
+//       {...inputProps}
+//     />
+//   );
+// }
+
+export function UserNameInput({
+  control,
+  errors,
+  input = {
+    name: 'username',
+    label: 'Username',
+    placeholder: '',
+    defaultValue: '',
+  },
+  ...inputProps
+}) {
+  return (
+    <CustomTextInput
+      control={control}
+      errors={errors}
+      input={{
+        name: input.name,
+        label: input.label,
+        placeholder: input.placeholder,
+        defaultValue: input.defaultValue,
+      }}
+      rules={{
+        contentType: 'username',
+        keyboardType: 'default',
+        autoCapitalize: 'none',
+        autoCorrect: false,
+      }}
+      {...inputProps}
+    />
+  );
+}
+
+
 export function DateInput({
   control,
   errors,

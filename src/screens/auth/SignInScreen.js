@@ -84,12 +84,12 @@ function SignInScreen({ navigation }) {
           primary
           shadow
         />
-        <CustomButton
+        {/* <CustomButton
           icon={googleLogo}
           text="Continue with Google"
           onPress={async () => await signInWithGoogleAsync(onSignInSuccess, onSignInFailure)}
           shadow
-        />
+        /> */}
 
         <View style={styles.registerButton}>
           <Text style={[textStyles.smallRegular, { color: colors.offBlack }]}>

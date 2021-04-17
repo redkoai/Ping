@@ -158,7 +158,7 @@ function Settings({}) {
           height: heightPercentageToDP('3'),
           width :widthPercentageToDP('30'), 
           resizeMode:'contain',
-          marginTop: heightPercentageToDP('1'), 
+          marginTop: heightPercentageToDP('-15'), 
           left: heightPercentageToDP('32'),
           
           }} />
