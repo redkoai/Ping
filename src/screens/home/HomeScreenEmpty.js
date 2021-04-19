@@ -37,19 +37,19 @@ function HomeScreenEmpty({}) {
     const db = firebase.database().ref("users");
 
 
-    // const eventQuery = () => {
-    //   db.child(`${user.uid}/Events/`).on("child_added", function (snapshot) {
-    //     console.log("snapshot event = ", snapshot)
-    //     console.log("snapshot event cohost", snapshot.val()["co-host-0"])
-    //     console.log("user uid =", user.uid)
-    //     if (snapshot.val()["co-host-0"] == user.uid) {
-    //       console.log("user is the host of:", snapshot)
-    //     }
-    //   });
-    // }
+    const eventQuery = () => {
+      db.child(`${user.uid}/Events/`).on("child_added", function (snapshot) {
+        console.log("snapshot event = ", snapshot)
+        console.log("snapshot event cohost", snapshot.val()["co-host-0"])
+        console.log("user uid =", user.uid)
+        if (snapshot.val()["co-host-0"] == user.uid) {
+          console.log("user is the host of:", snapshot)
+        }
+      });
+    }
 
 
-   
+
 
     // useEffect(() => {
     //     const userUID=UserInfo.uid;
@@ -63,60 +63,57 @@ function HomeScreenEmpty({}) {
     //     })
     //  }, []);
 
-    // const pullProfileInfo = () => {
-    //     try {
-    //       db.collection("users").doc(firebase.auth().currentUser.uid).get();
-    //     } catch (e) {
-    //       console.log(e);
-    //     }
-    //   };
+    const pullProfileInfo = () => {
+        try {
+          db.collection("users").doc(firebase.auth().currentUser.uid).get();
+        } catch (e) {
+          console.log(e);
+        }
+      };
 
 
-      const _CheckOnboarding = async () => {
-        await RetrieveData('Onboarding').then( async (val) => {
-              if(val !== 'DONE') { // if Onboarding
-                await StoreData("Onboarding", 'PENDING');
-                //console.log(`Onboarding State 1: ${RetrieveData('Onboarding')}`);
-                await StoreData("Onboarding", "DONE");
-                navigation.navigate("Onboarding", { screen: "Onboarding" });
+      // const _CheckOnboarding = async () => {
+      //   await RetrieveData('Onboarding').then( async (val) => {
+      //         if(val !== 'DONE') { // if Onboarding
+      //           await StoreData("Onboarding", 'PENDING');
+      //           //console.log(`Onboarding State 1: ${RetrieveData('Onboarding')}`);
+      //           await StoreData("Onboarding", "DONE");
+      //           navigation.navigate("Onboarding", { screen: "Onboarding" });
     
                 
-              }
-              else {
-                console.log(`Onboarding State: ${JSON.stringify(val)}`);
-              }
-            }
-        )
-      }
+      //         }
+      //         else {
+      //           console.log(`Onboarding State: ${JSON.stringify(val)}`);
+      //         }
+      //       }
+      //   )
+      // }
 
-    // useEffect(() => {
-    //   eventQuery()
-    //     const unsubscribe = navigation.addListener("focus", () => {
-    //       // Login Checker
-    //       _CheckOnboarding().then((r) => console.log("Checked on Boarding"));
-    //       LoginChecker().then((results) => {
-    //         console.log("USER IS LOGGED IN : ", results);
-    //         setIsLoggedIn(results);
+    useEffect(() => {
+      eventQuery()
+        const unsubscribe = navigation.addListener("focus", () => {
+          // Login Checker
+          // _CheckOnboarding().then((r) => console.log("Checked on Boarding"));
+          LoginChecker().then((results) => {
+            console.log("USER IS LOGGED IN : ", results);
+            setIsLoggedIn(results);
     
-    //         if (results) {
-    //           pullProfileInfo();
-    //         } else {
-    //           console.log("User isn't logged in");
-    //         }
-    //       });
-    //     });
+            if (results) {
+              pullProfileInfo();
+            } else {
+              console.log("User isn't logged in");
+            }
+          });
+        });
     
-    //     return unsubscribe;
-    //   }, [navigation]);
+        return unsubscribe;
+      }, [navigation]);
 
     return (
         <View style={{flex: 1}}>    
             <ImageBackground source={emptyHome} style={styles.homeEmpty}>
                  {isLoggedIn ? (
        
-
-
-
 <View style={{ flexDirection: 'column', marginLeft:'-10%',justifyContent: 'flex-end',marginTop:widthPercentageToDP(-43)}}>
                         
 <View style={{ flexDirection: 'row', justifyContent: 'space-between',marginTop:widthPercentageToDP(45),marginBottom:heightPercentageToDP('1')}}>
