@@ -29,6 +29,7 @@ function HomeScreenEmpty({}) {
     const [loggedInUser,setLoggedInUser]=useState([]);
     const [state,setState]=useState([]);
     const { user } = useContext(AuthContext);
+    console.log("user = ", user)
 
 
     //////////////////////////

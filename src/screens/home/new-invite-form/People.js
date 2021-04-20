@@ -65,10 +65,20 @@ function People({ navigation }) {
     console.log(foundUser);
     console.log(formData);
     db.child(foundUser.uid);
-    db.child(`${foundUser.uid}/Events/`).push(formData);
+    db.child(`${foundUser.uid}/Events`).push(formData);
     console.log("Data pushed");
     // db.child(user.user.uid).set({"email" : user.user.email})
   };
+
+  const sendInviteToAllFriends = () => {
+    db.child(`${user.uid}/Friends`).on('child_added', function(snapshot) {
+      console.log("snpashot = ", snapshot)
+      console.log("snapshot key =", snapshot.key)
+      console.log("snapshot value =", snapshot.val())
+      db.child(`${snapshot.key}/Events`).push(formData)
+      console.log('form data pushed')
+  })
+  }
 
   const sendHostEvent = () => {
     db.child(`${user.uid}/Events/`).push(formData);
@@ -77,13 +87,13 @@ function People({ navigation }) {
 
   const addFriend = () => {
     db.child(foundUser.uid);
-    // Adding friend 
-    db.child(`${foundUser.uid}/Friends/`).push(user);
-    // 
-    db.child(`${user.uid}/Friends/`).push(foundUser);
+    // Adding user to foundUser's (email that was searched) friends list
+    db.child(`${foundUser.uid}/Friends/${user.uid}`).set({email: user.email});
+    // Adding foundUser to user's friend list
+    db.child(`${user.uid}/Friends/${foundUser.uid}`).set({email: foundUser.email});
     console.log("Data pushed");
-    // db.child(user.user.uid).set({"email" : user.user.email})
   };
+
 
   const [foundUser, setFoundUser] = useState({
     email: null,
@@ -176,6 +186,17 @@ function People({ navigation }) {
               value={search}
             />
           </Card>
+          <TouchableOpacity>
+                 {/* temporarily using this as a button to send to all friends */}
+                {/* <Image source={send}  style={{height: heightPercentageToDP('10'), width :widthPercentageToDP('10'), marginTop: heightPercentageToDP('0'),marginLeft:widthPercentageToDP('23'), resizeMode:'contain' }} /> */}
+             <View style={{
+               borderWidth: "2px",
+             }}>
+                <Button onPress={sendInviteToAllFriends}>Send Invite to All Friends</Button>
+             </View>
+              
+            
+            </TouchableOpacity>
           <View style={styles.container}>
             <View style={{flexDirection:'row'}}>
           <Text  style={{marginLeft:widthPercentageToDP('10'), fontSize:actuatedNormalize(15), marginTop: heightPercentageToDP('3'), }}>

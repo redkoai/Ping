@@ -4,7 +4,7 @@ import emptyHome from "ping/assets/homeScreen/bg.png";
 import styles from "ping/src/styles/styles";
 import { Dimensions } from 'react-native';
 import {widthPercentageToDP,heightPercentageToDP,} from 'ping/util/scaler';
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useState, useContext} from "react";
 import createNewEventBtn from "ping/assets/NavBarAssets/createNewEventBtn.png"
 import addFriendsBtn from "ping/assets/NavBarAssets/addFriendsBtn.png"
 import CustomButton from 'ping/src/components/inputs/CustomButton';
@@ -27,6 +27,27 @@ function Accountsone({}) {
     // const navigation = useNavigation()
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [loggedInUser,setLoggedInUser]=useState([]);
+    const db = firebase.database().ref("users")
+
+    const [friends, setFriends] = useState({})
+
+    const { user } = useContext(AuthContext)
+
+     //////////////////////////////////////
+    // Firebase query for current friends
+    //////////////////////////////////////
+    // const friends = []
+    const queryFriends = () => {
+      let friends = {}
+      db.child(`${user.uid}/Friends`).on('child_added', function(snapshot) {
+        console.log("snapshot value = ", snapshot.val().email)
+        console.log("snapshot key = ", snapshot.key)
+        friends[snapshot.val().email] = snapshot.key
+    })
+    return friends
+    }
+
+    // console.log("query friends", queryFriends())
 
 
     const pullProfileInfo = () => {
@@ -76,7 +97,6 @@ function Accountsone({}) {
 
     const navigation = useNavigation()
 
-    const db = firebase.database().ref("users")
     const [search, setSearch] = useState([])
 
     const [foundUser, setFoundUser] = useState({
@@ -105,18 +125,38 @@ function Accountsone({}) {
         let foundUser = searchUser(search)
         console.log("foundUser (use effect) = ", foundUser)
         if (foundUser.found) {
-            console.log("poop")
             setFoundUser({email:foundUser.email,uid:foundUser.uid})
             console.log("setting found user state")
         }
         
       }, [search]);
+
+      useEffect(() => {
+        // friendLoop()
+        // let friends_list = queryFriends()
+        setFriends(queryFriends())
+        // console.log("friends list = ", friends_list)
+
+      }, [])
+
+      console.log("friend state = ", friends)
     // if (searchUser(search)) {
-    //     console.log("poop")
     //     setFoundUser(search)
     //     console.log("setting found user state")
     // }
     console.log("found user = ", foundUser)
+
+    // console.log("friends list loop = ", Object.keys(friends))
+
+    const friendLoop = Object.keys(friends).map((key) => {
+      console.log(key)
+      return (
+        <View>
+          <Text>{key}</Text>
+        </View>
+        
+      )
+    })
 
 
     // const searchUser = (email) => {
@@ -224,6 +264,9 @@ function Accountsone({}) {
           text="Add friends"
           shadow
         />
+        <View>
+        {friendLoop}
+        </View>
         </TouchableOpacity>
  </View>
           )}
