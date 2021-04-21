@@ -88,9 +88,9 @@ function People({ navigation }) {
   const addFriend = () => {
     db.child(foundUser.uid);
     // Adding user to foundUser's (email that was searched) friends list
-    db.child(`${foundUser.uid}/Friends/${user.uid}`).set({email: user.email});
+    // db.child(`${foundUser.uid}/Friends/${user.uid}`).set({username: user.username, email: user.email});
     // Adding foundUser to user's friend list
-    db.child(`${user.uid}/Friends/${foundUser.uid}`).set({email: foundUser.email});
+    db.child(`${user.uid}/Friends/${foundUser.uid}`).set({username: foundUser.username, email: foundUser.email});
     console.log("Data pushed");
   };
 
@@ -104,12 +104,13 @@ function People({ navigation }) {
     setSearch(search);
   };
 
-  const searchUser = (email) => {
-    let foundUser = { email: null, uid: null, found: false };
+  const searchUser = (username) => {
+    let foundUser = { username: null, email: null, uid: null, found: false };
     db.ref.orderByKey().on("child_added", function (snapshot) {
-      if (snapshot.val().email == email) {
+      if (snapshot.val().username == username) {
         console.log("found user", snapshot.val());
         foundUser = {
+          username: snapshot.val().username,
           email: snapshot.val().email,
           uid: snapshot.key,
           found: true,
@@ -124,7 +125,7 @@ function People({ navigation }) {
     let foundUser = searchUser(search);
     console.log("foundUser (use effect) = ", foundUser);
     if (foundUser.found) {
-      setFoundUser({ email: foundUser.email, uid: foundUser.uid });
+      setFoundUser({ username: foundUser.username, email: foundUser.email, uid: foundUser.uid });
       console.log("setting found user state");
     }
   }, [search]);
@@ -200,7 +201,7 @@ function People({ navigation }) {
           <View style={styles.container}>
             <View style={{flexDirection:'row'}}>
           <Text  style={{marginLeft:widthPercentageToDP('10'), fontSize:actuatedNormalize(15), marginTop: heightPercentageToDP('3'), }}>
-              {foundUser.email}</Text>
+              {foundUser.username}</Text>
           <TouchableOpacity onPress={sendInvite}>
 
                 <Image source={send}  style={{height: heightPercentageToDP('10'), width :widthPercentageToDP('10'), marginTop: heightPercentageToDP('0'),marginLeft:widthPercentageToDP('23'), resizeMode:'contain' }} />
