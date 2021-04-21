@@ -38,16 +38,36 @@ function HomeScreenEmpty({}) {
     const db = firebase.database().ref("users");
 
 
+    const [myInvites, setMyInvites] = useState({})
+
+    const [myEvents, setMyEvents] = useState({})
+
+
+
+
     const eventQuery = () => {
+      const myEvents = []
+      const myInvites_obj = {}
       db.child(`${user.uid}/Events/`).on("child_added", function (snapshot) {
-        console.log("snapshot event = ", snapshot)
-        console.log("snapshot event cohost", snapshot.val()["co-host-0"])
-        console.log("user uid =", user.uid)
+        // console.log("snapshot event = ", snapshot)
+        // console.log("snapshot event cohost", snapshot.val()["co-host-0"])
+        // console.log("user uid =", user.uid)
         if (snapshot.val()["co-host-0"] == user.uid) {
-          console.log("user is the host of:", snapshot)
+          console.log("event snapshot =", snapshot)
+        } else {
+          console.log("invite snapshot =", snapshot)
+          myInvites_obj[snapshot.val().event] = snapshot
+          console.log("my invites = ", myInvites_obj)
         }
       });
+      // console.log("my invites =", myInvites)
+      setMyInvites(myInvites_obj)
+      // setMyEvents(myEvents)
     }
+
+
+    console.log("invite state =", myInvites)
+
 
 
 
@@ -92,6 +112,7 @@ function HomeScreenEmpty({}) {
 
     useEffect(() => {
       eventQuery()
+      // console.log(" invites =", myInvites)
         const unsubscribe = navigation.addListener("focus", () => {
           // Login Checker
           // _CheckOnboarding().then((r) => console.log("Checked on Boarding"));
@@ -109,6 +130,29 @@ function HomeScreenEmpty({}) {
     
         return unsubscribe;
       }, [navigation]);
+
+
+      const EventLoop = Object.keys(myEvents).map((key) => {
+        console.log(key)
+        return (
+          <View>
+            <Text>{key}</Text>
+          </View>
+          
+        )
+      })
+
+
+
+      const InviteLoop = Object.keys(myInvites).map((key) => {
+        console.log(key)
+        return (
+          <View>
+            <Text>{key}</Text>
+          </View>
+          
+        )
+      })
 
     return (
         <View style={{flex: 1}}>    
@@ -144,6 +188,17 @@ function HomeScreenEmpty({}) {
 
 <TouchableOpacity >
 </TouchableOpacity>
+{
+    Object.keys(myEvents).length == 0 ? 
+    <View>
+      <Text>Events do not exist</Text>
+    </View> 
+    :
+    <View>
+      <Text>{EventLoop}</Text>
+    </View> 
+
+  }
 </ScrollView>
 <View style={{ flexDirection: 'row', justifyContent: 'space-between',marginTop:widthPercentageToDP(3),marginBottom:heightPercentageToDP('2')}}>
 <Text style={[textStyles.bigBold,{left:heightPercentageToDP('0')} ]}>My Invites</Text>
@@ -158,6 +213,17 @@ function HomeScreenEmpty({}) {
 
 <TouchableOpacity >
 </TouchableOpacity>
+{
+    Object.keys(myInvites).length == 0  ? 
+    <View>
+      <Text>invites do not exist</Text>
+    </View> 
+    :
+    <View>
+      <Text>{InviteLoop}</Text>
+    </View> 
+
+  }
 </ScrollView>
         <TouchableOpacity  style={{left: heightPercentageToDP('2.5'), marginBottom:widthPercentageToDP(5)}}  onPress={() => { 
     navigation.navigate('NewInvite')
