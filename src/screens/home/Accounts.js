@@ -35,7 +35,25 @@ function Settings({}) {
       }
     };
 
+    /////////////////////////////////
+    // Firebase Query to get username
+    //////////////////////////////////
+    const db = firebase.database().ref("users");
+
+    const [username, setUsername] = useState()
+
+    const getUsername = () => {
+      db.child(`${user.uid}`).on('child_added', function(snapshot) {
+        if (snapshot.key == "username"){
+          console.log(snapshot.val())
+          setUsername(snapshot.val())
+        }
+    })
+    }
+
     useEffect(() => {
+      getUsername()
+      console.log(username)
       const unsubscribe = navigation.addListener("focus", () => {
         // Login Checker
       //  _CheckOnboarding().then((r) => console.log("Checked on Boarding"));
@@ -76,11 +94,21 @@ function Settings({}) {
 
     return (
 
+      /////////////////////////////////////////
+      // Old render
+      /////////////////////////////////////////
+
         <View style={{ flex: 1 }}>
-          <ImageBackground source={emptyHome} style={styles.homeEmpty}>
+          {/* <ImageBackground source={emptyHome} style={styles.homeEmpty}> */}
        
           {isLoggedIn ? (
              <View>
+
+               <View>
+                  <Text>Hello,</Text>
+                  <Text>{username}</Text>
+                  <Text>{user.email}</Text>
+               </View>
             <View
               style={{
                 flexDirection: 'column',
@@ -113,14 +141,14 @@ function Settings({}) {
             
             }} />  */}
             {/* <Image source={Accevents} style={{height: heightPercentageToDP('20'), width :widthPercentageToDP('85'), marginTop: heightPercentageToDP('-7'), resizeMode:'contain' }} /> */}
-            <Image 
+            {/* <Image 
             source={Acccenter} 
             style={{height: heightPercentageToDP('32'),
             width :widthPercentageToDP('95'), 
             marginTop: heightPercentageToDP('4'), 
             left: heightPercentageToDP('1'),
             resizeMode:'contain' 
-            }} />
+            }} /> */}
         </View>
         <Spacer height={2}  />
          <TouchableOpacity  style={{left: heightPercentageToDP('3.5')}}>     
@@ -166,14 +194,14 @@ function Settings({}) {
           
         
           {/* <Image source={Accevents} style={{height: heightPercentageToDP('20'), width :widthPercentageToDP('85'), marginTop: heightPercentageToDP('-7'), resizeMode:'contain' }} /> */}
-          <Image 
+          {/* <Image 
           source={Acccenter} 
           style={{height: heightPercentageToDP('32'),
           width :widthPercentageToDP('95'), 
           marginTop: heightPercentageToDP('4'), 
           left: heightPercentageToDP('1'),
           resizeMode:'contain' 
-          }} />
+          }} /> */}
       </View>
 
 
@@ -190,7 +218,7 @@ function Settings({}) {
                   primary
               />
             }
-      </ImageBackground>
+      {/* </ImageBackground> */}
     </View>
 
   

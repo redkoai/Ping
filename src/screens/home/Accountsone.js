@@ -202,6 +202,14 @@ function Accountsone({}) {
           shadow
         />
         </TouchableOpacity>
+        {
+          friends ? 
+            <View>
+            {friendLoop}
+            </View>
+            : null
+
+        }
         </View>
 
 
@@ -264,9 +272,6 @@ function Accountsone({}) {
           text="Add friends"
           shadow
         />
-        <View>
-        {friendLoop}
-        </View>
         </TouchableOpacity>
  </View>
           )}
