@@ -190,11 +190,18 @@ function People({ navigation }) {
           <TouchableOpacity>
                  {/* temporarily using this as a button to send to all friends */}
                 {/* <Image source={send}  style={{height: heightPercentageToDP('10'), width :widthPercentageToDP('10'), marginTop: heightPercentageToDP('0'),marginLeft:widthPercentageToDP('23'), resizeMode:'contain' }} /> */}
-             <View style={{
-               borderWidth: "2px",
-             }}>
-                <Button onPress={sendInviteToAllFriends}>Send Invite to All Friends</Button>
-             </View>
+             {/* <View style={{
+               
+               marginLeft:widthPercentageToDP('10')
+             }}>         
+              <CustomButton
+             text="Send Invite to All Friends"
+             onPress={sendInviteToAllFriends}
+             
+             primary
+           />
+               
+             </View> */}
               
             
             </TouchableOpacity>
@@ -249,11 +256,26 @@ function People({ navigation }) {
 </Card>
 </TouchableOpacity> */}
 
-        <Spacer height={45} />
+        <View style={{
+               
+               marginLeft:widthPercentageToDP('5'),
+               marginTop: heightPercentageToDP("40")
+              
+             }}>         
+              <CustomButton
+             text="Send Invite to All Friends"
+             onPress={sendInviteToAllFriends}
+             
+             primary
+           />
+               
+             </View>
+       
 
         <View
           style={{ alignSelf: "flex-end", left: heightPercentageToDP("-1") }}
         >
+          
           <CustomButton
             text="next"
             onPress={handleSubmit(onSubmit)}
