@@ -17,6 +17,10 @@ import * as firebase from 'firebase';
 import StoreData from "../../../util/SaveItemInStorage";
 import RetrieveData from "../../../util/GetItemInStorage";
 import LoginChecker from "../../../util/validators/LoginChecker";
+import { colors, textStyles } from 'ping/src/styles/styles';
+import { actuatedNormalize } from "../../../util/fontScaler";
+import giffy from '../../../assets/homeScreen/giffy.gif'
+
 
 function Settings({}) {
   const [loggedInUser,setLoggedInUser]=useState([]);
@@ -100,14 +104,32 @@ function Settings({}) {
 
         <View style={{ flex: 1 }}>
           {/* <ImageBackground source={emptyHome} style={styles.homeEmpty}> */}
-       
+          <View style={{ backgroundColor: 'white', flex: 1 }}>
+          <TouchableOpacity onPress={() => navigation.navigate('settings')}>
+            <Image 
+            source={settings} 
+            style={{
+            height: heightPercentageToDP('3'),
+            width :widthPercentageToDP('30'), 
+            resizeMode:'contain',
+            marginTop: heightPercentageToDP('2'), 
+            left: heightPercentageToDP('35'),
+            
+            }} />
+            </TouchableOpacity>
           {isLoggedIn ? (
              <View>
 
                <View>
-                  <Text>Hello,</Text>
-                  <Text>{username}</Text>
-                  <Text>{user.email}</Text>
+               <View style={{flexDirection:'row'}} >
+                  <Text style={[textStyles.smallSemiBold,{ fontSize:actuatedNormalize(18), marginLeft:widthPercentageToDP('5'), marginTop:widthPercentageToDP('5')}]}>Hello</Text>
+                  <Text style={[textStyles.smallSemiBold,{ fontSize:actuatedNormalize(18), marginLeft:widthPercentageToDP('0'), marginTop:widthPercentageToDP('5')}]}> {username},</Text>
+                  </View>
+                  <View style={{flexDirection:'row'}} >
+                  <Text style={[textStyles.smallSemiBold,{ fontSize:actuatedNormalize(13), marginLeft:widthPercentageToDP('5'), marginTop:widthPercentageToDP('5')}]}>Your email is</Text>
+
+                  <Text style={[textStyles.smallSemiBold,{ fontSize:actuatedNormalize(13), marginLeft:widthPercentageToDP('0'), marginTop:widthPercentageToDP('5')}]}> {user.email}</Text>
+               </View>
                </View>
             <View
               style={{
@@ -117,18 +139,7 @@ function Settings({}) {
               }}
             >
             {/* <Image source={Accname} style={{height: heightPercentageToDP('10'), width :widthPercentageToDP('95'),  resizeMode:'contain',marginTop: heightPercentageToDP('10'), }} /> */}
-             <TouchableOpacity onPress={() => navigation.navigate('settings')}>
-            <Image 
-            source={settings} 
-            style={{
-            height: heightPercentageToDP('3'),
-            width :widthPercentageToDP('30'), 
-            resizeMode:'contain',
-            marginTop: heightPercentageToDP('1'), 
-            left: heightPercentageToDP('32'),
-            
-            }} />
-            </TouchableOpacity>
+
             
             {/* <Image 
             source={Accfriends} 
@@ -150,8 +161,18 @@ function Settings({}) {
             resizeMode:'contain' 
             }} /> */}
         </View>
+        <Image 
+            source={giffy} 
+            style={{
+            height: heightPercentageToDP('30'),
+            width :widthPercentageToDP('100'), 
+            resizeMode:'contain',
+            marginTop: heightPercentageToDP('2'), 
+            // left: heightPercentageToDP('35'),
+            
+            }} />
         <Spacer height={2}  />
-         <TouchableOpacity  style={{left: heightPercentageToDP('3.5')}}>     
+         <TouchableOpacity  style={{left: heightPercentageToDP('4.5')}}>     
         <CustomButton
           text="Create a new event"
           primary
@@ -210,15 +231,19 @@ function Settings({}) {
           )
 
 }
+<View style={{left: heightPercentageToDP('4.5')}}>
             {!skipped &&
-              <CustomButton
+              <CustomButton 
                   text="Sign Out"
                   onPress={async () => await singOutAsync(onSuccess, onFailure)}
                   shadow
                   primary
               />
+            
             }
+            </View>
       {/* </ImageBackground> */}
+    </View>
     </View>
 
   

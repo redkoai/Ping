@@ -19,7 +19,7 @@ import AuthContext from 'ping/src/contexts/AuthContext';
 import { actuatedNormalize } from "../../../util/fontScaler";
 import profileIm from "ping/assets/NavBarAssets/prof.png"
 import CustomButton from 'ping/src/components/inputs/CustomButton';
-
+import giffy from '../../../assets/homeScreen/circle.gif'
 import firebase from "firebase"
 
 
@@ -192,7 +192,8 @@ function HomeScreenEmpty({}) {
 {
     Object.keys(myEvents).length == 0 ? 
     <View>
-      <Text>Events do not exist</Text>
+      <Text style={[textStyles.smallSemiBold,{color:'gray', fontSize:actuatedNormalize(12)}]}>You don’t have any events scheduled...</Text>
+      <Image source={giffy} style={{height: heightPercentageToDP('17'), width :widthPercentageToDP('85'), marginTop: heightPercentageToDP('0'), resizeMode:'contain' }} />
     </View> 
     :
     <View>
@@ -217,7 +218,7 @@ function HomeScreenEmpty({}) {
 {
     Object.keys(myInvites).length == 0  ? 
     <View>
-      <Text>invites do not exist</Text>
+      <Text style={[textStyles.smallSemiBold,{color:'gray', fontSize:actuatedNormalize(12)}]}>You don’t have any invites yet. </Text>
     </View> 
     :
     <View>
@@ -226,7 +227,7 @@ function HomeScreenEmpty({}) {
 
   }
 </ScrollView>
-        <TouchableOpacity  style={{left: heightPercentageToDP('2.5'), marginBottom:widthPercentageToDP(5)}}  onPress={() => { 
+        <TouchableOpacity  style={{left: heightPercentageToDP('3.5'), marginBottom:widthPercentageToDP(5)}}  onPress={() => { 
     navigation.navigate('NewInvite')
 
 }}>     
