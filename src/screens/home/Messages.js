@@ -31,7 +31,7 @@ function Messages({}) {
 
     const { user } = useContext(AuthContext);
 
-    const db = firebase.database().ref("messages")
+    const db = firebase.database().ref("users")
 
     const pullProfileInfo = () => {
       try {
@@ -64,23 +64,27 @@ function Messages({}) {
 
     const queryUserHistory = () => {
       let userHistory = {}
-      db.ref.orderByKey().on("child_added", function(snapshot) {
-          if (snapshot.val().user._id == user.uid) {
-              console.log("found user", snapshot.val())
-              userHistory[snapshot.val().userTo.email] = {
-                text: snapshot.val().text, 
-                timestamp: snapshot.val().timestamp,
-                _id: snapshot.val().userTo._id
-              }
-          } 
-          if (snapshot.val().userTo._id == user.uid) {
-            console.log("found user", snapshot.val())
-            userHistory[snapshot.val().user.email] = {
-              text: snapshot.val().text, 
-              timestamp: snapshot.val().timestamp,
-              _id: snapshot.val().user._id
-            }
-        } 
+      db.child(`${user.uid}/messages/${user.uid}`).on("child_added", function(snapshot) {
+        console.log("snapshot = ", snapshot)
+        console.log("snapshot key = ", snapshot.key)
+        console.log("snapshot val = ", snapshot.val())
+        console.log("snapshot val user._id", snapshot.val().user._id)
+          // if (snapshot.val().user._id == user.uid) {
+          //     console.log("found user", snapshot.val())
+          //     userHistory[snapshot.val().userTo.email] = {
+          //       text: snapshot.val().text, 
+          //       timestamp: snapshot.val().timestamp,
+          //       _id: snapshot.val().userTo._id
+          //     }
+          // } 
+          // if (snapshot.val().userTo._id == user.uid) {
+          //   console.log("found user", snapshot.val())
+          //   userHistory[snapshot.val().user.email] = {
+          //     text: snapshot.val().text, 
+          //     timestamp: snapshot.val().timestamp,
+          //     _id: snapshot.val().user._id
+          //   }
+        // } 
       })
       return userHistory
   }
@@ -130,14 +134,20 @@ function Messages({}) {
             </View>
             <Spacer height={2} />
 
-            <TouchableOpacity style={{alignContent:'center',marginLeft:widthPercentageToDP(10)}} onPress={() => { 
+            <TouchableOpacity onPress={() => { 
+                navigation.navigate('CreateNewMessage')
+            }}>
+                <Image source={newMessageBtn} style={{height: heightPercentageToDP('7'), width :widthPercentageToDP('70'), marginTop: heightPercentageToDP('5'), resizeMode:'contain', left:heightPercentageToDP('0') }} />
+            </TouchableOpacity>
+
+            {/* <TouchableOpacity style={{alignContent:'center',marginLeft:widthPercentageToDP(10)}} onPress={() => { 
                 navigation.navigate('CreateNewMessage') }}>
                     <CustomButton
-          text="Create a new message"
-          primary
-          shadow
-        />
-        </TouchableOpacity> 
+                        text="Create a new message"
+                        primary
+                        shadow
+                      />
+            </TouchableOpacity>  */}
             
             
             <TouchableOpacity>
@@ -173,16 +183,21 @@ function Messages({}) {
             
             </View>
 
+              
+            <TouchableOpacity onPress={() => { 
+                navigation.navigate('CreateNewMessage')
+            }}>
+                <Image source={newMessageBtn} style={{height: heightPercentageToDP('7'), width :widthPercentageToDP('70'), marginTop: heightPercentageToDP('5'), resizeMode:'contain', left:heightPercentageToDP('0') }} />
+            </TouchableOpacity>
 
-
-              <TouchableOpacity style={{alignContent:'center',marginLeft:widthPercentageToDP(10)}} onPress={() => { 
+              {/* <TouchableOpacity style={{alignContent:'center',marginLeft:widthPercentageToDP(10)}} onPress={() => { 
                 navigation.navigate('CreateNewMessage') }}>
                     <CustomButton
-          text="Create a new message"
-          primary
-          shadow
-        />
-        </TouchableOpacity> 
+                      text="Create a new message"
+                      primary
+                      shadow
+                    />
+              </TouchableOpacity>  */}
             </View>
             )
         }

@@ -24,6 +24,7 @@ function CreateNewMessage({ }) {
     const [search, setSearch] = useState([])
 
     const [foundUser, setFoundUser] = useState({
+        username: null,
         email:null,
         uid:null
     })
@@ -32,31 +33,46 @@ function CreateNewMessage({ }) {
         setSearch(search)
     }
 
-    const searchUser = (email) => {
-        let foundUser = {email:null, uid:null, found:false}
-        db.ref.orderByKey().on("child_added", function(snapshot) {
-            if (snapshot.val().email == email) {
-                console.log("found user", snapshot.val())
-                foundUser = {email:snapshot.val().email, uid: snapshot.key, found:true}
-                return 
-            } 
-        })
-        return foundUser
-    }
+    const searchUser = (username) => {
+        let foundUser = { username: null, email: null, uid: null, found: false };
+        db.ref.orderByKey().on("child_added", function (snapshot) {
+          if (snapshot.val().username == username) {
+            console.log("found user", snapshot.val());
+            foundUser = {
+              username: snapshot.val().username,
+              email: snapshot.val().email,
+              uid: snapshot.key,
+              found: true,
+            };
+            return;
+          }
+        });
+        return foundUser;
+      };
+
+    // const searchUser2 = (email) => {
+    //     let foundUser = {email:null, uid:null, found:false}
+    //     db.ref.orderByKey().on("child_added", function(snapshot) {
+    //         if (snapshot.val().email == email) {
+    //             console.log("found user", snapshot.val())
+    //             foundUser = {email:snapshot.val().email, uid: snapshot.key, found:true}
+    //             return 
+    //         } 
+    //     })
+    //     return foundUser
+    // }
     // console.log(searchUser(search))
 
     useEffect(() => {
         let foundUser = searchUser(search)
         console.log("foundUser (use effect) = ", foundUser)
         if (foundUser.found) {
-            console.log("poop")
-            setFoundUser({email:foundUser.email,uid:foundUser.uid})
+            setFoundUser({username: foundUser.username, email:foundUser.email,uid:foundUser.uid})
             console.log("setting found user state")
         }
         
       }, [search]);
     // if (searchUser(search)) {
-    //     console.log("poop")
     //     setFoundUser(search)
     //     console.log("setting found user state")
     // }
@@ -87,20 +103,23 @@ function CreateNewMessage({ }) {
                 value={search}
             />
             <View style={styles.container}>
-                <Text>{foundUser.email}</Text>
+                <Text>{foundUser.username}</Text>
             </View>
             <TouchableOpacity style={{alignContent:'center',marginLeft:widthPercentageToDP(10)}} onPress={() => { 
                 navigation.navigate('Chat', { OtherUserInfo: {
                     _id: foundUser.uid,
-                    email: foundUser.email
+                    email: foundUser.email,
+                    username: foundUser.username
                 }})
             }}>
+
+            <Image source={newMessageBtn} style={{height: heightPercentageToDP('7'), width :widthPercentageToDP('70'), marginTop: heightPercentageToDP('5'), resizeMode:'contain', left:heightPercentageToDP('0') }} />
                 
-        <CustomButton
-          text="Create a new message"
-          primary
-          shadow
-        />
+                {/* <CustomButton
+                text="Create a new message"
+                primary
+                shadow
+                /> */}
         </TouchableOpacity> 
         </View>
     )

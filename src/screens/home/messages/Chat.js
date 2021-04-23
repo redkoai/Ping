@@ -31,6 +31,7 @@ function Chat({route, navigation }) {
                 user: item.user,
                 userTo: OtherUserInfo
             }
+            // db.child(`${user.uid}/messages/${user.uid}`).push(message)
             db.child(`${user.uid}/messages/${OtherUserInfo._id}`).push(message)
             db.child(`${OtherUserInfo._id}/messages/${user.uid}`).push(message)
         })

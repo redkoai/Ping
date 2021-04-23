@@ -99,12 +99,18 @@ function People({ navigation }) {
   }
 
   const addFriend = () => {
-    db.child(foundUser.uid);
+    // db.child(foundUser.uid);
     // Adding user to foundUser's (email that was searched) friends list
     // db.child(`${foundUser.uid}/Friends/${user.uid}`).set({username: user.username, email: user.email});
-    // Adding foundUser to user's friend list
-    db.child(`${user.uid}/Friends/${foundUser.uid}`).set({username: foundUser.username, email: foundUser.email});
-    console.log("Data pushed");
+    // Check if friend already exists:
+    db.child(`${user.uid}/Friends`).on('child_added', function(snapshot) {
+      if (snapshot.key == foundUser.uid) {
+        console.log('this friend has already been added')
+      } else {
+        db.child(`${user.uid}/Friends/${foundUser.uid}`).set({username: foundUser.username, email: foundUser.email});
+        console.log("friend added!")
+      }
+  })
   };
 
    //////////////////////////////////////
