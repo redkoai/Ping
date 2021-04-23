@@ -54,6 +54,7 @@ function HomeScreenEmpty({}) {
     // useEffect(() => {
     //     const userUID=UserInfo.uid;
     //     console.log("userid: ", userUID);
+    ////hard coded 
     //    firebase.database().ref('/InviteForms').child("-MW_XbsJOLm2BCA6nA_K").child("formData").on('value',(snapshot)=>{
     //   //firebase.database().ref('/InviteForms').limitToLast(1).on('value',(snapshot)=>{ 
     //   let data = snapshot.val() ? snapshot.val() : {};
