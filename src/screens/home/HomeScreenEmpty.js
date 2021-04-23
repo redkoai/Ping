@@ -66,7 +66,7 @@ function HomeScreenEmpty({}) {
     }
 
 
-    console.log("invite state =", myInvites)
+    // console.log("invite state =", myInvites)
 
 
 
@@ -111,9 +111,10 @@ function HomeScreenEmpty({}) {
       //   )
       // }
 
+
     useEffect(() => {
       eventQuery()
-      // console.log(" invites =", myInvites)
+      console.log(" invites =", myInvites)
         const unsubscribe = navigation.addListener("focus", () => {
           // Login Checker
           // _CheckOnboarding().then((r) => console.log("Checked on Boarding"));
@@ -131,6 +132,7 @@ function HomeScreenEmpty({}) {
     
         return unsubscribe;
       }, [navigation]);
+      console.log("invite state length = ", Object.keys(myInvites).length)
 
 
       const EventLoop = Object.keys(myEvents).map((key) => {
@@ -216,14 +218,14 @@ function HomeScreenEmpty({}) {
 <TouchableOpacity >
 </TouchableOpacity>
 {
-    Object.keys(myInvites).length == 0  ? 
-    <View>
-      <Text style={[textStyles.smallSemiBold,{color:'gray', fontSize:actuatedNormalize(12)}]}>You don’t have any invites yet. </Text>
-    </View> 
-    :
+    Object.keys(myInvites).length != 0 ?  
     <View>
       <Text>{InviteLoop}</Text>
     </View> 
+    :
+    <View>
+      <Text style={[textStyles.smallSemiBold,{color:'gray', fontSize:actuatedNormalize(12)}]}>You don’t have any invites yet. </Text>
+    </View>
 
   }
 </ScrollView>

@@ -203,7 +203,7 @@ function Accountsone({}) {
         />
         </TouchableOpacity>
         {
-          friends ? 
+          Object.keys(friends).length != 0 ? 
             <View>
             {friendLoop}
             </View>

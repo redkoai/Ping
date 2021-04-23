@@ -31,6 +31,9 @@ import {
   MEASUREMENT_ID,
 } from "@env";
 
+
+console.disableYellowBox = true;
+
 const FIREBASE_CONFIG = {
   apiKey: API_KEY,
   authDomain: AUTH_DOMAIN,
