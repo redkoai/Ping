@@ -19,7 +19,7 @@ const initialLayout = { width: Dimensions.get('window').width };
 export default function TabViewExample() {
   const [index, setIndex] = React.useState(0);
   const [routes] = React.useState([
-    { key: 'Accounts', title: 'Events' },
+    { key: 'Accounts', title: 'Profile' },
     { key: 'Accountsone', title: 'Friends' },
   ]);
  

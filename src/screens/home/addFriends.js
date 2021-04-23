@@ -18,9 +18,8 @@ const styles= StyleSheet.create({
 
 function addFriends({ }) {
     const navigation = useNavigation()
-    
-
     const db = firebase.database().ref("users")
+    
     const [search, setSearch] = useState([])
 
     const [foundUser, setFoundUser] = useState({

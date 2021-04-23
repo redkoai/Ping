@@ -115,11 +115,15 @@ function Details({route,navigation }) {
           navigation={navigation}
         />
         <CustomTextInput
+          style={{
+            display: 'none'
+          }}
+          editable={false}
           control={control}
           input={{
             name: 'co-host-0',
             label: 'Hosted by',
-            placeholder: 'Host/organization name',
+            placeholder: 'You',
             defaultValue: `${user.uid}`,
           }}
         />

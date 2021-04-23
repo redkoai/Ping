@@ -4,7 +4,7 @@ import PingIcon from 'ping/src/icons/PingIcon';
 import googleLogo from 'ping/assets/Google_G_Logo.png';
 import firebase from 'firebase';
 
-import React, { useContext, useCallback } from 'react';
+import React, { useContext, useCallback, useState } from 'react';
 import { useFocusEffect } from '@react-navigation/native';
 import AuthContext from 'ping/src/contexts/AuthContext';
 
@@ -25,17 +25,17 @@ function SignUpScreen({ navigation }) {
     resolver: yupResolver(AUTH_SCHEMA),
   });
   useFocusEffect(useCallback(reset));
+
+  const [username, setUsername] = useState()
   
 
   const onSignUpSuccess = (user) => {
-    // console.log("user = ", user)
-    db.child(user.user.uid).set({"email" : user.user.email})
-    // db.child(user.user.uid).set({"username" : user.user.username})
-    // db.push({"email":user.user.email, "uid": user.user.uid, "messages":{}})
-    // db.child(`${user.user.uid}/messages`).push({text: "text", timestamp: "timestamp"})
-    // db.child(`${user.user.uid}/messages`).push({text: "text2", timestamp: "timestamp2"})
-    console.log("user info pushed")
-    console.log("user success =", user)
+    // console.log("username input = ", username)
+    console.log("user = ", user)
+    db.child(`${user.user.uid}`).set({"email" : user.user.email, "username" : username})
+    // console.log("user email pushed")
+    // console.log("user info pushed")
+    // console.log("user success =", user)
     // navigation.navigate('HomeScreenEmpty');
   };
   const onSignUpFailure = (errorMessage) => {
@@ -43,6 +43,15 @@ function SignUpScreen({ navigation }) {
     console.log("error message = ", errorMessage)
     alert(errorMessage);
   };
+
+  const onChange = (username) => {
+    setUsername(username)
+  }
+
+  // const update = {
+  //   displayName: `${username}`
+  // }
+  
 
   return (
     <SafeAreaView
@@ -62,7 +71,7 @@ function SignUpScreen({ navigation }) {
         <PingIcon size={heightPercentageToDP(20)} color={colors.primary} style={styles.logo} />
         <Spacer height={6.5} />
 
-        <UserNameInput control={control} errors={errors} />
+        <UserNameInput control={control} errors={errors} onChangeText={onChange} value={username}/>
         <EmailInput control={control} errors={errors} />
         <PasswordInput control={control} errors={errors} />
        

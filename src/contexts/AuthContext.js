@@ -78,6 +78,8 @@ export function AuthProvider({ children }) {
           handleFailure()(errorMessage);
         }
       });
+    
+      
     // const credential = await firebase.auth.EmailAuthProvider.credential(data.email, data.password);
     // await firebase
     //   .auth()
