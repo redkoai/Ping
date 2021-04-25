@@ -21,6 +21,7 @@ import firebase from 'firebase';
 import RetrieveData from "../../../util/GetItemInStorage";
 import LoginChecker from "../../../util/validators/LoginChecker";
 import add from 'ping/assets/invites/adds.png';
+import { colors, textStyles } from 'ping/src/styles/styles';
 import { actuatedNormalize } from "ping/util/fontScaler";
 import 'firebase/firestore'
 
@@ -289,7 +290,7 @@ function Accountsone({}) {
             width :widthPercentageToDP('30'), 
             resizeMode:'contain',
             marginTop: heightPercentageToDP('-7'), 
-            left: heightPercentageToDP('32'),
+            left: widthPercentageToDP('70'),
             
             }} />
             </TouchableOpacity>

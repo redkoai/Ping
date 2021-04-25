@@ -8,6 +8,8 @@ import AuthContext from 'ping/src/contexts/AuthContext';
 import firebase from 'firebase';
 import 'firebase/firestore'
 import CustomButton from 'ping/src/components/inputs/CustomButton';
+import { colors, textStyles } from 'ping/src/styles/styles';
+import { actuatedNormalize } from "ping/util/fontScaler";
 
 const styles= StyleSheet.create({
     container: {
@@ -82,6 +84,7 @@ function addFriends({ }) {
                 placeholderTextColor = {"black"}
                 onChangeText={updateSearch}
                 value={search}
+                style={[textStyles.normalRegular], {fontSize:actuatedNormalize(13)}}
             />
             <View style={styles.container}>
                 <Text>{foundUser.email}</Text>
