@@ -172,13 +172,17 @@ function Settings({}) {
             
             }} />
         <Spacer height={2}  />
-         <TouchableOpacity  style={{left: heightPercentageToDP('4.5')}}>     
-        <CustomButton
+
+         <View style={{left: heightPercentageToDP('4.5')}}>    
+        <CustomButton 
           text="Create a new event"
           primary
           shadow
+          onPress={() => { 
+            navigation.navigate('NewInvite')}}
         />
-        </TouchableOpacity> 
+        
+        </View> 
         
         {/* <TouchableOpacity  style={{left: heightPercentageToDP('3.5')}}>     
         <CustomButton

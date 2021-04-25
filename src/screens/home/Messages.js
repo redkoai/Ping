@@ -139,7 +139,7 @@ function Messages({}) {
             <TouchableOpacity onPress={() => { 
                 navigation.navigate('CreateNewMessage')
             }}>
-                <Image source={newMessageBtn} style={{height: heightPercentageToDP('7'), width :widthPercentageToDP('70'), marginTop: heightPercentageToDP('5'), resizeMode:'contain', left:heightPercentageToDP('0') }} />
+                 <Image source={newMessageBtn} style={{height: heightPercentageToDP('10'), width :widthPercentageToDP('80'), marginTop: heightPercentageToDP('5'), resizeMode:'contain', left:widthPercentageToDP('9') }} />
             </TouchableOpacity>
 
             {/* <TouchableOpacity style={{alignContent:'center',marginLeft:widthPercentageToDP(10)}} onPress={() => { 
@@ -190,7 +190,7 @@ function Messages({}) {
             <TouchableOpacity onPress={() => { 
                 navigation.navigate('CreateNewMessage')
             }}>
-                <Image source={newMessageBtn} style={{height: heightPercentageToDP('7'), width :widthPercentageToDP('70'), marginTop: heightPercentageToDP('5'), resizeMode:'contain', left:heightPercentageToDP('0') }} />
+                <Image source={newMessageBtn} style={{height: heightPercentageToDP('10'), width :widthPercentageToDP('80'), marginTop: heightPercentageToDP('5'), resizeMode:'contain', left:widthPercentageToDP('9') }} />
             </TouchableOpacity>
 
               {/* <TouchableOpacity style={{alignContent:'center',marginLeft:widthPercentageToDP(10)}} onPress={() => { 

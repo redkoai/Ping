@@ -16,7 +16,7 @@ import LoginChecker from "../../../util/validators/LoginChecker";
 import CustomText from 'ping/src/components/CustomText';
 import { colors, textStyles } from 'ping/src/styles/styles';
 import AuthContext from 'ping/src/contexts/AuthContext';
-import { actuatedNormalize } from "../../../util/fontScaler";
+import { actuatedNormalize } from "ping/util/fontScaler";
 import profileIm from "ping/assets/NavBarAssets/prof.png"
 import CustomButton from 'ping/src/components/inputs/CustomButton';
 import giffy from '../../../assets/homeScreen/circle.gif'
@@ -281,16 +281,17 @@ function HomeScreenEmpty({}) {
 
   }
 </ScrollView>
-        <TouchableOpacity  style={{left: heightPercentageToDP('3.5'), marginBottom:widthPercentageToDP(5)}}  onPress={() => { 
-    navigation.navigate('NewInvite')
-
-}}>     
-        <CustomButton
+      
+         <View style={{left: heightPercentageToDP('3.5'), marginBottom:widthPercentageToDP(5)}}>    
+        <CustomButton 
           text="Create a new event"
           primary
           shadow
+          onPress={() => { 
+            navigation.navigate('NewInvite')}}
         />
-        </TouchableOpacity> 
+        </View> 
+
         
         {/* <TouchableOpacity  style={{left: heightPercentageToDP('2.5')}} onPress={() => { 
     navigation.navigate('Account', {screen: " Accountsone"})
@@ -316,16 +317,18 @@ function HomeScreenEmpty({}) {
 </View>
                     <Image source={emptyPic} style={{height: heightPercentageToDP('40'), width :widthPercentageToDP('85'), marginTop: heightPercentageToDP('0'), resizeMode:'contain' }} />
 
-                    <TouchableOpacity  style={{left: heightPercentageToDP('1'), marginBottom:widthPercentageToDP(5), marginTop:widthPercentageToDP(30)}}  onPress={() => { 
-    navigation.navigate('NewInvite')
-
-}}>     
-        <CustomButton
+                    
+  
+      <View style={{left: heightPercentageToDP('1'), marginBottom:widthPercentageToDP(5), marginTop:widthPercentageToDP(30)}} >    
+        <CustomButton 
           text="Create a new event"
           primary
           shadow
+          onPress={() => { 
+            navigation.navigate('NewInvite')}}
         />
-        </TouchableOpacity> 
+        </View> 
+
                         {/* <TouchableOpacity onPress={() => { 
                             navigation.navigate('NewInvite')
         

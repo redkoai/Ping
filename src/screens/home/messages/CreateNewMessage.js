@@ -7,6 +7,8 @@ import {SearchBar} from "react-native-elements"
 import AuthContext from 'ping/src/contexts/AuthContext';
 import firebase from 'firebase';
 import CustomButton from 'ping/src/components/inputs/CustomButton';
+import { colors, textStyles } from 'ping/src/styles/styles';
+import { actuatedNormalize } from "ping/util/fontScaler";
 import 'firebase/firestore'
 
 
@@ -89,6 +91,8 @@ function CreateNewMessage({ }) {
     console.log(search)
     return(
         <View>
+
+{/* <Text style={[textStyles.normalBold,{left:heightPercentageToDP('25'),marginTop: heightPercentageToDP('-22')}]}>{event.startdate}</Text> */}
             
             <SearchBar
                 placeholder="Search for user to mesage..."
@@ -101,6 +105,8 @@ function CreateNewMessage({ }) {
                 placeholderTextColor = {"black"}
                 onChangeText={updateSearch}
                 value={search}
+                style={[textStyles.normalRegular], {fontSize:actuatedNormalize(13)}}
+                
             />
             <View style={styles.container}>
                 <Text>{foundUser.username}</Text>
@@ -113,7 +119,7 @@ function CreateNewMessage({ }) {
                 }})
             }}>
 
-            <Image source={newMessageBtn} style={{height: heightPercentageToDP('7'), width :widthPercentageToDP('70'), marginTop: heightPercentageToDP('5'), resizeMode:'contain', left:heightPercentageToDP('0') }} />
+            <Image source={newMessageBtn} style={{height: heightPercentageToDP('7'), width :widthPercentageToDP('70'), marginTop: heightPercentageToDP('5'), resizeMode:'contain', left:heightPercentageToDP('2.5') }} />
                 
                 {/* <CustomButton
                 text="Create a new message"

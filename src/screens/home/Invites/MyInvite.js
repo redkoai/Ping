@@ -11,6 +11,7 @@ import CalendarIcon from 'ping/src/icons/CalendarIcon';
 import LocationNearMeIcon from 'ping/src/icons/LocationNearMeIcon';
 import { Entypo, MaterialIcons, MaterialCommunityIcons  } from '@expo/vector-icons'; 
 import ReactRoundedImage from "react-rounded-image";
+import { actuatedNormalize } from "ping/util/fontScaler";
 // import MyPhoto from 'ping/assets/createnew/MyInvite/men.jpg';
 import CustomText from 'ping/src/components/CustomText';
 import CustomTextInput from 'ping/src/components/inputs/CustomTextInput';
@@ -34,9 +35,7 @@ function MyInvite({navigation, route }) {
   });
 
  
-  const onSubmit = () => {
-    navigation.navigate('SecretCode');
-  };
+
 
 
   //TODO: PULL WITH INVITE ID, AUTOMATICALLY ADD TO CALENDAR SENT INVITE 
@@ -88,7 +87,7 @@ function MyInvite({navigation, route }) {
     return (
       <KeyboardAwareScrollView
         style={{ flex: 1, backgroundColor: 'white' }}
-        contentContainerStyle={{ justifyContent: 'center', alignItems: 'center' }}
+        contentContainerStyle={{ alignItems: 'space-evenly' }}
       >
         <StatusBar backgroundColor={colors.primary} />
         <View
@@ -127,7 +126,7 @@ function MyInvite({navigation, route }) {
           marginTop: heightPercentageToDP('3'),
           left:heightPercentageToDP('1')
           }}>
-          <CustomButton text="Secret Code" narrow primary onPress={handleSubmit(onSubmit)} />
+          <CustomButton text="Secret Code" narrow primary onPress={() => { navigation.navigate('SecretCode')}}/>
           </View>
 
           <TouchableOpacity >
@@ -137,10 +136,10 @@ function MyInvite({navigation, route }) {
           resizeMode:'contain',
           marginTop: heightPercentageToDP('-8'),
           left:heightPercentageToDP('32')}}>
-          <Text style={[textStyles.bigBold,{ color: colors.primary }]}>Edit</Text>
+          {/* <Text style={[textStyles.bigBold,{ color: colors.primary }]}>Edit</Text>
           <View style={{marginTop: heightPercentageToDP('-3.5'),left:heightPercentageToDP('5')}}>
           <MaterialIcons name="edit" size={32} color="#A6ACE9" />
-          </View> 
+          </View>  */}
           </View>
           </TouchableOpacity>
 
@@ -149,21 +148,22 @@ function MyInvite({navigation, route }) {
             style={{
                 borderBottomColor: '#E5E5E5',
                 borderBottomWidth: 1,
+                width:widthPercentageToDP('100'),
             }}
             />
 
-        <Spacer height={3} />
+        
 
-        <View style={{ 
+        {/* <View style={{ 
           height: heightPercentageToDP('10'),
           width :widthPercentageToDP('50'), 
           resizeMode:'contain',
           marginTop: heightPercentageToDP('0'),
           left:heightPercentageToDP('25')}}>
           <Text style={[ { color: colors.darkGrey }]}>{event.startdate}</Text>
-          </View>
+          </View> */}
 
-        <View style={{left:heightPercentageToDP('1.5'),textAlign: 'center',marginTop: heightPercentageToDP('-6')}}>
+        <View style={{left:heightPercentageToDP('4'),textAlign: 'center',marginTop: heightPercentageToDP('1')}}>
           <Text style={[ { color: colors.darkGrey }]}>{event.description}</Text>
           </View>
 
@@ -207,7 +207,7 @@ function MyInvite({navigation, route }) {
           </View>
 
           <Spacer height={3} />
-
+{/* 
           <View >
           <Text style={[textStyles.bigSemiBold,{left:heightPercentageToDP('2')}]}>
            Photos
@@ -215,7 +215,7 @@ function MyInvite({navigation, route }) {
           <TouchableOpacity >
             <Text style={[textStyles.bigRegular, { color: colors.darkGrey }, {left:heightPercentageToDP('35'),marginTop: heightPercentageToDP('-3')}]}>See all</Text>
           </TouchableOpacity>
-          </View>
+          </View> */}
 
           {/* <View style={{left:heightPercentageToDP('2')}}>
           <Image
@@ -227,14 +227,14 @@ function MyInvite({navigation, route }) {
 
         <Spacer height={5} />
 
-        <View >
+        {/* <View >
           <Text style={[textStyles.bigSemiBold,{left:heightPercentageToDP('2')}]}>
            Guest List ( )
           </Text>
           <TouchableOpacity >
             <Text style={[textStyles.bigRegular, { color: colors.primary }, {left:heightPercentageToDP('28'),marginTop: heightPercentageToDP('-3')}]}>See all invites</Text>
           </TouchableOpacity>
-        </View>
+        </View> */}
 
         {/* <View style={{left:heightPercentageToDP('2')}}>
           <Image
@@ -265,12 +265,22 @@ function MyInvite({navigation, route }) {
         </View> */}
         </View>
         
+    
 
-
-          <Spacer height={5} />
-  
-          <View style={{ alignSelf: 'flex-end', marginLeft:'10%' }}>
+        
+          <View
+          style={{
+            flexDirection: 'row',
+            justifyContent: 'center',
+            marginLeft: widthPercentageToDP(0),
+          }}
+        >
+          <View style={{  marginLeft:widthPercentageToDP(2) }}>
+           <CustomButton  text="RSVP" narrow primary />
+           </View>
+          <View style={{  marginLeft:widthPercentageToDP(2) }}>
             <CustomButton text="Invite" narrow primary />
+          </View>
           </View>
   
           <Spacer height={2} />
