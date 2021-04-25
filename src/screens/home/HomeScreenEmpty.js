@@ -229,16 +229,17 @@ function HomeScreenEmpty({}) {
 
   }
 </ScrollView>
-        <TouchableOpacity  style={{left: heightPercentageToDP('3.5'), marginBottom:widthPercentageToDP(5)}}  onPress={() => { 
-    navigation.navigate('NewInvite')
-
-}}>     
-        <CustomButton
+      
+         <View style={{left: heightPercentageToDP('3.5'), marginBottom:widthPercentageToDP(5)}}>    
+        <CustomButton 
           text="Create a new event"
           primary
           shadow
+          onPress={() => { 
+            navigation.navigate('NewInvite')}}
         />
-        </TouchableOpacity> 
+        </View> 
+
         
         {/* <TouchableOpacity  style={{left: heightPercentageToDP('2.5')}} onPress={() => { 
     navigation.navigate('Account', {screen: " Accountsone"})
@@ -264,16 +265,18 @@ function HomeScreenEmpty({}) {
 </View>
                     <Image source={emptyPic} style={{height: heightPercentageToDP('40'), width :widthPercentageToDP('85'), marginTop: heightPercentageToDP('0'), resizeMode:'contain' }} />
 
-                    <TouchableOpacity  style={{left: heightPercentageToDP('1'), marginBottom:widthPercentageToDP(5), marginTop:widthPercentageToDP(30)}}  onPress={() => { 
-    navigation.navigate('NewInvite')
-
-}}>     
-        <CustomButton
+                    
+  
+      <View style={{left: heightPercentageToDP('1'), marginBottom:widthPercentageToDP(5), marginTop:widthPercentageToDP(30)}} >    
+        <CustomButton 
           text="Create a new event"
           primary
           shadow
+          onPress={() => { 
+            navigation.navigate('NewInvite')}}
         />
-        </TouchableOpacity> 
+        </View> 
+
                         {/* <TouchableOpacity onPress={() => { 
                             navigation.navigate('NewInvite')
         

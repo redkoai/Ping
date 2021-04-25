@@ -9,17 +9,16 @@ import {
   Text,
   Linking,
 } from "react-native";
-// import { textStyles, colors } from "redvest/util/styles";
 import { widthPercentageToDP, heightPercentageToDP } from "../../../../util/scaler.js";
 import { actuatedNormalize } from "../../../../util/fontScaler";
 import { enableScreens } from "react-native-screens";
 import { Dimensions } from "react-native";
-//import alpacaApi from '../services/alpaca'
 import { SafeAreaView } from "react-native-safe-area-context";
 import { TextInput } from "react-native-gesture-handler";
 import React, {useContext, useEffect, useState} from "react";
 import AuthContext from 'ping/src/contexts/AuthContext';
 import CustomButton from 'ping/src/components/inputs/CustomButton';
+import { colors, textStyles } from 'ping/src/styles/styles';
 
 
 const chartConfig = {
@@ -60,193 +59,51 @@ function Settings() {
         >
           <View
             style={{
-              flexDirection: "row",
+              flexDirection: "column",
               width: "100%",
               justifyContent: "center",
               marginTop: widthPercentageToDP(1),
             }}
           >
-            <Text
-              style={{
-                marginLeft: "13%",
-                marginTop: "-10%",
-                fontSize: actuatedNormalize(22),
-              }}
-            >
-              Settings and Information
-            </Text>
+ 
+<Text style={[textStyles.bigBold,{fontSize:actuatedNormalize(20), left:heightPercentageToDP('7.5'),marginBottom:heightPercentageToDP('2')} ]}>Settings & Information</Text>
+
+
+<View style={{ flexDirection: 'row', justifyContent: 'space-between',marginTop:widthPercentageToDP(3)}}>
+<Text style={[textStyles.bigBold,{left:heightPercentageToDP('2'),marginBottom:heightPercentageToDP('2')} ]}>Terms and Conditions</Text>
+<TouchableOpacity onPress={() => { 
+    navigation.navigate("Events", { screen: "Events" })
+
+}}>
+<Text style={[textStyles.smallSemiBold,{color:'gray', fontSize:actuatedNormalize(12),left:heightPercentageToDP('-3')} ]}>Read</Text>
+</TouchableOpacity>
+</View>
+<View style={{ flexDirection: 'row', justifyContent: 'space-between',marginTop:widthPercentageToDP(3)}}>
+<Text style={[textStyles.bigBold,{left:heightPercentageToDP('2'),marginBottom:heightPercentageToDP('2')} ]}>Privacy Policy</Text>
+<TouchableOpacity onPress={() => { 
+    navigation.navigate("Events", { screen: "Events" })
+
+}}>
+<Text style={[textStyles.smallSemiBold,{color:'gray', fontSize:actuatedNormalize(12),left:heightPercentageToDP('-3')} ]}>Read</Text>
+</TouchableOpacity>
+</View>
+{/* <View style={{ flexDirection: 'row', justifyContent: 'space-between',marginTop:widthPercentageToDP(3)}}>
+<Text style={[textStyles.bigBold,{left:heightPercentageToDP('2'),marginBottom:heightPercentageToDP('2')} ]}>Terms and Conditions</Text>
+<TouchableOpacity onPress={() => { 
+    navigation.navigate("Events", { screen: "Events" })
+
+}}>
+<Text style={[textStyles.smallSemiBold,{color:'gray', fontSize:actuatedNormalize(12),left:heightPercentageToDP('-3')} ]}>Read</Text>
+</TouchableOpacity>
+</View> */}
           </View>
 
           <ScrollView
             style={{ height: "200%", flex: 1 }}
             contentContainerStyle={{ alignItems: "center" }}
           >
-            <View
-              style={{
-                flex: 0.03,
-                flexDirection: "column",
-                width: "100%",
-                justifyContent: "center",
-                padding: 15,
-                marginLeft: "3%",
-              }}
-            >
-              {/* <Image
-                  source={cashBalance}
-                  style={{
-                    resizeMode: "contain",
-                    width: widthPercentageToDP(85),
-                    height: heightPercentageToDP(7),
-                  }}
-                />
-                    <TouchableOpacity
-                onPress={() => navigation.navigate('Home', {screen: "tutorial"})}>
-                <Image
-                  source={tut}
-                  style={{
-                    resizeMode: "contain",
-                    width: widthPercentageToDP(85),
-                    height: heightPercentageToDP(5),
-                  }}
-                />
-              </TouchableOpacity>
-        
-        <TouchableOpacity
-                onPress={() => Linking.openURL("https://alpaca.markets/docs/trading-on-alpaca/paper-trading/")}>
-                <Image
-                  source={rule}
-                  style={{
-                    resizeMode: "contain",
-                    width: widthPercentageToDP(85),
-                    height: heightPercentageToDP(5),
-                  }}
-                />
-              </TouchableOpacity>
-
-              <TouchableOpacity
-                 onPress={() => Linking.openURL("https://alpaca.markets/docs/about-us/")}>
-                <Image
-                  source={alp}
-                  style={{
-                    resizeMode: "contain",
-                    width: widthPercentageToDP(85),
-                    height: heightPercentageToDP(5),
-                  }}
-                />
-              </TouchableOpacity>
-
-              <TouchableOpacity
-                onPress={() => navigation.navigate('Invest', {screen: "OrderTypeInfo"})}
-              >
-                <Image
-                  source={ot}
-                  style={{
-                    resizeMode: "contain",
-                    width: widthPercentageToDP(85),
-                    height: heightPercentageToDP(5),
-                  }}
-                />
-              </TouchableOpacity>
-     
-       
-              <TouchableOpacity
-                onPress={() => navigation.navigate("manualAuto")}
-              >
-                <Image
-                  source={bp}
-                  style={{
-                    resizeMode: "contain",
-                    width: widthPercentageToDP(85),
-                    height: heightPercentageToDP(5),
-                  }}
-                />
-              </TouchableOpacity>
-
-              <TouchableOpacity
-                onPress={() => navigation.navigate('Invest', {screen: "TimeInForceInfo"})}
-              >
-                <Image
-                  source={tf}
-                  style={{
-                    resizeMode: "contain",
-                    width: widthPercentageToDP(85),
-                    height: heightPercentageToDP(5),
-                  }}
-                />
-              </TouchableOpacity>
-              {/* <TouchableOpacity
-                onPress={() => navigation.navigate("Dashboard")}
-              >
-                <Image
-                  source={po}
-                  style={{
-                    resizeMode: "contain",
-                    width: widthPercentageToDP(85),
-                    height: heightPercentageToDP(5),
-                  }}
-                />
-              </TouchableOpacity> */}
-              {/* <TouchableOpacity 
-                onPress={alpacaAuthStart}>
-                <Image
-                  source={au}
-                  style={{
-                    resizeMode: "contain",
-                    width: widthPercentageToDP(85),
-                    height: heightPercentageToDP(5),
-                  }}
-                />
-              </TouchableOpacity>
-            
-       
+ <View style={{marginTop:heightPercentageToDP(40)}}>    
              
-                <Image
-                  source={lmv}
-                  style={{
-                    resizeMode: "contain",
-                    width: widthPercentageToDP(85),
-                    height: heightPercentageToDP(9),
-                  }}
-                />
-       
-           
-           
-        
-
-              <TouchableOpacity
-                onPress={() => Linking.openURL("https://redvest.app")}>
-              
-                <Image
-                  source={pv}
-                  style={{
-                    resizeMode: "contain",
-                    width: widthPercentageToDP(85),
-                    height: heightPercentageToDP(5),
-                  }}
-                />
-              </TouchableOpacity>
-              <TouchableOpacity
-                onPress={() => Linking.openURL("https://redvest.app/terms")}>
-                <Image
-                  source={tc}
-                  style={{
-                    resizeMode: "contain",
-                    width: widthPercentageToDP(85),
-                    height: heightPercentageToDP(5),
-                  }}
-                />
-              </TouchableOpacity>
-              <TouchableOpacity
-                onPress={() => Linking.openURL("https://redvest.app/privacy-policy")}>
-                <Image
-                  source={pp}
-                  style={{
-                    resizeMode: "contain",
-                    width: widthPercentageToDP(85),
-                    height: heightPercentageToDP(5),
-                  }}
-                />
-              </TouchableOpacity> */}
               {!skipped && (
                 <CustomButton
                   text="Sign Out"
