@@ -45,11 +45,11 @@ const CreatePicker = (props) => {
         <Image
           source={upload}
           style={{
-            height: heightPercentageToDP('20'),
+            height: heightPercentageToDP('23'),
             width: widthPercentageToDP('95'),
             marginTop: heightPercentageToDP(2),
             marginBottom: heightPercentageToDP(2),
-            left: heightPercentageToDP('-12.5'),
+            left: heightPercentageToDP('-4'),
             resizeMode: 'contain',
           }}
         />
