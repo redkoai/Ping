@@ -63,14 +63,10 @@ function Messages({}) {
 
 
     const queryUserHistory = () => {
-      console.log("queryUserHistory")
+      console.log("queryUserHistory ")
       let userHistory = {}
       db.child(`${user.uid}/messages/`).on("child_added", function(snapshot) {
-        // console.log("snapshot = ", snapshot)
-        // console.log("snapshot key = ", snapshot.key)
-        // console.log("snapshot val = ", Object.keys(snapshot.val())[0])
-        // console.log("snapshot user id =", snapshot.val()["-MZ9UNyCVaJAZkhAlxo-"].user._id)
-        console.log("snapshot val user._id", snapshot.val()[`${Object.keys(snapshot.val())[0]}`].user._id)
+        // console.log("snapshot val user._id", snapshot.val()[`${Object.keys(snapshot.val())[0]}`].user._id)
           if (snapshot.val()[`${Object.keys(snapshot.val())[0]}`].user._id == user.uid) {
               console.log("found user", snapshot.val())
               userHistory[snapshot.val()[`${Object.keys(snapshot.val())[0]}`].userTo.email] = {
@@ -141,15 +137,6 @@ function Messages({}) {
             }}>
                  <Image source={newMessageBtn} style={{height: heightPercentageToDP('10'), width :widthPercentageToDP('80'), marginTop: heightPercentageToDP('5'), resizeMode:'contain', left:widthPercentageToDP('9') }} />
             </TouchableOpacity>
-
-            {/* <TouchableOpacity style={{alignContent:'center',marginLeft:widthPercentageToDP(10)}} onPress={() => { 
-                navigation.navigate('CreateNewMessage') }}>
-                    <CustomButton
-                        text="Create a new message"
-                        primary
-                        shadow
-                      />
-            </TouchableOpacity>  */}
             
             
             <TouchableOpacity>

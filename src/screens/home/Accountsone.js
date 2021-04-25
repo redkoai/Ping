@@ -20,6 +20,8 @@ import AuthContext from 'ping/src/contexts/AuthContext';
 import firebase from 'firebase';
 import RetrieveData from "../../../util/GetItemInStorage";
 import LoginChecker from "../../../util/validators/LoginChecker";
+import add from 'ping/assets/invites/adds.png';
+import { actuatedNormalize } from "ping/util/fontScaler";
 import 'firebase/firestore'
 
 
@@ -100,6 +102,7 @@ function Accountsone({}) {
     const [search, setSearch] = useState([])
 
     const [foundUser, setFoundUser] = useState({
+        username: null,
         email:null,
         uid:null
     })
@@ -108,25 +111,62 @@ function Accountsone({}) {
         setSearch(search)
     }
 
-    const searchUser = (email) => {
-        let foundUser = {email:null, uid:null, found:false}
-        db.ref.orderByKey().on("child_added", function(snapshot) {
-            if (snapshot.val().email == email) {
-                console.log("found user", snapshot.val())
-                foundUser = {email:snapshot.val().email, uid: snapshot.key, found:true}
-                return 
-            } 
-        })
-        return foundUser
-    }
+    // const searchUser = (email) => {
+    //     let foundUser = {email:null, uid:null, found:false}
+    //     db.ref.orderByKey().on("child_added", function(snapshot) {
+    //         if (snapshot.val().email == email) {
+    //             console.log("found user", snapshot.val())
+    //             foundUser = {email:snapshot.val().email, uid: snapshot.key, found:true}
+    //             return 
+    //         } 
+    //     })
+    //     return foundUser
+    // }
     // console.log(searchUser(search))
+
+    const searchUser = (username) => {
+      let foundUser = { username: null, email: null, uid: null, found: false };
+      db.ref.orderByKey().on("child_added", function (snapshot) {
+        if (snapshot.val().username == username) {
+          // setButton(false)
+          // setButtonAdd(false)
+          console.log("found user", snapshot.val());
+          foundUser = {
+            username: snapshot.val().username,
+            email: snapshot.val().email,
+            uid: snapshot.key,
+            found: true,
+          };
+          return;
+        }
+      });
+      return foundUser;
+    };
+
+    const addFriend = () => {
+      // db.child(foundUser.uid);
+      // Adding user to foundUser's (email that was searched) friends list
+      // db.child(`${foundUser.uid}/Friends/${user.uid}`).set({username: user.username, email: user.email});
+      // Check if friend already exists:
+
+      db.child(`${user.uid}/Friends/${foundUser.uid}`).set({username: foundUser.username, email: foundUser.email});
+          console.log("friend added!")
+    //   db.child(`${user.uid}/Friends`).on('child_added', function(snapshot) {
+    //     if (snapshot.key == foundUser.uid) {
+    //       console.log('this friend has already been added')
+    //     } else {
+    //       db.child(`${user.uid}/Friends/${foundUser.uid}`).set({username: foundUser.username, email: foundUser.email});
+    //       console.log("friend added!")
+    //     }
+    // })
+    };
 
     useEffect(() => {
         let foundUser = searchUser(search)
         console.log("foundUser (use effect) = ", foundUser)
         if (foundUser.found) {
-            setFoundUser({email:foundUser.email,uid:foundUser.uid})
-            console.log("setting found user state")
+          setFoundUser({ username: foundUser.username, email: foundUser.email, uid: foundUser.uid });
+          console.log("setting found user state");
         }
         
       }, [search]);
@@ -173,30 +213,48 @@ function Accountsone({}) {
 
           <ImageBackground source={emptyHome} style={styles.homeEmpty}>
             
-  {isLoggedIn ? (
-          <View style={{marginTop:'-110%'}}>
-            
-            <SearchBar
-                placeholder="Search for users..."
-                autoCapitalize = "none"
-                containerStyle = {{backgroundColor: "white"}}
-                inputStyle = {{color: "black"}}
-                inputContainerStyle = {{backgroundColor: "white"}}
-                searchIcon = {{color: "black"}}
-                clearIcon = {{color: "black"}}
-                placeholderTextColor = {"black"}
-                onChangeText={updateSearch}
-                value={search}
-            />
-            <View style={styles.container}>
-                <Text>{foundUser.email}</Text>
-            </View>
-            <TouchableOpacity onPress={() => { 
-                navigation.navigate('Chat', { OtherUserInfo: {
-                    _id: foundUser.uid,
-                    email: foundUser.email
-                }})
-            }}>
+          {isLoggedIn ? (
+                  <View style={{marginTop:'-110%'}}>
+                    
+                    <SearchBar
+                        placeholder="Search for users..."
+                        autoCapitalize = "none"
+                        containerStyle = {{backgroundColor: "white"}}
+                        inputStyle = {{color: "black"}}
+                        inputContainerStyle = {{backgroundColor: "white"}}
+                        searchIcon = {{color: "black"}}
+                        clearIcon = {{color: "black"}}
+                        placeholderTextColor = {"black"}
+                        onChangeText={updateSearch}
+                        value={search}
+                    />
+                    <View style={styles.container}>
+                    {
+                      foundUser.email != null ?
+                      <View style={styles.container}>
+                      <View style={{flexDirection:'row'}}>
+                        <Text  style={{marginLeft:widthPercentageToDP('10'), fontSize:actuatedNormalize(15), marginTop: heightPercentageToDP('3'), }}>
+                            {foundUser.username}
+                        </Text>
+                        <TouchableOpacity onPress={addFriend}>
+                          <Image source={add}  style={{height: heightPercentageToDP('10'), width :widthPercentageToDP('10'), marginTop: heightPercentageToDP('0'), marginLeft:widthPercentageToDP('2'), resizeMode:'contain' }} />
+                        </TouchableOpacity>
+                      </View>
+                    </View>
+                    :
+                    null
+                    }
+                        {/* <Text>{foundUser.username}</Text>
+                        <TouchableOpacity onPress={addFriend}>
+                          <Image source={add}  style={{height: heightPercentageToDP('10'), width :widthPercentageToDP('10'), marginTop: heightPercentageToDP('0'), marginLeft:widthPercentageToDP('2'), resizeMode:'contain' }} />
+                        </TouchableOpacity> */}
+                    </View>
+                    <TouchableOpacity onPress={() => { 
+                        navigation.navigate('Chat', { OtherUserInfo: {
+                            _id: foundUser.uid,
+                            email: foundUser.email
+                        }})
+                    }}>
                 <CustomButton
           text="Add friends"
           shadow
