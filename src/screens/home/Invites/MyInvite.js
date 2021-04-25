@@ -11,6 +11,7 @@ import CalendarIcon from 'ping/src/icons/CalendarIcon';
 import LocationNearMeIcon from 'ping/src/icons/LocationNearMeIcon';
 import { Entypo, MaterialIcons, MaterialCommunityIcons  } from '@expo/vector-icons'; 
 import ReactRoundedImage from "react-rounded-image";
+import { actuatedNormalize } from "ping/util/fontScaler";
 // import MyPhoto from 'ping/assets/createnew/MyInvite/men.jpg';
 import CustomText from 'ping/src/components/CustomText';
 import CustomTextInput from 'ping/src/components/inputs/CustomTextInput';

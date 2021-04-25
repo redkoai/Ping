@@ -16,7 +16,7 @@ import LoginChecker from "../../../util/validators/LoginChecker";
 import CustomText from 'ping/src/components/CustomText';
 import { colors, textStyles } from 'ping/src/styles/styles';
 import AuthContext from 'ping/src/contexts/AuthContext';
-import { actuatedNormalize } from "../../../util/fontScaler";
+import { actuatedNormalize } from "ping/util/fontScaler";
 import profileIm from "ping/assets/NavBarAssets/prof.png"
 import CustomButton from 'ping/src/components/inputs/CustomButton';
 import giffy from '../../../assets/homeScreen/circle.gif'
