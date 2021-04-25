@@ -20,6 +20,8 @@ import AuthContext from 'ping/src/contexts/AuthContext';
 import firebase from 'firebase';
 import RetrieveData from "../../../util/GetItemInStorage";
 import LoginChecker from "../../../util/validators/LoginChecker";
+import { colors, textStyles } from 'ping/src/styles/styles';
+import { actuatedNormalize } from "ping/util/fontScaler";
 import 'firebase/firestore'
 
 
@@ -174,7 +176,7 @@ function Accountsone({}) {
           <ImageBackground source={emptyHome} style={styles.homeEmpty}>
             
   {isLoggedIn ? (
-          <View style={{marginTop:'-110%'}}>
+          <View style={{marginTop:heightPercentageToDP(-45)}}>
             
             <SearchBar
                 placeholder="Search for users..."
@@ -187,6 +189,7 @@ function Accountsone({}) {
                 placeholderTextColor = {"black"}
                 onChangeText={updateSearch}
                 value={search}
+                style={[textStyles.normalRegular], {fontSize:actuatedNormalize(13)}}
             />
             <View style={styles.container}>
                 <Text>{foundUser.email}</Text>
@@ -231,7 +234,7 @@ function Accountsone({}) {
             width :widthPercentageToDP('30'), 
             resizeMode:'contain',
             marginTop: heightPercentageToDP('-7'), 
-            left: heightPercentageToDP('32'),
+            left: widthPercentageToDP('70'),
             
             }} />
             </TouchableOpacity>

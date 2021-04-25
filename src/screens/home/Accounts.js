@@ -113,7 +113,7 @@ function Settings({}) {
             width :widthPercentageToDP('30'), 
             resizeMode:'contain',
             marginTop: heightPercentageToDP('2'), 
-            left: heightPercentageToDP('35'),
+            left: widthPercentageToDP('75'),
             
             }} />
             </TouchableOpacity>
