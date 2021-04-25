@@ -214,7 +214,7 @@ function HomeScreenEmpty({}) {
             <ImageBackground source={emptyHome} style={styles.homeEmpty}>
                  {isLoggedIn ? (
        
-<View style={{ flexDirection: 'column', marginLeft:'-10%',justifyContent: 'flex-end',marginTop:widthPercentageToDP(-43)}}>
+<View style={{ flexDirection: 'column', marginLeft:'3%',justifyContent: 'space-between', marginTop:widthPercentageToDP(-43)}}>
                         
 <View style={{ flexDirection: 'row', justifyContent: 'space-between',marginTop:widthPercentageToDP(45),marginBottom:heightPercentageToDP('1')}}>
 <Text style={[textStyles.bigBold,{left:heightPercentageToDP('0')} ]}>Home</Text>
@@ -223,7 +223,7 @@ function HomeScreenEmpty({}) {
                     navigation.navigate("Account", { screen: "SignIn" })
                   }
                 >
-<Image source={profileIm} style={{height: heightPercentageToDP('4'), width :widthPercentageToDP('8'), marginBottom: heightPercentageToDP('2'), resizeMode:'contain' , left:heightPercentageToDP('2')}} />
+<Image source={profileIm} style={{height: heightPercentageToDP('4'), width :widthPercentageToDP('8'), marginBottom: heightPercentageToDP('2'), resizeMode:'contain' , left:heightPercentageToDP('-2')}} />
 </TouchableOpacity>
 </View>
 
@@ -236,7 +236,7 @@ function HomeScreenEmpty({}) {
     navigation.navigate("Events", { screen: "Events" })
 
 }}>
-<Text style={[textStyles.smallSemiBold,{color:'gray', fontSize:actuatedNormalize(12),left:heightPercentageToDP('3')} ]}>See all</Text>
+<Text style={[textStyles.smallSemiBold,{color:'gray', fontSize:actuatedNormalize(12),left:heightPercentageToDP('-3')} ]}>See all</Text>
 </TouchableOpacity>
 </View>
 <ScrollView  horizontal={true} style={{ flexDirection: 'row',marginTop:widthPercentageToDP(3)}}>
@@ -247,7 +247,7 @@ function HomeScreenEmpty({}) {
     Object.keys(myEvents).length == 0 ? 
     <View>
       <Text style={[textStyles.smallSemiBold,{color:'gray', fontSize:actuatedNormalize(12)}]}>You don’t have any events scheduled...</Text>
-      <Image source={giffy} style={{height: heightPercentageToDP('17'), width :widthPercentageToDP('85'), marginTop: heightPercentageToDP('0'), resizeMode:'contain' }} />
+      <Image source={giffy} style={{height: heightPercentageToDP('17'), width :widthPercentageToDP('85'), marginBottom: heightPercentageToDP('5'), resizeMode:'contain' }} />
     </View> 
     :
     <View>
@@ -262,7 +262,7 @@ function HomeScreenEmpty({}) {
    navigation.navigate("Events", { screen: "Events" })
 
 }}>
-<Text style={[textStyles.smallSemiBold,{color:'gray', fontSize:actuatedNormalize(12),left:heightPercentageToDP('3')} ]}>See all</Text>
+<Text style={[textStyles.smallSemiBold,{color:'gray', fontSize:actuatedNormalize(12),left:heightPercentageToDP('-3')} ]}>See all</Text>
 </TouchableOpacity>
 </View>
 <ScrollView  horizontal={true} style={{ flexDirection: 'row',marginTop:widthPercentageToDP(3)}}>
