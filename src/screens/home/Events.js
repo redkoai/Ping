@@ -32,7 +32,7 @@ function Events({navigation, route}) {
   // const navigation = useNavigation()
 
   const [items, setItems] = useState({})
-  const [eventID, setEventID] = useState()
+  // const [eventID, setEventID] = useState()
 
 
   ///////////////////////////////////////
@@ -66,7 +66,7 @@ function Events({navigation, route}) {
       setTimeout(() => {
         db.child(`${user.uid}/Events`).on("child_added", function(snapshot) {
           console.log("snapshot key= ", snapshot.key)
-          setEventID(snapshot.key)
+          // setEventID(snapshot.key)
           console.log("enddate = ", snapshot.val().enddate)
           let date = new Date(snapshot.val().enddate.replace('th', ''))
           console.log("date =", date.toDateString())
@@ -75,7 +75,8 @@ function Events({navigation, route}) {
           newItems[date.toISOString().split('T')[0]].push( {
             name: snapshot.val().event,
             height: Math.max(50, Math.floor(Math.random() * 150)),
-            info: snapshot
+            info: snapshot,
+            eventID: snapshot.key
           })
           
           console.log("newItems = ", newItems)
@@ -123,6 +124,7 @@ function Events({navigation, route}) {
     //   }
 
       renderItem = (item) => {
+        const eventID = item.eventID
         console.log("item =", item)
           return(
           <TouchableOpacity onPress={() => { 
