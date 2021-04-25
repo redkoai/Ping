@@ -63,28 +63,30 @@ function Messages({}) {
 
 
     const queryUserHistory = () => {
+      console.log("queryUserHistory")
       let userHistory = {}
-      db.child(`${user.uid}/messages/${user.uid}`).on("child_added", function(snapshot) {
-        console.log("snapshot = ", snapshot)
-        console.log("snapshot key = ", snapshot.key)
-        console.log("snapshot val = ", snapshot.val())
-        console.log("snapshot val user._id", snapshot.val().user._id)
-          // if (snapshot.val().user._id == user.uid) {
-          //     console.log("found user", snapshot.val())
-          //     userHistory[snapshot.val().userTo.email] = {
-          //       text: snapshot.val().text, 
-          //       timestamp: snapshot.val().timestamp,
-          //       _id: snapshot.val().userTo._id
-          //     }
-          // } 
-          // if (snapshot.val().userTo._id == user.uid) {
-          //   console.log("found user", snapshot.val())
-          //   userHistory[snapshot.val().user.email] = {
-          //     text: snapshot.val().text, 
-          //     timestamp: snapshot.val().timestamp,
-          //     _id: snapshot.val().user._id
-          //   }
-        // } 
+      db.child(`${user.uid}/messages/`).on("child_added", function(snapshot) {
+        // console.log("snapshot = ", snapshot)
+        // console.log("snapshot key = ", snapshot.key)
+        // console.log("snapshot val = ", Object.keys(snapshot.val())[0])
+        // console.log("snapshot user id =", snapshot.val()["-MZ9UNyCVaJAZkhAlxo-"].user._id)
+        console.log("snapshot val user._id", snapshot.val()[`${Object.keys(snapshot.val())[0]}`].user._id)
+          if (snapshot.val()[`${Object.keys(snapshot.val())[0]}`].user._id == user.uid) {
+              console.log("found user", snapshot.val())
+              userHistory[snapshot.val()[`${Object.keys(snapshot.val())[0]}`].userTo.email] = {
+                text: snapshot.val()[`${Object.keys(snapshot.val())[0]}`].text, 
+                timestamp: snapshot.val()[`${Object.keys(snapshot.val())[0]}`].timestamp,
+                _id: snapshot.val()[`${Object.keys(snapshot.val())[0]}`].userTo._id
+              }
+          } 
+          if (snapshot.val()[`${Object.keys(snapshot.val())[0]}`].userTo._id == user.uid) {
+            console.log("found user", snapshot.val())
+            userHistory[snapshot.val()[`${Object.keys(snapshot.val())[0]}`].user.email] = {
+              text: snapshot.val()[`${Object.keys(snapshot.val())[0]}`].text, 
+              timestamp: snapshot.val()[`${Object.keys(snapshot.val())[0]}`].timestamp,
+              _id: snapshot.val()[`${Object.keys(snapshot.val())[0]}`].user._id
+            }
+        } 
       })
       return userHistory
   }
@@ -93,7 +95,7 @@ function Messages({}) {
       setUserHistory(queryUserHistory())
     }, []);
 
-  console.log("user history =", userHistory)
+  console.log("user history = ", userHistory)
   const userHistoryLoop = Object.keys(userHistory).map((key) => {
     return (
       <Button title={key} onPress={() => { 
@@ -163,6 +165,7 @@ function Messages({}) {
           )
           : (
             <View>
+              <Text>Current Chats:</Text>
               {userHistoryLoop}
               <View 
             style={{ 
@@ -171,7 +174,7 @@ function Messages({}) {
                 marginTop:widthPercentageToDP(3)
                 }}>
 
-            <Image 
+            {/* <Image 
             source={emptyPic}
             style={{height: heightPercentageToDP('40'), 
               width :widthPercentageToDP('85'),
@@ -179,7 +182,7 @@ function Messages({}) {
               resizeMode:'contain', 
               left:heightPercentageToDP('5') 
               
-              }} />
+              }} /> */}
             
             </View>
 

@@ -34,6 +34,8 @@ function Chat({route, navigation }) {
             // db.child(`${user.uid}/messages/${user.uid}`).push(message)
             db.child(`${user.uid}/messages/${OtherUserInfo._id}`).push(message)
             db.child(`${OtherUserInfo._id}/messages/${user.uid}`).push(message)
+            // db.child(`${user.uid}/messages/`).push(message)
+            // db.child(`${OtherUserInfo._id}/messages/`).push(message)
         })
     }
 
@@ -51,6 +53,7 @@ function Chat({route, navigation }) {
     }
 
     const getMessage = (callback) => { // pass in a callback that adds the message to the page
+        // db.child(`${user.uid}/messages/${OtherUserInfo._id}`).on("child_added", snapshot => {
         db.child(`${user.uid}/messages/${OtherUserInfo._id}`).on("child_added", snapshot => {
             callback(parse(snapshot))
             // if (snapshot.val().user._id == user.uid && snapshot.val().userTo._id == OtherUserInfo._id){

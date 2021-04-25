@@ -99,7 +99,6 @@ function Events({navigation, route}) {
 
     // const loadItems = (day) => {
     //     setTimeout(() => {
-    //       console.log("poop3")
     //       for (let i = -15; i < 85; i++) {
     //         const time = day.timestamp + i * 24 * 60 * 60 * 1000;
     //         const strTime = timeToString(time);
@@ -124,6 +123,7 @@ function Events({navigation, route}) {
     //   }
 
       renderItem = (item) => {
+        console.log("item =", item)
           return(
           <TouchableOpacity onPress={() => { 
             console.log("eventID = ", eventID)

@@ -31,6 +31,8 @@ function HomeScreenEmpty({}) {
     const { user } = useContext(AuthContext);
     console.log("user = ", user)
 
+    const [eventID, setEventID] = useState()
+
 
     //////////////////////////
     //  Firebase query
@@ -49,6 +51,8 @@ function HomeScreenEmpty({}) {
       const myEvents = []
       const myInvites_obj = {}
       db.child(`${user.uid}/Events/`).on("child_added", function (snapshot) {
+        // setEventID(snapshot.key)
+        console.log("snapshot =", snapshot)
         // console.log("snapshot event = ", snapshot)
         // console.log("snapshot event cohost", snapshot.val()["co-host-0"])
         // console.log("user uid =", user.uid)
@@ -56,7 +60,7 @@ function HomeScreenEmpty({}) {
           console.log("event snapshot =", snapshot)
         } else {
           console.log("invite snapshot =", snapshot)
-          myInvites_obj[snapshot.val().event] = snapshot
+          myInvites_obj[snapshot.key] = snapshot
           console.log("my invites = ", myInvites_obj)
         }
       });
@@ -136,11 +140,22 @@ function HomeScreenEmpty({}) {
 
 
       const EventLoop = Object.keys(myEvents).map((key) => {
-        console.log(key)
+        const eventID = key
         return (
+          <TouchableOpacity onPress={() => { 
+            console.log("eventID =  ", eventID)
+            navigation.navigate('MyInvite', { eventID:eventID })
+        }}
+          style={{
+                marginRight: 10,
+                marginTop: 30,
+                padding: 10
+              }}>
           <View>
             <Text>{key}</Text>
           </View>
+          </TouchableOpacity>
+          
           
         )
       })
@@ -148,14 +163,51 @@ function HomeScreenEmpty({}) {
 
 
       const InviteLoop = Object.keys(myInvites).map((key) => {
-        console.log(key)
+        // console.log("invite loop key = ", key)
+        // const obj = JSON.stringify(myInvites[key])
+        // console.log("invite loop event =",  myInvites[key])
+        const eventID = key
         return (
+          <TouchableOpacity onPress={() => { 
+            console.log("eventID = ", eventID)
+            navigation.navigate('MyInvite', { eventID:eventID })
+        }}
+          style={{
+                marginRight: 10,
+                marginTop: 30,
+                padding: 10
+              }}>
           <View>
             <Text>{key}</Text>
           </View>
+          </TouchableOpacity>
+          
           
         )
       })
+
+
+      renderItem = (item) => {
+        return(
+        <TouchableOpacity onPress={() => { 
+          console.log("eventID = ", eventID)
+          navigation.navigate('MyInvite', { eventID:eventID })
+      }}
+        style={{
+              marginRight: 10,
+              marginTop: 30,
+              padding: 10
+            }}>
+              <Card >
+                  <Card.Content >
+                      <View style={{flexDirection:"row", justifyContent:"center"}}>
+                        <Text>{item.name}</Text>
+                      </View>
+                  </Card.Content>
+              </Card>
+          </TouchableOpacity>)
+
+    }
 
     return (
         <View style={{flex: 1}}>    
