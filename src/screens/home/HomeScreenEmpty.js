@@ -48,7 +48,7 @@ function HomeScreenEmpty({}) {
 
 
     const eventQuery = () => {
-      const myEvents = []
+      const myEvents_obj = {}
       const myInvites_obj = {}
       db.child(`${user.uid}/Events/`).on("child_added", function (snapshot) {
         // setEventID(snapshot.key)
@@ -58,6 +58,7 @@ function HomeScreenEmpty({}) {
         // console.log("user uid =", user.uid)
         if (snapshot.val()["co-host-0"] == user.uid) {
           console.log("event snapshot =", snapshot)
+          myEvents_obj[snapshot.key] = snapshot.val().event
         } else {
           console.log("invite snapshot =", snapshot)
           myInvites_obj[snapshot.key] = snapshot.val().event
@@ -66,7 +67,7 @@ function HomeScreenEmpty({}) {
       });
       // console.log("my invites =", myInvites)
       setMyInvites(myInvites_obj)
-      // setMyEvents(myEvents)
+      setMyEvents(myEvents_obj)
     }
 
 
@@ -152,7 +153,7 @@ function HomeScreenEmpty({}) {
                 padding: 10
               }}>
           <View>
-            <Text>{key}</Text>
+            <Text>{myEvents[key]}</Text>
           </View>
           </TouchableOpacity>
           
