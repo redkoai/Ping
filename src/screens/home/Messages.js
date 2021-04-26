@@ -18,7 +18,9 @@ import newMessageBtn from "ping/assets/newMessage.png"
 import StoreData from "../../../util/SaveItemInStorage";
 import RetrieveData from "../../../util/GetItemInStorage";
 import LoginChecker from "../../../util/validators/LoginChecker";
-
+import CustomButtonCopyLong from 'ping/src/components/inputs/CustomButtonCopyLong';
+import { colors, textStyles } from 'ping/src/styles/styles';
+import { actuatedNormalize } from "ping/util/fontScaler";
 
 
 function Messages({}) {
@@ -94,14 +96,32 @@ function Messages({}) {
   console.log("user history = ", userHistory)
   const userHistoryLoop = Object.keys(userHistory).map((key) => {
     return (
-      <Button title={key} onPress={() => { 
-        navigation.navigate('Chat', { OtherUserInfo: {
-            _id: userHistory[key]._id,
-            email: key
-        }})
-    }}>
-      {key}
-      </Button>
+    //   <Button title={key} onPress={() => { 
+    //     navigation.navigate('Chat', { OtherUserInfo: {
+    //         _id: userHistory[key]._id,
+    //         email: key
+    //     }})
+    // }}>
+    //   {key}
+    //   </Button>
+    <View
+    style={{ 
+        flexDirection: 'column', 
+        justifyContent: 'center',
+        marginLeft:widthPercentageToDP(0)
+        }}>
+<CustomButtonCopyLong
+text= {key}
+buttonSecondary
+shadow
+  onPress={() => { 
+    navigation.navigate('Chat', { OtherUserInfo: {
+        _id: userHistory[key]._id,
+        email: key
+    }})
+}}
+/>
+  </View>
     )
   })
 
@@ -118,7 +138,8 @@ function Messages({}) {
             style={{ 
                 flexDirection: 'column', 
                 justifyContent: 'center',
-                marginTop:widthPercentageToDP(3)
+                marginTop:widthPercentageToDP(3),
+             
                 }}>
 
             <Image 
@@ -151,9 +172,10 @@ function Messages({}) {
             </View>
           )
           : (
-            <View>
-              <Text>Current Chats:</Text>
+            <View style={{marginTop:heightPercentageToDP('2'),marginBottom:heightPercentageToDP('3')}}>
+              <Text style={[textStyles.bigRegular,{left:heightPercentageToDP('0'), fontSize:actuatedNormalize(12)} ]}>Current Chats:</Text>
               {userHistoryLoop}
+              <ScrollView>
               <View 
             style={{ 
                 flexDirection: 'column', 
@@ -173,11 +195,11 @@ function Messages({}) {
             
             </View>
 
-              
+            </ScrollView>
             <TouchableOpacity onPress={() => { 
                 navigation.navigate('CreateNewMessage')
             }}>
-                <Image source={newMessageBtn} style={{height: heightPercentageToDP('10'), width :widthPercentageToDP('80'), marginTop: heightPercentageToDP('5'), resizeMode:'contain', left:widthPercentageToDP('9') }} />
+                <Image source={newMessageBtn} style={{height: heightPercentageToDP('10'), width :widthPercentageToDP('80'), marginTop: heightPercentageToDP(40), resizeMode:'contain', left:widthPercentageToDP('9') }} />
             </TouchableOpacity>
 
               {/* <TouchableOpacity style={{alignContent:'center',marginLeft:widthPercentageToDP(10)}} onPress={() => { 

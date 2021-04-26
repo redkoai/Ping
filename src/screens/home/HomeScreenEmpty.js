@@ -1,5 +1,5 @@
 import {useNavigation} from "@react-navigation/native";
-import {Image, ImageBackground, View, ScrollView,Text} from "react-native";
+import {Image, ImageBackground, View, ScrollView,Text, But} from "react-native";
 import {TouchableOpacity} from 'react-native';
 import emptyHome from "ping/assets/homeScreen/bg.png";
 import styles from "ping/src/styles/styles";
@@ -19,6 +19,7 @@ import AuthContext from 'ping/src/contexts/AuthContext';
 import { actuatedNormalize } from "ping/util/fontScaler";
 import profileIm from "ping/assets/NavBarAssets/prof.png"
 import CustomButton from 'ping/src/components/inputs/CustomButton';
+import CustomButtonCopy from 'ping/src/components/inputs/CustomButtonCopy';
 import giffy from '../../../assets/homeScreen/circle.gif'
 import firebase from "firebase"
 
@@ -31,7 +32,7 @@ function HomeScreenEmpty({}) {
     const { user } = useContext(AuthContext);
     console.log("user = ", user)
 
-    const [eventID, setEventID] = useState()
+    // const [eventID, setEventID] = useState()
 
 
     //////////////////////////
@@ -48,7 +49,7 @@ function HomeScreenEmpty({}) {
 
 
     const eventQuery = () => {
-      const myEvents = []
+      const myEvents_obj = {}
       const myInvites_obj = {}
       db.child(`${user.uid}/Events/`).on("child_added", function (snapshot) {
         // setEventID(snapshot.key)
@@ -58,15 +59,16 @@ function HomeScreenEmpty({}) {
         // console.log("user uid =", user.uid)
         if (snapshot.val()["co-host-0"] == user.uid) {
           console.log("event snapshot =", snapshot)
+          myEvents_obj[snapshot.key] = snapshot.val().event
         } else {
           console.log("invite snapshot =", snapshot)
-          myInvites_obj[snapshot.key] = snapshot
+          myInvites_obj[snapshot.key] = snapshot.val().event
           console.log("my invites = ", myInvites_obj)
         }
       });
       // console.log("my invites =", myInvites)
       setMyInvites(myInvites_obj)
-      // setMyEvents(myEvents)
+      setMyEvents(myEvents_obj)
     }
 
 
@@ -152,7 +154,7 @@ function HomeScreenEmpty({}) {
                 padding: 10
               }}>
           <View>
-            <Text>{key}</Text>
+            <Text>{myEvents[key]}</Text>
           </View>
           </TouchableOpacity>
           
@@ -160,54 +162,84 @@ function HomeScreenEmpty({}) {
         )
       })
 
+      // const visit = (obj, fn) => {
+      //   const values = Object.values(obj)
+
+      //   values.forEach(val => val && typeof val == "object" ? visit(val, fn) : fn(val))
+      // }
+
+      // const print = (val) => console.log(val)
+
+      // console.log("visit function =", visit(myInvites, print ))
+
+      // const values = Object.values(myInvites).map((value) => {
+      //   console.log(value)
+      // })
+
+      // console.log("myinvite values = ", values)
 
 
       const InviteLoop = Object.keys(myInvites).map((key) => {
         // console.log("invite loop key = ", key)
         // const obj = JSON.stringify(myInvites[key])
-        // console.log("invite loop event =",  myInvites[key])
+        console.log("invite loop event = ",  myInvites[key])
         const eventID = key
         return (
-          <TouchableOpacity onPress={() => { 
-            console.log("eventID = ", eventID)
-            navigation.navigate('MyInvite', { eventID:eventID })
+        //   <TouchableOpacity onPress={() => { 
+        //     console.log("eventID = ", eventID)
+        //     navigation.navigate('MyInvite', { eventID:eventID })
+        // }}
+        //   style={{
+        //         marginRight: 10,
+        //         marginTop: 30,
+        //         padding: 10
+        //       }}>
+        //   <View>
+        //     <Text>{myInvites[key]}</Text>
+        //   </View>
+        //   </TouchableOpacity>
+          <View style={{
+                    marginRight: widthPercentageToDP(1),
+                    marginTop: 30,
+                    padding: widthPercentageToDP(1)
+                  }}>
+                 <CustomButtonCopy
+                 text= {myInvites[key]}
+                 buttonSecondary
+                 shadow
+                 
+                 style={{fontSize:actuatedNormalize(11)}}
+                 onPress={() => { 
+                   navigation.navigate('MyInvite', { eventID:eventID })
         }}
-          style={{
-                marginRight: 10,
-                marginTop: 30,
-                padding: 10
-              }}>
-          <View>
-            <Text>{key}</Text>
+               />
           </View>
-          </TouchableOpacity>
-          
           
         )
       })
 
 
-      renderItem = (item) => {
-        return(
-        <TouchableOpacity onPress={() => { 
-          console.log("eventID = ", eventID)
-          navigation.navigate('MyInvite', { eventID:eventID })
-      }}
-        style={{
-              marginRight: 10,
-              marginTop: 30,
-              padding: 10
-            }}>
-              <Card >
-                  <Card.Content >
-                      <View style={{flexDirection:"row", justifyContent:"center"}}>
-                        <Text>{item.name}</Text>
-                      </View>
-                  </Card.Content>
-              </Card>
-          </TouchableOpacity>)
+    //   renderItem = (item) => {
+    //     return(
+    //     <TouchableOpacity onPress={() => { 
+    //       console.log("eventID = ", eventID)
+    //       navigation.navigate('MyInvite', { eventID:eventID })
+    //   }}
+    //     style={{
+    //           marginRight: 10,
+    //           marginTop: 30,
+    //           padding: 10
+    //         }}>
+    //           <Card >
+    //               <Card.Content >
+    //                   <View style={{flexDirection:"row", justifyContent:"center"}}>
+    //                     <Text>{item.name}</Text>
+    //                   </View>
+    //               </Card.Content>
+    //           </Card>
+    //       </TouchableOpacity>)
 
-    }
+    // }
 
     return (
         <View style={{flex: 1}}>    
@@ -282,7 +314,7 @@ function HomeScreenEmpty({}) {
   }
 </ScrollView>
       
-         <View style={{left: heightPercentageToDP('3.5'), marginBottom:widthPercentageToDP(5)}}>    
+         <View style={{left: heightPercentageToDP('0.6'), marginBottom:widthPercentageToDP(5)}}>    
         <CustomButton 
           text="Create a new event"
           primary
