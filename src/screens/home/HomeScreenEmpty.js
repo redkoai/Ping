@@ -156,8 +156,6 @@ function HomeScreenEmpty({}) {
             <Text>{myEvents[key]}</Text>
           </View>
           </TouchableOpacity>
-          
-          
         )
       })
 

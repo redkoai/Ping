@@ -63,7 +63,7 @@ function Messages({}) {
 
 
     const queryUserHistory = () => {
-      console.log("queryUserHistory ")
+      console.log("queryUserHistory")
       let userHistory = {}
       db.child(`${user.uid}/messages/`).on("child_added", function(snapshot) {
         // console.log("snapshot val user._id", snapshot.val()[`${Object.keys(snapshot.val())[0]}`].user._id)
