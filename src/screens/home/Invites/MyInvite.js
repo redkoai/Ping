@@ -19,6 +19,7 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import Moment from 'moment';
 import add from "ping/assets/invites/add.png";
 import send from "ping/assets/invites/send.png";
+import newMessageBtn from "ping/assets/newMessage.png"
 
 
 
@@ -27,6 +28,8 @@ import 'firebase/firestore'
 
 
 function MyInvite({navigation, route }) {
+
+  // const navigation = useNavigation()
 
   const { eventID } = route.params
   console.log(eventID.eventID)
@@ -61,14 +64,35 @@ function MyInvite({navigation, route }) {
     })
     setEvent(event)
     console.log("event description = ", event.description)
+    console.log("event co host = ", event["co-host-0"] )
+    console.log("user.uid = ", user.uid)
+    console.log("event = ", event)
 
     }
+
+    /////////////////////////////////////////////
+    // Firebase query for event host information
+    //////////////////////////////////////////////
+    const [hostEmail, setHostEmail] = useState()
+    const [hostUsername, setHostUsername] = useState()
+    const getHostInfo = () => {
+      db.on("child_added", function(snapshot) {
+        if (snapshot.key == event["co-host-0"]){
+          setHostEmail(snapshot.val().email)
+          setHostUsername(snapshot.val().username)
+        }
+      })
+    }
+
+    console.log("host email =", hostEmail)
+    console.log("host username =", hostUsername)
 
 
    
 
     useEffect(() => {
         getEvent()
+        getHostInfo()
         const userUID=UserInfo.uid;
         // console.log("userid: ", userUID);
        //firebase.database().ref('/InviteForms').child("-MW_XbsJOLm2BCA6nA_K").child("formData").on('value',(snapshot)=>{
@@ -280,8 +304,29 @@ function MyInvite({navigation, route }) {
            </View>
 
           {/* TODO MESSSAGE HOST TAKE HOST UID AND MESSAGE */}
+          {/* navigation.navigate("Invest", { screen: "InvestScreen" }) */}
+          {/* navigation.navigate("**stack_Name**", {
+ screen:"screen_name_connect_with_**stack_name**",
+ params:{
+ user:"anything_string_or_object"
+}
+}) */}
           <View style={{  marginLeft:widthPercentageToDP(10) }}>
-            <CustomButton text="Message Host" narrow primary />
+          <TouchableOpacity style={{alignContent:'center',marginLeft:widthPercentageToDP(10)}} onPress={() => { 
+                navigation.navigate('Messages', {
+                  screen: 'Chat', 
+                  params: {
+                    OtherUserInfo: {
+                      _id: event["co-host-0"],
+                      email: hostEmail,
+                      username: hostUsername
+                    }}
+                  }
+                )
+            }}>
+              <Image source={newMessageBtn} style={{height: heightPercentageToDP('7'), width :widthPercentageToDP('70'), marginTop: heightPercentageToDP('5'), resizeMode:'contain', left:heightPercentageToDP('2.5') }} />
+              {/* <CustomButton text="Message Host" narrow primary /> */}
+          </TouchableOpacity>
           </View>
           </View>
   

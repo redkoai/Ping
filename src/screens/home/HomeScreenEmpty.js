@@ -53,7 +53,7 @@ function HomeScreenEmpty({}) {
       const myInvites_obj = {}
       db.child(`${user.uid}/Events/`).on("child_added", function (snapshot) {
         // setEventID(snapshot.key)
-        console.log("snapshot =", snapshot)
+        console.log("snapshot = ", snapshot)
         // console.log("snapshot event = ", snapshot)
         // console.log("snapshot event cohost", snapshot.val()["co-host-0"])
         // console.log("user uid =", user.uid)
@@ -120,7 +120,7 @@ function HomeScreenEmpty({}) {
 
     useEffect(() => {
       eventQuery()
-      console.log(" invites =", myInvites)
+      console.log(" invites = ", myInvites)
         const unsubscribe = navigation.addListener("focus", () => {
           // Login Checker
           // _CheckOnboarding().then((r) => console.log("Checked on Boarding"));
