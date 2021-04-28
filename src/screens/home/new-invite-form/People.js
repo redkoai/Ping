@@ -61,7 +61,11 @@ function People({ navigation }) {
   //////////////////////////////////////////
   // Send to people that do not have the app
   //////////////////////////////////////////
+
   const [text, setText] = useState([]) 
+
+  // create randomly generated password
+  const password = hello
 
   const updateText = (text) => {
     setText(text);
@@ -105,8 +109,33 @@ function People({ navigation }) {
         ,
         
     }).catch(console.error)
-    console.log("email sent to: ", text)
 }
+// TODO: create user using the email that from text input (text state), and then push formData to the user:
+// const signUpWithEmailAsync = async (handleSuccess, handleFailure) => {
+//   await firebase
+//     .auth()
+//     .createUserWithEmailAndPassword(text, password)
+//     // console.log(data)
+//     .then(handleSuccess)
+//     .catch((error) => {
+//       let errorCode = error.code;
+//       let errorMessage = error.message;
+//       if (errorCode == 'auth/weak-password') {
+//         handleFailure()('Weak Password!');
+//       } else {
+//         handleFailure()(errorMessage);
+//       }
+//     });
+// const onSignUpSuccess = (user) => {
+//   // console.log("username input = ", username)
+//   console.log("user = ", user)
+//   db.child(`${user.user.uid}`).set({"email" : text, "username" : text})
+// };
+// const onSignUpFailure = (errorMessage) => {
+//   console.log("user failure = ", user)
+//   console.log("error message = ", errorMessage)
+//   alert(errorMessage);
+// };
 
 console.log("form data = ", formData)
 
@@ -329,7 +358,11 @@ console.log("form data = ", formData)
             />
           </Card>
           <TouchableOpacity onPress={handleEmail}>
-            <Button onPress={handleEmail}> Send email </Button>
+            <Button onPress={handleEmail} 
+          //   onPress={handleSubmit(
+          //   async () => await signUpWithEmailAsync(onSignUpSuccess, onSignUpFailure),
+          // )}
+          > Send email </Button>
           </TouchableOpacity>
           <TouchableOpacity>
                  {/* temporarily using this as a button to send to all friends */}
