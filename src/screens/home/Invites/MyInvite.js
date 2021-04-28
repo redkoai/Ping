@@ -124,7 +124,7 @@ function MyInvite({navigation, route }) {
           width :widthPercentageToDP('20'), 
           resizeMode:'contain',
           marginTop: heightPercentageToDP('3'),
-          left:heightPercentageToDP('1')
+          left:heightPercentageToDP('3')
           }}>
           <CustomButton text="Secret Code" narrow primary onPress={() => { navigation.navigate('SecretCode')}}/>
           </View>
@@ -271,15 +271,17 @@ function MyInvite({navigation, route }) {
           <View
           style={{
             flexDirection: 'row',
-            justifyContent: 'center',
+            justifyContent: 'space-between',
             marginLeft: widthPercentageToDP(0),
           }}
         >
-          <View style={{  marginLeft:widthPercentageToDP(2) }}>
-           <CustomButton  text="RSVP" narrow primary />
+          <View style={{  marginLeft:widthPercentageToDP(10) }}>
+           <CustomButton  text="RSVP" small primary />
            </View>
-          <View style={{  marginLeft:widthPercentageToDP(2) }}>
-            <CustomButton text="Invite" narrow primary />
+
+          {/* TODO MESSSAGE HOST TAKE HOST UID AND MESSAGE */}
+          <View style={{  marginLeft:widthPercentageToDP(10) }}>
+            <CustomButton text="Message Host" narrow primary />
           </View>
           </View>
   

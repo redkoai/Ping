@@ -5,6 +5,7 @@ import Chat from 'ping/src/screens/home/messages/Chat'
 import CreateNewMessage from 'ping/src/screens/home/messages/CreateNewMessage'
 import ScreenTitle from 'ping/src/components/header/ScreenTitle';
 import { createStackNavigator } from '@react-navigation/stack';
+import BackChevron from 'ping/src/components/header/BackChevron';
 
 const MessagesStack = createStackNavigator();
 
@@ -15,6 +16,7 @@ function MessagesStackNavigator() {
       name="Messages" 
       component={Messages}
       options={{
+        
         headerLeft: () => <ScreenTitle title="Messages" />,
       }}
        />
@@ -22,14 +24,16 @@ function MessagesStackNavigator() {
       name="CreateNewMessage" 
       component={CreateNewMessage}
       options={{
-        headerLeft: () => <ScreenTitle title="Create New Message" />,
+        headerLeft: () => <BackChevron />,
+        headerRight: () => <ScreenTitle title="Create New Message" />,
       }}
        />
        <MessagesStack.Screen 
       name="Chat" 
       component={Chat}
       options={{
-        headerLeft: () => <ScreenTitle title="Chat" />,
+        headerLeft: () => <BackChevron />,
+        headerRight: () => <ScreenTitle title="Chat" />,
       }}
        />
     </MessagesStack.Navigator>

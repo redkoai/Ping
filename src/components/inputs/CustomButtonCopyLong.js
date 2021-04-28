@@ -1,6 +1,6 @@
 import { textStyles, colors } from 'ping/src/styles/styles';
 import { heightPercentageToDP, widthPercentageToDP } from 'ping/util/scaler';
-
+import { actuatedNormalize } from "ping/util/fontScaler";
 import React from 'react';
 import { View, Image, Text, StyleSheet, TouchableOpacity } from 'react-native';
 
@@ -50,15 +50,15 @@ function CustomButton({
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: heightPercentageToDP(1.2),
-    marginBottom: heightPercentageToDP(1.5),
+    marginTop: heightPercentageToDP(0.5),
+    marginBottom: heightPercentageToDP(0),
     //borderColor: 'red',
     //borderWidth: 1,
   },
   button: {
     height: heightPercentageToDP(Platform.OS === 'ios' ? 5.8 : 6.3),
-    paddingHorizontal: 30,
-    borderRadius: 50,
+    paddingHorizontal: widthPercentageToDP(1),
+    borderRadius: widthPercentageToDP(1),
     display: 'flex',
     alignItems: 'center',
     flexDirection: 'row',
@@ -66,7 +66,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   buttonLarge: {
-    width: widthPercentageToDP(80),
+    width: widthPercentageToDP(100),
     height: heightPercentageToDP(Platform.OS === 'ios' ? 5.8 : 6.3),
   },
   buttonNarrow: {
@@ -95,12 +95,7 @@ const styles = StyleSheet.create({
   buttonSecondary: {
     backgroundColor: 'white',
   },
-  buttonSecondary1: {
-    backgroundColor: 'white',
-    borderRadius: 10,
-    fontSize:15
-    
-  },
+
   primaryDisabled: {
     backgroundColor: '#ccc',
   },
@@ -115,12 +110,14 @@ const styles = StyleSheet.create({
   },
   textPrimary: {
     color: 'white',
+    fontSize:actuatedNormalize(11)
   },
   textOutline: {
     color: colors.primary,
   },
   textSecondary: {
     color: colors.primary,
+    fontSize:actuatedNormalize(11)
   },
   textPrimaryDisabled: {
     color: 'white',

@@ -24,7 +24,7 @@ import add from 'ping/assets/invites/adds.png';
 import { colors, textStyles } from 'ping/src/styles/styles';
 import { actuatedNormalize } from "ping/util/fontScaler";
 import 'firebase/firestore'
-
+import CustomButtonCopyLong from 'ping/src/components/inputs/CustomButtonCopyLong';
 
 function Accountsone({}) {
     // const navigation = useNavigation()
@@ -215,7 +215,7 @@ function Accountsone({}) {
           <ImageBackground source={emptyHome} style={styles.homeEmpty}>
             
           {isLoggedIn ? (
-                  <View style={{marginTop:'-110%'}}>
+                  <View style={{marginTop:'-105%'}}>
                     
                     <SearchBar
                         placeholder="Search for users..."
@@ -256,16 +256,24 @@ function Accountsone({}) {
                             email: foundUser.email
                         }})
                     }}>
+                      <View style={{marginLeft:widthPercentageToDP('9')}}> 
                 <CustomButton
           text="Add friends"
           shadow
         />
+        </View>
         </TouchableOpacity>
         {
           Object.keys(friends).length != 0 ? 
-            <View>
-            {friendLoop}
-            </View>
+
+      <CustomButtonCopyLong
+      text= {friendLoop}
+      buttonSecondary
+      shadow
+      
+      />
+ 
+
             : null
 
         }

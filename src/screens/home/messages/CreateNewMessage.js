@@ -12,6 +12,7 @@ import { actuatedNormalize } from "ping/util/fontScaler";
 import 'firebase/firestore'
 
 
+
 const styles= StyleSheet.create({
     container: {
         textAlign:"center"
