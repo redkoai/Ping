@@ -8,6 +8,8 @@ import {
   TouchableOpacity,
   View,
   Text,
+  TextInput,
+  SafeAreaView
 } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import Spacer from "ping/src/components/Spacer";
@@ -29,6 +31,7 @@ import sends from 'ping/assets/invites/send.png';
 import adds from 'ping/assets/invites/add.png';
 import add from 'ping/assets/invites/adds.png';
 import { actuatedNormalize } from "ping/util/fontScaler";
+import email from 'react-native-email'
 
 
 
@@ -54,6 +57,58 @@ function People({ navigation }) {
     console.log("guestlist = ", guests)
   }
 
+
+  //////////////////////////////////////////
+  // Send to people that do not have the app
+  //////////////////////////////////////////
+  const [text, setText] = useState([]) 
+
+  const updateText = (text) => {
+    setText(text);
+    console.log("text input =", text)
+  };
+
+  const sendInviteToEmail = () => {
+    console.log("text =", text)
+  }
+
+  const handleEmail = () => {
+    const to = text // string or array of email addresses
+    email(to, {
+        // Optional additional arguments
+        cc: ['jbodoia@gmail.com'], // string or array of email addresses
+        bcc: 'jbodoia@gmail.com', // string or array of email addresses
+        subject: 'You have an invite from Ping',
+        body: `You have been invited to the follow event: 
+        
+        Event Name: ${formData.event} 
+        
+        Dresscode: ${formData.dresscode}
+
+        Location: ${formData.location}
+
+        Start Date: ${formData.startdate}
+
+        End Date: ${formData.enddate}
+
+        Link to ping app: 
+
+
+        Ping login information:
+        username: ${text}
+        email: ${text}
+        password: 6376373673
+        `
+        
+        
+        
+        ,
+        
+    }).catch(console.error)
+    console.log("email sent to: ", text)
+}
+
+console.log("form data = ", formData)
 
   ////////////////////////////
   // changing color of buttons
@@ -170,6 +225,8 @@ function People({ navigation }) {
     setSearch(search);
   };
 
+
+
   const searchUser = (username) => {
     let foundUser = { username: null, email: null, uid: null, found: false };
     db.ref.orderByKey().on("child_added", function (snapshot) {
@@ -257,6 +314,23 @@ function People({ navigation }) {
               value={search}
             />
           </Card>
+          <Card style={{ padding: 5, margin: 22, height: 80 }}>
+            <SearchBar
+              placeholder="Enter an email to send an invite to..."
+              autoCapitalize="none"
+              containerStyle={{ backgroundColor: "white" }}
+              inputStyle={{ color: "black" }}
+              inputContainerStyle={{ backgroundColor: "white" }}
+              searchIcon={{ color: "black" }}
+              clearIcon={{ color: "black" }}
+              placeholderTextColor={"black"}
+              onChangeText={updateText}
+              value={text}
+            />
+          </Card>
+          <TouchableOpacity onPress={handleEmail}>
+            <Button onPress={handleEmail}> Send email </Button>
+          </TouchableOpacity>
           <TouchableOpacity>
                  {/* temporarily using this as a button to send to all friends */}
                 {/* <Image source={send}  style={{height: heightPercentageToDP('10'), width :widthPercentageToDP('10'), marginTop: heightPercentageToDP('0'),marginLeft:widthPercentageToDP('23'), resizeMode:'contain' }} /> */}
