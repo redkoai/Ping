@@ -69,18 +69,19 @@ function People({ navigation }) {
 
   const updateText = (text) => {
     setText(text);
+    setPassword("test1234")
     console.log("text input =", text)
   };
 
-  const sendInviteToEmail = () => {
-    console.log("text =", text)
-  }
+  // const sendInviteToEmail = () => {
+  //   console.log("text =", text)
+  // }
 
   const handleEmail = () => {
     const to = text // string or array of email addresses
     email(to, {
         // Optional additional arguments
-        cc: ['jbodoia@gmail.com'], // string or array of email addresses
+        cc: [`${text}`], // string or array of email addresses
         bcc: 'jbodoia@gmail.com', // string or array of email addresses
         subject: 'You have an invite from Ping',
         body: `You have been invited to the follow event: 
@@ -101,7 +102,7 @@ function People({ navigation }) {
         Ping login information:
         username: ${text}
         email: ${text}
-        password: 6376373673
+        password: ${password}
         `
         
         
@@ -109,49 +110,23 @@ function People({ navigation }) {
         ,
         
     }).catch(console.error)
-    console.log("one")
-    setPassword("hello")
-    firebase.auth().createUserWithEmailAndPassword(text, password)
-    .then((userCredential) => {
-      // Signed in 
-      var user = userCredential.user;
-      console.log("user sign up successful 1")
-      // ...
+    // console.log("one")
+    firebase.auth().createUserWithEmailAndPassword(text, password).then(cred => {
+      console.log("cred =", cred)
     })
-    .catch((error) => {
-      console.log("user sign up not successful ")
-      var errorCode = error.code;
-      var errorMessage = error.message;
-      // ..
-    });
-    console.log("two")
+  
 }
-// TODO: create user using the email that from text input (text state), and then push formData to the user:
-// const signUpWithEmailAsync = async (handleSuccess, handleFailure) => {
-//   await firebase
-//     .auth()
-//     .createUserWithEmailAndPassword(text, password)
-//     // console.log(data)
-//     .then(handleSuccess)
-//     .catch((error) => {
-//       let errorCode = error.code;
-//       let errorMessage = error.message;
-//       if (errorCode == 'auth/weak-password') {
-//         handleFailure()('Weak Password!');
-//       } else {
-//         handleFailure()(errorMessage);
-//       }
-//     });
-// const onSignUpSuccess = (user) => {
-//   // console.log("username input = ", username)
-//   console.log("user = ", user)
-//   db.child(`${user.user.uid}`).set({"email" : text, "username" : text})
-// };
-// const onSignUpFailure = (errorMessage) => {
-//   console.log("user failure = ", user)
-//   console.log("error message = ", errorMessage)
-//   alert(errorMessage);
-// };
+// TODO: create user using the email that from text input (text state), and then push formData to the user: 
+
+// const signUp = () => {
+//   console.log("text = ", text)
+//   console.log("password =", password)
+//   firebase.auth().createUserWithEmailAndPassword(text, password).then(cred => {
+//     console.log("cred =", cred)
+//   })
+// }
+
+
 
 console.log("form data = ", formData)
 
@@ -374,11 +349,9 @@ console.log("form data = ", formData)
               value={text}
             />
           </Card>
-          <TouchableOpacity onPress={handleEmail}>
+          <TouchableOpacity>
             <Button onPress={handleEmail} 
-          //   onPress={handleSubmit(
-          //   async () => await signUpWithEmailAsync(onSignUpSuccess, onSignUpFailure),
-          // )}
+            // onPress={ signUp }
           > Send email </Button>
           </TouchableOpacity>
           <TouchableOpacity>
