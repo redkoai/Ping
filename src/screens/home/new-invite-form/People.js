@@ -65,7 +65,7 @@ function People({ navigation }) {
   const [text, setText] = useState([]) 
 
   // create randomly generated password
-  const password = hello
+  const [password, setPassword] = useState()
 
   const updateText = (text) => {
     setText(text);
@@ -109,6 +109,22 @@ function People({ navigation }) {
         ,
         
     }).catch(console.error)
+    console.log("one")
+    setPassword("hello")
+    firebase.auth().createUserWithEmailAndPassword(text, password)
+    .then((userCredential) => {
+      // Signed in 
+      var user = userCredential.user;
+      console.log("user sign up successful 1")
+      // ...
+    })
+    .catch((error) => {
+      console.log("user sign up not successful ")
+      var errorCode = error.code;
+      var errorMessage = error.message;
+      // ..
+    });
+    console.log("two")
 }
 // TODO: create user using the email that from text input (text state), and then push formData to the user:
 // const signUpWithEmailAsync = async (handleSuccess, handleFailure) => {
