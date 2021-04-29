@@ -26,7 +26,16 @@ const NewInviteStack = createStackNavigator();
 function NewInviteStackNavigator() {
   return (
     <NewInviteProvider>
-      <NewInviteStack.Navigator screenOptions={headerOptions}>
+      <NewInviteStack.Navigator
+        screenOptions={({ route }) => ({
+          tabBarButton: ["Events"].includes(route.name)
+            ? () => {
+                return null;
+              }
+            : undefined,
+        })}
+        ßscreenOptions={headerOptions}
+      >
         <NewInviteStack.Screen
           name="createnewtemplates"
           component={createnewtemplates}
@@ -40,7 +49,14 @@ function NewInviteStackNavigator() {
           component={EventsStackNavigator}
           options={{
             headerLeft: () => <BackChevron />,
-            headerRight: () => <ScreenTitle title="Templates" />,
+            title: "Onboarding",
+            headerShown: false,
+            keyboardHidesTabBar: true,
+            tabBarVisible: false,
+
+            tabBarOptions: {
+              visible: false,
+            },
           }}
         />
         <NewInviteStack.Screen

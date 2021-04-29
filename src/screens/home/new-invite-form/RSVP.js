@@ -67,8 +67,7 @@ function RSVP({ navigation }) {
   useEffect(() => {
     formState.isSubmitSuccessful && !user && setSignInVisibility(true);
     formState.isSubmitSuccessful && user && writeUserData(formData);
-    const randomID = uuid.v1();
-    setEventID(randomID);
+    
   }, [formState.isSubmitSuccessful]);
 
   const onSubmit = (data) => {

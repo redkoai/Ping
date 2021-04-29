@@ -30,15 +30,22 @@ import sends from "ping/assets/invites/send.png";
 import adds from "ping/assets/invites/add.png";
 import add from "ping/assets/invites/adds.png";
 import { actuatedNormalize } from "ping/util/fontScaler";
+import uuid from "react-native-uuid";
 
 function People({ route, navigation }) {
   const { formData, updateFormData } = useContext(NewInviteContext);
   const [guestList, setGuestList] = useState([]);
   const { user } = useContext(AuthContext);
   const [event, setEvent] = useState("");
+  const [eventID, setEventID] = useState("");
   const { control, errors, reset, setValue, handleSubmit } = useForm({
     //resolver: yupResolver(RSVP_SCHEMA),
   });
+
+  useEffect(() => {
+    const randomID = uuid.v1();
+    setEventID(randomID);
+  }, []);
 
   // Trying to update form with the guestlist, need help
   const guests = {};
@@ -84,7 +91,7 @@ function People({ route, navigation }) {
     navigation.navigate("Events", {
       screen: "MyInvite",
       params: {
-        eventID: "1",
+        eventID: eventID,
       },
     });
     reset();
@@ -134,7 +141,7 @@ function People({ route, navigation }) {
       console.log("snpashot = ", snapshot);
       console.log("snapshot key =", snapshot.key);
       console.log("snapshot value =", snapshot.val());
-      db.child(`${snapshot.key}/Events/${eventID}`).set(formData)
+      db.child(`${snapshot.key}/Events/${eventID}`).set(formData);
       console.log("form data pushed");
     });
   };

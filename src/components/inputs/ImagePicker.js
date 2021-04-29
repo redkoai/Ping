@@ -48,14 +48,14 @@ const ImgPicker = (props) => {
     // setPickedImage(image.uri);
 
     //<----PHOT UPLOAD NOT WORKING ----->x
-    // let result = await ImagePicker.launchImageLibraryAsync({
-    //   mediaTypes: ImagePicker.MediaTypeOptions.All,
-    //   allowsEditing: false,
-    //   aspect: [16, 9],
-    //   quality: 1,
-    // });
-    //   .then()
-    //   .catch((e) => console.log(e));
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      allowsEditing: true,
+      aspect: [16, 9],
+      quality: 1,
+    })
+      .then()
+      .catch((e) => console.log(e));
 
     let bucketName = "images";
     let file =
@@ -122,12 +122,12 @@ const ImgPicker = (props) => {
           }}
         />
       </TouchableOpacity>
-      <TouchableOpacity onPress={showImage}>
+      {/* <TouchableOpacity onPress={showImage}>
         {/* <Button
         title="Take Image"
         onPress={takeImageHandler}
       /> */}
-        <Image
+      {/* <Image
           source={upload}
           style={{
             height: heightPercentageToDP("17"),
@@ -137,7 +137,7 @@ const ImgPicker = (props) => {
             resizeMode: "contain",
           }}
         />
-      </TouchableOpacity>
+      </TouchableOpacity> */}
     </View>
   );
 };
