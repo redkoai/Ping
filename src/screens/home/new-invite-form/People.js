@@ -69,6 +69,7 @@ function People({ navigation }) {
 
   const updateText = (text) => {
     setText(text);
+    // Todo generate this password randomly:
     setPassword("test1234")
     console.log("text input =", text)
   };
