@@ -303,6 +303,8 @@ function MyInvite({navigation, route }) {
            <CustomButton  text="RSVP" small primary />
            </View>
 
+
+
           {/* TODO MESSSAGE HOST TAKE HOST UID AND MESSAGE */}
           {/* navigation.navigate("Invest", { screen: "InvestScreen" }) */}
           {/* navigation.navigate("**stack_Name**", {

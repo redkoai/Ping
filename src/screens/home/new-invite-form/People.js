@@ -173,12 +173,13 @@ console.log("form data = ", formData)
   const db = firebase.database().ref("users");
   const [search, setSearch] = useState([]);
 
+
   const sendInvite = () => {
     guests[foundUser.uid] = "no"
     console.log(foundUser);
     console.log(formData);
-    db.child(foundUser.uid);
-    db.child(`${foundUser.uid}/Events`).push(formData);
+    // db.child(foundUser.uid);
+    db.child(`${foundUser.uid}/Events/${eventID}`).set(formData);
     console.log("Data pushed");
     // db.child(user.user.uid).set({"email" : user.user.email})
   };
@@ -188,13 +189,13 @@ console.log("form data = ", formData)
       console.log("snpashot = ", snapshot)
       console.log("snapshot key =", snapshot.key)
       console.log("snapshot value =", snapshot.val())
-      db.child(`${snapshot.key}/Events`).push(formData)
+      db.child(`${snapshot.key}/Events/${eventID}`).set(formData)
       console.log('form data pushed')
   })
   }
 
   const sendHostEvent = () => {
-    db.child(`${user.uid}/Events/`).push(formData);
+    db.child(`${user.uid}/Events/${eventID}`).set(formData);
     console.log("host data pushed")
   }
 
@@ -233,7 +234,7 @@ console.log("form data = ", formData)
     const friendLoop = Object.keys(friends).map((key) => {
       console.log(key)
       const sendInviteToQueryFriend = () => {
-        db.child(`${friends[key]}/Events`).push(formData);
+        db.child(`${friends[key]}/Events/${eventID}`).set(formData);
         console.log("Data pushed");
         // db.child(user.user.uid).set({"email" : user.user.email})
       };

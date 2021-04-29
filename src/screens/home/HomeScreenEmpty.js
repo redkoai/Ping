@@ -143,6 +143,7 @@ function HomeScreenEmpty({}) {
 
       const EventLoop = Object.keys(myEvents).map((key) => {
         const eventID = key
+        console.log("event ID = ", eventID)
         return (
           <TouchableOpacity onPress={() => { 
             console.log("eventID =  ", eventID)
