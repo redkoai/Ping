@@ -15,7 +15,7 @@ import CustomNumberInput from "ping/src/components/inputs/CustomNumberInput";
 import CustomSwitch from "ping/src/components/inputs/CustomSwitch";
 import rsvpprogline from "ping/assets/createnew/rsvp/rsvpprogline.png";
 import SignInModal from "ping/src/components/inputs/SignInModal";
-
+import uuid from "react-native-uuid";
 import firebase from "firebase";
 import "firebase/firestore";
 
@@ -23,7 +23,7 @@ function RSVP({ navigation }) {
   const { user } = useContext(AuthContext);
   const { formData, updateFormData } = useContext(NewInviteContext);
   const [isSignInVisible, setSignInVisibility] = useState(false);
-
+  const [eventID, setEventID] = useState(1);
   //const [saveData,setSaveData] = useState(false);
   const [state, setState] = useState({});
   // const UserInfo = { "uid": user.uid, "email": user.email }
@@ -44,21 +44,12 @@ function RSVP({ navigation }) {
     }
   );
   const writeUserData = (formData) => {
-    firebase
-      .database()
-      .ref("InviteForms/")
-      .push({
-        formData,
-        secret_code: rand(),
-      })
-      .then((data) => {
-        //success callback
-        console.log("data ", data);
-      })
-      .catch((error) => {
-        //error callback
-        console.log("error ", error);
-      });
+    // var randomID = uuid.v1();
+    // setEventID(randomID);
+
+    //formData.eventID = randomID;
+
+   
   };
   const fetchdata = () => {
     firebase
@@ -74,12 +65,10 @@ function RSVP({ navigation }) {
   };
 
   useEffect(() => {
-    console.log("RSVPData:", formData);
-  }, [formData]);
-
-  useEffect(() => {
     formState.isSubmitSuccessful && !user && setSignInVisibility(true);
     formState.isSubmitSuccessful && user && writeUserData(formData);
+    const randomID = uuid.v1();
+    setEventID(randomID);
   }, [formState.isSubmitSuccessful]);
 
   const onSubmit = (data) => {
@@ -96,10 +85,10 @@ function RSVP({ navigation }) {
     if (data[Object.keys(data)[2]] === undefined) {
       data["total-invited"] = null;
     }
-
     updateFormData(data);
+    //console.log(eventID)
     // navigation.navigate('Signinpopup');
-    navigation.navigate("People");
+    navigation.navigate("People", { eventID: eventID });
   };
 
   return (

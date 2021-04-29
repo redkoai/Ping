@@ -23,44 +23,81 @@ import { SearchBar } from "react-native-elements";
 import firebase from "firebase";
 import "firebase/firestore";
 import { Button } from "react-native-paper";
-import AuthContext from 'ping/src/contexts/AuthContext';
-import send from 'ping/assets/invites/sends.png';
-import sends from 'ping/assets/invites/send.png';
-import adds from 'ping/assets/invites/add.png';
-import add from 'ping/assets/invites/adds.png';
+import AuthContext from "ping/src/contexts/AuthContext";
+import send from "ping/assets/invites/sends.png";
+import sent from "ping/assets/invites/sent.png";
+import sends from "ping/assets/invites/send.png";
+import adds from "ping/assets/invites/add.png";
+import add from "ping/assets/invites/adds.png";
 import { actuatedNormalize } from "ping/util/fontScaler";
 
-
-
-function People({ navigation }) {
+function People({ route, navigation }) {
   const { formData, updateFormData } = useContext(NewInviteContext);
-
-  const { user } = useContext(AuthContext)
-
+  const [guestList, setGuestList] = useState([]);
+  const { user } = useContext(AuthContext);
+  const [event, setEvent] = useState("");
   const { control, errors, reset, setValue, handleSubmit } = useForm({
     //resolver: yupResolver(RSVP_SCHEMA),
   });
 
   // Trying to update form with the guestlist, need help
-  const guests = {}
+  const guests = {};
+  const rand = () => {
+    let text = "";
+    let possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 
+    for (let i = 0; i < 10; i++)
+      text += possible.charAt(Math.floor(Math.random() * possible.length));
+
+    return text;
+  };
   const onSubmit = () => {
+    sendHostEvent();
+
+    // db.child(`${user.uid}/Events/${eventID}`).on(
+    //   "child_added",
+    //   function (snapshot) {
+    //     console.log("snapshot =", snapshot);
+    //     event[snapshot.key] = snapshot.val();
+    //   }
+    // );
+    console.log( "Mangos");
+   
+  
+    formData.guestList = guestList;
+    firebase
+      .database()
+      //.ref(`InviteForms/${randomID}`)
+      .ref(`InviteForms/`)
+      .push({
+        formData,
+        secret_code: rand(),
+      })
+      .then((data) => {
+        //success callback
+        console.log("data ", data);
+      })
+      .catch((error) => {
+        //error callback
+        console.log("error ", error);
+      });
     updateFormData(guests);
-    navigation.navigate("EventInvited");
+    navigation.navigate("Events", { screen: "MyInvite",params:{
+      eventID:"1"
+    } });
     reset();
   };
 
   const consoleLog = () => {
-    console.log("guestlist = ", guests)
-  }
-
+    console.log("guestlist = ", guests);
+  };
 
   ////////////////////////////
   // changing color of buttons
   /////////////////////////////
   // const [button, setButton] = useState(false)
   // const [buttonAdd, setButtonAdd] = useState(false)
-  
+
   // const buttonChange = () => {
   //   setButton(true)
   // }
@@ -71,100 +108,126 @@ function People({ navigation }) {
   // Adding firebase query to check if email searched exists
   ///////////////////////////////////////////////////////////
   const db = firebase.database().ref("users");
+  const inviteFormDB = firebase.database().ref(`InviteForms`);
   const [search, setSearch] = useState([]);
 
   const sendInvite = () => {
-    guests[foundUser.uid] = "no"
-    console.log(foundUser);
-    console.log(formData);
+    guests[foundUser.uid] = "no";
     db.child(foundUser.uid);
     db.child(`${foundUser.uid}/Events`).push(formData);
+
+    // db.child(user.user.uid).set({ email: user.user.email });
+
+    const modifiedGuestList = guestList;
+    const foundUserData = foundUser;
+    foundUserData.invited = 1;
+    modifiedGuestList.push(foundUserData);
+    setGuestList(modifiedGuestList);
     console.log("Data pushed");
-    // db.child(user.user.uid).set({"email" : user.user.email})
+    setSentMessgeStatus(!sentMessageStatus);
   };
 
   const sendInviteToAllFriends = () => {
-    db.child(`${user.uid}/Friends`).on('child_added', function(snapshot) {
-      console.log("snpashot = ", snapshot)
-      console.log("snapshot key =", snapshot.key)
-      console.log("snapshot value =", snapshot.val())
-      db.child(`${snapshot.key}/Events`).push(formData)
-      console.log('form data pushed')
-  })
-  }
+    db.child(`${user.uid}/Friends`).on("child_added", function (snapshot) {
+      console.log("snpashot = ", snapshot);
+      console.log("snapshot key =", snapshot.key);
+      console.log("snapshot value =", snapshot.val());
+      db.child(`${snapshot.key}/Events`).push(formData);
+      console.log("form data pushed");
+    });
+  };
 
   const sendHostEvent = () => {
     db.child(`${user.uid}/Events/`).push(formData);
-    console.log("host data pushed")
-  }
+    console.log("host data pushed");
+  };
 
   const addFriend = () => {
     // db.child(foundUser.uid);
     // Adding user to foundUser's (email that was searched) friends list
     // db.child(`${foundUser.uid}/Friends/${user.uid}`).set({username: user.username, email: user.email});
     // Check if friend already exists:
-    db.child(`${user.uid}/Friends`).on('child_added', function(snapshot) {
+    db.child(`${user.uid}/Friends`).on("child_added", function (snapshot) {
       if (snapshot.key == foundUser.uid) {
-        console.log('this friend has already been added')
+        console.log("this friend has already been added");
       } else {
-        db.child(`${user.uid}/Friends/${foundUser.uid}`).set({username: foundUser.username, email: foundUser.email});
-        console.log("friend added!")
+        db.child(`${user.uid}/Friends/${foundUser.uid}`).set({
+          username: foundUser.username,
+          email: foundUser.email,
+        });
+        console.log("friend added!");
       }
-  })
+    });
   };
 
-   //////////////////////////////////////
-    // Firebase query for current friends
-    //////////////////////////////////////
+  //////////////////////////////////////
+  // Firebase query for current friends
+  //////////////////////////////////////
 
-    const [friends, setFriends] = useState({})
-    // const friends = []
-    const queryFriends = () => {
-      let friends = {}
-      db.child(`${user.uid}/Friends`).on('child_added', function(snapshot) {
-        console.log("snapshot value = ", snapshot.val().username)
-        console.log("snapshot key = ", snapshot.key)
-        friends[snapshot.val().username] = snapshot.key
-    })
-    return friends
-    }
+  const [friends, setFriends] = useState({});
+  // const friends = []
+  const queryFriends = () => {
+    let friends = {};
+    db.child(`${user.uid}/Friends`).on("child_added", function (snapshot) {
+      console.log("snapshot value = ", snapshot.val().username);
+      console.log("snapshot key = ", snapshot.key);
+      friends[snapshot.val().username] = snapshot.key;
+    });
+    console.log(friends, "friends");
+    return friends;
+  };
 
+  const friendLoop = Object.keys(friends).map((key) => {
+    console.log(key);
+    const sendInviteToQueryFriend = (friendKey) => {
+      db.child(`${friends[key]}/Events`).push(formData);
+      console.log("Data pushed");
 
-    const friendLoop = Object.keys(friends).map((key) => {
-      console.log(key)
-      const sendInviteToQueryFriend = () => {
-        db.child(`${friends[key]}/Events`).push(formData);
-        console.log("Data pushed");
-        // db.child(user.user.uid).set({"email" : user.user.email})
-      };
-      return (
-        <View style={styles.container}>
-            <View style={{flexDirection:'row'}}>
-                <Text  style={{marginLeft:widthPercentageToDP('10'), fontSize:actuatedNormalize(15), marginTop: heightPercentageToDP('3'), }}>
-                    {key}</Text>
-                <TouchableOpacity onPress={sendInviteToQueryFriend}>
-                    <Image source={send}  style={{height: heightPercentageToDP('10'), width :widthPercentageToDP('10'), marginTop: heightPercentageToDP('0'),marginLeft:widthPercentageToDP('23'), resizeMode:'contain' }} />
-                </TouchableOpacity>
-            </View>
-        </View>    
-      )
-    })
+      // db.child(user.user.uid).set({"email" : user.user.email})
+    };
+    return (
+      <View style={styles.container}>
+        <View style={{ flexDirection: "row" }}>
+          <Text
+            style={{
+              marginLeft: widthPercentageToDP("10"),
+              fontSize: actuatedNormalize(15),
+              marginTop: heightPercentageToDP("3"),
+            }}
+          >
+            {key}
+          </Text>
+          <TouchableOpacity onPress={sendInviteToQueryFriend}>
+            <Image
+              source={send}
+              style={{
+                height: heightPercentageToDP("10"),
+                width: widthPercentageToDP("10"),
+                marginTop: heightPercentageToDP("0"),
+                marginLeft: widthPercentageToDP("23"),
+                resizeMode: "contain",
+              }}
+            />
+          </TouchableOpacity>
+        </View>
+      </View>
+    );
+  });
 
-
-    useEffect(() => {
-      // friendLoop()
-      // let friends_list = queryFriends()
-      setFriends(queryFriends())
-      console.log("friends =", friends)
-      // console.log("friends list = ", friends_list)
-
-    }, [])
-
+  useEffect(() => {
+    // friendLoop()
+    // let friends_list = queryFriends()
+    setFriends(queryFriends());
+    console.log("friends =", friends);
+    // console.log("friends list = ", friends_list)
+  }, []);
 
   const [foundUser, setFoundUser] = useState({
     email: null,
     uid: null,
   });
+
+  const [sentMessageStatus, setSentMessgeStatus] = useState(false);
 
   const updateSearch = (search) => {
     setSearch(search);
@@ -190,12 +253,16 @@ function People({ navigation }) {
   };
 
   useEffect(() => {
-    queryFriends()
-    console.log(friends)
+    queryFriends();
+    console.log(friends);
     let foundUser = searchUser(search);
     console.log("foundUser (use effect) = ", foundUser);
     if (foundUser.found) {
-      setFoundUser({ username: foundUser.username, email: foundUser.email, uid: foundUser.uid });
+      setFoundUser({
+        username: foundUser.username,
+        email: foundUser.email,
+        uid: foundUser.uid,
+      });
       console.log("setting found user state");
     }
   }, [search]);
@@ -258,9 +325,9 @@ function People({ navigation }) {
             />
           </Card>
           <TouchableOpacity>
-                 {/* temporarily using this as a button to send to all friends */}
-                {/* <Image source={send}  style={{height: heightPercentageToDP('10'), width :widthPercentageToDP('10'), marginTop: heightPercentageToDP('0'),marginLeft:widthPercentageToDP('23'), resizeMode:'contain' }} /> */}
-             {/* <View style={{
+            {/* temporarily using this as a button to send to all friends */}
+            {/* <Image source={send}  style={{height: heightPercentageToDP('10'), width :widthPercentageToDP('10'), marginTop: heightPercentageToDP('0'),marginLeft:widthPercentageToDP('23'), resizeMode:'contain' }} /> */}
+            {/* <View style={{
                
                marginLeft:widthPercentageToDP('10')
              }}>         
@@ -272,32 +339,67 @@ function People({ navigation }) {
            />
                
              </View> */}
-              
-            
-            </TouchableOpacity>
-          {
-            foundUser.email != null ?
+          </TouchableOpacity>
+          {foundUser.email != null ? (
             <View style={styles.container}>
-            <View style={{flexDirection:'row'}}>
-              <Text  style={{marginLeft:widthPercentageToDP('10'), fontSize:actuatedNormalize(15), marginTop: heightPercentageToDP('3'), }}>
+              <View style={{ flexDirection: "row" }}>
+                <Text
+                  style={{
+                    marginLeft: widthPercentageToDP("10"),
+                    fontSize: actuatedNormalize(15),
+                    marginTop: heightPercentageToDP("3"),
+                  }}
+                >
                   {foundUser.username}
-              </Text>
-              <TouchableOpacity onPress={sendInvite}>
-                <Image source={send}  style={{height: heightPercentageToDP('10'), width :widthPercentageToDP('10'), marginTop: heightPercentageToDP('0'),marginLeft:widthPercentageToDP('23'), resizeMode:'contain' }} />
-                {/* <Button onPress={sendInvite}>Send Invite</Button> */}
-                {/* {console.log("button = ", button)} */}
-              </TouchableOpacity>
-              <TouchableOpacity onPress={addFriend}>
-                <Image source={add}  style={{height: heightPercentageToDP('10'), width :widthPercentageToDP('10'), marginTop: heightPercentageToDP('0'), marginLeft:widthPercentageToDP('2'), resizeMode:'contain' }} />
+                </Text>
+                {!sentMessageStatus ? (
+                  <TouchableOpacity onPress={sendInvite}>
+                    <Image
+                      source={send}
+                      style={{
+                        height: heightPercentageToDP("10"),
+                        width: widthPercentageToDP("10"),
+                        marginTop: heightPercentageToDP("0"),
+                        marginLeft: widthPercentageToDP("23"),
+                        resizeMode: "contain",
+                      }}
+                    />
+
+                    {/* <Button onPress={sendInvite}>Send Invite</Button> */}
+                    {/* {console.log("button = ", button)} */}
+                  </TouchableOpacity>
+                ) : (
+                  <TouchableOpacity
+                    onPress={() => setSentMessgeStatus(!sentMessageStatus)}
+                  >
+                    <Image
+                      source={sent}
+                      style={{
+                        height: heightPercentageToDP("10"),
+                        width: widthPercentageToDP("10"),
+                        marginTop: heightPercentageToDP("0"),
+                        marginLeft: widthPercentageToDP("23"),
+                        resizeMode: "contain",
+                      }}
+                    />
+                  </TouchableOpacity>
+                )}
+                <TouchableOpacity onPress={addFriend}>
+                  <Image
+                    source={add}
+                    style={{
+                      height: heightPercentageToDP("10"),
+                      width: widthPercentageToDP("10"),
+                      marginTop: heightPercentageToDP("0"),
+                      marginLeft: widthPercentageToDP("2"),
+                      resizeMode: "contain",
+                    }}
+                  />
                   {/* <Button onPress={addFriend}>Add Friend</Button> */}
-               </TouchableOpacity>
+                </TouchableOpacity>
+              </View>
             </View>
-          </View>
-          :
-          null
-          }
-
-
+          ) : null}
         </View>
 
         {/* <TouchableOpacity
@@ -323,42 +425,33 @@ function People({ navigation }) {
 </Card>
 </TouchableOpacity> */}
 
-        <View style={{
-               
-               marginLeft:widthPercentageToDP('5'),
-               marginTop: heightPercentageToDP("40")
-              
-             }}> 
-             {
-                  friends ?
-                  <View>
-                    <Text>
-                      Friends:
-                    </Text>
-                    {friendLoop}
-                  </View>
-                  :
-                  null
-                }        
-              <CustomButton
-             text="Send Invite to All Friends"
-             onPress={sendInviteToAllFriends}
-             
-             primary
-           />
-               
-             </View>
-       
+        <View
+          style={{
+            marginLeft: widthPercentageToDP("5"),
+            marginTop: heightPercentageToDP("40"),
+          }}
+        >
+          {friends ? (
+            <View>
+              <Text>Friends:</Text>
+              {friendLoop}
+            </View>
+          ) : null}
+          <CustomButton
+            text="Send Invite to All Friends"
+            onPress={sendInviteToAllFriends}
+            primary
+          />
+        </View>
 
         <View
           style={{ alignSelf: "flex-end", left: heightPercentageToDP("-1") }}
         >
-          
           <CustomButton
             text="next"
             onPress={handleSubmit(onSubmit)}
-            onPress={sendHostEvent}
-            onPress={consoleLog}
+            //onPress={sendHostEvent}
+            //onPress={consoleLog}
             narrow
             primary
           />
