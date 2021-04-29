@@ -61,9 +61,8 @@ function People({ route, navigation }) {
     //     event[snapshot.key] = snapshot.val();
     //   }
     // );
-    console.log( "Mangos");
-   
-  
+    console.log("Mangos");
+
     formData.guestList = guestList;
     firebase
       .database()
@@ -82,9 +81,12 @@ function People({ route, navigation }) {
         console.log("error ", error);
       });
     updateFormData(guests);
-    navigation.navigate("Events", { screen: "MyInvite",params:{
-      eventID:"1"
-    } });
+    navigation.navigate("Events", {
+      screen: "MyInvite",
+      params: {
+        eventID: "1",
+      },
+    });
     reset();
   };
 
@@ -114,7 +116,7 @@ function People({ route, navigation }) {
   const sendInvite = () => {
     guests[foundUser.uid] = "no";
     db.child(foundUser.uid);
-    db.child(`${foundUser.uid}/Events`).push(formData);
+    db.child(`${foundUser.uid}/Events/${eventID}`).set(formData);
 
     // db.child(user.user.uid).set({ email: user.user.email });
 
