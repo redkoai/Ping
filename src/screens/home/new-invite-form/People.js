@@ -134,13 +134,13 @@ function People({ route, navigation }) {
       console.log("snpashot = ", snapshot);
       console.log("snapshot key =", snapshot.key);
       console.log("snapshot value =", snapshot.val());
-      db.child(`${snapshot.key}/Events`).push(formData);
+      db.child(`${snapshot.key}/Events/${eventID}`).set(formData)
       console.log("form data pushed");
     });
   };
 
   const sendHostEvent = () => {
-    db.child(`${user.uid}/Events/`).push(formData);
+    db.child(`${user.uid}/Events/${eventID}`).set(formData);
     console.log("host data pushed");
   };
 
@@ -182,7 +182,7 @@ function People({ route, navigation }) {
   const friendLoop = Object.keys(friends).map((key) => {
     console.log(key);
     const sendInviteToQueryFriend = (friendKey) => {
-      db.child(`${friends[key]}/Events`).push(formData);
+      db.child(`${friends[key]}/Events/${eventID}`).set(formData);
       console.log("Data pushed");
 
       // db.child(user.user.uid).set({"email" : user.user.email})
