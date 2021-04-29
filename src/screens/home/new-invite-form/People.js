@@ -110,25 +110,17 @@ function People({ navigation }) {
         ,
         
     }).catch(console.error)
-    // console.log("one")
+    // create a user using the email from input:
     firebase.auth().createUserWithEmailAndPassword(text, password).then(cred => {
       console.log("cred =", cred)
+      // create email and username for user in firebase:
+      db.child(`${cred.user.uid}`).set({"email" : text, "username" : text})
+      // push the invite data to the database for the user created:
+      db.child(`${cred.user.uid}/Events`).push(formData)
     })
-  
+
 }
-// TODO: create user using the email that from text input (text state), and then push formData to the user: 
 
-// const signUp = () => {
-//   console.log("text = ", text)
-//   console.log("password =", password)
-//   firebase.auth().createUserWithEmailAndPassword(text, password).then(cred => {
-//     console.log("cred =", cred)
-//   })
-// }
-
-
-
-console.log("form data = ", formData)
 
   ////////////////////////////
   // changing color of buttons
