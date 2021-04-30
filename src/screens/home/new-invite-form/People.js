@@ -97,8 +97,74 @@ function People({ route, navigation }) {
   };
 
   const consoleLog = () => {
-    console.log("guestlist = ", guests);
+    console.log("guestlist = ", guests)
+  }
+
+
+  //////////////////////////////////////////
+  // Send to people that do not have the app
+  //////////////////////////////////////////
+
+  const [text, setText] = useState([]) 
+
+  // create randomly generated password
+  const [password, setPassword] = useState()
+
+  const updateText = (text) => {
+    setText(text);
+    // Todo generate this password randomly:
+    setPassword("test1234")
+    console.log("text input =", text)
   };
+
+  // const sendInviteToEmail = () => {
+  //   console.log("text =", text)
+  // }
+
+  const handleEmail = () => {
+    const to = text // string or array of email addresses
+    email(to, {
+        // Optional additional arguments
+        cc: [`${text}`], // string or array of email addresses
+        bcc: 'jbodoia@gmail.com', // string or array of email addresses
+        subject: 'You have an invite from Ping',
+        body: `You have been invited to the follow event: 
+        
+        Event Name: ${formData.event} 
+        
+        Dresscode: ${formData.dresscode}
+
+        Location: ${formData.location}
+
+        Start Date: ${formData.startdate}
+
+        End Date: ${formData.enddate}
+
+        Link to ping app: 
+
+
+        Ping login information:
+        username: ${text}
+        email: ${text}
+        password: ${password}
+        `
+        
+        
+        
+        ,
+        
+    }).catch(console.error)
+    // create a user using the email from input:
+    firebase.auth().createUserWithEmailAndPassword(text, password).then(cred => {
+      console.log("cred =", cred)
+      // create email and username for user in firebase:
+      db.child(`${cred.user.uid}`).set({"email" : text, "username" : text})
+      // push the invite data to the database for the user created:
+      db.child(`${cred.user.uid}/Events`).push(formData)
+    })
+
+}
+
 
   ////////////////////////////
   // changing color of buttons
@@ -335,6 +401,25 @@ function People({ route, navigation }) {
               value={search}
             />
           </Card>
+          <Card style={{ padding: 5, margin: 22, height: 80 }}>
+            <SearchBar
+              placeholder="Enter an email to send an invite to..."
+              autoCapitalize="none"
+              containerStyle={{ backgroundColor: "white" }}
+              inputStyle={{ color: "black" }}
+              inputContainerStyle={{ backgroundColor: "white" }}
+              searchIcon={{ color: "black" }}
+              clearIcon={{ color: "black" }}
+              placeholderTextColor={"black"}
+              onChangeText={updateText}
+              value={text}
+            />
+          </Card>
+          <TouchableOpacity>
+            <Button onPress={handleEmail} 
+            // onPress={ signUp }
+          > Send email </Button>
+          </TouchableOpacity>
           <TouchableOpacity>
             {/* temporarily using this as a button to send to all friends */}
             {/* <Image source={send}  style={{height: heightPercentageToDP('10'), width :widthPercentageToDP('10'), marginTop: heightPercentageToDP('0'),marginLeft:widthPercentageToDP('23'), resizeMode:'contain' }} /> */}
