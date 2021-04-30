@@ -9,13 +9,13 @@ import Spacer from "ping/src/components/Spacer";
 import { widthPercentageToDP, heightPercentageToDP } from "ping/util/scaler";
 import RadioButton from "rn-radio-button";
 import deprogline from "ping/assets/createnew/dresscode/dresscodeprogline.png";
-import ImagePicker  from "ping/src/components/inputs/ImagePicker";
+import ImagePicker from "ping/src/components/inputs/ImagePicker";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import CustomTextInput from "ping/src/components/inputs/CustomTextInput";
 import CustomButton from "ping/src/components/inputs/CustomButton";
 import CustomInputLabel from "ping/src/components/inputs/CustomInputLabel";
 
-function Dresscode({ navigation }) {
+function Dresscode({ route, navigation }) {
   const { formData, updateFormData } = useContext(NewInviteContext);
 
   const { control, errors, setValue, reset, handleSubmit } = useForm({
@@ -23,14 +23,11 @@ function Dresscode({ navigation }) {
   });
   const onSubmit = (data) => {
     updateFormData(data);
-    navigation.navigate("FAQ");
+    navigation.navigate("FAQ", {imagePath:route.params.imagePath});
     //reset();
     //console.log("After Submit Dresscode---", formData)
   };
-  // useEffect(() => {
-  //   console.log('DresscodeData:', formData);
-  //   navigation.navigate('FAQ');
-  // }, [formData]);
+
 
   const listData = [
     { label: "Casual and Comfortable", value: "casual-and-comfortable" },
@@ -105,7 +102,7 @@ function Dresscode({ navigation }) {
 
         <CustomInputLabel text="Share some Inspo" optional />
         <Spacer height={1} />
-         <ImagePicker /> 
+        <ImagePicker imagePath={route.params.imagePath} />
 
         <Spacer height={5} />
         <View style={{ alignSelf: "flex-end" }}>

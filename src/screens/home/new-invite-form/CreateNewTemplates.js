@@ -1,68 +1,65 @@
-import { useNavigation } from '@react-navigation/native';
-import { Image, ImageBackground, View, ScrollView,Text } from 'react-native';
-import { TouchableOpacity } from 'react-native';
-import emptyHome from 'ping/assets/homeScreen/bg.png';
-import styles from 'ping/src/styles/styles';
-import { Dimensions } from 'react-native';
-import { colors, textStyles } from 'ping/src/styles/styles';
-import { widthPercentageToDP, heightPercentageToDP } from 'ping/util/scaler';
-import React, { useContext, useEffect, useState } from 'react';
-import tempprogline from 'ping/assets/createnew/templates/tempprogline.png';
+import { useNavigation } from "@react-navigation/native";
+import { Image, ImageBackground, View, ScrollView, Text } from "react-native";
+import { TouchableOpacity } from "react-native";
+import emptyHome from "ping/assets/homeScreen/bg.png";
+import styles from "ping/src/styles/styles";
+import { Dimensions } from "react-native";
+import { colors, textStyles } from "ping/src/styles/styles";
+import { widthPercentageToDP, heightPercentageToDP } from "ping/util/scaler";
+import React, { useContext, useEffect, useState } from "react";
+import tempprogline from "ping/assets/createnew/templates/tempprogline.png";
 // import temp1 from 'ping/assets/createnew/templates/templates1.png';
-import inv1 from 'ping/assets/invites/1.png';
-import inv2 from 'ping/assets/invites/2.png';
-import inv3 from 'ping/assets/invites/3.png';
-import inv4 from 'ping/assets/invites/4.png';
-import inv5 from 'ping/assets/invites/5.png';
-import inv6 from 'ping/assets/invites/6.png';
-import inv7 from 'ping/assets/invites/7.png';
-import inv8 from 'ping/assets/invites/8.png';
-import inv9 from 'ping/assets/invites/9.png';
-import inv10 from 'ping/assets/invites/10.png';
-import inv11 from 'ping/assets/invites/11.png';
-import inv12 from 'ping/assets/invites/12.png';
-import inv13 from 'ping/assets/invites/13.png';
-import inv14 from 'ping/assets/invites/14.png';
-import inv15 from 'ping/assets/invites/15.png';
-import NewInviteContext from 'ping/src/contexts/NewInviteContext';
-import CreatePicker from 'ping/src/components/inputs/CreatePicker';
-
+import inv1 from "ping/assets/invites/1.png";
+import inv2 from "ping/assets/invites/2.png";
+import inv3 from "ping/assets/invites/3.png";
+import inv4 from "ping/assets/invites/4.png";
+import inv5 from "ping/assets/invites/5.png";
+import inv6 from "ping/assets/invites/6.png";
+import inv7 from "ping/assets/invites/7.png";
+import inv8 from "ping/assets/invites/8.png";
+import inv9 from "ping/assets/invites/9.png";
+import inv10 from "ping/assets/invites/10.png";
+import inv11 from "ping/assets/invites/11.png";
+import inv12 from "ping/assets/invites/12.png";
+import inv13 from "ping/assets/invites/13.png";
+import inv14 from "ping/assets/invites/14.png";
+import inv15 from "ping/assets/invites/15.png";
+import NewInviteContext from "ping/src/contexts/NewInviteContext";
+import CreatePicker from "ping/src/components/inputs/CreatePicker";
 
 function createnewtemplates({}) {
   const navigation = useNavigation();
-  const {bgImage, setSelectedImage} = useContext(NewInviteContext);
+  const { bgImage, setSelectedImage } = useContext(NewInviteContext);
 
   // const [img,setImg] = useState([{idnum:1}]);
 
   const handlePress = (imagePath) => {
     setSelectedImage(imagePath);
-    navigation.navigate('Details');
-  }
+    navigation.navigate("Details", { imagePath: imagePath });
+  };
 
   return (
     <ScrollView style={{ flex: 1 }}>
       <ImageBackground source={emptyHome} style={styles.homeEmpty}>
         <View
           style={{
-            flexDirection: 'column',
-            justifyContent: 'center',
+            flexDirection: "column",
+            justifyContent: "center",
             marginTop: widthPercentageToDP(3),
-            marginLeft:widthPercentageToDP(5),
+            marginLeft: widthPercentageToDP(5),
           }}
         >
-          
-           
           <Image
             source={tempprogline}
             style={{
-              height: heightPercentageToDP('7'),
-              width: widthPercentageToDP('88'),
-              resizeMode: 'contain',
-              marginTop: heightPercentageToDP('0'),
+              height: heightPercentageToDP("7"),
+              width: widthPercentageToDP("88"),
+              resizeMode: "contain",
+              marginTop: heightPercentageToDP("0"),
             }}
           />
-        
-        <CreatePicker />
+
+          <CreatePicker />
           {/* <TouchableOpacity
             onPress={() => {
               //navigation.navigate('SecretCode');
@@ -80,287 +77,311 @@ function createnewtemplates({}) {
             />
           </TouchableOpacity> */}
 
-         
-      
-          <Text style={[textStyles.bigBold,{left:widthPercentageToDP('3'),marginTop:heightPercentageToDP('2')} ]}>Brunch</Text>
-          
+          <Text
+            style={[
+              textStyles.bigBold,
+              {
+                left: widthPercentageToDP("3"),
+                marginTop: heightPercentageToDP("2"),
+              },
+            ]}
+          >
+            Brunch
+          </Text>
+
           <View
-          style={{
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-            marginTop: widthPercentageToDP(3),
-            marginLeft: widthPercentageToDP(0),
-          }}
-        >
-          <ScrollView  horizontal={true}>
-          <TouchableOpacity
-            onPress={() => {
-              //setImg(inv1)  
-              handlePress(inv1)
-              
+            style={{
+              flexDirection: "row",
+              justifyContent: "space-between",
+              marginTop: widthPercentageToDP(3),
+              marginLeft: widthPercentageToDP(0),
             }}
           >
-       
+            <ScrollView horizontal={true}>
+              <TouchableOpacity
+                onPress={() => {
+                  //setImg(inv1)
+                  handlePress("1.png");
+                }}
+              >
+                <Image
+                  source={inv1}
+                  style={{
+                    height: heightPercentageToDP("25"),
+                    width: widthPercentageToDP("45"),
+                    marginTop: heightPercentageToDP("-4.5"),
+                    resizeMode: "contain",
+                  }}
+                />
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => {
+                  handlePress("2.png");
+                  //navigation.navigate('Details');
+                }}
+              >
+                <Image
+                  source={inv2}
+                  style={{
+                    height: heightPercentageToDP("25"),
+                    width: widthPercentageToDP("45"),
+                    marginTop: heightPercentageToDP("-4.5"),
+                    resizeMode: "contain",
+                  }}
+                />
+              </TouchableOpacity>
 
-            <Image
-              source={inv1}
-              style={{
-                height: heightPercentageToDP('25'),
-                width: widthPercentageToDP('45'),
-                marginTop: heightPercentageToDP('-4.5'),
-                resizeMode: 'contain',
-                
-              }}
-            />
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => {
-              handlePress(inv2)
-              //navigation.navigate('Details');
-            }}
+              <TouchableOpacity
+                onPress={() => {
+                  handlePress("3.png");
+                }}
+              >
+                <Image
+                  source={inv3}
+                  style={{
+                    height: heightPercentageToDP("25"),
+                    width: widthPercentageToDP("45"),
+                    marginTop: heightPercentageToDP("-4.5"),
+                    resizeMode: "contain",
+                  }}
+                />
+              </TouchableOpacity>
+            </ScrollView>
+          </View>
+          <Text
+            style={[
+              textStyles.bigBold,
+              {
+                left: widthPercentageToDP("3"),
+                marginTop: heightPercentageToDP("0"),
+              },
+            ]}
           >
-            
-            <Image
-              source={inv2}
+            Party
+          </Text>
+          <ScrollView horizontal={true}>
+            <View
               style={{
-                height: heightPercentageToDP('25'),
-                width: widthPercentageToDP('45'),
-                marginTop: heightPercentageToDP('-4.5'),
-                resizeMode: 'contain',
+                flexDirection: "row",
+                justifyContent: "center",
+                marginTop: widthPercentageToDP(3),
+                marginLeft: widthPercentageToDP(3),
               }}
-            />
-          </TouchableOpacity>
+            >
+              <TouchableOpacity
+                onPress={() => {
+                  handlePress(inv4);
+                }}
+              >
+                <Image
+                  source={inv4}
+                  style={{
+                    height: heightPercentageToDP("25"),
+                    width: widthPercentageToDP("45"),
+                    marginTop: heightPercentageToDP("-4.5"),
+                    resizeMode: "contain",
+                  }}
+                />
+              </TouchableOpacity>
 
-         
-          <TouchableOpacity
-            onPress={() => {
-              handlePress(inv3);
-            }}
-          >
-            <Image
-              source={inv3}
-              style={{
-                height: heightPercentageToDP('25'),
-                width: widthPercentageToDP('45'),
-                marginTop: heightPercentageToDP('-4.5'),
-                resizeMode: 'contain',
-              }}
-            />
-          </TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => {
+                  handlePress(inv5);
+                }}
+              >
+                <Image
+                  source={inv5}
+                  style={{
+                    height: heightPercentageToDP("25"),
+                    width: widthPercentageToDP("45"),
+                    marginTop: heightPercentageToDP("-4.5"),
+                    resizeMode: "contain",
+                  }}
+                />
+              </TouchableOpacity>
+            </View>
           </ScrollView>
-          </View>
-          <Text style={[textStyles.bigBold,{left:widthPercentageToDP('3'),marginTop:heightPercentageToDP('0')} ]}>Party</Text>
-          <ScrollView  horizontal={true}>
+          <Text
+            style={[
+              textStyles.bigBold,
+              {
+                left: widthPercentageToDP("3"),
+                marginTop: heightPercentageToDP("0"),
+              },
+            ]}
+          >
+            Birthday
+          </Text>
           <View
-          style={{
-            flexDirection: 'row',
-            justifyContent: 'center',
-            marginTop: widthPercentageToDP(3),
-            marginLeft: widthPercentageToDP(3),
-          }}
-        >
-          <TouchableOpacity
-            onPress={() => {
-              handlePress(inv4);
+            style={{
+              flexDirection: "row",
+              justifyContent: "center",
+              marginTop: widthPercentageToDP(3),
             }}
           >
-            <Image
-              source={inv4}
-              style={{
-                height: heightPercentageToDP('25'),
-                width: widthPercentageToDP('45'),
-                marginTop: heightPercentageToDP('-4.5'),
-                resizeMode: 'contain',
+            <TouchableOpacity
+              onPress={() => {
+                handlePress(inv6);
               }}
-            />
-          </TouchableOpacity>
-       
-         
-          <TouchableOpacity
-            onPress={() => {
-              handlePress(inv5);
-            }}
-          >
-            <Image
-              source={inv5}
-              style={{
-                height: heightPercentageToDP('25'),
-                width: widthPercentageToDP('45'),
-                marginTop: heightPercentageToDP('-4.5'),
-                resizeMode: 'contain',
+            >
+              <Image
+                source={inv6}
+                style={{
+                  height: heightPercentageToDP("25"),
+                  width: widthPercentageToDP("45"),
+                  marginTop: heightPercentageToDP("-4.5"),
+                  resizeMode: "contain",
+                }}
+              />
+            </TouchableOpacity>
+
+            <TouchableOpacity
+              onPress={() => {
+                handlePress(inv7);
               }}
-            />
-          </TouchableOpacity>
+            >
+              <Image
+                source={inv7}
+                style={{
+                  height: heightPercentageToDP("25"),
+                  width: widthPercentageToDP("45"),
+                  marginTop: heightPercentageToDP("-4.5"),
+                  resizeMode: "contain",
+                }}
+              />
+            </TouchableOpacity>
           </View>
-          </ScrollView>
-          <Text style={[textStyles.bigBold,{left:widthPercentageToDP('3'),marginTop:heightPercentageToDP('0')} ]}>Birthday</Text>
+          <Text
+            style={[
+              textStyles.bigBold,
+              {
+                left: widthPercentageToDP("3"),
+                marginTop: heightPercentageToDP("0"),
+              },
+            ]}
+          >
+            Holidays
+          </Text>
           <View
-          style={{
-            flexDirection: 'row',
-            justifyContent: 'center',
-            marginTop: widthPercentageToDP(3),
-          }}
-        >
-          <TouchableOpacity
-            onPress={() => {
-              handlePress(inv6);
+            style={{
+              flexDirection: "row",
+              justifyContent: "center",
+              marginTop: widthPercentageToDP(3),
             }}
           >
-            <Image
-              source={inv6}
-              style={{
-                height: heightPercentageToDP('25'),
-                width: widthPercentageToDP('45'),
-                marginTop: heightPercentageToDP('-4.5'),
-                resizeMode: 'contain',
+            <TouchableOpacity
+              onPress={() => {
+                handlePress(inv8);
               }}
-            />
-          </TouchableOpacity>
+            >
+              <Image
+                source={inv8}
+                style={{
+                  height: heightPercentageToDP("25"),
+                  width: widthPercentageToDP("45"),
+                  marginTop: heightPercentageToDP("-4.5"),
+                  resizeMode: "contain",
+                }}
+              />
+            </TouchableOpacity>
 
-         
-          <TouchableOpacity
-            onPress={() => {
-              handlePress(inv7);
-            }}
-          >
-            <Image
-              source={inv7}
-              style={{
-                height: heightPercentageToDP('25'),
-                width: widthPercentageToDP('45'),
-                marginTop: heightPercentageToDP('-4.5'),
-                resizeMode: 'contain',
+            <TouchableOpacity
+              onPress={() => {
+                handlePress(inv10);
               }}
-            />
-          </TouchableOpacity>
-          </View>
-          <Text style={[textStyles.bigBold,{left:widthPercentageToDP('3'),marginTop:heightPercentageToDP('0')} ]}>Holidays</Text>
-          <View
-          style={{
-            flexDirection: 'row',
-            justifyContent: 'center',
-            marginTop: widthPercentageToDP(3),
-          }}
-        >
-          <TouchableOpacity
-            onPress={() => {
-              handlePress(inv8);
-            }}
-          >
-            <Image
-              source={inv8}
-              style={{
-                height: heightPercentageToDP('25'),
-                width: widthPercentageToDP('45'),
-                marginTop: heightPercentageToDP('-4.5'),
-                resizeMode: 'contain',
-              }}
-            />
-          </TouchableOpacity>
-
-         
-          <TouchableOpacity
-            onPress={() => {
-              handlePress(inv10);
-            }}
-          >
-            <Image
-              source={inv10}
-              style={{
-                height: heightPercentageToDP('25'),
-                width: widthPercentageToDP('45'),
-                marginTop: heightPercentageToDP('-4.5'),
-                resizeMode: 'contain',
-              }}
-            />
-          </TouchableOpacity>
-          </View>
-
-
-          <View
-          style={{
-            flexDirection: 'row',
-            justifyContent: 'center',
-            marginTop: widthPercentageToDP(3),
-          }}
-        >
-          <TouchableOpacity
-            onPress={() => {
-              handlePress(inv11);
-            }}
-          >
-            <Image
-              source={inv11}
-              style={{
-                height: heightPercentageToDP('25'),
-                width: widthPercentageToDP('45'),
-                marginTop: heightPercentageToDP('-8.5'),
-                resizeMode: 'contain',
-              }}
-            />
-          </TouchableOpacity>
-
-         
-          <TouchableOpacity
-            onPress={() => {
-              handlePress(inv12);
-            }}
-          >
-            <Image
-              source={inv12}
-              style={{
-                height: heightPercentageToDP('25'),
-                width: widthPercentageToDP('45'),
-                marginTop: heightPercentageToDP('-8.5'),
-                resizeMode: 'contain',
-              }}
-            />
-          </TouchableOpacity>
+            >
+              <Image
+                source={inv10}
+                style={{
+                  height: heightPercentageToDP("25"),
+                  width: widthPercentageToDP("45"),
+                  marginTop: heightPercentageToDP("-4.5"),
+                  resizeMode: "contain",
+                }}
+              />
+            </TouchableOpacity>
           </View>
 
           <View
-          style={{
-            flexDirection: 'row',
-            justifyContent: 'center',
-            marginTop: widthPercentageToDP(3),
-          }}
-        >
-          <TouchableOpacity
-            onPress={() => {
-              handlePress(inv13);
+            style={{
+              flexDirection: "row",
+              justifyContent: "center",
+              marginTop: widthPercentageToDP(3),
             }}
           >
-            <Image
-              source={inv13}
-              style={{
-                height: heightPercentageToDP('25'),
-                width: widthPercentageToDP('45'),
-                marginTop: heightPercentageToDP('-8.5'),
-                resizeMode: 'contain',
+            <TouchableOpacity
+              onPress={() => {
+                handlePress(inv11);
               }}
-            />
-          </TouchableOpacity>
+            >
+              <Image
+                source={inv11}
+                style={{
+                  height: heightPercentageToDP("25"),
+                  width: widthPercentageToDP("45"),
+                  marginTop: heightPercentageToDP("-8.5"),
+                  resizeMode: "contain",
+                }}
+              />
+            </TouchableOpacity>
 
-         
-          <TouchableOpacity
-            onPress={() => {
-              handlePress(inv14);
+            <TouchableOpacity
+              onPress={() => {
+                handlePress(inv12);
+              }}
+            >
+              <Image
+                source={inv12}
+                style={{
+                  height: heightPercentageToDP("25"),
+                  width: widthPercentageToDP("45"),
+                  marginTop: heightPercentageToDP("-8.5"),
+                  resizeMode: "contain",
+                }}
+              />
+            </TouchableOpacity>
+          </View>
+
+          <View
+            style={{
+              flexDirection: "row",
+              justifyContent: "center",
+              marginTop: widthPercentageToDP(3),
             }}
           >
-            <Image
-              source={inv14}
-              style={{
-                height: heightPercentageToDP('25'),
-                width: widthPercentageToDP('45'),
-                marginTop: heightPercentageToDP('-8.5'),
-                resizeMode: 'contain',
+            <TouchableOpacity
+              onPress={() => {
+                handlePress(inv13);
               }}
-            />
-          </TouchableOpacity>
-          </View>
+            >
+              <Image
+                source={inv13}
+                style={{
+                  height: heightPercentageToDP("25"),
+                  width: widthPercentageToDP("45"),
+                  marginTop: heightPercentageToDP("-8.5"),
+                  resizeMode: "contain",
+                }}
+              />
+            </TouchableOpacity>
 
+            <TouchableOpacity
+              onPress={() => {
+                handlePress(inv14);
+              }}
+            >
+              <Image
+                source={inv14}
+                style={{
+                  height: heightPercentageToDP("25"),
+                  width: widthPercentageToDP("45"),
+                  marginTop: heightPercentageToDP("-8.5"),
+                  resizeMode: "contain",
+                }}
+              />
+            </TouchableOpacity>
           </View>
-       
+        </View>
       </ImageBackground>
     </ScrollView>
   );

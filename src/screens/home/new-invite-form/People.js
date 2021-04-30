@@ -68,7 +68,6 @@ function People({ route, navigation }) {
     //     event[snapshot.key] = snapshot.val();
     //   }
     // );
-    console.log("Mangos");
 
     formData.guestList = guestList;
     firebase
@@ -123,7 +122,6 @@ function People({ route, navigation }) {
   const sendInvite = () => {
     guests[foundUser.uid] = "no";
     db.child(foundUser.uid);
-    db.child(`${foundUser.uid}/Events/${eventID}`).set(formData);
 
     // db.child(user.user.uid).set({ email: user.user.email });
 
@@ -132,6 +130,10 @@ function People({ route, navigation }) {
     foundUserData.invited = 1;
     modifiedGuestList.push(foundUserData);
     setGuestList(modifiedGuestList);
+    const listFormData = formData;
+    listFormData["guest_list"] = guestList;
+
+    db.child(`${foundUser.uid}/Events/${eventID}`).push(listFormData);
     console.log("Data pushed");
     setSentMessgeStatus(!sentMessageStatus);
   };

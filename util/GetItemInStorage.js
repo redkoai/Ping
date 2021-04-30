@@ -1,4 +1,5 @@
-import AsyncStorage from '@react-native-community/async-storage'
+//import AsyncStorage from '@react-native-community/async-storage'
+import { AsyncStorage } from "react-native";
 /*
 
   Async storage : KEY , VALUE => Will stay locally

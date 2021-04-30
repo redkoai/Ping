@@ -16,6 +16,7 @@ import { widthPercentageToDP, heightPercentageToDP } from "ping/util/scaler";
 import upload from "ping/assets/createnew/dresscode/upload.png";
 //import ImagePicker from "react-native-image-crop-picker";
 const ImgPicker = (props) => {
+  console.log(props, "awesome");
   const [pickedImage, setPickedImage] = useState();
   const [photo, setPhoto] = useState("");
   const verifyPermissions = async () => {
@@ -48,15 +49,18 @@ const ImgPicker = (props) => {
     // setPickedImage(image.uri);
 
     //<----PHOT UPLOAD NOT WORKING ----->x
-    let result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.All,
-      allowsEditing: true,
-      aspect: [16, 9],
-      quality: 1,
-    })
-      .then()
-      .catch((e) => console.log(e));
 
+    const pickImage = async () => {
+      let result = await ImagePicker.launchImageLibraryAsync({
+        mediaTypes: ImagePicker.MediaTypeOptions.All,
+        allowsEditing: false,
+        aspect: [3, 2],
+        quality: 2,
+      });
+      console.log(result);
+    };
+
+    pickImage();
     let bucketName = "images";
     let file =
       "https://image.shutterstock.com/image-photo/mountains-under-mist-morning-amazing-260nw-1725825019.jpg";
@@ -66,7 +70,7 @@ const ImgPicker = (props) => {
     uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED, () => {
       let downloadURL = uploadTask.snapshot.downloadURL;
     });
-    console.log(result);
+   
   };
 
   const showImage = () => {

@@ -1,4 +1,5 @@
-import AsyncStorage from '@react-native-community/async-storage'
+//import AsyncStorage from "@react-native-community/async-storage";
+import { AsyncStorage } from "react-native";
 /*
 
   Async storage : KEY , VALUE => Will stay locally
@@ -7,12 +8,10 @@ import AsyncStorage from '@react-native-community/async-storage'
 
 
 */
-export default SaveItemInStorage = async (key, value) =>{
-    try {
-        await AsyncStorage.setItem(
-          key, value
-        );
-      } catch (error) {
-        console.log(e)
-    }
-}
+export default SaveItemInStorage = async (key, value) => {
+  try {
+    await AsyncStorage.setItem(key, value);
+  } catch (error) {
+    console.log(e);
+  }
+};

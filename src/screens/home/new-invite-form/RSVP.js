@@ -19,7 +19,7 @@ import uuid from "react-native-uuid";
 import firebase from "firebase";
 import "firebase/firestore";
 
-function RSVP({ navigation }) {
+function RSVP({ route, navigation }) {
   const { user } = useContext(AuthContext);
   const { formData, updateFormData } = useContext(NewInviteContext);
   const [isSignInVisible, setSignInVisibility] = useState(false);
@@ -46,10 +46,7 @@ function RSVP({ navigation }) {
   const writeUserData = (formData) => {
     // var randomID = uuid.v1();
     // setEventID(randomID);
-
     //formData.eventID = randomID;
-
-   
   };
   const fetchdata = () => {
     firebase
@@ -67,7 +64,6 @@ function RSVP({ navigation }) {
   useEffect(() => {
     formState.isSubmitSuccessful && !user && setSignInVisibility(true);
     formState.isSubmitSuccessful && user && writeUserData(formData);
-    
   }, [formState.isSubmitSuccessful]);
 
   const onSubmit = (data) => {
@@ -84,6 +80,8 @@ function RSVP({ navigation }) {
     if (data[Object.keys(data)[2]] === undefined) {
       data["total-invited"] = null;
     }
+
+    data["imagePath"] = route.params.imagePath;
     updateFormData(data);
     //console.log(eventID)
     // navigation.navigate('Signinpopup');
