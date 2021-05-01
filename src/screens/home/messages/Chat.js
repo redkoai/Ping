@@ -80,6 +80,8 @@ function Chat({route, navigation }) {
     }, [])
 
     return(
+
+
         <GiftedChat messages={messages} user = {UserInfo} onSend={send} />
     )
 

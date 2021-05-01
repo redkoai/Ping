@@ -20,14 +20,14 @@ function MessagesStackNavigator() {
         headerLeft: () => <ScreenTitle title="Messages" />,
       }}
        />
-       <MessagesStack.Screen 
+       {/* <MessagesStack.Screen 
       name="CreateNewMessage" 
       component={CreateNewMessage}
       options={{
         headerLeft: () => <BackChevron />,
         headerRight: () => <ScreenTitle title="Create New Message" />,
       }}
-       />
+       /> */}
        <MessagesStack.Screen 
       name="Chat" 
       component={Chat}

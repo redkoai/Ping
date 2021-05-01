@@ -209,13 +209,19 @@ function Accountsone({}) {
           text="Chat"
           small
           primary
-          onPress={addFriend}
+          onPress={() => { 
+            navigation.navigate('Chat', { OtherUserInfo: {
+                _id: foundUser.uid,
+                email: foundUser.email,
+                username: foundUser.username
+            }})
+        }}
           
          
         />
         </View>
         </View>
-        
+                  
         
       )
     })

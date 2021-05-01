@@ -159,7 +159,7 @@ icon={chat}
             <Spacer height={2} />
 
             <TouchableOpacity onPress={() => { 
-                navigation.navigate('CreateNewMessage')
+                navigation.navigate('Account',{screen:'Accountsone'})
             }}>
                  <Image source={newMessageBtn} style={{height: heightPercentageToDP('10'), width :widthPercentageToDP('80'), marginTop: heightPercentageToDP('5'), resizeMode:'contain', left:widthPercentageToDP('9') }} />
             </TouchableOpacity>
