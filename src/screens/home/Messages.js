@@ -182,7 +182,7 @@ icon={chat}
               <View style={{marginLeft:widthPercentageToDP('3'),marginTop:heightPercentageToDP('2'), flexDirection:'row'}}>
               <Text style={[textStyles.bigRegular,{left:heightPercentageToDP('0'),marginBottom:heightPercentageToDP('2') ,fontSize:actuatedNormalize(12)} ]}>Current Chats:</Text>
               <TouchableOpacity onPress={() => { 
-                navigation.navigate('CreateNewMessage')
+                navigation.navigate('Account',{screen:'Accountsone'})
             }}>
                 <Image source={newMessageBtn} style={{height: heightPercentageToDP('5'), marginLeft:heightPercentageToDP('22'),width :widthPercentageToDP('10'), marginTop: heightPercentageToDP(-1),marginBottom: heightPercentageToDP(2), resizeMode:'contain', left:widthPercentageToDP('9') }} />
             </TouchableOpacity>

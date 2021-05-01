@@ -40,6 +40,7 @@ function NewInviteStackNavigator() {
           name="createnewtemplates"
           component={createnewtemplates}
           options={{
+            headerTitle: false,
             headerLeft: () => <BackChevron />,
             headerRight: () => <ScreenTitle title="Templates" />,
           }}
@@ -53,6 +54,7 @@ function NewInviteStackNavigator() {
             headerShown: false,
             keyboardHidesTabBar: true,
             tabBarVisible: false,
+            headerTitle: false,
 
             tabBarOptions: {
               visible: false,
@@ -63,6 +65,7 @@ function NewInviteStackNavigator() {
           name="Details"
           component={Details}
           options={{
+            headerTitle: false,
             headerLeft: () => <BackChevron />,
             headerRight: () => <ScreenTitle title="Details" />,
           }}
@@ -70,7 +73,7 @@ function NewInviteStackNavigator() {
         <NewInviteStack.Screen
           name="Dresscode"
           component={Dresscode}
-          options={{
+          options={{headerTitle: false,
             headerLeft: () => <BackChevron />,
             headerRight: () => <ScreenTitle title="Dress Code" />,
           }}
@@ -79,6 +82,7 @@ function NewInviteStackNavigator() {
           name="FAQ"
           component={FAQ}
           options={{
+            headerTitle: false,
             headerLeft: () => <BackChevron />,
             headerRight: () => <ScreenTitle title="FAQ'S" />,
           }}
@@ -87,6 +91,7 @@ function NewInviteStackNavigator() {
           name="People"
           component={People}
           options={{
+            headerTitle: false,
             headerLeft: () => <BackChevron />,
             headerRight: () => <ScreenTitle title="People" />,
           }}
@@ -95,6 +100,7 @@ function NewInviteStackNavigator() {
           name="RSVP"
           component={RSVP}
           options={{
+            headerTitle: false,
             headerLeft: () => <BackChevron />,
             headerRight: () => <ScreenTitle title="RSVP Options" />,
           }}
@@ -104,6 +110,7 @@ function NewInviteStackNavigator() {
           name="EventInvited"
           component={EventInvited}
           options={{
+            headerTitle: false,
             headerLeft: () => <BackChevron text="RSVP" />,
           }}
         />
@@ -133,6 +140,7 @@ function NewInviteStackNavigator() {
           name="MyEvents"
           component={MyEvents}
           options={{
+            headerTitle: false,
             headerLeft: () => <BackChevron text="My Events" />,
             headerRight: () => <ScreenTitle title="Events" />,
           }}
@@ -153,6 +161,7 @@ function NewInviteStackNavigator() {
           name="SecretCode"
           component={SecretCode}
           options={{
+            headerTitle: false,
             headerLeft: () => <BackChevron />,
             // headerRight: () => <ScreenTitle title="RSVP Options" />,
           }}
