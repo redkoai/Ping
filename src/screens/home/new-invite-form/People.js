@@ -31,7 +31,7 @@ import adds from "ping/assets/invites/add.png";
 import add from "ping/assets/invites/adds.png";
 import { actuatedNormalize } from "ping/util/fontScaler";
 import uuid from "react-native-uuid";
-
+import email from "react-native-email";
 function People({ route, navigation }) {
   const { formData, updateFormData } = useContext(NewInviteContext);
   const [guestList, setGuestList] = useState([]);
@@ -97,24 +97,23 @@ function People({ route, navigation }) {
   };
 
   const consoleLog = () => {
-    console.log("guestlist = ", guests)
-  }
-
+    console.log("guestlist = ", guests);
+  };
 
   //////////////////////////////////////////
   // Send to people that do not have the app
   //////////////////////////////////////////
 
-  const [text, setText] = useState([]) 
+  const [text, setText] = useState([]);
 
   // create randomly generated password
-  const [password, setPassword] = useState()
+  const [password, setPassword] = useState();
 
   const updateText = (text) => {
     setText(text);
     // Todo generate this password randomly:
-    setPassword("test1234")
-    console.log("text input =", text)
+    setPassword("test1234");
+    console.log("text input =", text);
   };
 
   // const sendInviteToEmail = () => {
@@ -122,13 +121,13 @@ function People({ route, navigation }) {
   // }
 
   const handleEmail = () => {
-    const to = text // string or array of email addresses
+    const to = text; // string or array of email addresses
     email(to, {
-        // Optional additional arguments
-        cc: [`${text}`], // string or array of email addresses
-        bcc: 'jbodoia@gmail.com', // string or array of email addresses
-        subject: 'You have an invite from Ping',
-        body: `You have been invited to the follow event: 
+      // Optional additional arguments
+      cc: [`${text}`], // string or array of email addresses
+      bcc: "jbodoia@gmail.com", // string or array of email addresses
+      subject: "You have an invite from Ping",
+      body: `You have been invited to the follow event: 
         
         Event Name: ${formData.event} 
         
@@ -147,24 +146,20 @@ function People({ route, navigation }) {
         username: ${text}
         email: ${text}
         password: ${password}
-        `
-        
-        
-        
-        ,
-        
-    }).catch(console.error)
+        `,
+    }).catch(console.error);
     // create a user using the email from input:
-    firebase.auth().createUserWithEmailAndPassword(text, password).then(cred => {
-      console.log("cred =", cred)
-      // create email and username for user in firebase:
-      db.child(`${cred.user.uid}`).set({"email" : text, "username" : text})
-      // push the invite data to the database for the user created:
-      db.child(`${cred.user.uid}/Events`).push(formData)
-    })
-
-}
-
+    firebase
+      .auth()
+      .createUserWithEmailAndPassword(text, password)
+      .then((cred) => {
+        console.log("cred =", cred);
+        // create email and username for user in firebase:
+        db.child(`${cred.user.uid}`).set({ email: text, username: text });
+        // push the invite data to the database for the user created:
+        db.child(`${cred.user.uid}/Events`).push(formData);
+      });
+  };
 
   ////////////////////////////
   // changing color of buttons
@@ -246,13 +241,29 @@ function People({ route, navigation }) {
   const queryFriends = () => {
     let friends = {};
     db.child(`${user.uid}/Friends`).on("child_added", function (snapshot) {
-      console.log("snapshot value = ", snapshot.val().username);
+      console.log("snapshot value = ", snapshot.val().email);
       console.log("snapshot key = ", snapshot.key);
-      friends[snapshot.val().username] = snapshot.key;
+      friends[snapshot.val().email] = snapshot.key;
+      setFriends(friends);
+      console.log(friends, "orages");
     });
-    console.log(friends, "friends");
+
     return friends;
   };
+
+  useEffect(() => {
+    // friendLoop()
+    // let friends_list = queryFriends()
+    queryFriends();
+    console.log("friends =", friends);
+    // console.log("friends list = ", friends_list)
+  }, []);
+
+  useEffect(() => {
+    setInterval(() => {
+      queryFriends();
+    }, 1000);
+  }, []);
 
   const friendLoop = Object.keys(friends).map((key) => {
     console.log(key);
@@ -262,6 +273,7 @@ function People({ route, navigation }) {
 
       // db.child(user.user.uid).set({"email" : user.user.email})
     };
+
     return (
       <View style={styles.container}>
         <View style={{ flexDirection: "row" }}>
@@ -290,14 +302,6 @@ function People({ route, navigation }) {
       </View>
     );
   });
-
-  useEffect(() => {
-    // friendLoop()
-    // let friends_list = queryFriends()
-    setFriends(queryFriends());
-    console.log("friends =", friends);
-    // console.log("friends list = ", friends_list)
-  }, []);
 
   const [foundUser, setFoundUser] = useState({
     email: null,
@@ -416,9 +420,13 @@ function People({ route, navigation }) {
             />
           </Card>
           <TouchableOpacity>
-            <Button onPress={handleEmail} 
-            // onPress={ signUp }
-          > Send email </Button>
+            <Button
+              onPress={handleEmail}
+              // onPress={ signUp }
+            >
+              {" "}
+              Send email{" "}
+            </Button>
           </TouchableOpacity>
           <TouchableOpacity>
             {/* temporarily using this as a button to send to all friends */}
@@ -527,12 +535,13 @@ function People({ route, navigation }) {
             marginTop: heightPercentageToDP("40"),
           }}
         >
-          {friends ? (
+          {friends && (
             <View>
               <Text>Friends:</Text>
+
               {friendLoop}
             </View>
-          ) : null}
+          )}
           <CustomButton
             text="Send Invite to All Friends"
             onPress={sendInviteToAllFriends}

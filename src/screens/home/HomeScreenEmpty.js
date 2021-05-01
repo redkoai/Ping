@@ -120,6 +120,10 @@ function HomeScreenEmpty({}) {
           console.log("User isn't logged in");
         }
       });
+
+      setInterval(() => {
+        eventQuery();
+      }, 1000);
     });
 
     return unsubscribe;
@@ -227,199 +231,201 @@ function HomeScreenEmpty({}) {
 
   return (
     <View style={{ flex: 1 }}>
-      <ImageBackground source={emptyHome} style={styles.homeEmpty}>
-        {isLoggedIn ? (
-          <View
-            style={{
-              flexDirection: "column",
-              marginLeft: "3%",
-              justifyContent: "space-between",
-              marginTop: widthPercentageToDP(-43),
-            }}
-          >
+      {myEvents && (
+        <ImageBackground source={emptyHome} style={styles.homeEmpty}>
+          {isLoggedIn ? (
             <View
               style={{
-                flexDirection: "row",
+                flexDirection: "column",
+                marginLeft: "3%",
                 justifyContent: "space-between",
-                marginTop: widthPercentageToDP(45),
-                marginBottom: heightPercentageToDP("1"),
+                marginTop: widthPercentageToDP(-43),
               }}
             >
-              <Text
-                style={[
-                  textStyles.bigBold,
-                  { left: heightPercentageToDP("0") },
-                ]}
-              >
-                Home
-              </Text>
-              <TouchableOpacity
-                onPress={() =>
-                  navigation.navigate("Account", { screen: "SignIn" })
-                }
-              >
-                <Image
-                  source={profileIm}
-                  style={{
-                    height: heightPercentageToDP("4"),
-                    width: widthPercentageToDP("8"),
-                    marginBottom: heightPercentageToDP("2"),
-                    resizeMode: "contain",
-                    left: heightPercentageToDP("-2"),
-                  }}
-                />
-              </TouchableOpacity>
-            </View>
-
-            <View
-              style={{
-                flexDirection: "row",
-                justifyContent: "space-between",
-                marginTop: widthPercentageToDP(3),
-              }}
-            >
-              <Text
-                style={[
-                  textStyles.bigBold,
-                  {
-                    left: heightPercentageToDP("0"),
-                    marginBottom: heightPercentageToDP("2"),
-                  },
-                ]}
-              >
-                My Events
-              </Text>
-              <TouchableOpacity
-                onPress={() => {
-                  navigation.navigate("Events", { screen: "Events" });
+              <View
+                style={{
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                  marginTop: widthPercentageToDP(45),
+                  marginBottom: heightPercentageToDP("1"),
                 }}
               >
                 <Text
                   style={[
-                    textStyles.smallSemiBold,
-                    {
-                      color: "gray",
-                      fontSize: actuatedNormalize(12),
-                      left: heightPercentageToDP("-3"),
-                    },
+                    textStyles.bigBold,
+                    { left: heightPercentageToDP("0") },
                   ]}
                 >
-                  See all
+                  Home
                 </Text>
-              </TouchableOpacity>
-            </View>
-            <ScrollView
-              horizontal={true}
-              style={{
-                flexDirection: "row",
-                marginTop: widthPercentageToDP(3),
-              }}
-            >
-              <TouchableOpacity></TouchableOpacity>
-              {Object.keys(myEvents).length == 0 ? (
-                <View>
-                  <Text
-                    style={[
-                      textStyles.smallSemiBold,
-                      { color: "gray", fontSize: actuatedNormalize(12) },
-                    ]}
-                  >
-                    You don’t have any events scheduled...
-                  </Text>
+                <TouchableOpacity
+                  onPress={() =>
+                    navigation.navigate("Account", { screen: "SignIn" })
+                  }
+                >
                   <Image
-                    source={giffy}
+                    source={profileIm}
                     style={{
-                      height: heightPercentageToDP("17"),
-                      width: widthPercentageToDP("85"),
-                      marginBottom: heightPercentageToDP("5"),
+                      height: heightPercentageToDP("4"),
+                      width: widthPercentageToDP("8"),
+                      marginBottom: heightPercentageToDP("2"),
                       resizeMode: "contain",
+                      left: heightPercentageToDP("-2"),
                     }}
                   />
-                </View>
-              ) : (
-                <View>
-                  <Text>{EventLoop}</Text>
-                </View>
-              )}
-            </ScrollView>
-            <View
-              style={{
-                flexDirection: "row",
-                justifyContent: "space-between",
-                marginTop: widthPercentageToDP(3),
-                marginBottom: heightPercentageToDP("2"),
-              }}
-            >
-              <Text
-                style={[
-                  textStyles.bigBold,
-                  { left: heightPercentageToDP("0") },
-                ]}
-              >
-                My Invites
-              </Text>
-              <TouchableOpacity
-                onPress={() => {
-                  navigation.navigate("Events", { screen: "Events" });
+                </TouchableOpacity>
+              </View>
+
+              <View
+                style={{
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                  marginTop: widthPercentageToDP(3),
                 }}
               >
                 <Text
                   style={[
-                    textStyles.smallSemiBold,
+                    textStyles.bigBold,
                     {
-                      color: "gray",
-                      fontSize: actuatedNormalize(12),
-                      left: heightPercentageToDP("-3"),
+                      left: heightPercentageToDP("0"),
+                      marginBottom: heightPercentageToDP("2"),
                     },
                   ]}
                 >
-                  See all
+                  My Events
                 </Text>
-              </TouchableOpacity>
-            </View>
-            <ScrollView
-              horizontal={true}
-              style={{
-                flexDirection: "row",
-                marginTop: widthPercentageToDP(3),
-              }}
-            >
-              <TouchableOpacity></TouchableOpacity>
-              {Object.keys(myInvites).length != 0 ? (
-                <View>
-                  <Text>{InviteLoop}</Text>
-                </View>
-              ) : (
-                <View>
+                <TouchableOpacity
+                  onPress={() => {
+                    navigation.navigate("Events", { screen: "Events" });
+                  }}
+                >
                   <Text
                     style={[
                       textStyles.smallSemiBold,
-                      { color: "gray", fontSize: actuatedNormalize(12) },
+                      {
+                        color: "gray",
+                        fontSize: actuatedNormalize(12),
+                        left: heightPercentageToDP("-3"),
+                      },
                     ]}
                   >
-                    You don’t have any invites yet.{" "}
+                    See all
                   </Text>
-                </View>
-              )}
-            </ScrollView>
-
-            <View
-              style={{
-                left: heightPercentageToDP("0.6"),
-                marginBottom: widthPercentageToDP(5),
-              }}
-            >
-              <CustomButton
-                text="Create a new event"
-                primary
-                shadow
-                onPress={() => {
-                  navigation.navigate("NewInvite");
+                </TouchableOpacity>
+              </View>
+              <ScrollView
+                horizontal={true}
+                style={{
+                  flexDirection: "row",
+                  marginTop: widthPercentageToDP(3),
                 }}
-              />
-            </View>
+              >
+                <TouchableOpacity></TouchableOpacity>
+                {Object.keys(myEvents).length == 0 ? (
+                  <View>
+                    <Text
+                      style={[
+                        textStyles.smallSemiBold,
+                        { color: "gray", fontSize: actuatedNormalize(12) },
+                      ]}
+                    >
+                      You don’t have any events scheduled...
+                    </Text>
+                    <Image
+                      source={giffy}
+                      style={{
+                        height: heightPercentageToDP("17"),
+                        width: widthPercentageToDP("85"),
+                        marginBottom: heightPercentageToDP("5"),
+                        resizeMode: "contain",
+                      }}
+                    />
+                  </View>
+                ) : (
+                  <View>
+                    <Text>{EventLoop}</Text>
+                  </View>
+                )}
+              </ScrollView>
 
-            {/* <TouchableOpacity  style={{left: heightPercentageToDP('2.5')}} onPress={() => { 
+              <View
+                style={{
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                  marginTop: widthPercentageToDP(3),
+                  marginBottom: heightPercentageToDP("2"),
+                }}
+              >
+                <Text
+                  style={[
+                    textStyles.bigBold,
+                    { left: heightPercentageToDP("0") },
+                  ]}
+                >
+                  My Invites
+                </Text>
+                <TouchableOpacity
+                  onPress={() => {
+                    navigation.navigate("Events", { screen: "Events" });
+                  }}
+                >
+                  <Text
+                    style={[
+                      textStyles.smallSemiBold,
+                      {
+                        color: "gray",
+                        fontSize: actuatedNormalize(12),
+                        left: heightPercentageToDP("-3"),
+                      },
+                    ]}
+                  >
+                    See all
+                  </Text>
+                </TouchableOpacity>
+              </View>
+              <ScrollView
+                horizontal={true}
+                style={{
+                  flexDirection: "row",
+                  marginTop: widthPercentageToDP(3),
+                }}
+              >
+                <TouchableOpacity></TouchableOpacity>
+                {Object.keys(myInvites).length != 0 ? (
+                  <View>
+                    <Text>{InviteLoop}</Text>
+                  </View>
+                ) : (
+                  <View>
+                    <Text
+                      style={[
+                        textStyles.smallSemiBold,
+                        { color: "gray", fontSize: actuatedNormalize(12) },
+                      ]}
+                    >
+                      You don’t have any invites yet.{" "}
+                    </Text>
+                  </View>
+                )}
+              </ScrollView>
+
+              <View
+                style={{
+                  left: heightPercentageToDP("0.6"),
+                  marginBottom: widthPercentageToDP(5),
+                }}
+              >
+                <CustomButton
+                  text="Create a new event"
+                  primary
+                  shadow
+                  onPress={() => {
+                    navigation.navigate("NewInvite");
+                  }}
+                />
+              </View>
+
+              {/* <TouchableOpacity  style={{left: heightPercentageToDP('2.5')}} onPress={() => { 
     navigation.navigate('Account', {screen: " Accountsone"})
 
 }}>      
@@ -428,90 +434,91 @@ function HomeScreenEmpty({}) {
           shadow
         />
         </TouchableOpacity> */}
-          </View>
-        ) : (
-          <View
-            style={{
-              flexDirection: "column",
-              justifyContent: "center",
-              marginTop: widthPercentageToDP(3),
-            }}
-          >
-            <View
-              style={{
-                flexDirection: "row",
-                justifyContent: "space-between",
-                marginTop: widthPercentageToDP(-10),
-                marginBottom: heightPercentageToDP("3"),
-              }}
-            >
-              <Text
-                style={[
-                  textStyles.bigBold,
-                  { left: heightPercentageToDP("0") },
-                ]}
-              >
-                Home
-              </Text>
-              <TouchableOpacity
-                onPress={() =>
-                  navigation.navigate("Account", { screen: "SignUp" })
-                }
-              >
-                <Image
-                  source={profileIm}
-                  style={{
-                    height: heightPercentageToDP("4"),
-                    width: widthPercentageToDP("8"),
-                    marginBottom: heightPercentageToDP("2"),
-                    resizeMode: "contain",
-                    left: heightPercentageToDP("0"),
-                  }}
-                />
-              </TouchableOpacity>
             </View>
-            <Image
-              source={emptyPic}
-              style={{
-                height: heightPercentageToDP("40"),
-                width: widthPercentageToDP("85"),
-                marginTop: heightPercentageToDP("0"),
-                resizeMode: "contain",
-              }}
-            />
-
+          ) : (
             <View
               style={{
-                left: heightPercentageToDP("1"),
-                marginBottom: widthPercentageToDP(5),
-                marginTop: widthPercentageToDP(30),
+                flexDirection: "column",
+                justifyContent: "center",
+                marginTop: widthPercentageToDP(3),
               }}
             >
-              <CustomButton
-                text="Create a new event"
-                primary
-                shadow
-                onPress={() => {
-                  navigation.navigate("NewInvite");
+              <View
+                style={{
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                  marginTop: widthPercentageToDP(-10),
+                  marginBottom: heightPercentageToDP("3"),
+                }}
+              >
+                <Text
+                  style={[
+                    textStyles.bigBold,
+                    { left: heightPercentageToDP("0") },
+                  ]}
+                >
+                  Home
+                </Text>
+                <TouchableOpacity
+                  onPress={() =>
+                    navigation.navigate("Account", { screen: "SignUp" })
+                  }
+                >
+                  <Image
+                    source={profileIm}
+                    style={{
+                      height: heightPercentageToDP("4"),
+                      width: widthPercentageToDP("8"),
+                      marginBottom: heightPercentageToDP("2"),
+                      resizeMode: "contain",
+                      left: heightPercentageToDP("0"),
+                    }}
+                  />
+                </TouchableOpacity>
+              </View>
+              <Image
+                source={emptyPic}
+                style={{
+                  height: heightPercentageToDP("40"),
+                  width: widthPercentageToDP("85"),
+                  marginTop: heightPercentageToDP("0"),
+                  resizeMode: "contain",
                 }}
               />
-            </View>
 
-            {/* <TouchableOpacity onPress={() => { 
+              <View
+                style={{
+                  left: heightPercentageToDP("1"),
+                  marginBottom: widthPercentageToDP(5),
+                  marginTop: widthPercentageToDP(30),
+                }}
+              >
+                <CustomButton
+                  text="Create a new event"
+                  primary
+                  shadow
+                  onPress={() => {
+                    navigation.navigate("NewInvite");
+                  }}
+                />
+              </View>
+
+              {/* <TouchableOpacity onPress={() => { 
                             navigation.navigate('NewInvite')
         
                         }}>
                             <Image source={createNewEventBtn} style={{height: heightPercentageToDP('7'), width :widthPercentageToDP('70'), marginTop: heightPercentageToDP('5'), resizeMode:'contain', left:heightPercentageToDP('5'),marginBottom:heightPercentageToDP('20') }} />
                         </TouchableOpacity> */}
-            {/* <TouchableOpacity onPress={() => { 
+              {/* <TouchableOpacity onPress={() => { 
                            navigation.navigate('SignUp')
                           //navigation.navigate('SecretCode')
                         }}>
                             <Image source={addFriendsBtn} style={{height: heightPercentageToDP('7'), width :widthPercentageToDP('70'), marginBottom: heightPercentageToDP('15'), resizeMode:'contain' , left:heightPercentageToDP('5')}} />
                         </TouchableOpacity> */}
-          </View>
-        )}
-      </ImageBackground>
+            </View>
+          )}
+        </ImageBackground>
+      )}
     </View>
   );
 }
