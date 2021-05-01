@@ -65,6 +65,21 @@ function HomeScreenEmpty({}) {
     setMyEvents(myEvents_obj);
   };
 
+  // const imagePath = `../../../assets/invites/${event.imagePath}`;
+
+  // const getImage = (img) => {
+  //   if (event.imagePath === "1.png") {
+  //     return {
+  //       image: require("../../../assets/invites/1.png"),
+  //     };
+  //   } else if (event.imagePath === "2.png") {
+  //     return { image: require("../../../assets/invites/2.png") };
+  //   } else if (event.imagePath === "3.png") {
+  //     return { image: require("../../../assets/invites/3.png") };
+  //   } else {
+  //     return { image: require("../../../assets/invites/3.png") };
+  //   }
+  // };
   // console.log("invite state =", myInvites)
 
   // useEffect(() => {
@@ -205,7 +220,19 @@ function HomeScreenEmpty({}) {
           padding: widthPercentageToDP(1),
         }}
       >
+              {/* <ImageBackground
+            source={getImage().image}
+            style={{
+              height: heightPercentageToDP("30"),
+              width: widthPercentageToDP("100"),
+              marginLeft: widthPercentageToDP("0"),
+              marginTop: heightPercentageToDP("-1"),
+              resizeMode: "stretch",
+            }}
+          /> */}
+
         <CustomButtonCopyLong
+        
           text={myInvites[key]}
           buttonSecondary
           shadow

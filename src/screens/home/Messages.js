@@ -15,7 +15,7 @@ import chat from "ping/assets/messages/chat.png";
 import homettl from "ping/assets/messages/messagettl.png";
 import AuthContext from 'ping/src/contexts/AuthContext';
 import firebase from 'firebase';
-import newMessageBtn from "ping/assets/newMessage.png"
+import newMessageBtn from "ping/assets/pluss.png"
 import StoreData from "../../../util/SaveItemInStorage";
 import RetrieveData from "../../../util/GetItemInStorage";
 import LoginChecker from "../../../util/validators/LoginChecker";
@@ -136,7 +136,7 @@ icon={chat}
         {
           userHistory == {}
           ? (
-            <View style={{flex: 1}}>    
+            <View style={{flex: 1, backgroundColor: "white" }}>    
        
             <ImageBackground source={emptyHome} style={styles.homeEmpty}>
             <View 
@@ -177,36 +177,24 @@ icon={chat}
             </View>
           )
           : (
-            <View style={{marginTop:heightPercentageToDP('2')}}>
-              <Text style={[textStyles.bigRegular,{left:heightPercentageToDP('0'),marginBottom:heightPercentageToDP('2') ,fontSize:actuatedNormalize(12)} ]}>Current Chats:</Text>
-              {userHistoryLoop}
-              <ScrollView>
-              <View 
-            style={{ 
-                flexDirection: 'column', 
-                justifyContent: 'center',
-                marginTop:widthPercentageToDP(3)
-                }}>
-
-            {/* <Image 
-            source={emptyPic}
-            style={{height: heightPercentageToDP('40'), 
-              width :widthPercentageToDP('85'),
-              marginTop: heightPercentageToDP('10'),
-              resizeMode:'contain', 
-              left:heightPercentageToDP('5') 
-              
-              }} /> */}
             
-            </View>
-
-            </ScrollView>
-            <TouchableOpacity onPress={() => { 
+            <View style={{marginTop:heightPercentageToDP('2')}}>
+              <View style={{marginLeft:widthPercentageToDP('3'),marginTop:heightPercentageToDP('2'), flexDirection:'row'}}>
+              <Text style={[textStyles.bigRegular,{left:heightPercentageToDP('0'),marginBottom:heightPercentageToDP('2') ,fontSize:actuatedNormalize(12)} ]}>Current Chats:</Text>
+              <TouchableOpacity onPress={() => { 
                 navigation.navigate('CreateNewMessage')
             }}>
-                <Image source={newMessageBtn} style={{height: heightPercentageToDP('10'), width :widthPercentageToDP('80'), marginTop: heightPercentageToDP(40), resizeMode:'contain', left:widthPercentageToDP('9') }} />
+                <Image source={newMessageBtn} style={{height: heightPercentageToDP('5'), marginLeft:heightPercentageToDP('22'),width :widthPercentageToDP('10'), marginTop: heightPercentageToDP(-1),marginBottom: heightPercentageToDP(2), resizeMode:'contain', left:widthPercentageToDP('9') }} />
             </TouchableOpacity>
+            
+</View>
+<ScrollView>
+              {userHistoryLoop}
+             
+     
 
+            </ScrollView>
+        
               {/* <TouchableOpacity style={{alignContent:'center',marginLeft:widthPercentageToDP(10)}} onPress={() => { 
                 navigation.navigate('CreateNewMessage') }}>
                     <CustomButton
