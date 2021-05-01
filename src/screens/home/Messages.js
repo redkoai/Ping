@@ -11,14 +11,15 @@ import React, {useEffect, useState, useContext} from "react";
 import CustomButton from 'ping/src/components/inputs/CustomButton';
 import Spacer from 'ping/src/components/Spacer';
 import emptyPic from "ping/assets/messages/img.png";
+import chat from "ping/assets/messages/chat.png";
 import homettl from "ping/assets/messages/messagettl.png";
 import AuthContext from 'ping/src/contexts/AuthContext';
 import firebase from 'firebase';
-import newMessageBtn from "ping/assets/newMessage.png"
+import newMessageBtn from "ping/assets/pluss.png"
 import StoreData from "../../../util/SaveItemInStorage";
 import RetrieveData from "../../../util/GetItemInStorage";
 import LoginChecker from "../../../util/validators/LoginChecker";
-import CustomButtonCopyLong from 'ping/src/components/inputs/CustomButtonCopyLong';
+import CustomButtonCopy from 'ping/src/components/inputs/CustomButtonCopy';
 import { colors, textStyles } from 'ping/src/styles/styles';
 import { actuatedNormalize } from "ping/util/fontScaler";
 
@@ -71,7 +72,7 @@ function Messages({}) {
         // console.log("snapshot val user._id", snapshot.val()[`${Object.keys(snapshot.val())[0]}`].user._id)
           if (snapshot.val()[`${Object.keys(snapshot.val())[0]}`].user._id == user.uid) {
               console.log("found user", snapshot.val())
-              userHistory[snapshot.val()[`${Object.keys(snapshot.val())[0]}`].userTo.email] = {
+              userHistory[snapshot.val()[`${Object.keys(snapshot.val())[0]}`].userTo.username] = {
                 text: snapshot.val()[`${Object.keys(snapshot.val())[0]}`].text, 
                 timestamp: snapshot.val()[`${Object.keys(snapshot.val())[0]}`].timestamp,
                 _id: snapshot.val()[`${Object.keys(snapshot.val())[0]}`].userTo._id
@@ -79,7 +80,7 @@ function Messages({}) {
           } 
           if (snapshot.val()[`${Object.keys(snapshot.val())[0]}`].userTo._id == user.uid) {
             console.log("found user", snapshot.val())
-            userHistory[snapshot.val()[`${Object.keys(snapshot.val())[0]}`].user.email] = {
+            userHistory[snapshot.val()[`${Object.keys(snapshot.val())[0]}`].user.username] = {
               text: snapshot.val()[`${Object.keys(snapshot.val())[0]}`].text, 
               timestamp: snapshot.val()[`${Object.keys(snapshot.val())[0]}`].timestamp,
               _id: snapshot.val()[`${Object.keys(snapshot.val())[0]}`].user._id
@@ -99,7 +100,7 @@ function Messages({}) {
     //   <Button title={key} onPress={() => { 
     //     navigation.navigate('Chat', { OtherUserInfo: {
     //         _id: userHistory[key]._id,
-    //         email: key
+    //         username: key
     //     }})
     // }}>
     //   {key}
@@ -110,16 +111,19 @@ function Messages({}) {
         justifyContent: 'center',
         marginLeft:widthPercentageToDP(0)
         }}>
-<CustomButtonCopyLong
+              
+             
+<CustomButtonCopy
 text= {key}
 buttonSecondary
 shadow
   onPress={() => { 
     navigation.navigate('Chat', { OtherUserInfo: {
         _id: userHistory[key]._id,
-        email: key
+        username: key
     }})
 }}
+icon={chat}
 />
   </View>
     )
@@ -132,7 +136,8 @@ shadow
         {
           userHistory == {}
           ? (
-            <View style={{flex: 1}}>    
+            <View style={{flex: 1, backgroundColor: "white" }}>    
+       
             <ImageBackground source={emptyHome} style={styles.homeEmpty}>
             <View 
             style={{ 
@@ -172,36 +177,24 @@ shadow
             </View>
           )
           : (
-            <View style={{marginTop:heightPercentageToDP('2'),marginBottom:heightPercentageToDP('3')}}>
-              <Text style={[textStyles.bigRegular,{left:heightPercentageToDP('0'), fontSize:actuatedNormalize(12)} ]}>Current Chats:</Text>
-              {userHistoryLoop}
-              <ScrollView>
-              <View 
-            style={{ 
-                flexDirection: 'column', 
-                justifyContent: 'center',
-                marginTop:widthPercentageToDP(3)
-                }}>
-
-            {/* <Image 
-            source={emptyPic}
-            style={{height: heightPercentageToDP('40'), 
-              width :widthPercentageToDP('85'),
-              marginTop: heightPercentageToDP('10'),
-              resizeMode:'contain', 
-              left:heightPercentageToDP('5') 
-              
-              }} /> */}
             
-            </View>
-
-            </ScrollView>
-            <TouchableOpacity onPress={() => { 
+            <View style={{marginTop:heightPercentageToDP('2')}}>
+              <View style={{marginLeft:widthPercentageToDP('3'),marginTop:heightPercentageToDP('2'), flexDirection:'row'}}>
+              <Text style={[textStyles.bigRegular,{left:heightPercentageToDP('0'),marginBottom:heightPercentageToDP('2') ,fontSize:actuatedNormalize(12)} ]}>Current Chats:</Text>
+              <TouchableOpacity onPress={() => { 
                 navigation.navigate('CreateNewMessage')
             }}>
-                <Image source={newMessageBtn} style={{height: heightPercentageToDP('10'), width :widthPercentageToDP('80'), marginTop: heightPercentageToDP(40), resizeMode:'contain', left:widthPercentageToDP('9') }} />
+                <Image source={newMessageBtn} style={{height: heightPercentageToDP('5'), marginLeft:heightPercentageToDP('22'),width :widthPercentageToDP('10'), marginTop: heightPercentageToDP(-1),marginBottom: heightPercentageToDP(2), resizeMode:'contain', left:widthPercentageToDP('9') }} />
             </TouchableOpacity>
+            
+</View>
+<ScrollView>
+              {userHistoryLoop}
+             
+     
 
+            </ScrollView>
+        
               {/* <TouchableOpacity style={{alignContent:'center',marginLeft:widthPercentageToDP(10)}} onPress={() => { 
                 navigation.navigate('CreateNewMessage') }}>
                     <CustomButton

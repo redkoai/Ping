@@ -5,8 +5,9 @@ import React from 'react';
 import { View, Image, Text, StyleSheet, TouchableOpacity } from 'react-native';
 
 function CustomButton({
-  icon,
+  
   text,
+  icon,
   onPress,
   shadow = false,
   primary = false,
@@ -30,10 +31,10 @@ function CustomButton({
         onPress={onPress}
         disabled={disabled}
       >
-        {icon && <Image source={icon} style={styles.icon} />}
+       {icon && <Image source={icon} style={styles.icon} />}
         <Text
           style={[
-            textStyles.bigBold,
+            textStyles.bigBold, 
             //small ? textStyles.normalBold : textStyles.bigBold,
             primary ? styles.textPrimary : styles.textSecondary,
             outline && styles.textOutline,
@@ -43,6 +44,7 @@ function CustomButton({
         >
           {text}
         </Text>
+        
       </TouchableOpacity>
     </View>
   );
@@ -50,13 +52,13 @@ function CustomButton({
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: heightPercentageToDP(1.2),
+    marginTop: heightPercentageToDP(0),
     marginBottom: heightPercentageToDP(1.5),
     //borderColor: 'red',
     //borderWidth: 1,
   },
   button: {
-    height: heightPercentageToDP(Platform.OS === 'ios' ? 5.8 : 6.3),
+    height: heightPercentageToDP(10),
     paddingHorizontal: widthPercentageToDP(1),
     borderRadius: widthPercentageToDP(1),
     display: 'flex',
@@ -66,12 +68,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   buttonLarge: {
-    width: widthPercentageToDP(30),
-    height: heightPercentageToDP(Platform.OS === 'ios' ? 10 : 6.3),
+    width: widthPercentageToDP(100),
+    height: heightPercentageToDP(Platform.OS === 'ios' ? 5 : 6.3),
   },
   buttonNarrow: {
     width: widthPercentageToDP(47),
-    height: heightPercentageToDP(Platform.OS === 'ios' ? 5.8 : 6.3),
+    height: heightPercentageToDP(Platform.OS === 'ios' ? 5 : 6.3),
   },
   buttonSmall: {
     minWidth: widthPercentageToDP(28),
@@ -90,7 +92,7 @@ const styles = StyleSheet.create({
   buttonOutline: {
     backgroundColor: 'white',
     borderColor: colors.primary,
-    borderWidth: 3,
+    borderWidth: 1,
   },
   buttonSecondary: {
     backgroundColor: 'white',
@@ -106,18 +108,21 @@ const styles = StyleSheet.create({
     resizeMode: 'contain',
     width: 35,
     height: heightPercentageToDP(2.5),
-    marginRight: 8,
+    marginRight: widthPercentageToDP(60),
   },
   textPrimary: {
     color: 'white',
-    fontSize:actuatedNormalize(11)
+    fontSize:actuatedNormalize(11),
+    textAlign:'right',
+    marginLeft: widthPercentageToDP(-10),
   },
   textOutline: {
     color: colors.primary,
   },
   textSecondary: {
     color: colors.primary,
-    fontSize:actuatedNormalize(11)
+    fontSize:actuatedNormalize(11),
+    textAlign:'left'
   },
   textPrimaryDisabled: {
     color: 'white',
