@@ -24,7 +24,8 @@ import add from 'ping/assets/invites/adds.png';
 import { colors, textStyles } from 'ping/src/styles/styles';
 import { actuatedNormalize } from "ping/util/fontScaler";
 import 'firebase/firestore'
-import CustomButtonCopyLong from 'ping/src/components/inputs/CustomButtonCopyLong';
+import CustomButtonCopy from 'ping/src/components/inputs/CustomButtonCopy';
+import CustomButtonCopyLong from "ping/src/components/inputs/CustomButtonCopyLong";
 
 function Accountsone({}) {
     // const navigation = useNavigation()
@@ -43,9 +44,9 @@ function Accountsone({}) {
     const queryFriends = () => {
       let friends = {}
       db.child(`${user.uid}/Friends`).on('child_added', function(snapshot) {
-        console.log("snapshot value = ", snapshot.val().email)
+        console.log("snapshot value = ", snapshot.val().username)
         console.log("snapshot key = ", snapshot.key)
-        friends[snapshot.val().email] = snapshot.key
+        friends[snapshot.val(). username] = snapshot.key
     })
     return friends
     }
@@ -192,9 +193,29 @@ function Accountsone({}) {
     const friendLoop = Object.keys(friends).map((key) => {
       console.log(key)
       return (
-        <View>
-          <Text>{key}</Text>
+
+        <View style={{flexDirection:'row', justifyContent:'space-between'}}>
+          <Text  style={[
+                          textStyles.normalMedium,{marginLeft:widthPercentageToDP('6'), fontSize:actuatedNormalize(15), marginTop: heightPercentageToDP('3') }]}>{key}</Text>
+            {/* <CustomButtonCopy
+      text= {key}
+      buttonSecondary
+      shadow
+      
+      /> */}
+          {/* <Text>{key}</Text> */}
+          <View style={{marginRight:widthPercentageToDP('6'),fontSize:actuatedNormalize(15), marginTop: heightPercentageToDP('1'), }}>
+                        <CustomButton
+          text="Chat"
+          small
+          primary
+          onPress={addFriend}
+          
+         
+        />
         </View>
+        </View>
+        
         
       )
     })
@@ -214,12 +235,12 @@ function Accountsone({}) {
 
           <ImageBackground source={emptyHome} style={styles.homeEmpty}>
             
-          {isLoggedIn ? (
+          
                   <View style={{flex:1, marginTop:'0%'}}>
-                      <View style={{ marginTop:'2%'}}>
-                    
+                      <View style={{ marginTop:'-0.5%'}}>
+                  
                     <SearchBar
-                        placeholder="Search for users..."
+                        placeholder="Search friends..."
                         autoCapitalize = "none"
                         containerStyle = {{backgroundColor: "white"}}
                         inputStyle = {{color: "black"}}
@@ -234,14 +255,36 @@ function Accountsone({}) {
                     <View style={styles.container}>
                     {
                       foundUser.email != null ?
+
                       <View style={styles.container}>
                       <View style={{flexDirection:'row', justifyContent:'space-between'}}>
-                        <Text  style={{marginLeft:widthPercentageToDP('0'), fontSize:actuatedNormalize(15), marginTop: heightPercentageToDP('3'), }}>
+                        <Text  style={[
+                          textStyles.bigBold,{marginLeft:widthPercentageToDP('6'), fontSize:actuatedNormalize(15), marginTop: heightPercentageToDP('3'), }]}>
                             {foundUser.username}
                         </Text>
-                        <TouchableOpacity onPress={addFriend}>
-                          <Image source={add}  style={{height: heightPercentageToDP('10'), width :widthPercentageToDP('10'), marginTop: heightPercentageToDP('-0.5'), marginLeft:widthPercentageToDP('0'), resizeMode:'contain' }} />
-                        </TouchableOpacity>
+                       
+                        <View style={{marginRight:widthPercentageToDP('6'),fontSize:actuatedNormalize(15), marginTop: heightPercentageToDP('1'), }}>
+                        {friendLoop.includes(foundUser.username) === false ?
+                        <CustomButton
+          text="Add"
+          small
+          buttonSecondary
+          onPress={addFriend}
+          outline
+         
+        />
+    :
+
+    <CustomButton
+          text="Add"
+          small
+          disabled
+          onPress={addFriend}
+          
+         
+        />
+                        }
+         </View>
                       </View>
                     </View>
                     :
@@ -252,30 +295,26 @@ function Accountsone({}) {
                           <Image source={add}  style={{height: heightPercentageToDP('10'), width :widthPercentageToDP('10'), marginTop: heightPercentageToDP('0'), marginLeft:widthPercentageToDP('2'), resizeMode:'contain' }} />
                         </TouchableOpacity> */}
                     </View>
-                    <TouchableOpacity onPress={() => { 
+                    {/* <TouchableOpacity onPress={() => { 
                         navigation.navigate('Chat', { OtherUserInfo: {
                             _id: foundUser.uid,
                             email: foundUser.email
                         }})
-                    }}>
-                      <View style={{marginLeft:widthPercentageToDP('0')}}> 
-                <CustomButton
-          text="Add friends"
+                    }}> */}
+                      <View style={{marginTop:widthPercentageToDP('4')}}> 
+                <CustomButtonCopy
+          text="Friends"
           shadow
         />
           
         </View>
-        </TouchableOpacity>
+        {/* </TouchableOpacity> */}
         {
           Object.keys(friends).length != 0 ? 
-
-      <CustomButtonCopyLong
-      text= {friendLoop}
-      buttonSecondary
-      shadow
-      
-      />
- 
+          <ScrollView>
+      {friendLoop}
+      </ScrollView>
+    
 
             : null
 
@@ -283,68 +322,7 @@ function Accountsone({}) {
         </View>
 
 
-  ):(
-    <View>
-    <View
-    style={{
-      flexDirection: 'column',
-      justifyContent: 'center',
-      marginTop: widthPercentageToDP(3),
-    }}
-  >
-
-<TouchableOpacity onPress={() => navigation.navigate('settings')}>
-            <Image 
-            source={settings} 
-            style={{
-            height: heightPercentageToDP('3'),
-            width :widthPercentageToDP('30'), 
-            resizeMode:'contain',
-            marginTop: heightPercentageToDP('-7'), 
-            left: widthPercentageToDP('70'),
-            
-            }} />
-            </TouchableOpacity>
-
-            {/* <Image source={Accname} style={{height: heightPercentageToDP('10'), width :widthPercentageToDP('95'),  resizeMode:'contain',marginTop: heightPercentageToDP('10'), }} /> */}
-            
-            {/* <Image 
-            source={Accfriends} 
-            style={{height: heightPercentageToDP('4'),
-             width :widthPercentageToDP('30'), 
-             resizeMode:'contain',
-             marginTop: heightPercentageToDP('1'),
-              }} /> */}
-
-            {/* <Image source={Accactivity} style={{height: heightPercentageToDP('20'), width :widthPercentageToDP('85'), marginTop: heightPercentageToDP('-7'), resizeMode:'contain' }} /> */}
-            
-            <Image 
-            source={Acccenterone} 
-            style={{height: heightPercentageToDP('40'),
-            width :widthPercentageToDP('95'),
-            marginTop: heightPercentageToDP('3'),
-            left: heightPercentageToDP('1.5'),
-            resizeMode:'contain'
-             }} />
-            </View>
-
-        <Spacer height={2} />
-        {/* <TouchableOpacity  style={{left: heightPercentageToDP('3.5')}}>       
-        <CustomButton
-          text="Create a new event"
-          primary
-          shadow
-        />
-        </TouchableOpacity>  */}
-        
-        <TouchableOpacity  style={{left: heightPercentageToDP('3.5')}}>     
-        <CustomButton
-          text="Add friends"
-          shadow
-        />
-        </TouchableOpacity>
- </View>
-          )}
+  
             
         </ImageBackground>
         </View>

@@ -19,15 +19,14 @@ function Dresscode({ route, navigation }) {
   const { formData, updateFormData } = useContext(NewInviteContext);
 
   const { control, errors, setValue, reset, handleSubmit } = useForm({
-    resolver: yupResolver(DRESSCODE_SCHEMA),
+    //resolver: yupResolver(DRESSCODE_SCHEMA),
   });
   const onSubmit = (data) => {
     updateFormData(data);
-    navigation.navigate("FAQ", {imagePath:route.params.imagePath});
+    navigation.navigate("FAQ", { imagePath: route.params.imagePath });
     //reset();
     //console.log("After Submit Dresscode---", formData)
   };
-
 
   const listData = [
     { label: "Casual and Comfortable", value: "casual-and-comfortable" },
