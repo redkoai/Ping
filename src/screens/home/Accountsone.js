@@ -215,7 +215,7 @@ function Accountsone({}) {
           <ImageBackground source={emptyHome} style={styles.homeEmpty}>
             
           {isLoggedIn ? (
-                  <View style={{marginTop:'-65%'}}>
+                  <View style={{marginTop:'-15%'}}>
                     
                     <SearchBar
                         placeholder="Search for users..."
@@ -256,12 +256,13 @@ function Accountsone({}) {
                             email: foundUser.email
                         }})
                     }}>
-                      {/* <View style={{marginLeft:widthPercentageToDP('0')}}> 
+                      <View style={{marginLeft:widthPercentageToDP('0')}}> 
                 <CustomButton
           text="Add friends"
           shadow
         />
-        </View> */}
+          
+        </View>
         </TouchableOpacity>
         {
           Object.keys(friends).length != 0 ? 

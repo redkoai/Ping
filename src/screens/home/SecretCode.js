@@ -9,6 +9,7 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 
 import firebase from 'firebase';
 import 'firebase/firestore'
+import { actuatedNormalize } from 'ping/util/fontScaler';
 
 function SecretCode({ navigation }) {
 
@@ -55,7 +56,7 @@ function SecretCode({ navigation }) {
             width :widthPercentageToDP('95'), 
             resizeMode:'contain',
             marginTop: heightPercentageToDP('-62'),
-            left:heightPercentageToDP('13')}}>
+            left:heightPercentageToDP('15')}}>
                 <Text style={[textStyles.bigBold ]}>{secretCode}</Text>
             </View>
         <TouchableOpacity style={{marginTop: heightPercentageToDP('8'),left:heightPercentageToDP('4')}}>
@@ -66,12 +67,12 @@ function SecretCode({ navigation }) {
          />
          </TouchableOpacity>
 
-        <TouchableOpacity style={{marginTop: heightPercentageToDP('0'),left:heightPercentageToDP('4')}}>
+        {/* <TouchableOpacity style={{marginTop: heightPercentageToDP('0'),left:heightPercentageToDP('4')}}>
         <CustomButton
           text="View photos"
           shadow
         />
-        </TouchableOpacity>
+        </TouchableOpacity> */}
 
         </View>
       </KeyboardAwareScrollView>

@@ -13,6 +13,7 @@ import CustomAddButton from "ping/src/components/inputs/CustomAddButton";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import faqprogline from "ping/assets/createnew/faq/faqprogline.png";
 
+
 function FAQ({ route, navigation }) {
   const { formData, updateFormData } = useContext(NewInviteContext);
 
@@ -89,7 +90,7 @@ function FAQ({ route, navigation }) {
         <CustomTextInput
           input={{
             name: "faqguests",
-            label: "What should guests prepare?",
+            label: "What should guests prepare or bring?",
             placeholder: "Bring some food for the potluck!",
             defaultValue: "",
           }}

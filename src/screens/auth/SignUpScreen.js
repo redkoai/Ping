@@ -4,12 +4,19 @@ import PingIcon from 'ping/src/icons/PingIcon';
 import googleLogo from 'ping/assets/Google_G_Logo.png';
 import firebase from 'firebase';
 
-import React, { useContext, useCallback, useState } from 'react';
+import * as ImagePicker from 'expo-image-picker';
+import * as Permissions from 'expo-permissions';
+import React, { useContext, useCallback, useState,useEffect } from 'react';
 import { useFocusEffect } from '@react-navigation/native';
 import AuthContext from 'ping/src/contexts/AuthContext';
+import profileIm from "ping/assets/NavBarAssets/prof.png";
+import { KeyboardAvoidingView, SafeAreaView, StyleSheet, Dimensions, View,Text, TouchableOpacity,Image } from 'react-native';
 
-import { KeyboardAvoidingView, SafeAreaView, StyleSheet, Dimensions, View,Text, TouchableOpacity } from 'react-native';
 
+// import storage from '@react-native-firebase/storage';
+// import * as Progress from 'react-native-progress';
+
+// import ImagePicker from 'react-native-image-picker';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import AUTH_SCHEMA from 'ping/src/schema/authSchema';
@@ -17,6 +24,8 @@ import AUTH_SCHEMA from 'ping/src/schema/authSchema';
 import Spacer from 'ping/src/components/Spacer';
 import { EmailInput, PasswordInput, UserNameInput } from 'ping/src/components/inputs/CustomTextInput';
 import CustomButton from 'ping/src/components/inputs/CustomButton';
+
+console.disableYellowBox = true;
 
 function SignUpScreen({ navigation }) {
   const db = firebase.database().ref("users")
@@ -29,14 +38,10 @@ function SignUpScreen({ navigation }) {
   const [username, setUsername] = useState()
   
 
+
   const onSignUpSuccess = (user) => {
-    // console.log("username input = ", username)
     console.log("user = ", user)
-    db.child(`${user.user.uid}`).set({"email" : user.user.email, "username" : username})
-    // console.log("user email pushed")
-    // console.log("user info pushed")
-    // console.log("user success =", user)
-    // navigation.navigate('HomeScreenEmpty');
+    db.child(`${user.user.uid}`).set({"email" : user.user.email, "username" : username, "avatar" : image})
   };
   const onSignUpFailure = (errorMessage) => {
     console.log("user failure = ", user)
@@ -48,10 +53,30 @@ function SignUpScreen({ navigation }) {
     setUsername(username)
   }
 
-  // const update = {
-  //   displayName: `${username}`
-  // }
-  
+  const [image, setImage] = useState(null);
+      useEffect(() => {
+      async () => {
+        if (Platform.OS !== 'web'){
+          const {status} = await ImagePicker.requestMediaLibraryPermissionsAsync();
+          if (status !== 'granted') {
+            alert('Sorry, we need camera roll permissions to make this work!');
+          }
+        }
+      }
+    });
+
+  const pickImage = async () => {
+    let result = await ImagePicker.launchImageLibraryAsync({
+        mediaTypes: ImagePicker.MediaTypeOptions.All,
+        allowsEditing:true,
+        aspect: [2,2],
+        quality: 1,
+    });
+    console.log(result);
+    if (!result.cancelled){
+        setImage(result.uri);
+    }
+};
 
   return (
     <SafeAreaView
@@ -68,8 +93,14 @@ function SignUpScreen({ navigation }) {
         contentContainerStyle={{ flex: 1, alignItems: 'center' }}
         style={{ flex: 1, alignItems: 'center' }}
       >
-        <PingIcon size={heightPercentageToDP(20)} color={colors.primary} style={styles.logo} />
+        <PingIcon size={heightPercentageToDP(12)} color={colors.primary} style={styles.logo} />
         <Spacer height={6.5} />
+        {image && <Image source={{uri: image}} style={{marginTop:'0%', height: heightPercentageToDP('10'), width: widthPercentageToDP('30')}} />}
+        <TouchableOpacity onPress={pickImage}>
+                {/* <Image source={profileIm} style={{marginBottom:'2%', width :widthPercentageToDP('30'), height :heightPercentageToDP('8'), resizeMode:'contain'}} /> */}
+                
+                 <Text  style={[textStyles.normalSemiBold, { marginTop:'2%',color: colors.primary }]}> Pick Your Profile Image</Text>
+            </TouchableOpacity>
 
         <UserNameInput control={control} errors={errors} onChangeText={onChange} value={username}/>
         <EmailInput control={control} errors={errors} />
@@ -96,6 +127,7 @@ function SignUpScreen({ navigation }) {
           <TouchableOpacity onPress={() => navigation.navigate('SignIn')}>
             <Text style={[textStyles.normalSemiBold, { color: colors.primary }]}>  Sign In</Text>
           </TouchableOpacity>
+    
         </View>
       </KeyboardAvoidingView>
     </SafeAreaView>

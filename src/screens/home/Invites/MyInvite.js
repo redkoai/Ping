@@ -282,7 +282,8 @@ function MyInvite({ navigation, route }) {
         >
         <View
           style={{
-            left: heightPercentageToDP("4"),
+            paddingHorizontal: widthPercentageToDP("3"),
+            marginBottom: heightPercentageToDP("1"),
             textAlign: "center",
             marginTop: heightPercentageToDP("1"),
           }}
@@ -382,7 +383,8 @@ function MyInvite({ navigation, route }) {
             ]}
           >
             {event["radio-buttons"]}
-          </Text> </View>
+          </Text> 
+          </View>
           )}
           <View
             style={{

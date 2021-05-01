@@ -31,6 +31,7 @@ import adds from "ping/assets/invites/add.png";
 import add from "ping/assets/invites/adds.png";
 import { actuatedNormalize } from "ping/util/fontScaler";
 import uuid from "react-native-uuid";
+import email from 'react-native-email'
 
 function People({ route, navigation }) {
   const { formData, updateFormData } = useContext(NewInviteContext);
@@ -416,9 +417,17 @@ function People({ route, navigation }) {
             />
           </Card>
           <TouchableOpacity>
-            <Button onPress={handleEmail} 
+            {/* <CustomButton onPress={handleEmail} 
             // onPress={ signUp }
-          > Send email </Button>
+          > Send email </Button> */}
+          <View style={{marginLeft: widthPercentageToDP("25")}}> 
+          <CustomButton 
+             text="Email Invites"
+             onPress={handleEmail} 
+             narrow
+             primary
+           />
+           </View>
           </TouchableOpacity>
           <TouchableOpacity>
             {/* temporarily using this as a button to send to all friends */}
@@ -480,6 +489,8 @@ function People({ route, navigation }) {
                     />
                   </TouchableOpacity>
                 )}
+
+                {/* todo conditional rendering */}
                 <TouchableOpacity onPress={addFriend}>
                   <Image
                     source={add}

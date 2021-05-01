@@ -447,7 +447,7 @@ function HomeScreenEmpty({}) {
 
             <View
               style={{
-                left: heightPercentageToDP("3"),
+                left: heightPercentageToDP("0.5"),
                 marginBottom: widthPercentageToDP(5),
               }}
             >

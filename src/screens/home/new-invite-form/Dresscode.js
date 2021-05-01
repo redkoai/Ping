@@ -100,9 +100,9 @@ function Dresscode({ route, navigation }) {
           />
         </View>
 
-        <CustomInputLabel text="Share some Inspo" optional />
+        {/* <CustomInputLabel text="Share some Inspo" optional />
         <Spacer height={1} />
-        <ImagePicker imagePath={route.params.imagePath} />
+        <ImagePicker imagePath={route.params.imagePath} /> */}
 
         <Spacer height={5} />
         <View style={{ alignSelf: "flex-end" }}>

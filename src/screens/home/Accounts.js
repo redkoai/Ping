@@ -122,6 +122,7 @@ function Settings({}) {
 
                <View>
                <View style={{flexDirection:'row'}} >
+               {/* <Image source={{uri: user.avatar}} style={{marginTop:'0%', height: heightPercentageToDP('10'), width: widthPercentageToDP('30')}} /> */}
                   <Text style={[textStyles.smallSemiBold,{ fontSize:actuatedNormalize(18), marginLeft:widthPercentageToDP('5'), marginTop:widthPercentageToDP('5')}]}>Hello</Text>
                   <Text style={[textStyles.smallSemiBold,{ fontSize:actuatedNormalize(18), marginLeft:widthPercentageToDP('0'), marginTop:widthPercentageToDP('5')}]}> {username},</Text>
                   </View>
