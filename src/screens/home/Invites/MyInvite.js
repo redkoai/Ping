@@ -31,7 +31,7 @@ import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view
 import Moment from "moment";
 import add from "ping/assets/invites/add.png";
 import send from "ping/assets/invites/send.png";
-import newMessageBtn from "ping/assets/newMessage.png";
+import newMessageBtn from "ping/assets/invites/messagehost.png";
 
 import firebase from "firebase";
 import "firebase/firestore";
@@ -149,18 +149,19 @@ function MyInvite({ navigation, route }) {
           <ImageBackground
             source={getImage().image}
             style={{
-              height: heightPercentageToDP("35"),
-              width: widthPercentageToDP("95"),
+              height: heightPercentageToDP("30"),
+              width: widthPercentageToDP("100"),
+              marginLeft: widthPercentageToDP("0"),
               marginTop: heightPercentageToDP("-1"),
-              resizeMode: "contain",
+              resizeMode: "stretch",
             }}
           />
           <Text
             style={[
               textStyles.bigBold,
               {
-                marginTop: heightPercentageToDP("29"),
-                left: heightPercentageToDP("3"),
+                marginTop: heightPercentageToDP("31"),
+                left: heightPercentageToDP("0"),
               },
             ]}
           >
@@ -171,7 +172,7 @@ function MyInvite({ navigation, route }) {
               textStyles.normalBold,
               {
                 left: heightPercentageToDP("25"),
-                marginTop: heightPercentageToDP("-22"),
+                marginTop: heightPercentageToDP("-35"),
               },
             ]}
           >
@@ -181,8 +182,8 @@ function MyInvite({ navigation, route }) {
             style={[
               textStyles.normalBold,
               {
-                left: heightPercentageToDP("13"),
-                marginTop: heightPercentageToDP("3"),
+                left: heightPercentageToDP("5"),
+                marginTop: heightPercentageToDP("-2"),
               },
             ]}
           >
@@ -210,6 +211,7 @@ function MyInvite({ navigation, route }) {
             height: heightPercentageToDP("10"),
             width: widthPercentageToDP("20"),
             resizeMode: "contain",
+            flexDirection:'row',
             marginTop: heightPercentageToDP("3"),
             left: heightPercentageToDP("3"),
           }}
@@ -222,9 +224,21 @@ function MyInvite({ navigation, route }) {
               navigation.navigate("SecretCode");
             }}
           />
+                  <View style={{ marginLeft: widthPercentageToDP(10),marginTop: heightPercentageToDP("1"), }}>
+          <CustomButton text="RSVP" small secondary outline />
         </View>
 
-        <TouchableOpacity>
+        {/* TODO MESSSAGE HOST TAKE HOST UID AND MESSAGE */}
+        {/* navigation.navigate("Invest", { screen: "InvestScreen" }) */}
+        {/* navigation.navigate("**stack_Name**", {
+ screen:"screen_name_connect_with_**stack_name**",
+ params:{
+ user:"anything_string_or_object"
+}
+}) */}
+        </View>
+
+        {/* <TouchableOpacity>
           <View
             style={{
               height: heightPercentageToDP("10"),
@@ -234,12 +248,12 @@ function MyInvite({ navigation, route }) {
               left: heightPercentageToDP("32"),
             }}
           >
-            {/* <Text style={[textStyles.bigBold,{ color: colors.primary }]}>Edit</Text>
+            <Text style={[textStyles.bigBold,{ color: colors.primary }]}>Edit</Text>
           <View style={{marginTop: heightPercentageToDP('-3.5'),left:heightPercentageToDP('5')}}>
           <MaterialIcons name="edit" size={32} color="#A6ACE9" />
-          </View>  */}
+          </View> 
           </View>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
 
         <View
           style={{
@@ -257,7 +271,14 @@ function MyInvite({ navigation, route }) {
           left:heightPercentageToDP('25')}}>
           <Text style={[ { color: colors.darkGrey }]}>{event.startdate}</Text>
           </View> */}
-
+<View
+          style={{
+            left: heightPercentageToDP("2"),
+            flexDirection:'column',
+            textAlign: "center",
+            marginTop: heightPercentageToDP("1"),
+          }}
+        >
         <View
           style={{
             left: heightPercentageToDP("4"),
@@ -274,7 +295,7 @@ function MyInvite({ navigation, route }) {
             style={[
               textStyles.normalBold,
               {
-                left: heightPercentageToDP("4"),
+                left: widthPercentageToDP("10"),
                 marginTop: heightPercentageToDP("-2.8"),
               },
             ]}
@@ -376,8 +397,8 @@ function MyInvite({ navigation, route }) {
             </TouchableOpacity>
           </View>
         </View>
-
-        <Spacer height={3} />
+        </View>
+        {/* <Spacer height={3} /> */}
         {/* 
           <View >
           <Text style={[textStyles.bigSemiBold,{left:heightPercentageToDP('2')}]}>
@@ -395,7 +416,7 @@ function MyInvite({ navigation, route }) {
             resizeMode={"cover"} />
           </View> */}
 
-        <Spacer height={5} />
+        {/* <Spacer height={5} /> */}
 
         {/* <View >
           <Text style={[textStyles.bigSemiBold,{left:heightPercentageToDP('2')}]}>
@@ -414,7 +435,7 @@ function MyInvite({ navigation, route }) {
            <Text>{event['co-host-1']}</Text> 
           </View> */}
 
-        <Spacer height={5} />
+        {/* <Spacer height={5} /> */}
 
         {/* <View>
           <Text style={[textStyles.bigSemiBold,{left:heightPercentageToDP('2')}]}>
@@ -443,18 +464,6 @@ function MyInvite({ navigation, route }) {
         }}
       >
         <View style={{ marginLeft: widthPercentageToDP(10) }}>
-          <CustomButton text="RSVP" small primary />
-        </View>
-
-        {/* TODO MESSSAGE HOST TAKE HOST UID AND MESSAGE */}
-        {/* navigation.navigate("Invest", { screen: "InvestScreen" }) */}
-        {/* navigation.navigate("**stack_Name**", {
- screen:"screen_name_connect_with_**stack_name**",
- params:{
- user:"anything_string_or_object"
-}
-}) */}
-        <View style={{ marginLeft: widthPercentageToDP(10) }}>
           <TouchableOpacity
             style={{
               alignContent: "center",
@@ -476,11 +485,11 @@ function MyInvite({ navigation, route }) {
             <Image
               source={newMessageBtn}
               style={{
-                height: heightPercentageToDP("7"),
-                width: widthPercentageToDP("70"),
+                height: heightPercentageToDP("20"),
+                width: widthPercentageToDP("90"),
                 marginTop: heightPercentageToDP("5"),
                 resizeMode: "contain",
-                left: heightPercentageToDP("2.5"),
+                left: heightPercentageToDP("-7"),
               }}
             />
             {/* <CustomButton text="Message Host" narrow primary /> */}

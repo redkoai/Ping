@@ -4,7 +4,7 @@ import { actuatedNormalize } from "ping/util/fontScaler";
 import React from 'react';
 import { View, Image, Text, StyleSheet, TouchableOpacity } from 'react-native';
 
-function CustomButton({
+function CustomButtonCopyLong({
   icon,
   text,
   onPress,
@@ -50,13 +50,13 @@ function CustomButton({
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: heightPercentageToDP(0.5),
-    marginBottom: heightPercentageToDP(0),
+    marginTop: heightPercentageToDP(1.2),
+    marginBottom: heightPercentageToDP(1.5),
     //borderColor: 'red',
     //borderWidth: 1,
   },
   button: {
-    height: heightPercentageToDP(Platform.OS === 'ios' ? 5.8 : 6.3),
+    height: heightPercentageToDP(20),
     paddingHorizontal: widthPercentageToDP(1),
     borderRadius: widthPercentageToDP(1),
     display: 'flex',
@@ -66,8 +66,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   buttonLarge: {
-    width: widthPercentageToDP(100),
-    height: heightPercentageToDP(Platform.OS === 'ios' ? 5.8 : 6.3),
+    width: widthPercentageToDP(30),
+    height: heightPercentageToDP(Platform.OS === 'ios' ? 18 : 6.3),
   },
   buttonNarrow: {
     width: widthPercentageToDP(47),
@@ -127,4 +127,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default CustomButton;
+export default CustomButtonCopyLong;

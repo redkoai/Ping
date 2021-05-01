@@ -19,7 +19,7 @@ import AuthContext from "ping/src/contexts/AuthContext";
 import { actuatedNormalize } from "ping/util/fontScaler";
 import profileIm from "ping/assets/NavBarAssets/prof.png";
 import CustomButton from "ping/src/components/inputs/CustomButton";
-import CustomButtonCopy from "ping/src/components/inputs/CustomButtonCopy";
+import CustomButtonCopyLong from "ping/src/components/inputs/CustomButtonCopyLong";
 import giffy from "../../../assets/homeScreen/circle.gif";
 import firebase from "firebase";
 
@@ -141,9 +141,23 @@ function HomeScreenEmpty({}) {
           padding: 10,
         }}
       >
-        <View>
-          <Text>{myEvents[key]}</Text>
-        </View>
+              <View
+        style={{
+          marginRight: widthPercentageToDP(1),
+          
+          padding: widthPercentageToDP(1),
+        }}
+      >
+        <CustomButtonCopyLong
+          text={myEvents[key]}
+          buttonSecondary
+          shadow
+          style={{ fontSize: actuatedNormalize(11) }}
+          onPress={() => {
+            navigation.navigate("MyInvite", { eventID: eventID });
+          }}
+        />
+      </View>
       </TouchableOpacity>
     );
   });
@@ -186,11 +200,12 @@ function HomeScreenEmpty({}) {
       <View
         style={{
           marginRight: widthPercentageToDP(1),
-          marginTop: 30,
+          // marginTop: 30,
+          
           padding: widthPercentageToDP(1),
         }}
       >
-        <CustomButtonCopy
+        <CustomButtonCopyLong
           text={myInvites[key]}
           buttonSecondary
           shadow
@@ -405,7 +420,7 @@ function HomeScreenEmpty({}) {
 
             <View
               style={{
-                left: heightPercentageToDP("0.6"),
+                left: heightPercentageToDP("3"),
                 marginBottom: widthPercentageToDP(5),
               }}
             >
