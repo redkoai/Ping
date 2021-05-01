@@ -210,12 +210,13 @@ function Accountsone({}) {
     console.log(search)
 
     return (
-        <View style={{ flex: 1 }}>
+        <View style={{flexDirection: "column",flex:2 }}>
 
           <ImageBackground source={emptyHome} style={styles.homeEmpty}>
             
           {isLoggedIn ? (
-                  <View style={{marginTop:'-15%'}}>
+                  <View style={{flex:1, marginTop:'0%'}}>
+                      <View style={{ marginTop:'2%'}}>
                     
                     <SearchBar
                         placeholder="Search for users..."
@@ -229,16 +230,17 @@ function Accountsone({}) {
                         onChangeText={updateSearch}
                         value={search}
                     />
+                     </View>
                     <View style={styles.container}>
                     {
                       foundUser.email != null ?
                       <View style={styles.container}>
-                      <View style={{flexDirection:'row'}}>
-                        <Text  style={{marginLeft:widthPercentageToDP('10'), fontSize:actuatedNormalize(15), marginTop: heightPercentageToDP('30'), }}>
+                      <View style={{flexDirection:'row', justifyContent:'space-between'}}>
+                        <Text  style={{marginLeft:widthPercentageToDP('0'), fontSize:actuatedNormalize(15), marginTop: heightPercentageToDP('3'), }}>
                             {foundUser.username}
                         </Text>
                         <TouchableOpacity onPress={addFriend}>
-                          <Image source={add}  style={{height: heightPercentageToDP('10'), width :widthPercentageToDP('10'), marginTop: heightPercentageToDP('30'), marginLeft:widthPercentageToDP('2'), resizeMode:'contain' }} />
+                          <Image source={add}  style={{height: heightPercentageToDP('10'), width :widthPercentageToDP('10'), marginTop: heightPercentageToDP('-0.5'), marginLeft:widthPercentageToDP('0'), resizeMode:'contain' }} />
                         </TouchableOpacity>
                       </View>
                     </View>
