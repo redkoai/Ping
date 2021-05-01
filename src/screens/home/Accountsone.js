@@ -215,7 +215,7 @@ function Accountsone({}) {
           <ImageBackground source={emptyHome} style={styles.homeEmpty}>
             
           {isLoggedIn ? (
-                  <View style={{marginTop:'-105%'}}>
+                  <View style={{marginTop:'-65%'}}>
                     
                     <SearchBar
                         placeholder="Search for users..."
@@ -234,11 +234,11 @@ function Accountsone({}) {
                       foundUser.email != null ?
                       <View style={styles.container}>
                       <View style={{flexDirection:'row'}}>
-                        <Text  style={{marginLeft:widthPercentageToDP('10'), fontSize:actuatedNormalize(15), marginTop: heightPercentageToDP('3'), }}>
+                        <Text  style={{marginLeft:widthPercentageToDP('10'), fontSize:actuatedNormalize(15), marginTop: heightPercentageToDP('30'), }}>
                             {foundUser.username}
                         </Text>
                         <TouchableOpacity onPress={addFriend}>
-                          <Image source={add}  style={{height: heightPercentageToDP('10'), width :widthPercentageToDP('10'), marginTop: heightPercentageToDP('0'), marginLeft:widthPercentageToDP('2'), resizeMode:'contain' }} />
+                          <Image source={add}  style={{height: heightPercentageToDP('10'), width :widthPercentageToDP('10'), marginTop: heightPercentageToDP('30'), marginLeft:widthPercentageToDP('2'), resizeMode:'contain' }} />
                         </TouchableOpacity>
                       </View>
                     </View>
@@ -256,12 +256,12 @@ function Accountsone({}) {
                             email: foundUser.email
                         }})
                     }}>
-                      <View style={{marginLeft:widthPercentageToDP('9')}}> 
+                      {/* <View style={{marginLeft:widthPercentageToDP('0')}}> 
                 <CustomButton
           text="Add friends"
           shadow
         />
-        </View>
+        </View> */}
         </TouchableOpacity>
         {
           Object.keys(friends).length != 0 ? 

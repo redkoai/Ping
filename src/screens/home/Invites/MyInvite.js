@@ -178,6 +178,7 @@ function MyInvite({ navigation, route }) {
           >
             {event.startdate}
           </Text>
+  
           <Text
             style={[
               textStyles.normalBold,
@@ -296,7 +297,7 @@ function MyInvite({ navigation, route }) {
               textStyles.normalBold,
               {
                 left: widthPercentageToDP("10"),
-                marginTop: heightPercentageToDP("-2.8"),
+                marginTop: heightPercentageToDP("-1.8"),
               },
             ]}
           >
@@ -333,6 +334,17 @@ function MyInvite({ navigation, route }) {
           >
             {event.startdate}
           </Text>
+          <Text
+            style={[
+              textStyles.normalBold,
+              {
+                left: heightPercentageToDP("5"),
+                marginTop: heightPercentageToDP("0"),
+              },
+            ]}
+          >
+            {event.enddate}
+          </Text>
         </View>
 
         <Spacer height={1} />
@@ -344,6 +356,8 @@ function MyInvite({ navigation, route }) {
           >
             <MaterialCommunityIcons name="hanger" size={32} color="black" />
           </View>
+          {event["radio-buttons"] === "casual-and-comfortable" ? (
+            <View>
           <Text
             style={[
               textStyles.normalBold,
@@ -353,8 +367,23 @@ function MyInvite({ navigation, route }) {
               },
             ]}
           >
-            {event["radio-buttons"]}
+            Casual and Comfortable
           </Text>
+          </View>
+          ):(
+            <View>          
+              <Text
+            style={[
+              textStyles.normalBold,
+              {
+                left: heightPercentageToDP("5"),
+                marginTop: heightPercentageToDP("-2.6"),
+              },
+            ]}
+          >
+            {event["radio-buttons"]}
+          </Text> </View>
+          )}
           <View
             style={{
               left: heightPercentageToDP("40"),
@@ -385,6 +414,163 @@ function MyInvite({ navigation, route }) {
           >
             FAQ'S
           </Text>
+
+          {event.faqguests ==! "" ? (
+            <View>
+          <Text
+            style={[
+              textStyles.normalBold,
+              {
+                marginTop: heightPercentageToDP(".5"),
+                left: heightPercentageToDP("5"),
+              },
+            ]}
+          >
+           Guests Should Bring
+          </Text>
+          <Text
+            style={[
+              textStyles.normalRegular,
+              {
+                marginTop: heightPercentageToDP(".5"),
+                left: heightPercentageToDP("5"),
+              },
+            ]}
+          >
+            {event.faqguests}
+          
+          </Text>
+          </View>
+          ):(
+          <View></View>
+            )}
+
+            {event.faqpeoplepark ==! "" ? (
+            <View>
+          <Text
+            style={[
+              textStyles.normalBold,
+              {
+                marginTop: heightPercentageToDP(".5"),
+                left: heightPercentageToDP("5"),
+              },
+            ]}
+          >
+           Where To Park
+          </Text>
+          <Text
+            style={[
+              textStyles.normalRegular,
+              {
+                marginTop: heightPercentageToDP(".5"),
+                left: heightPercentageToDP("5"),
+              },
+            ]}
+          >
+            {event.faqpeoplepark}
+          </Text>
+          </View>
+          ):(
+          <View></View>
+            )}
+          
+
+
+
+          {event.faqsecretcode ==! "" ? (
+            <View>
+          <Text
+            style={[
+              textStyles.normalBold,
+              {
+                marginTop: heightPercentageToDP(".5"),
+                left: heightPercentageToDP("5"),
+              },
+            ]}
+          >
+          Secret Code
+          </Text>
+          <Text
+            style={[
+              textStyles.normalRegular,
+              {
+                marginTop: heightPercentageToDP(".5"),
+                left: heightPercentageToDP("5"),
+              },
+            ]}
+          >
+            {event.faqsecretcode}
+          </Text>
+         
+          </View>
+          ):(
+          <View></View>
+            )}
+
+
+             {event['co-host-1'] ==! "" ? (
+            <View>
+          <Text
+            style={[
+              textStyles.normalBold,
+              {
+                marginTop: heightPercentageToDP(".5"),
+                left: heightPercentageToDP("5"),
+              },
+            ]}
+          >
+          Co-Host
+          </Text>
+          <Text
+            style={[
+              textStyles.normalRegular,
+              {
+                marginTop: heightPercentageToDP(".5"),
+                left: heightPercentageToDP("5"),
+              },
+            ]}
+          >
+            {event['co-host-1']}
+          </Text>
+         
+          </View>
+          ):(
+          <View></View>
+            )}
+
+
+
+{event['request-num-of-kids'] ==! "" ? (
+            <View>
+          <Text
+            style={[
+              textStyles.normalBold,
+              {
+                marginTop: heightPercentageToDP(".5"),
+                left: heightPercentageToDP("5"),
+              },
+            ]}
+          >
+          Can Kids Come?
+          </Text>
+          <Text
+            style={[
+              textStyles.normalRegular,
+              {
+                marginTop: heightPercentageToDP(".5"),
+                left: heightPercentageToDP("5"),
+              },
+            ]}
+          >
+            
+            {event['request-num-of-kids']}
+          </Text>
+          </View>
+          ):(
+          <View></View>
+            )}
+
+
           <View
             style={{
               left: heightPercentageToDP("40"),
