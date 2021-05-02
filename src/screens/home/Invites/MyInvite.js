@@ -8,6 +8,7 @@ import {
   Text,
   TouchableOpacity,
   ImageBackground,
+  Button
 } from "react-native";
 import NewInviteContext from "ping/src/contexts/NewInviteContext";
 import AuthContext from "ping/src/contexts/AuthContext";
@@ -17,6 +18,8 @@ import { widthPercentageToDP, heightPercentageToDP } from "ping/util/scaler";
 import CustomButton from "ping/src/components/inputs/CustomButton";
 import CalendarIcon from "ping/src/icons/CalendarIcon";
 import LocationNearMeIcon from "ping/src/icons/LocationNearMeIcon";
+import { InAppBrowser } from "@matt-block/react-native-in-app-browser";
+import * as WebBrowser from 'expo-web-browser';
 import {
   Entypo,
   MaterialIcons,
@@ -76,6 +79,9 @@ function MyInvite({ navigation, route }) {
     console.log("event = ", event);
   };
 
+
+  const url = "https://www.google.com/maps/place/" + event.location
+  
   /////////////////////////////////////////////
   // Firebase query for event host information
   //////////////////////////////////////////////
@@ -226,7 +232,18 @@ function MyInvite({ navigation, route }) {
             }}
           />
                   <View style={{ marginLeft: widthPercentageToDP(10),marginTop: heightPercentageToDP("1"), }}>
-          <CustomButton text="RSVP" small secondary outline />
+          <CustomButton text="RSVP" small secondary outline onPress={() => {
+              navigation.navigate("Messages", {
+                screen: "Chat",
+                params: {
+                  OtherUserInfo: {
+                    _id: event["co-host-0"],
+                    email: hostEmail,
+                    username: hostUsername,
+                  },
+                },
+              });
+            }} />
         </View>
 
         {/* TODO MESSSAGE HOST TAKE HOST UID AND MESSAGE */}
@@ -292,7 +309,10 @@ function MyInvite({ navigation, route }) {
         </View>
 
         <View>
+          <TouchableOpacity  onPress={() => InAppBrowser.open(url)}>
+
           <Entypo name="location-pin" size={28} color="black" />
+          </TouchableOpacity>
           <Text
             style={[
               textStyles.normalBold,
@@ -304,7 +324,7 @@ function MyInvite({ navigation, route }) {
           >
             {event.location}
           </Text>
-          <TouchableOpacity>
+          <TouchableOpacity  onPress={() => InAppBrowser.open(url)}>
             <LocationNearMeIcon
               style={{
                 left: heightPercentageToDP("40"),

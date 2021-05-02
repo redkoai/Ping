@@ -37,11 +37,13 @@ function SignUpScreen({ navigation }) {
 
   const [username, setUsername] = useState()
   
-
+  const storageRef = firebase.storage().ref(user + '/profilePicture/' + file.name);
+  
 
   const onSignUpSuccess = (user) => {
     console.log("user = ", user)
     db.child(`${user.user.uid}`).set({"email" : user.user.email, "username" : username, "avatar" : image})
+    storageRef.put(image)
   };
   const onSignUpFailure = (errorMessage) => {
     console.log("user failure = ", user)
