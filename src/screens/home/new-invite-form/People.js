@@ -474,7 +474,7 @@ function People({ route, navigation }) {
                         height: heightPercentageToDP("10"),
                         width: widthPercentageToDP("10"),
                         marginTop: heightPercentageToDP("0"),
-                        marginLeft: widthPercentageToDP("23"),
+                        marginLeft: widthPercentageToDP("2"),
                         resizeMode: "contain",
                       }}
                     />
@@ -538,10 +538,11 @@ function People({ route, navigation }) {
             />
         </Card>
         </View>
-          <TouchableOpacity>
-            {/* <CustomButton onPress={handleEmail} 
+          {/* <CustomButton onPress={handleEmail} 
             // onPress={ signUp }
           > Send email </Button> */}
+          <TouchableOpacity>
+          
           <View style={{marginLeft: widthPercentageToDP("12"),marginTop: heightPercentageToDP("3")}}> 
           <CustomButton 
              text="Email Invites"
@@ -561,17 +562,8 @@ function People({ route, navigation }) {
 
       
 
-           <View
-          style={{
-            marginLeft: widthPercentageToDP("5"),
-            marginBottom: heightPercentageToDP("60"),
-          }}
-        >
-          
-        </View>
-
         <View
-          style={{ alignSelf: "flex-end", left: heightPercentageToDP("0") }}
+          style={{ alignSelf: "flex-end", left: heightPercentageToDP("0"),marginTop: heightPercentageToDP("60"), }}
         >
           <CustomButton
             text="next"
