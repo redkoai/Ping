@@ -3,6 +3,7 @@ import { headerOptions } from 'ping/src/styles/styles';
 import Accounts from 'ping/src/screens/home/Accounts';
 import TabViewExample from 'ping/src/screens/home/TabViewExample';
 import Accountsone from 'ping/src/screens/home/Accountsone';
+import Accountsonen from 'ping/src/screens/home/Accountsonen';
 import { createStackNavigator } from '@react-navigation/stack';
 import settings from "ping/src/screens/home/account/settings.js"
 import BackChevron from 'ping/src/components/header/BackChevron';
@@ -19,6 +20,7 @@ function AccountStackNavigator() {
           
         }}/>
       <AccountStack.Screen name="Accountsone" component={Accountsone} />
+      <AccountStack.Screen name="Accountsonen" component={Accountsonen} />
       <AccountStack.Screen name="settings" component={settings} />
     </AccountStack.Navigator>
   );

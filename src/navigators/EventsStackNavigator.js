@@ -25,7 +25,7 @@ function EventsStackNavigator() {
       component={MyInvite}
       options={{
         headerLeft: () => <BackChevron />,
-        headerRight: () => <ScreenTitle title="MyInvite" />,
+        headerRight: () => <ScreenTitle title="My Invite" />,
       }} 
       />
     </EventsStack.Navigator>

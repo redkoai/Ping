@@ -83,6 +83,7 @@ function Chat({route, navigation }) {
 
 
         <GiftedChat messages={messages} user = {UserInfo} onSend={send} />
+        //image?: renderAvatar 
     )
 
 }

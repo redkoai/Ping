@@ -24,10 +24,11 @@ import add from 'ping/assets/invites/adds.png';
 import { colors, textStyles } from 'ping/src/styles/styles';
 import { actuatedNormalize } from "ping/util/fontScaler";
 import 'firebase/firestore'
+import BackChevron from "ping/src/components/header/BackChevron";
 import CustomButtonCopy from 'ping/src/components/inputs/CustomButtonCopy';
 import CustomButtonCopyLong from "ping/src/components/inputs/CustomButtonCopyLong";
 
-function Accountsonen({}) {
+function Accountsone({}) {
     // const navigation = useNavigation()
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [loggedInUser,setLoggedInUser]=useState([]);
@@ -242,7 +243,12 @@ function Accountsonen({}) {
 
           <ImageBackground source={emptyHome} style={styles.homeEmpty}>
             
-          
+          <TouchableOpacity onPress={() => navigation.goBack()}>
+      <View style={styles.container}>
+        {icon && <Image source={icon} style={styles.icon} />}
+        {text && <Text style={textStyles.normalMedium}>{text}</Text>}
+      </View>
+    </TouchableOpacity>
                   <View style={{flex:1, marginTop:'0%'}}>
                       <View style={{ marginTop:'-0.5%'}}>
                   
@@ -336,4 +342,18 @@ function Accountsonen({}) {
 
     )
 }
-export default Accountsonen
+
+// const styles = StyleSheet.create({
+//   container: {
+//     flexDirection: 'row',
+//     alignItems: 'center',
+//     paddingVertical: headerPaddings.vertical,
+//     paddingHorizontal: headerPaddings.horizontal,
+//   },
+//   icon: {
+//     resizeMode: 'contain',
+//     width: 10,
+//     marginRight: 10,
+//   },
+// });
+export default Accountsone

@@ -409,13 +409,11 @@ function MyInvite({ navigation, route }) {
           <View
             style={{
               left: heightPercentageToDP("40"),
-              marginTop: heightPercentageToDP("-3"),
+              marginTop: heightPercentageToDP("1"),
             }}
             size={heightPercentageToDP(3)}
           >
-            <TouchableOpacity>
-              <MaterialIcons name="arrow-drop-down" size={32} color="black" />
-            </TouchableOpacity>
+            
           </View>
         </View>
 
@@ -437,7 +435,7 @@ function MyInvite({ navigation, route }) {
             FAQ'S
           </Text>
 
-          {event.faqguests ==! "" ? (
+          
             <View>
           <Text
             style={[
@@ -463,11 +461,9 @@ function MyInvite({ navigation, route }) {
           
           </Text>
           </View>
-          ):(
-          <View></View>
-            )}
+          
 
-            {event.faqpeoplepark ==! "" ? (
+           
             <View>
           <Text
             style={[
@@ -492,14 +488,12 @@ function MyInvite({ navigation, route }) {
             {event.faqpeoplepark}
           </Text>
           </View>
-          ):(
-          <View></View>
-            )}
+        
           
 
 
 
-          {event.faqsecretcode ==! "" ? (
+        
             <View>
           <Text
             style={[
@@ -525,12 +519,10 @@ function MyInvite({ navigation, route }) {
           </Text>
          
           </View>
-          ):(
-          <View></View>
-            )}
+       
 
 
-             {event['co-host-1'] ==! "" ? (
+         
             <View>
           <Text
             style={[
@@ -556,13 +548,11 @@ function MyInvite({ navigation, route }) {
           </Text>
          
           </View>
-          ):(
-          <View></View>
-            )}
+        
 
 
 
-{event['request-num-of-kids'] ==! "" ? (
+
             <View>
           <Text
             style={[
@@ -588,9 +578,7 @@ function MyInvite({ navigation, route }) {
             {event['request-num-of-kids']}
           </Text>
           </View>
-          ):(
-          <View></View>
-            )}
+        
 
 
           <View
@@ -600,9 +588,7 @@ function MyInvite({ navigation, route }) {
             }}
             size={heightPercentageToDP(3)}
           >
-            <TouchableOpacity>
-              <MaterialIcons name="arrow-drop-down" size={32} color="black" />
-            </TouchableOpacity>
+            
           </View>
         </View>
         </View>

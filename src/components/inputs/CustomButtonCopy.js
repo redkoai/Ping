@@ -108,7 +108,7 @@ const styles = StyleSheet.create({
     resizeMode: 'contain',
     width: 35,
     height: heightPercentageToDP(2.5),
-    marginRight: widthPercentageToDP(60),
+    marginRight: widthPercentageToDP(30),
   },
   textPrimary: {
     color: 'white',
