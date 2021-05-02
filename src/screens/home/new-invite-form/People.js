@@ -239,18 +239,28 @@ function People({ route, navigation }) {
 
   const [friends, setFriends] = useState({});
   // const friends = []
-  const queryFriends = () => {
-    let friends = {};
-    db.child(`${user.uid}/Friends`).on("child_added", function (snapshot) {
-      console.log("snapshot value = ", snapshot.val().email);
-      console.log("snapshot key = ", snapshot.key);
-      friends[snapshot.val().email] = snapshot.key;
-      setFriends(friends);
-      console.log(friends, "orages");
-    });
+  // const queryFriends = () => {
+  //   let friends = {};
+  //   db.child(`${user.uid}/Friends`).on("child_added", function (snapshot) {
+  //     console.log("snapshot value = ", snapshot.val().email);
+  //     console.log("snapshot key = ", snapshot.key);
+  //     friends[snapshot.val().email] = snapshot.key;
+  //     setFriends(friends);
+  //     console.log(friends, "orages");
+  //   });
 
-    return friends;
-  };
+  //   return friends;
+  // };
+
+  const queryFriends = () => {
+    let friends = {}
+    db.child(`${user.uid}/Friends`).on('child_added', function(snapshot) {
+      console.log("snapshot value = ", snapshot.val().username)
+      console.log("snapshot key = ", snapshot.key)
+      friends[snapshot.val(). username] = snapshot.key
+  })
+  return friends
+  }
 
   useEffect(() => {
     // friendLoop()
@@ -263,7 +273,7 @@ function People({ route, navigation }) {
   useEffect(() => {
     setInterval(() => {
       queryFriends();
-    }, 1000);
+    }, 10000);
   }, []);
 
   const friendLoop = Object.keys(friends).map((key) => {
@@ -279,11 +289,11 @@ function People({ route, navigation }) {
       <View style={styles.container}>
         <View style={{ flexDirection: "row" }}>
           <Text
-            style={{
-              marginLeft: widthPercentageToDP("10"),
-              fontSize: actuatedNormalize(15),
-              marginTop: heightPercentageToDP("3"),
-            }}
+            style={[textStyles.bigRegular,
+              {marginLeft: widthPercentageToDP("0"),
+              fontSize: actuatedNormalize(12),
+              marginTop: heightPercentageToDP("2"),
+            }]}
           >
             {key}
           </Text>
@@ -293,8 +303,8 @@ function People({ route, navigation }) {
               style={{
                 height: heightPercentageToDP("10"),
                 width: widthPercentageToDP("10"),
-                marginTop: heightPercentageToDP("0"),
-                marginLeft: widthPercentageToDP("23"),
+                marginTop: heightPercentageToDP("-2"),
+                marginLeft: widthPercentageToDP("30"),
                 resizeMode: "contain",
               }}
             />
@@ -394,7 +404,7 @@ function People({ route, navigation }) {
         /> */}
           <Card style={{ padding: 5, margin: 22, height: 80 }}>
             <SearchBar
-              placeholder="Search for user to mesage..."
+              placeholder="Search for user to invite..."
               autoCapitalize="none"
               containerStyle={{ backgroundColor: "white" }}
               inputStyle={{ color: "black" }}
@@ -406,55 +416,13 @@ function People({ route, navigation }) {
               value={search}
             />
           </Card>
-          <Card style={{ padding: 5, margin: 22, height: 80 }}>
-            <SearchBar
-              placeholder="Enter an email to send an invite to..."
-              autoCapitalize="none"
-              containerStyle={{ backgroundColor: "white" }}
-              inputStyle={{ color: "black" }}
-              inputContainerStyle={{ backgroundColor: "white" }}
-              searchIcon={{ color: "black" }}
-              clearIcon={{ color: "black" }}
-              placeholderTextColor={"black"}
-              onChangeText={updateText}
-              value={text}
-            />
-          </Card>
-          <TouchableOpacity>
-            {/* <CustomButton onPress={handleEmail} 
-            // onPress={ signUp }
-          > Send email </Button> */}
-          <View style={{marginLeft: widthPercentageToDP("25")}}> 
-          <CustomButton 
-             text="Email Invites"
-             onPress={handleEmail} 
-             narrow
-             primary
-           />
-           </View>
-          </TouchableOpacity>
-          <TouchableOpacity>
-            {/* temporarily using this as a button to send to all friends */}
-            {/* <Image source={send}  style={{height: heightPercentageToDP('10'), width :widthPercentageToDP('10'), marginTop: heightPercentageToDP('0'),marginLeft:widthPercentageToDP('23'), resizeMode:'contain' }} /> */}
-            {/* <View style={{
-               
-               marginLeft:widthPercentageToDP('10')
-             }}>         
-              <CustomButton
-             text="Send Invite to All Friends"
-             onPress={sendInviteToAllFriends}
-             
-             primary
-           />
-               
-             </View> */}
-          </TouchableOpacity>
+
           {foundUser.email != null ? (
             <View style={styles.container}>
               <View style={{ flexDirection: "row" }}>
                 <Text
                   style={{
-                    marginLeft: widthPercentageToDP("10"),
+                    marginLeft: widthPercentageToDP("6"),
                     fontSize: actuatedNormalize(15),
                     marginTop: heightPercentageToDP("3"),
                   }}
@@ -469,7 +437,7 @@ function People({ route, navigation }) {
                         height: heightPercentageToDP("10"),
                         width: widthPercentageToDP("10"),
                         marginTop: heightPercentageToDP("0"),
-                        marginLeft: widthPercentageToDP("23"),
+                        marginLeft: widthPercentageToDP("42"),
                         resizeMode: "contain",
                       }}
                     />
@@ -511,53 +479,88 @@ function People({ route, navigation }) {
               </View>
             </View>
           ) : null}
-        </View>
-
-        {/* <TouchableOpacity
-        style={{
-        marginTop: heightPercentageToDP('-4.5'),
-        left: heightPercentageToDP('15'),
-       borderWidth:1,
-       borderColor:'#3D8976',
-       alignItems:'center',
-       justifyContent:'center',
-       width:50,
-       height:50,
-       backgroundColor:'#3D8976',
-       borderRadius:25,
-     }}
- >
-   <Icon name={"arrow-forward"}  size={30} color="#FFFFFF" />
- </TouchableOpacity> */}
-
-        {/* <TouchableOpacity>
- <Card style={{padding: 15, margin: 22,height: 50}}>
-        <Text>Search for friends...</Text>
-</Card>
-</TouchableOpacity> */}
-
         <View
           style={{
             marginLeft: widthPercentageToDP("5"),
-            marginTop: heightPercentageToDP("40"),
+            marginTop: heightPercentageToDP("0"),
           }}
         >
           {friends && (
             <View>
-              <Text>Friends:</Text>
+              <Text
+                  style={[
+                    textStyles.bigBold,
+                    { left: heightPercentageToDP("0") },
+                  ]}
+                >Friends:</Text>
 
               {friendLoop}
             </View>
           )}
+           </View>
+           <View
+          style={{
+            marginLeft: widthPercentageToDP("10"),
+            marginTop: heightPercentageToDP("5"),
+            marginBottom: heightPercentageToDP("5"),
+          }}
+        >
           <CustomButton
-            text="Send Invite to All Friends"
+            text="Send to All Friends"
             onPress={sendInviteToAllFriends}
-            primary
+            outline
+            small
+            buttonSecondary
           />
+        </View>
+          <Card style={{ padding: 5, margin: 22, height: 80 }}>
+            <SearchBar
+              placeholder="Enter an email to send an invite..."
+              autoCapitalize="none"
+              containerStyle={{ backgroundColor: "white" }}
+              inputStyle={{ color: "black" }}
+              inputContainerStyle={{ backgroundColor: "white" }}
+              searchIcon={{ color: "black" }}
+              clearIcon={{ color: "black" }}
+              placeholderTextColor={"black"}
+              onChangeText={updateText}
+              value={text}
+            />
+          </Card>
+          <TouchableOpacity>
+            {/* <CustomButton onPress={handleEmail} 
+            // onPress={ signUp }
+          > Send email </Button> */}
+          <View style={{marginLeft: widthPercentageToDP("12")}}> 
+          <CustomButton 
+             text="Email Invites"
+             onPress={handleEmail} 
+             narrow
+             buttonSecondary
+             outline
+             small
+           />
+           </View>
+          </TouchableOpacity>
+          <TouchableOpacity>
+
+          </TouchableOpacity>
+ 
+        </View>
+
+      
+
+           <View
+          style={{
+            marginLeft: widthPercentageToDP("5"),
+            marginBottom: heightPercentageToDP("60"),
+          }}
+        >
+          
         </View>
 
         <View
-          style={{ alignSelf: "flex-end", left: heightPercentageToDP("-1") }}
+          style={{ alignSelf: "flex-end", left: heightPercentageToDP("0") }}
         >
           <CustomButton
             text="next"
