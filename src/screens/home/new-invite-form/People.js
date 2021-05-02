@@ -402,7 +402,8 @@ function People({ route, navigation }) {
             defaultValue: '',
           }} 
         /> */}
-          <Card style={{ padding: 5, margin: 22, height: 80 }}>
+         <View style={{marginLeft:widthPercentageToDP("5"),width:widthPercentageToDP("100") }}>
+           <Card>
             <SearchBar
               placeholder="Search for user to invite..."
               autoCapitalize="none"
@@ -414,9 +415,12 @@ function People({ route, navigation }) {
               placeholderTextColor={"black"}
               onChangeText={updateSearch}
               value={search}
+              lightTheme
+              
             />
-          </Card>
-
+        </Card>
+        </View>
+        
           {foundUser.email != null ? (
             <View style={styles.container}>
               <View style={{ flexDirection: "row" }}>
@@ -429,6 +433,21 @@ function People({ route, navigation }) {
                 >
                   {foundUser.username}
                 </Text>
+                       {/* todo conditional rendering */}
+                       <TouchableOpacity onPress={addFriend}>
+                  <Image
+                    source={add}
+                    style={{
+                      height: heightPercentageToDP("10"),
+                      width: widthPercentageToDP("10"),
+                      marginTop: heightPercentageToDP("0"),
+                      
+                      marginLeft: widthPercentageToDP("42"),
+                      resizeMode: "contain",
+                    }}
+                  />
+               
+                </TouchableOpacity>
                 {!sentMessageStatus ? (
                   <TouchableOpacity onPress={sendInvite}>
                     <Image
@@ -437,7 +456,7 @@ function People({ route, navigation }) {
                         height: heightPercentageToDP("10"),
                         width: widthPercentageToDP("10"),
                         marginTop: heightPercentageToDP("0"),
-                        marginLeft: widthPercentageToDP("42"),
+                        marginLeft: widthPercentageToDP("2"),
                         resizeMode: "contain",
                       }}
                     />
@@ -462,27 +481,14 @@ function People({ route, navigation }) {
                   </TouchableOpacity>
                 )}
 
-                {/* todo conditional rendering */}
-                <TouchableOpacity onPress={addFriend}>
-                  <Image
-                    source={add}
-                    style={{
-                      height: heightPercentageToDP("10"),
-                      width: widthPercentageToDP("10"),
-                      marginTop: heightPercentageToDP("0"),
-                      marginLeft: widthPercentageToDP("2"),
-                      resizeMode: "contain",
-                    }}
-                  />
-                  {/* <Button onPress={addFriend}>Add Friend</Button> */}
-                </TouchableOpacity>
+         
               </View>
             </View>
           ) : null}
         <View
           style={{
             marginLeft: widthPercentageToDP("5"),
-            marginTop: heightPercentageToDP("0"),
+            marginTop: heightPercentageToDP("2"),
           }}
         >
           {friends && (
@@ -513,7 +519,9 @@ function People({ route, navigation }) {
             buttonSecondary
           />
         </View>
-          <Card style={{ padding: 5, margin: 22, height: 80 }}>
+         
+          <View style={{marginLeft:widthPercentageToDP("5"),width:widthPercentageToDP("100") }}>
+           <Card style={{}}>
             <SearchBar
               placeholder="Enter an email to send an invite..."
               autoCapitalize="none"
@@ -525,13 +533,16 @@ function People({ route, navigation }) {
               placeholderTextColor={"black"}
               onChangeText={updateText}
               value={text}
+              lightTheme
+              
             />
-          </Card>
+        </Card>
+        </View>
           <TouchableOpacity>
             {/* <CustomButton onPress={handleEmail} 
             // onPress={ signUp }
           > Send email </Button> */}
-          <View style={{marginLeft: widthPercentageToDP("12")}}> 
+          <View style={{marginLeft: widthPercentageToDP("12"),marginTop: heightPercentageToDP("3")}}> 
           <CustomButton 
              text="Email Invites"
              onPress={handleEmail} 
