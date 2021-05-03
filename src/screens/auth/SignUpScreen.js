@@ -37,13 +37,13 @@ function SignUpScreen({ navigation }) {
 
   const [username, setUsername] = useState()
   
-  const storageRef = firebase.storage().ref(user + '/profilePicture/' + file.name);
+  
   
 
   const onSignUpSuccess = (user) => {
     console.log("user = ", user)
     db.child(`${user.user.uid}`).set({"email" : user.user.email, "username" : username, "avatar" : image})
-    storageRef.put(image)
+    firebase.storage().ref(user + '/profilePicture/' + file.name).put(image)
   };
   const onSignUpFailure = (errorMessage) => {
     console.log("user failure = ", user)
@@ -95,7 +95,9 @@ function SignUpScreen({ navigation }) {
         contentContainerStyle={{ flex: 1, alignItems: 'center' }}
         style={{ flex: 1, alignItems: 'center' }}
       >
-        <PingIcon size={heightPercentageToDP(12)} color={colors.primary} style={styles.logo} />
+       <View style={{left: widthPercentageToDP(-5), marginBottom:heightPercentageToDP(-15)}}>
+        <PingIcon size={heightPercentageToDP(20)} color={colors.primary} style={styles.logo} />
+        </View>
         <Spacer height={6.5} />
         {image && <Image source={{uri: image}} style={{marginTop:'0%', height: heightPercentageToDP('10'), width: widthPercentageToDP('30')}} />}
         <TouchableOpacity onPress={pickImage}>

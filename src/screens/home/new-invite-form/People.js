@@ -122,11 +122,12 @@ function People({ route, navigation }) {
   // }
 
   const handleEmail = () => {
+    //todo : array of emails ITERARTE 
     const to = text; // string or array of email addresses
     email(to, {
       // Optional additional arguments
       cc: [`${text}`], // string or array of email addresses
-      bcc: "jbodoia@gmail.com", // string or array of email addresses
+      bcc: "jbodoia@gmail.com",  // string or array of email addresses [`${text}`],
       subject: "You have an invite from Ping",
       body: `You have been invited to the follow event: 
         
@@ -518,6 +519,13 @@ function People({ route, navigation }) {
             small
             buttonSecondary
           />
+          {/* <CustomButton
+            text="Send to All Friends"
+            onPress={sendInviteToAllFriends}
+            disabled
+            small
+            buttonSecondary
+          /> */}
         </View>
          
           <View style={{marginLeft:widthPercentageToDP("5"),width:widthPercentageToDP("100") }}>

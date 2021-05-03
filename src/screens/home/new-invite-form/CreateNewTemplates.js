@@ -91,7 +91,7 @@ function createnewtemplates({}) {
                 
                  {/* <Text  style={[textStyles.normalSemiBold, { marginTop:'2%',color: colors.primary }]}> Pick Your Profile Image</Text> */}
             </TouchableOpacity>
-            {/* {image && <Image source={{uri: image}} style={{marginTop:'2%',marginLeft:widthPercentageToDP('-20'), height: heightPercentageToDP('10'), width: widthPercentageToDP('30')}} />} */}
+            {image && <Image source={{uri: image}} style={{marginTop:'2%',marginLeft:widthPercentageToDP('-20'), height: heightPercentageToDP('15'), width: widthPercentageToDP('47')}} />}
             </View>
           {/* <CreatePicker /> */}
           {/* <TouchableOpacity

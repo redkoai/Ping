@@ -177,7 +177,7 @@ function MyInvite({ navigation, route }) {
             style={[
               textStyles.normalBold,
               {
-                left: heightPercentageToDP("25"),
+                left: heightPercentageToDP("27"),
                 marginTop: heightPercentageToDP("-35"),
               },
             ]}
@@ -189,8 +189,8 @@ function MyInvite({ navigation, route }) {
             style={[
               textStyles.normalBold,
               {
-                left: heightPercentageToDP("5"),
-                marginTop: heightPercentageToDP("-2"),
+                left: heightPercentageToDP("1"),
+                marginTop: heightPercentageToDP("-4"),
               },
             ]}
           >
@@ -309,7 +309,7 @@ function MyInvite({ navigation, route }) {
         </View>
 
         <View>
-          <TouchableOpacity  onPress={() => InAppBrowser.open(url)}>
+          <TouchableOpacity  onPress={() => InAppBrowser.open("https://www.google.com/maps/place/" + event.location)}>
 
           <Entypo name="location-pin" size={28} color="black" />
           </TouchableOpacity>
@@ -435,7 +435,34 @@ function MyInvite({ navigation, route }) {
             FAQ'S
           </Text>
 
+          <View>
+          <Text
+            style={[
+              textStyles.normalBold,
+              {
+                marginTop: heightPercentageToDP(".5"),
+                left: heightPercentageToDP("5"),
+              },
+            ]}
+          >
+          Guests Per Invite
+          </Text>
+          <Text
+            style={[
+              textStyles.normalRegular,
+              {
+                marginTop: heightPercentageToDP(".5"),
+                left: heightPercentageToDP("5"),
+              },
+            ]}
+          >
+            
+            {event['total-invited']}
+          </Text>
+          </View>
+
           
+
             <View>
           <Text
             style={[
@@ -549,7 +576,6 @@ function MyInvite({ navigation, route }) {
          
           </View>
         
-
 
 
 

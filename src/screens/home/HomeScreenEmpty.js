@@ -453,21 +453,14 @@ function HomeScreenEmpty({}) {
 
               <View
                 style={{
-                  left: heightPercentageToDP("0.6"),
+                  left: heightPercentageToDP("3"),
                   marginBottom: widthPercentageToDP(5),
                 }}
               >
-                <CustomButton
-                  text="Create a new event"
-                  primary
-                  shadow
-                  onPress={() => {
-                    navigation.navigate("NewInvite");
-                  }}
-                />
+               
               </View>
 
-              {/* <TouchableOpacity  style={{left: heightPercentageToDP('2.5')}} onPress={() => { 
+              <TouchableOpacity  style={{left: heightPercentageToDP('2.5')}} onPress={() => { 
     navigation.navigate('Account', {screen: " Accountsone"})
 
 }}>      
@@ -475,7 +468,7 @@ function HomeScreenEmpty({}) {
           text="Add friends"
           shadow
         />
-        </TouchableOpacity> */}
+        </TouchableOpacity>
             </View>
           ) : (
             <View
