@@ -85,7 +85,7 @@ function RSVP({ route, navigation }) {
     updateFormData(data);
     //console.log(eventID)
     // navigation.navigate('Signinpopup');
-    navigation.navigate("People", { eventID: eventID });
+    navigation.navigate("People", { eventID: eventID, imagePath:route.params.imagePath });
   };
 
   return (
