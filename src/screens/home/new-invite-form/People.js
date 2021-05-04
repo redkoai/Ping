@@ -31,7 +31,7 @@ import adds from "ping/assets/invites/add.png";
 import add from "ping/assets/invites/adds.png";
 import { actuatedNormalize } from "ping/util/fontScaler";
 import uuid from "react-native-uuid";
-import email from 'react-native-email'
+import email from "react-native-email";
 
 function People({ route, navigation }) {
   const { formData, updateFormData } = useContext(NewInviteContext);
@@ -109,6 +109,7 @@ function People({ route, navigation }) {
 
   // create randomly generated password
   const [password, setPassword] = useState();
+  const [emailInviteBool, setEmailInviteBool] = useState(false);
 
   const updateText = (text) => {
     setText(text);
@@ -122,14 +123,17 @@ function People({ route, navigation }) {
   // }
 
   const handleEmail = () => {
-    //todo : array of emails ITERARTE 
-    const to = text; // string or array of email addresses
-    email(to, {
-      // Optional additional arguments
-      cc: [`${text}`], // string or array of email addresses
-      bcc: "jbodoia@gmail.com",  // string or array of email addresses [`${text}`],
-      subject: "You have an invite from Ping",
-      body: `You have been invited to the follow event: 
+    //todo : array of emails ITERARTE
+    setEmailInviteBool(true);
+    for (let i = 0; i < emailList.length; i++) {
+      const to = emailList[i]; // string or array of email addresses
+      email(to, {
+        // Optional additional arguments
+        // cc: [`${text}`], // string or array of email addresses
+        cc: [`${emailList[i]}`],
+        bcc: "jbodoia@gmail.com", // string or array of email addresses [`${text}`],
+        subject: "You have an invite from Ping",
+        body: `You have been invited to the follow event: 
         
         Event Name: ${formData.event} 
         
@@ -149,7 +153,8 @@ function People({ route, navigation }) {
         email: ${text}
         password: ${password}
         `,
-    }).catch(console.error);
+      }).catch((e) => console.log(e, "blllur"));
+    }
     // create a user using the email from input:
     firebase
       .auth()
@@ -181,6 +186,10 @@ function People({ route, navigation }) {
   const db = firebase.database().ref("users");
   const inviteFormDB = firebase.database().ref(`InviteForms`);
   const [search, setSearch] = useState([]);
+  const [sentInviteToAllFriendsBool, setSentInviteToAllFriendsBool] = useState(
+    false
+  );
+  const [addedFriendsList, setAddedFriendsList] = useState([]);
 
   const sendInvite = () => {
     guests[foundUser.uid] = "no";
@@ -209,6 +218,7 @@ function People({ route, navigation }) {
       db.child(`${snapshot.key}/Events/${eventID}`).set(formData);
       console.log("form data pushed");
     });
+    setSentInviteToAllFriendsBool(!sentInviteToAllFriendsBool);
   };
 
   const sendHostEvent = () => {
@@ -221,6 +231,12 @@ function People({ route, navigation }) {
     // Adding user to foundUser's (email that was searched) friends list
     // db.child(`${foundUser.uid}/Friends/${user.uid}`).set({username: user.username, email: user.email});
     // Check if friend already exists:
+    const addedFriendsListArr = addedFriendsList;
+    addedFriendsListArr.push(foundUser);
+
+    setAddedFriendsList(() => [...addedFriendsListArr]);
+    console.log(addedFriendsList, "addedFriendsList");
+
     db.child(`${user.uid}/Friends`).on("child_added", function (snapshot) {
       if (snapshot.key == foundUser.uid) {
         console.log("this friend has already been added");
@@ -254,14 +270,14 @@ function People({ route, navigation }) {
   // };
 
   const queryFriends = () => {
-    let friends = {}
-    db.child(`${user.uid}/Friends`).on('child_added', function(snapshot) {
-      console.log("snapshot value = ", snapshot.val().username)
-      console.log("snapshot key = ", snapshot.key)
-      friends[snapshot.val(). username] = snapshot.key
-  })
-  return friends
-  }
+    let friends = {};
+    db.child(`${user.uid}/Friends`).on("child_added", function (snapshot) {
+      console.log("snapshot value = ", snapshot.val().username);
+      console.log("snapshot key = ", snapshot.key);
+      friends[snapshot.val().username] = snapshot.key;
+    });
+    return friends;
+  };
 
   useEffect(() => {
     // friendLoop()
@@ -290,11 +306,14 @@ function People({ route, navigation }) {
       <View style={styles.container}>
         <View style={{ flexDirection: "row" }}>
           <Text
-            style={[textStyles.bigRegular,
-              {marginLeft: widthPercentageToDP("0"),
-              fontSize: actuatedNormalize(12),
-              marginTop: heightPercentageToDP("2"),
-            }]}
+            style={[
+              textStyles.bigRegular,
+              {
+                marginLeft: widthPercentageToDP("0"),
+                fontSize: actuatedNormalize(12),
+                marginTop: heightPercentageToDP("2"),
+              },
+            ]}
           >
             {key}
           </Text>
@@ -321,6 +340,7 @@ function People({ route, navigation }) {
   });
 
   const [sentMessageStatus, setSentMessgeStatus] = useState(false);
+  const [emailList, setEmailList] = useState([]);
 
   const updateSearch = (search) => {
     setSearch(search);
@@ -359,6 +379,12 @@ function People({ route, navigation }) {
       console.log("setting found user state");
     }
   }, [search]);
+
+  const addEmail = () => {
+    let emailListChangeArr = emailList;
+    emailListChangeArr.push(text);
+    setEmailList(() => [...emailListChangeArr]);
+  };
 
   return (
     <KeyboardAwareScrollView
@@ -403,25 +429,29 @@ function People({ route, navigation }) {
             defaultValue: '',
           }} 
         /> */}
-         <View style={{marginLeft:widthPercentageToDP("5"),width:widthPercentageToDP("100") }}>
-           <Card>
-            <SearchBar
-              placeholder="Search for user to invite..."
-              autoCapitalize="none"
-              containerStyle={{ backgroundColor: "white" }}
-              inputStyle={{ color: "black" }}
-              inputContainerStyle={{ backgroundColor: "white" }}
-              searchIcon={{ color: "black" }}
-              clearIcon={{ color: "black" }}
-              placeholderTextColor={"black"}
-              onChangeText={updateSearch}
-              value={search}
-              lightTheme
-              
-            />
-        </Card>
-        </View>
-        
+          <View
+            style={{
+              marginLeft: widthPercentageToDP("5"),
+              width: widthPercentageToDP("100"),
+            }}
+          >
+            <Card>
+              <SearchBar
+                placeholder="Search for user to invite..."
+                autoCapitalize="none"
+                containerStyle={{ backgroundColor: "white" }}
+                inputStyle={{ color: "black" }}
+                inputContainerStyle={{ backgroundColor: "white" }}
+                searchIcon={{ color: "black" }}
+                clearIcon={{ color: "black" }}
+                placeholderTextColor={"black"}
+                onChangeText={updateSearch}
+                value={search}
+                lightTheme
+              />
+            </Card>
+          </View>
+
           {foundUser.email != null ? (
             <View style={styles.container}>
               <View style={{ flexDirection: "row" }}>
@@ -434,20 +464,19 @@ function People({ route, navigation }) {
                 >
                   {foundUser.username}
                 </Text>
-                       {/* todo conditional rendering */}
-                       <TouchableOpacity onPress={addFriend}>
+                {/* todo conditional rendering */}
+                <TouchableOpacity onPress={addFriend}>
                   <Image
                     source={add}
                     style={{
                       height: heightPercentageToDP("10"),
                       width: widthPercentageToDP("10"),
                       marginTop: heightPercentageToDP("0"),
-                      
+
                       marginLeft: widthPercentageToDP("42"),
                       resizeMode: "contain",
                     }}
                   />
-               
                 </TouchableOpacity>
                 {!sentMessageStatus ? (
                   <TouchableOpacity onPress={sendInvite}>
@@ -481,97 +510,127 @@ function People({ route, navigation }) {
                     />
                   </TouchableOpacity>
                 )}
-
-         
               </View>
             </View>
           ) : null}
-        <View
-          style={{
-            marginLeft: widthPercentageToDP("5"),
-            marginTop: heightPercentageToDP("2"),
-          }}
-        >
-          {friends && (
-            <View>
-              <Text
+          <View
+            style={{
+              marginLeft: widthPercentageToDP("5"),
+              marginTop: heightPercentageToDP("2"),
+            }}
+          >
+            {friends && (
+              <View>
+                <Text
                   style={[
                     textStyles.bigBold,
                     { left: heightPercentageToDP("0") },
                   ]}
-                >Friends:</Text>
+                >
+                  Friends:
+                </Text>
+                {addedFriendsList.map((addedFriend) => (
+                  <Text>{addedFriend.username}</Text>
+                ))}
+                {friendLoop}
+              </View>
+            )}
+          </View>
+          <View
+            style={{
+              marginLeft: widthPercentageToDP("10"),
+              marginTop: heightPercentageToDP("5"),
+              marginBottom: heightPercentageToDP("5"),
+            }}
+          >
+            {!sentInviteToAllFriendsBool ? (
+              <CustomButton
+                text="Send to All Friends"
+                onPress={sendInviteToAllFriends}
+                outline
+                small
+                buttonSecondary
+              />
+            ) : (
+              <CustomButton
+                text="Send to All Friends"
+                onPress={sendInviteToAllFriends}
+                disabled
+                small
+                buttonSecondary
+              />
+            )}
+          </View>
 
-              {friendLoop}
-            </View>
-          )}
-           </View>
-           <View
-          style={{
-            marginLeft: widthPercentageToDP("10"),
-            marginTop: heightPercentageToDP("5"),
-            marginBottom: heightPercentageToDP("5"),
-          }}
-        >
-          <CustomButton
-            text="Send to All Friends"
-            onPress={sendInviteToAllFriends}
-            outline
-            small
-            buttonSecondary
-          />
-          {/* <CustomButton
-            text="Send to All Friends"
-            onPress={sendInviteToAllFriends}
-            disabled
-            small
-            buttonSecondary
-          /> */}
-        </View>
-         
-          <View style={{marginLeft:widthPercentageToDP("5"),width:widthPercentageToDP("100") }}>
-           <Card style={{}}>
-            <SearchBar
-              placeholder="Enter an email to send an invite..."
-              autoCapitalize="none"
-              containerStyle={{ backgroundColor: "white" }}
-              inputStyle={{ color: "black" }}
-              inputContainerStyle={{ backgroundColor: "white" }}
-              searchIcon={{ color: "black" }}
-              clearIcon={{ color: "black" }}
-              placeholderTextColor={"black"}
-              onChangeText={updateText}
-              value={text}
-              lightTheme
-              
-            />
-        </Card>
-        </View>
+          <View
+            style={{
+              marginLeft: widthPercentageToDP("5"),
+              width: widthPercentageToDP("30"),
+            }}
+          >
+            <Card style={{ justifyContent: "center" }}>
+              <SearchBar
+                placeholder="Enter an email to send an invite..."
+                autoCapitalize="none"
+                containerStyle={{ backgroundColor: "white" }}
+                inputStyle={{ color: "black" }}
+                inputContainerStyle={{ backgroundColor: "white" }}
+                searchIcon={{ color: "black" }}
+                clearIcon={{ color: "black" }}
+                placeholderTextColor={"black"}
+                onChangeText={updateText}
+                value={text}
+                lightTheme
+              />
+              {/* <TouchableOpacity>
+                <Text>ADD</Text>
+              </TouchableOpacity> */}
+              <CustomButton onPress={addEmail} text="ADD"></CustomButton>
+            </Card>
+            {emailList.map((email) => (
+              <Text>{email}</Text>
+            ))}
+          </View>
           {/* <CustomButton onPress={handleEmail} 
             // onPress={ signUp }
           > Send email </Button> */}
           <TouchableOpacity>
-          
-          <View style={{marginLeft: widthPercentageToDP("12"),marginTop: heightPercentageToDP("3")}}> 
-          <CustomButton 
-             text="Email Invites"
-             onPress={handleEmail} 
-             narrow
-             buttonSecondary
-             outline
-             small
-           />
-           </View>
+            <View
+              style={{
+                marginLeft: widthPercentageToDP("12"),
+                marginTop: heightPercentageToDP("3"),
+              }}
+            >
+              {!emailInviteBool ? (
+                <CustomButton
+                  text="Email Invites"
+                  onPress={handleEmail}
+                  narrow
+                  buttonSecondary
+                  outline
+                  small
+                />
+              ) : (
+                <CustomButton
+                  text="Email Invites"
+                  onPress={handleEmail}
+                  narrow
+                  buttonSecondary
+                  disabled
+                  small
+                />
+              )}
+            </View>
           </TouchableOpacity>
-          <TouchableOpacity>
-
-          </TouchableOpacity>
- 
+          <TouchableOpacity></TouchableOpacity>
         </View>
 
-      
-
         <View
-          style={{ alignSelf: "flex-end", left: heightPercentageToDP("0"),marginTop: heightPercentageToDP("60"), }}
+          style={{
+            alignSelf: "flex-end",
+            left: heightPercentageToDP("0"),
+            marginTop: heightPercentageToDP("60"),
+          }}
         >
           <CustomButton
             text="next"
