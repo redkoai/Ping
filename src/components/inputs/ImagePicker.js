@@ -16,7 +16,7 @@ import { widthPercentageToDP, heightPercentageToDP } from "ping/util/scaler";
 import upload from "ping/assets/createnew/dresscode/upload.png";
 //import ImagePicker from "react-native-image-crop-picker";
 const ImgPicker = (props) => {
-  console.log(props, "awesome");
+  
   const [pickedImage, setPickedImage] = useState();
   const [photo, setPhoto] = useState("");
   const verifyPermissions = async () => {

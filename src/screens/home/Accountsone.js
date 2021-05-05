@@ -46,7 +46,7 @@ function Accountsonen({}) {
       db.child(`${user.uid}/Friends`).on('child_added', function(snapshot) {
         console.log("snapshot value = ", snapshot.val().username)
         console.log("snapshot key = ", snapshot.key)
-        friends[snapshot.val(). username] = snapshot.key
+        friends[snapshot.val().username] = [snapshot.key, snapshot.val().email]
     })
     return friends
     }
@@ -152,7 +152,7 @@ function Accountsonen({}) {
       // Check if friend already exists:
 
       db.child(`${user.uid}/Friends/${foundUser.uid}`).set({username: foundUser.username, email: foundUser.email});
-          console.log("friend added!")
+        
     //   db.child(`${user.uid}/Friends`).on('child_added', function(snapshot) {
     //     if (snapshot.key == foundUser.uid) {
     //       console.log('this friend has already been added')
@@ -165,10 +165,10 @@ function Accountsonen({}) {
 
     useEffect(() => {
         let foundUser = searchUser(search)
-        console.log("foundUser (use effect) = ", foundUser)
+        
         if (foundUser.found) {
           setFoundUser({ username: foundUser.username, email: foundUser.email, uid: foundUser.uid });
-          console.log("setting found user state");
+          
         }
         
       }, [search]);
@@ -181,17 +181,21 @@ function Accountsonen({}) {
 
       }, [])
 
-      console.log("friend state = ", friends)
+
+
     // if (searchUser(search)) {
     //     setFoundUser(search)
     //     console.log("setting found user state")
     // }
-    console.log("found user = ", foundUser)
+    
 
     // console.log("friends list loop = ", Object.keys(friends))
 
     const friendLoop = Object.keys(friends).map((key) => {
-      console.log(key)
+      console.log("friend loop key =", key)
+      console.log("friend loop values =", friends[key])
+      console.log("friend loop value[0] =", friends[key][0])
+      console.log("friend loop value[1] =", friends[key][1])
       return (
 
         <View style={{flexDirection:'row', justifyContent:'space-between'}}>
@@ -211,11 +215,24 @@ function Accountsonen({}) {
           small
           primary
           onPress={() => { 
-            navigation.navigate('Chat', { OtherUserInfo: {
-                _id: foundUser.uid,
-                email: foundUser.email,
-                username: foundUser.username
-            }})
+            console.log("friends[key][0] onpress = ", friends[key][0])
+            navigation.navigate("Messages", {
+              screen: "Chat",
+              params: {
+                OtherUserInfo: {
+                  _id: friends[key][0],
+                  email: friends[key][1],
+                  username: key,
+                },
+              },
+            })
+
+
+            // navigation.navigate('Chat', { OtherUserInfo: {
+            //     _id: friends[key][0],
+            //     email: friends[key][1],
+            //     username: key
+            // }})
         }}
           
          

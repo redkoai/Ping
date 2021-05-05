@@ -96,6 +96,8 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
   },
 
+  //TODO: PASS IMAGE 
+
   primaryDisabled: {
     backgroundColor: '#ccc',
   },

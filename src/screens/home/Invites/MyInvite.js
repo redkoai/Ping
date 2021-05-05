@@ -87,6 +87,7 @@ function MyInvite({ navigation, route }) {
   //////////////////////////////////////////////
   const [hostEmail, setHostEmail] = useState();
   const [hostUsername, setHostUsername] = useState();
+  const [photo, setPhoto]=useState("")
   const getHostInfo = () => {
     db.on("child_added", function (snapshot) {
       if (snapshot.key == event["co-host-0"]) {
@@ -119,6 +120,17 @@ function MyInvite({ navigation, route }) {
           setState(formval);
         });
       });
+
+//get Image
+      let storeRef = firebase.storage().ref();
+      storeRef
+        .child(`images/${route.params.eventID}`)
+        .getDownloadURL()
+        .then((url) => {
+          console.log(url,"bananas");
+          setPhoto(url);
+        });
+
   }, []);
 
   // const { formData, updateFormData, bgImage } = useContext(NewInviteContext);
@@ -153,7 +165,8 @@ function MyInvite({ navigation, route }) {
       >
         <View>
           <ImageBackground
-            source={getImage().image}
+           // source={getImage().image}
+           source={{uri:photo}}
             style={{
               height: heightPercentageToDP("30"),
               width: widthPercentageToDP("100"),

@@ -28,6 +28,7 @@ import NewInviteContext from "ping/src/contexts/NewInviteContext";
 import CreatePicker from "ping/src/components/inputs/CreatePicker";
 import * as ImagePicker from 'expo-image-picker';
 import upload from 'ping/assets/createnew/templates/picker.png';
+import firebase from "firebase";
 
 function createnewtemplates({}) {
   const navigation = useNavigation();
@@ -55,13 +56,25 @@ function createnewtemplates({}) {
     console.log(result);
     if (!result.cancelled){
         setImage(result.uri);
-    }
+// let bucketName="images"
+// let file =result.uri
+//   firebase.storage()
+//   .ref(`${bucketName}/${file}`)
+//   //eventID as the path name to be able to access 
+//   .put(file)
+//   .then((snapshot) => {
+//     //You can check the image is now uploaded in the storage bucket
+//     console.log(`image has been successfully uploaded.`);
+//   })
+//   .catch((e) => console.log('uploading image error => ', e));
+//     }
 };
+  }
   // const [img,setImg] = useState([{idnum:1}]);
 
   const handlePress = (imagePath) => {
     setSelectedImage(imagePath);
-    navigation.navigate("Details", { imagePath: imagePath });
+    navigation.navigate("Details", { imagePath: image });
   };
 
   return (

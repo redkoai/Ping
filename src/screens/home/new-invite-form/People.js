@@ -42,11 +42,44 @@ function People({ route, navigation }) {
   const { control, errors, reset, setValue, handleSubmit } = useForm({
     //resolver: yupResolver(RSVP_SCHEMA),
   });
+  const[photo, setPhoto]=useState("")
 
   useEffect(() => {
     const randomID = uuid.v1();
     setEventID(randomID);
+
+    let bucketName="images"
+    let file =route.params.imagePath
+      // firebase.storage()
+      // .ref(`${bucketName}/${randomID}/${file}`)
+      // //eventID as the path name to be able to access 
+      // .put(file)
+      // .then((snapshot) => {
+      //   //You can check the image is now uploaded in the storage bucket
+      //   console.log(`image has been successfully uploaded.`);
+      // })
+      // .catch((e) => console.log('uploading image error => ', e));
+
+      let storageRef =firebase.storage().ref().child(`images/${randomID}`)
+      fetch(file).then(res=>res.blob()).then(blob=>
+        storageRef.put(blob).then(function(snapshot){
+          console.log(snapshot)
+          console.log("Uploaded a blob")
+        })
+        ).catch(e=>console.log(e,"imageError"))
+      //eventID as the path name to be able to access 
+      // .put(file)
+      // .then((snapshot) => {
+      //   //You can check the image is now uploaded in the storage bucket
+      //   console.log(`image has been successfully uploaded.`);
+      // })
+      // .catch((e) => console.log('uploading image error => ', e));
+
+
   }, []);
+
+
+ 
 
   // Trying to update form with the guestlist, need help
   const guests = {};
@@ -88,10 +121,13 @@ function People({ route, navigation }) {
         console.log("error ", error);
       });
     updateFormData(guests);
+    
+
     navigation.navigate("Events", {
       screen: "MyInvite",
       params: {
         eventID: eventID,
+        imagePath:route.params.imagePath
       },
     });
     reset();
@@ -547,6 +583,7 @@ function People({ route, navigation }) {
           >
             {friends && (
               <View>
+
                 <Text
                   style={[
                     textStyles.bigBold,
@@ -554,14 +591,26 @@ function People({ route, navigation }) {
                   ]}
                 >
                   Friends:
+                 
                 </Text>
+                <View style={{flexDirection:'row'}}>
                 {addedFriendsList.map((addedFriend) => (
                   <Text>{addedFriend.username}</Text>
                 ))}
-                {friendLoop}
+                {friendLoop} 
+                <CustomButton
+                text="Remove"
+                // onPress={sendInviteToAllFriends}
+                outline
+                small
+                buttonSecondary
+              />
               </View>
+              </View>
+              
             )}
           </View>
+
           <View
             style={{
               marginLeft: widthPercentageToDP("10"),

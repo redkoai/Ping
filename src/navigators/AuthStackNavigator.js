@@ -18,16 +18,16 @@ function AuthStackNavigator() {
       <AuthStack.Screen
         name="SignIn"
         component={SignInScreen}
-        options={{
-          headerRight: () => <SkipButton />,
-        }}
+        // options={{
+        //   headerRight: () => <SkipButton />,
+        // }}
       />
       <AuthStack.Screen
         name="SignUp"
         component={SignUpScreen}
         options={{
           headerLeft: () => <BackChevron />,
-          headerRight: () => <SkipButton />,
+          // headerRight: () => <SkipButton />,
         }}
       />
       <AuthStack.Screen

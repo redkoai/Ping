@@ -29,7 +29,7 @@ function HomeScreenEmpty({}) {
   const [loggedInUser, setLoggedInUser] = useState([]);
   const [state, setState] = useState([]);
   const { user } = useContext(AuthContext);
-  console.log("user = ", user);
+  // console.log("user = ", user);
 
   // const [eventID, setEventID] = useState()
 
@@ -47,17 +47,17 @@ function HomeScreenEmpty({}) {
     const myInvites_obj = {};
     db.child(`${user.uid}/Events/`).on("child_added", function (snapshot) {
       // setEventID(snapshot.key)
-      console.log("snapshot = ", snapshot);
+      // console.log("snapshot = ", snapshot);
       // console.log("snapshot event = ", snapshot)
       // console.log("snapshot event cohost", snapshot.val()["co-host-0"])
       // console.log("user uid =", user.uid)
       if (snapshot.val()["co-host-0"] == user.uid) {
-        console.log("event snapshot =", snapshot);
+        // console.log("event snapshot =", snapshot);
         myEvents_obj[snapshot.key] = snapshot.val().event;
       } else {
-        console.log("invite snapshot =", snapshot);
+        // console.log("invite snapshot =", snapshot);
         myInvites_obj[snapshot.key] = snapshot.val().event;
-        console.log("my invites = ", myInvites_obj);
+        // console.log("my invites = ", myInvites_obj);
       }
     });
     // console.log("my invites =", myInvites)
@@ -121,7 +121,7 @@ function HomeScreenEmpty({}) {
 
   useEffect(() => {
     eventQuery();
-    console.log(" invites = ", myInvites);
+    // console.log(" invites = ", myInvites);
     const unsubscribe = navigation.addListener("focus", () => {
       // Login Checker
       // _CheckOnboarding().then((r) => console.log("Checked on Boarding"));
@@ -147,11 +147,11 @@ function HomeScreenEmpty({}) {
 
   const EventLoop = Object.keys(myEvents).map((key) => {
     const eventID = key;
-    console.log("event ID = ", eventID);
+    // console.log("event ID = ", eventID);
     return (
       <TouchableOpacity
         onPress={() => {
-          console.log("eventID =  ", eventID);
+          // console.log("eventID =  ", eventID);
           navigation.navigate("MyInvite", { eventID: eventID });
         }}
         style={{
@@ -200,7 +200,7 @@ function HomeScreenEmpty({}) {
   const InviteLoop = Object.keys(myInvites).map((key) => {
     // console.log("invite loop key = ", key)
     // const obj = JSON.stringify(myInvites[key])
-    console.log("invite loop event = ", myInvites[key]);
+    // console.log("invite loop event = ", myInvites[key]);
     const eventID = key;
     return (
       //   <TouchableOpacity onPress={() => {
