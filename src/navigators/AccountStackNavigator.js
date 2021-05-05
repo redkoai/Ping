@@ -15,13 +15,19 @@ function AccountStackNavigator() {
     <AccountStack.Navigator screenOptions={headerOptions}>
     {/* <AccountStack.Screen name="Accounts" component={Accounts} /> */}
       <AccountStack.Screen name="TabViewExample" component={TabViewExample} 
-      options={{
+      />
+      <AccountStack.Screen name="Accountsone" component={Accountsone} options={{
           headerLeft: () => <BackChevron />,
           
         }}/>
-      <AccountStack.Screen name="Accountsone" component={Accountsone} />
-      <AccountStack.Screen name="Accountsonen" component={Accountsonen} />
-      <AccountStack.Screen name="settings" component={settings} />
+      <AccountStack.Screen name="Accountsonen" component={Accountsonen} options={{
+          headerLeft: () => <BackChevron />,
+          
+        }}/>
+      <AccountStack.Screen name="settings" component={settings} options={{
+          headerLeft: () => <BackChevron />,
+          
+        }}/>
     </AccountStack.Navigator>
   );
 }

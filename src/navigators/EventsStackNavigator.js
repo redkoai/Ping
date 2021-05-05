@@ -16,7 +16,7 @@ function EventsStackNavigator() {
       name="Events" 
       component={Events}
       options={{
-        headerLeft: () => <BackChevron />,
+        
         headerRight: () => <ScreenTitle title="Events" />,
       }} 
       />
