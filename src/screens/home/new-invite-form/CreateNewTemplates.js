@@ -26,56 +26,61 @@ import inv14 from "ping/assets/invites/14.png";
 import inv15 from "ping/assets/invites/15.png";
 import NewInviteContext from "ping/src/contexts/NewInviteContext";
 import CreatePicker from "ping/src/components/inputs/CreatePicker";
-import * as ImagePicker from 'expo-image-picker';
-import upload from 'ping/assets/createnew/templates/picker.png';
+import * as ImagePicker from "expo-image-picker";
+import upload from "ping/assets/createnew/templates/picker.png";
 import firebase from "firebase";
-
+import * as FileSystem from "expo-file-system";
 function createnewtemplates({}) {
   const navigation = useNavigation();
   const { bgImage, setSelectedImage } = useContext(NewInviteContext);
 
   const [image, setImage] = useState(null);
-      useEffect(() => {
-      async () => {
-        if (Platform.OS !== 'web'){
-          const {status} = await ImagePicker.requestMediaLibraryPermissionsAsync();
-          if (status !== 'granted') {
-            alert('Sorry, we need camera roll permissions to make this work!');
-          }
+  useEffect(() => {
+    async () => {
+      if (Platform.OS !== "web") {
+        const {
+          status,
+        } = await ImagePicker.requestMediaLibraryPermissionsAsync();
+        if (status !== "granted") {
+          alert("Sorry, we need camera roll permissions to make this work!");
         }
       }
-    });
+    };
+  });
 
   const pickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
-        mediaTypes: ImagePicker.MediaTypeOptions.All,
-        allowsEditing:true,
-        aspect: [2,2],
-        quality: 1,
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      allowsEditing: true,
+      aspect: [2, 2],
+      quality: 1,
     });
     console.log(result);
-    if (!result.cancelled){
-        setImage(result.uri);
-// let bucketName="images"
-// let file =result.uri
-//   firebase.storage()
-//   .ref(`${bucketName}/${file}`)
-//   //eventID as the path name to be able to access 
-//   .put(file)
-//   .then((snapshot) => {
-//     //You can check the image is now uploaded in the storage bucket
-//     console.log(`image has been successfully uploaded.`);
-//   })
-//   .catch((e) => console.log('uploading image error => ', e));
-//     }
-};
-  }
+    if (!result.cancelled) {
+      setImage(result.uri);
+      // let bucketName="images"
+      // let file =result.uri
+      //   firebase.storage()
+      //   .ref(`${bucketName}/${file}`)
+      //   //eventID as the path name to be able to access
+      //   .put(file)
+      //   .then((snapshot) => {
+      //     //You can check the image is now uploaded in the storage bucket
+      //     console.log(`image has been successfully uploaded.`);
+      //   })
+      //   .catch((e) => console.log('uploading image error => ', e));
+      //     }
+    }
+  };
   // const [img,setImg] = useState([{idnum:1}]);
 
   const handlePress = (imagePath) => {
     setSelectedImage(imagePath);
+    if(image===null){
+      navigation.navigate("Details", { imagePath: imagePath });
+    }else{
     navigation.navigate("Details", { imagePath: image });
-  };
+  }};
 
   return (
     <ScrollView style={{ flex: 1 }}>
@@ -97,15 +102,33 @@ function createnewtemplates({}) {
               marginTop: heightPercentageToDP("0"),
             }}
           />
-<View style={{flexDirection:'row'}}>
+          <View style={{ flexDirection: "row" }}>
+            <TouchableOpacity onPress={pickImage}>
+              <Image
+                source={upload}
+                style={{
+                  marginBottom: "2%",
+                  marginLeft: widthPercentageToDP("-27"),
+                  width: widthPercentageToDP("90"),
+                  height: heightPercentageToDP("20"),
+                  resizeMode: "contain",
+                }}
+              />
 
-        <TouchableOpacity onPress={pickImage}>
-                <Image source={upload} style={{marginBottom:'2%', marginLeft:widthPercentageToDP('-27'), width :widthPercentageToDP('90'), height :heightPercentageToDP('20'), resizeMode:'contain'}} />
-                
-                 {/* <Text  style={[textStyles.normalSemiBold, { marginTop:'2%',color: colors.primary }]}> Pick Your Profile Image</Text> */}
+              {/* <Text  style={[textStyles.normalSemiBold, { marginTop:'2%',color: colors.primary }]}> Pick Your Profile Image</Text> */}
             </TouchableOpacity>
-            {image && <Image source={{uri: image}} style={{marginTop:'2%',marginLeft:widthPercentageToDP('-20'), height: heightPercentageToDP('15'), width: widthPercentageToDP('47')}} />}
-            </View>
+            {image && (
+              <Image
+                source={{ uri: image }}
+                style={{
+                  marginTop: "2%",
+                  marginLeft: widthPercentageToDP("-20"),
+                  height: heightPercentageToDP("15"),
+                  width: widthPercentageToDP("47"),
+                }}
+              />
+            )}
+          </View>
           {/* <CreatePicker /> */}
           {/* <TouchableOpacity
             onPress={() => {

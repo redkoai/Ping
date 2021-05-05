@@ -76,7 +76,8 @@
     "rn-radio-button": "^1.0.2",
     "util": "^0.12.3",
     "uuid": "^8.3.2",
-    "yup": "^0.32.9"
+    "yup": "^0.32.9",
+    "expo-file-system": "~11.0.2"
   },
   "devDependencies": {
     "@babel/core": "~7.9.0"
