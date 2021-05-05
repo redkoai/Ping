@@ -346,16 +346,15 @@ function createnewtemplates({}) {
             Party & Events
           </Text>
           <ScrollView horizontal={true}>
-            <View
-              style={{
-                flexDirection: "row",
-                justifyContent: "center",
-                marginTop: widthPercentageToDP(3),
-                marginLeft: widthPercentageToDP(3),
-                marginRight:widthPercentageToDP("2"),
-              }}
-
-            >
+          <View
+            style={{
+              flexDirection: "row",
+              justifyContent: "space-between",
+              marginTop: widthPercentageToDP(3),
+              marginRight:widthPercentageToDP("2"),
+              marginLeft: widthPercentageToDP(0),
+            }}
+          >
               <TouchableOpacity
                 onPress={() => {
                   handlePress(inv29);
@@ -708,6 +707,22 @@ function createnewtemplates({}) {
                 }}
               />
             </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => {
+                handlePress(inv9);
+              }}
+            >
+              <Image
+                source={inv9}
+                style={{
+                  height: heightPercentageToDP("25"),
+                  width: widthPercentageToDP("45"),
+                  marginTop: heightPercentageToDP("-4.5"),
+                  marginRight:widthPercentageToDP("2"),
+                  resizeMode: "contain",
+                }}
+              />
+            </TouchableOpacity>
 
             <TouchableOpacity
               onPress={() => {
@@ -798,7 +813,7 @@ function createnewtemplates({}) {
                 }}
               />
             </TouchableOpacity>
-            <TouchableOpacity
+            {/* <TouchableOpacity
               onPress={() => {
                 handlePress(inv13);
               }}
@@ -813,7 +828,7 @@ function createnewtemplates({}) {
                   resizeMode: "contain",
                 }}
               />
-            </TouchableOpacity>
+            </TouchableOpacity> */}
 
 
 
