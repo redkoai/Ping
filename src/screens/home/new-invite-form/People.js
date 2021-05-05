@@ -535,7 +535,7 @@ function People({ route, navigation }) {
 
           {foundUser.email != null ? (
             <View style={styles.container}>
-              <View style={{ flexDirection: "row" }}>
+              <View style={{ flexDirection: "row", justifyContent:'space-around' }}>
                 <Text
                   style={{
                     marginLeft: widthPercentageToDP("6"),
@@ -554,7 +554,7 @@ function People({ route, navigation }) {
                       width: widthPercentageToDP("10"),
                       marginTop: heightPercentageToDP("0"),
 
-                      marginLeft: widthPercentageToDP("42"),
+                      marginLeft: widthPercentageToDP("32"),
                       resizeMode: "contain",
                     }}
                   />
@@ -605,7 +605,7 @@ function People({ route, navigation }) {
                 <Text
                   style={[
                     textStyles.bigBold,
-                    { left: heightPercentageToDP("0") },
+                    { left: widthPercentageToDP("0") },
                   ]}
                 >
                   Friends:
@@ -678,7 +678,7 @@ function People({ route, navigation }) {
               {/* <TouchableOpacity>
                 <Text>ADD</Text>
               </TouchableOpacity> */}
-              <CustomButton onPress={addEmail} text="ADD"></CustomButton>
+              <CustomButton small onPress={addEmail} text="ADD"/>
             </Card>
             {emailList.map((email) => (
               <Text>{email}</Text>
