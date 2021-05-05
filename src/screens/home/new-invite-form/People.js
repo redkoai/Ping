@@ -490,7 +490,7 @@ function People({ route, navigation }) {
 
           {foundUser.email != null ? (
             <View style={styles.container}>
-              <View style={{ flexDirection: "row" }}>
+              <View style={{ flexDirection: "row", justifyContent:'space-around' }}>
                 <Text
                   style={{
                     marginLeft: widthPercentageToDP("6"),
@@ -509,7 +509,7 @@ function People({ route, navigation }) {
                       width: widthPercentageToDP("10"),
                       marginTop: heightPercentageToDP("0"),
 
-                      marginLeft: widthPercentageToDP("42"),
+                      marginLeft: widthPercentageToDP("32"),
                       resizeMode: "contain",
                     }}
                   />
@@ -561,7 +561,7 @@ function People({ route, navigation }) {
                 <Text
                   style={[
                     textStyles.bigBold,
-                    { left: heightPercentageToDP("0") },
+                    { left: widthPercentageToDP("0") },
                   ]}
                 >
                   Friends:
@@ -569,16 +569,27 @@ function People({ route, navigation }) {
                 </Text>
                 <View style={{flexDirection:'row'}}>
                 {addedFriendsList.map((addedFriend) => (
-                  <Text>{addedFriend.username}</Text>
-                ))}
+                   <View style={{flexDirection:'row', justifyContent:'space-evenly'}}>
+                      <View style={{marginTop:heightPercentageToDP("2")}}>
+                  <Text style={[
+                    textStyles.bigRegular,
+                    { left: widthPercentageToDP("4") },
+                  ]}>{addedFriend.username}</Text>
+                  </View>
+                <View style={{left: widthPercentageToDP("37") }}>
+                  <CustomButton
+                  text="Remove"
+                  // onPress={sendInviteToAllFriends}
+                  outline
+                  small
+                  buttonSecondary
+                />
+                </View>
+                 </View>
+                ))
+                }
                 {friendLoop} 
-                <CustomButton
-                text="Remove"
-                // onPress={sendInviteToAllFriends}
-                outline
-                small
-                buttonSecondary
-              />
+               
               </View>
               </View>
               
@@ -634,7 +645,7 @@ function People({ route, navigation }) {
               {/* <TouchableOpacity>
                 <Text>ADD</Text>
               </TouchableOpacity> */}
-              <CustomButton onPress={addEmail} text="ADD"></CustomButton>
+              <CustomButton small onPress={addEmail} text="ADD"/>
             </Card>
             {emailList.map((email) => (
               <Text>{email}</Text>
