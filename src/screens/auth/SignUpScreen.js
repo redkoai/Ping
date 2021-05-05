@@ -1,6 +1,6 @@
 import { textStyles, colors } from 'ping/src/styles/styles';
 import { widthPercentageToDP, heightPercentageToDP } from 'ping/util/scaler';
-import PingIcon from 'ping/src/icons/PingIcon';
+import PingIcon from 'ping/assets/text.png';
 import googleLogo from 'ping/assets/Google_G_Logo.png';
 import firebase from 'firebase';
 
@@ -87,6 +87,8 @@ function SignUpScreen({ navigation }) {
         alignItems: 'center',
         backgroundColor: 'white',
         minHeight: Math.round(Dimensions.get('window').height),
+
+        
       }}
     >
       <KeyboardAvoidingView
@@ -95,9 +97,7 @@ function SignUpScreen({ navigation }) {
         contentContainerStyle={{ flex: 1, alignItems: 'center' }}
         style={{ flex: 1, alignItems: 'center' }}
       >
-       <View style={{left: widthPercentageToDP(-5), marginBottom:heightPercentageToDP(-15)}}>
-        <PingIcon size={heightPercentageToDP(20)} color={colors.primary} style={styles.logo} />
-        </View>
+       <Image source={PingIcon} style={{ width:widthPercentageToDP(70), height:heightPercentageToDP(10), resizeMode:'contain'}}/>
         <Spacer height={6.5} />
         {image && <Image source={{uri: image}} style={{marginTop:'0%', height: heightPercentageToDP('10'), width: widthPercentageToDP('30')}} />}
         <TouchableOpacity onPress={pickImage}>

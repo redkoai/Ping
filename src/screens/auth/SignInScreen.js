@@ -1,6 +1,6 @@
 import { textStyles, colors } from 'ping/src/styles/styles';
 import { widthPercentageToDP, heightPercentageToDP } from 'ping/util/scaler';
-import PingIcon from 'ping/src/icons/PingIcon';
+import PingIcon from 'ping/assets/text.png';
 import googleLogo from 'ping/assets/Google_G_Logo.png';
 
 import React, { useContext, useCallback } from 'react';
@@ -16,6 +16,8 @@ import {
   StyleSheet,
   Dimensions,
   Platform,
+  Image
+  
 } from 'react-native';
 
 import { useForm } from 'react-hook-form';
@@ -66,10 +68,12 @@ function SignInScreen({ navigation }) {
         contentContainerStyle={{ flex: 1, alignItems: 'center' }}
         style={{ flex: 1, alignItems: 'center' }}
       >
-         <View style={{left: widthPercentageToDP(-5), marginBottom:heightPercentageToDP(-6)}}>
-        <PingIcon size={heightPercentageToDP(20)} color={colors.primary} style={styles.logo} />
-        </View>
-        <Spacer height={6.5} />
+       
+           <Image source={PingIcon} style={{ width:widthPercentageToDP(70), height:heightPercentageToDP(20), resizeMode:'contain'}}/>
+
+        {/* <PingIcon size={heightPercentageToDP(20)} color={colors.primary} style={styles.logo} /> */}
+
+      
 
         <EmailInput control={control} errors={errors} />
         <PasswordInput
