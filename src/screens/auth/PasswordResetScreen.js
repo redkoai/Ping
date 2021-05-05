@@ -1,12 +1,13 @@
+
 import { colors } from 'ping/src/styles/styles';
 import { widthPercentageToDP, heightPercentageToDP } from 'ping/util/scaler';
-import PingIcon from 'ping/src/icons/PingIcon';
+import PingIcon from 'ping/assets/text.png';
 
 import React, { useContext, useCallback } from 'react';
 import { useFocusEffect } from '@react-navigation/native';
 import AuthContext from 'ping/src/contexts/AuthContext';
 
-import { KeyboardAvoidingView, SafeAreaView, StyleSheet, Dimensions } from 'react-native';
+import { KeyboardAvoidingView, SafeAreaView, StyleSheet, Dimensions,Image } from 'react-native';
 
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -45,7 +46,7 @@ function PasswordResetScreen() {
         contentContainerStyle={{ flex: 1, alignItems: 'center' }}
         style={{ flex: 1, alignItems: 'center' }}
       >
-        <PingIcon size={heightPercentageToDP(20)} color={colors.primary} style={styles.logo} />
+          <Image source={{PingIcon}} style={{left: widthPercentageToDP(-5), marginBottom:heightPercentageToDP(-6), width:widthPercentageToDP(70), height:heightPercentageToDP(10)}}/>
         <Spacer height={8} />
 
         <EmailInput control={control} errors={errors} />
