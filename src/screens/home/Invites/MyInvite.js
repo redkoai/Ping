@@ -97,9 +97,37 @@ function MyInvite({ navigation, route }) {
     });
   };
 
+
+ 
+
   console.log("host email =", hostEmail);
   console.log("host username =", hostUsername);
   console.log(event, "brown");
+
+
+  //////////////////////////////
+  // Send RSVP
+  /////////////////////////////
+
+  // const sendRSVP = () => {
+  //   const message = {
+  //     text: "Yes",
+  //     timestamp: firebase.database.ServerValue.TIMESTAMP,
+  //     user: {
+  //       _id: user.uid,
+  //       email: user.email
+  //     },
+  //     userTo: {
+  //       _id: event["co-host-0"],
+  //       email: hostEmail,
+  //       username: hostUsername
+  //     }
+  // }
+  // db.child(`${user.uid}/messages/${event["co-host-0"]}`).push(message)
+  // db.child(`${event["co-host-0"]}/messages/${user.uid}`).push(message)
+
+  // }
+
 
   useEffect(() => {
     getEvent();
@@ -244,8 +272,57 @@ function MyInvite({ navigation, route }) {
               navigation.navigate("SecretCode");
             }}
           />
-                  <View style={{ marginLeft: widthPercentageToDP(10),marginTop: heightPercentageToDP("1"), }}>
-          <CustomButton text="RSVP" small secondary outline onPress={() => {
+          <View style={{ marginLeft: widthPercentageToDP(10),marginTop: heightPercentageToDP("-5"), }}>
+            <Text>RSVP</Text>
+          <CustomButton text="Yes" small secondary outline onPress={() => {
+            console.log("host email =", hostEmail)
+            console.log("host username =", hostUsername)
+              const message = {
+                text: "Yes",
+                timestamp: firebase.database.ServerValue.TIMESTAMP,
+                user: {
+                  _id: user.uid,
+                  email: user.email
+                },
+                userTo: {
+                  _id: event["co-host-0"],
+                  email: `${hostEmail}`,
+                  username: `${hostUsername}`
+                }
+            }
+            db.child(`${user.uid}/messages/${event["co-host-0"]}`).push(message)
+            db.child(`${event["co-host-0"]}/messages/${user.uid}`).push(message)
+              navigation.navigate("Messages", {
+                screen: "Chat",
+                params: {
+                  OtherUserInfo: {
+                    _id: event["co-host-0"],
+                    email: hostEmail,
+                    username: hostUsername,
+                  },
+                },
+              });
+            }} />
+        </View>
+        <View style={{ marginLeft: widthPercentageToDP(-28),marginTop: heightPercentageToDP("3"), }}>
+        <CustomButton text="No" small secondary outline onPress={() => {
+            console.log("host email =", hostEmail)
+            console.log("host username =", hostUsername)
+              const message = {
+                text: "No",
+                timestamp: firebase.database.ServerValue.TIMESTAMP,
+                user: {
+                  _id: user.uid,
+                  email: user.email
+                },
+                userTo: {
+                  _id: event["co-host-0"],
+                  email: `${hostEmail}`,
+                  username: `${hostUsername}`
+                }
+            }
+            db.child(`${user.uid}/messages/${event["co-host-0"]}`).push(message)
+            db.child(`${event["co-host-0"]}/messages/${user.uid}`).push(message)
               navigation.navigate("Messages", {
                 screen: "Chat",
                 params: {
