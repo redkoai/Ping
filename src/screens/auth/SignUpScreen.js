@@ -87,6 +87,8 @@ function SignUpScreen({ navigation }) {
         alignItems: 'center',
         backgroundColor: 'white',
         minHeight: Math.round(Dimensions.get('window').height),
+
+        
       }}
     >
       <KeyboardAvoidingView
@@ -95,9 +97,7 @@ function SignUpScreen({ navigation }) {
         contentContainerStyle={{ flex: 1, alignItems: 'center' }}
         style={{ flex: 1, alignItems: 'center' }}
       >
-       <View style={{left: widthPercentageToDP(-5), marginBottom:heightPercentageToDP(-15)}}>
-       <Image source={{PingIcon}} style={{left: widthPercentageToDP(-5), marginBottom:heightPercentageToDP(-6), width:widthPercentageToDP(70), height:heightPercentageToDP(10)}}/>
-        </View>
+       <Image source={PingIcon} style={{ width:widthPercentageToDP(70), height:heightPercentageToDP(10), resizeMode:'contain'}}/>
         <Spacer height={6.5} />
         {image && <Image source={{uri: image}} style={{marginTop:'0%', height: heightPercentageToDP('10'), width: widthPercentageToDP('30')}} />}
         <TouchableOpacity onPress={pickImage}>

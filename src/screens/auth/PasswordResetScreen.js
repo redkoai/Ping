@@ -46,8 +46,7 @@ function PasswordResetScreen() {
         contentContainerStyle={{ flex: 1, alignItems: 'center' }}
         style={{ flex: 1, alignItems: 'center' }}
       >
-          <Image source={{PingIcon}} style={{left: widthPercentageToDP(-5), marginBottom:heightPercentageToDP(-6), width:widthPercentageToDP(70), height:heightPercentageToDP(10)}}/>
-        <Spacer height={8} />
+         <Image source={PingIcon} style={{ width:widthPercentageToDP(70), height:heightPercentageToDP(20), resizeMode:'contain'}}/>
 
         <EmailInput control={control} errors={errors} />
         <Spacer height={1} />

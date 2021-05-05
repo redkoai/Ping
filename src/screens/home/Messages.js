@@ -69,7 +69,7 @@ function Messages({}) {
       console.log("queryUserHistory")
       let userHistory = {}
       db.child(`${user.uid}/messages/`).on("child_added", function(snapshot) {
-        // console.log("snapshot val user._id", snapshot.val()[`${Object.keys(snapshot.val())[0]}`].user._id)
+        console.log("snapshot val user._id", snapshot.val()[`${Object.keys(snapshot.val())[0]}`].userTo._id)
           if (snapshot.val()[`${Object.keys(snapshot.val())[0]}`].user._id == user.uid) {
               console.log("found user", snapshot.val())
               userHistory[snapshot.val()[`${Object.keys(snapshot.val())[0]}`].userTo.username] = {
@@ -78,7 +78,7 @@ function Messages({}) {
                 _id: snapshot.val()[`${Object.keys(snapshot.val())[0]}`].userTo._id
               }
           } 
-          if (snapshot.val()[`${Object.keys(snapshot.val())[0]}`].userTo._id == user.uid) {
+          else if (snapshot.val()[`${Object.keys(snapshot.val())[0]}`].userTo._id == user.uid) {
             console.log("found user", snapshot.val())
             userHistory[snapshot.val()[`${Object.keys(snapshot.val())[0]}`].user.username] = {
               text: snapshot.val()[`${Object.keys(snapshot.val())[0]}`].text, 

@@ -212,11 +212,21 @@ function Accountsone({}) {
           small
           primary
           onPress={() => { 
-            navigation.navigate('Chat', { OtherUserInfo: {
-                _id: foundUser.uid,
-                email: foundUser.email,
-                username: foundUser.username
-            }})
+            navigation.navigate("Messages", {
+              screen: "Chat",
+              params: {
+                OtherUserInfo: {
+                  _id: event["co-host-0"],
+                  email: hostEmail,
+                  username: hostUsername,
+                },
+              },
+            })
+            // navigation.navigate('Chat', { OtherUserInfo: {
+            //     _id: foundUser.uid,
+            //     email: foundUser.email,
+            //     username: foundUser.username
+            // }})
         }}
           
          

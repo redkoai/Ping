@@ -68,12 +68,12 @@ function SignInScreen({ navigation }) {
         contentContainerStyle={{ flex: 1, alignItems: 'center' }}
         style={{ flex: 1, alignItems: 'center' }}
       >
-         <View style={{left: widthPercentageToDP(-5), marginBottom:heightPercentageToDP(-6)}}>
-           <Image source={{PingIcon}} style={{left: widthPercentageToDP(-5), marginBottom:heightPercentageToDP(-6), width:widthPercentageToDP(70), height:heightPercentageToDP(10)}}/>
+       
+           <Image source={PingIcon} style={{ width:widthPercentageToDP(70), height:heightPercentageToDP(20), resizeMode:'contain'}}/>
 
         {/* <PingIcon size={heightPercentageToDP(20)} color={colors.primary} style={styles.logo} /> */}
-        </View>
-        <Spacer height={6.5} />
+
+      
 
         <EmailInput control={control} errors={errors} />
         <PasswordInput
