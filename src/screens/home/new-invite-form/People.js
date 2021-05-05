@@ -32,7 +32,7 @@ import add from "ping/assets/invites/adds.png";
 import { actuatedNormalize } from "ping/util/fontScaler";
 import uuid from "react-native-uuid";
 import email from "react-native-email";
-
+import Modal from "react-native-modal";
 function People({ route, navigation }) {
   const { formData, updateFormData } = useContext(NewInviteContext);
   const [guestList, setGuestList] = useState([]);
@@ -190,7 +190,9 @@ function People({ route, navigation }) {
     false
   );
   const [addedFriendsList, setAddedFriendsList] = useState([]);
-
+  const [areYouSureInviteAllFriends, setAreYouSureInviteAllFriends] = useState(
+    false
+  );
   const sendInvite = () => {
     guests[foundUser.uid] = "no";
     db.child(foundUser.uid);
@@ -211,6 +213,10 @@ function People({ route, navigation }) {
   };
 
   const sendInviteToAllFriends = () => {
+    setAreYouSureInviteAllFriends(true);
+  };
+
+  const sendInviteToAllFriendsConfirmation = () => {
     db.child(`${user.uid}/Friends`).on("child_added", function (snapshot) {
       console.log("snpashot = ", snapshot);
       console.log("snapshot key =", snapshot.key);
@@ -219,6 +225,7 @@ function People({ route, navigation }) {
       console.log("form data pushed");
     });
     setSentInviteToAllFriendsBool(!sentInviteToAllFriendsBool);
+    setAreYouSureInviteAllFriends(false);
   };
 
   const sendHostEvent = () => {
@@ -391,6 +398,25 @@ function People({ route, navigation }) {
       style={{ flex: 1, backgroundColor: "white" }}
       contentContainerStyle={{ justifyContent: "center", alignItems: "center" }}
     >
+      <Modal
+        animationType={"fade"}
+        transparent={true}
+        visible={areYouSureInviteAllFriends}
+        onTouchOutside={() => {
+          setAreYouSureInviteAllFriends(false);
+        }}
+      >
+        <View style={{ backgroundColor: "white", height: 250, width: 250 }}>
+          <TouchableOpacity onPress={sendInviteToAllFriendsConfirmation}>
+            <Text>Yess</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => setAreYouSureInviteAllFriends(false)}
+          >
+            <Text>X</Text>
+          </TouchableOpacity>
+        </View>
+      </Modal>
       <StatusBar backgroundColor={colors.primary} />
       <View
         style={{
