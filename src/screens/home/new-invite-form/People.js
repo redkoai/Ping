@@ -328,6 +328,8 @@ function People({ route, navigation }) {
     setAddedFriendsList(() => [...newFriendList]);
   };
 
+
+
   //////////////////////////////////////
   // Firebase query for current friends
   //////////////////////////////////////
@@ -464,9 +466,16 @@ function People({ route, navigation }) {
     setEmailList(() => [...emailListChangeArr]);
   };
 
+  //TODO REMOVE EMAIL
+  // const removeEmail = () => {
+  //   const emailListChangeArr = addedFriendsList;
+  //   const newEmailList = emailListChangeArr.filter((item) => item != friend);
+
+  //   setAddedFriendsList(() => [...newFriendList]);
+  // };
   return (
     <KeyboardAwareScrollView
-      style={{ flex: 1, backgroundColor: "white" }}
+      style={{ flex: 1, backgroundColor: "white",  }}
       contentContainerStyle={{ justifyContent: "center", alignItems: "center" }}
     >
       <Modal
@@ -733,8 +742,16 @@ function People({ route, navigation }) {
               <CustomButton small onPress={addEmail} text="ADD"/>
             </Card>
             {emailList.map((email) => (
-              <Text>{email}</Text>
+               <Text style={[
+                textStyles.bigRegular,{marginTop: heightPercentageToDP("1.5"),marginRight:widthPercentageToDP("0")}]}>{email}</Text>
             ))}
+            <CustomButton
+                        text="Remove"
+                        onPress={() => removeFiend(addedFriend)}
+                        outline
+                        small
+                        buttonSecondary
+                      />
           </View>
           {/* <CustomButton onPress={handleEmail} 
             // onPress={ signUp }
@@ -746,6 +763,7 @@ function People({ route, navigation }) {
                 marginTop: heightPercentageToDP("3"),
               }}
             >
+              
               {!emailInviteBool ? (
                 <CustomButton
                   text="Email Invites"
@@ -777,6 +795,7 @@ function People({ route, navigation }) {
             marginTop: heightPercentageToDP("60"),
           }}
         >
+          
           <CustomButton
             text="next"
             onPress={handleSubmit(onSubmit)}
