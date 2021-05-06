@@ -276,6 +276,22 @@ function People({ route, navigation }) {
     setAreYouSureInviteAllFriends(false);
   };
 
+  // const emailInviteToAllFriends = () => {
+  //   setAreYouSureEmailAllFriends(true);
+  // };
+
+  // const emailInviteToAllFriendsConfirmation = () => {
+  //   db.child(`${user.uid}/Friends`).on("child_added", function (snapshot) {
+  //     console.log("snpashot = ", snapshot);
+  //     console.log("snapshot key =", snapshot.key);
+  //     console.log("snapshot value =", snapshot.val());
+  //     db.child(`${snapshot.key}/Events/${eventID}`).set(formData);
+  //     console.log("form data pushed");
+  //   });
+  //   setSentInviteToAllFriendsBool(!sentInviteToAllFriendsBool);
+  //   setAreYouSureEmailAllFriends(false);
+  // };
+
   const sendHostEvent = () => {
     db.child(`${user.uid}/Events/${eventID}`).set(formData);
     console.log("host data pushed");
@@ -461,17 +477,52 @@ function People({ route, navigation }) {
           setAreYouSureInviteAllFriends(false);
         }}
       >
-        <View style={{ backgroundColor: "white", height: 250, width: 250 }}>
+        <View style={{ backgroundColor: "#A6ACE9", height: heightPercentageToDP("15"), width: widthPercentageToDP("60") ,marginLeft:widthPercentageToDP("15"),borderRadius:10,
+
+}}>
+        <Text style={[
+                    textStyles.bigRegular,{color:'white',marginTop: heightPercentageToDP("2"),marginLeft:widthPercentageToDP("2")}]}>Are you sure you want to send to all friends?</Text>
+                    <View style={{flexDirection:'row', justifyContent:'space-around'}}>
           <TouchableOpacity onPress={sendInviteToAllFriendsConfirmation}>
-            <Text>Yess</Text>
+          <Text style={[
+                    textStyles.bigRegular,{color:'white',marginTop: heightPercentageToDP("2"),marginLeft:widthPercentageToDP("2")}]}>Yes</Text>
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => setAreYouSureInviteAllFriends(false)}
           >
-            <Text>X</Text>
+             <Text style={[
+                    textStyles.bigRegular,{color:'white',marginTop: heightPercentageToDP("2"),marginLeft:widthPercentageToDP("2")}]}>No</Text>
           </TouchableOpacity>
         </View>
+        </View>
       </Modal>
+      {/* <Modal
+        animationType={"fade"}
+        transparent={true}
+        visible={areYouSureInviteAllFriends}
+        onTouchOutside={() => {
+          setAreYouSureInviteAllFriends(false);
+        }}
+      >
+        <View style={{ backgroundColor: "#A6ACE9", height: heightPercentageToDP("15"), width: widthPercentageToDP("60") ,marginLeft:widthPercentageToDP("15"),borderRadius:10,
+
+}}>
+        <Text style={[
+                    textStyles.bigRegular,{color:'white',marginTop: heightPercentageToDP("2"),marginLeft:widthPercentageToDP("2")}]}>Are you sure you want to send to all emails that don't have an account?</Text>
+                    <View style={{flexDirection:'row', justifyContent:'space-around'}}>
+          <TouchableOpacity onPress={sendInviteToAllFriendsConfirmation}>
+          <Text style={[
+                    textStyles.bigRegular,{color:'white',marginTop: heightPercentageToDP("1"),marginLeft:widthPercentageToDP("2")}]}>Yes</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => setAreYouSureInviteAllFriends(false)}
+          >
+             <Text style={[
+                    textStyles.bigRegular,{color:'white',marginTop: heightPercentageToDP("1"),marginLeft:widthPercentageToDP("2")}]}>No</Text>
+          </TouchableOpacity>
+        </View>
+        </View>
+      </Modal> */}
       <StatusBar backgroundColor={colors.primary} />
       <View
         style={{
@@ -605,15 +656,16 @@ function People({ route, navigation }) {
                 <Text
                   style={[
                     textStyles.bigBold,
-                    { left: widthPercentageToDP("0") },
+                    { left: widthPercentageToDP("2") },
                   ]}
                 >
                   Friends:
                 </Text>
                 <View style={{ flexDirection: "column" }}>
                   {addedFriendsList.map((addedFriend) => (
-                    <View style={{ flexDirection: "column" }}>
-                      <Text>{addedFriend.username}</Text>
+                    <View style={{ flexDirection: "row", justifyContent:'space-around' }}>
+                      <Text style={[
+                    textStyles.bigRegular,{marginTop: heightPercentageToDP("1.5"),marginRight:widthPercentageToDP("0")}]}>{addedFriend.username}</Text>
                       <CustomButton
                         text="Remove"
                         onPress={() => removeFiend(addedFriend)}

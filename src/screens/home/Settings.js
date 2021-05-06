@@ -17,6 +17,8 @@ import * as firebase from 'firebase';
 import StoreData from "../../../util/SaveItemInStorage";
 import RetrieveData from "../../../util/GetItemInStorage";
 import LoginChecker from "../../../util/validators/LoginChecker";
+import { InAppBrowser } from "@matt-block/react-native-in-app-browser";
+
 
 function Accounts({}) {
   const [loggedInUser,setLoggedInUser]=useState([]);
@@ -89,7 +91,7 @@ function Accounts({}) {
               }}
             >
             {/* <Image source={Accname} style={{height: heightPercentageToDP('10'), width :widthPercentageToDP('95'),  resizeMode:'contain',marginTop: heightPercentageToDP('10'), }} /> */}
-             <TouchableOpacity>
+             <TouchableOpacity onPress={() => InAppBrowser.open("https://www.theredko.com/tango-privacy-policy")}>
             <Image 
             source={settings} 
             style={{
@@ -150,7 +152,7 @@ function Accounts({}) {
             }}
           >
           {/* <Image source={Accname} style={{height: heightPercentageToDP('10'), width :widthPercentageToDP('95'),  resizeMode:'contain',marginTop: heightPercentageToDP('10'), }} /> */}
-           <TouchableOpacity>
+          <TouchableOpacity onPress={() => InAppBrowser.open("https://www.theredko.com/tango-privacy-policy")}>
           <Image 
           source={settings} 
           style={{

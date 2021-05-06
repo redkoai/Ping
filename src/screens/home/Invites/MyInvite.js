@@ -19,7 +19,7 @@ import CustomButton from "ping/src/components/inputs/CustomButton";
 import CalendarIcon from "ping/src/icons/CalendarIcon";
 import LocationNearMeIcon from "ping/src/icons/LocationNearMeIcon";
 import { InAppBrowser } from "@matt-block/react-native-in-app-browser";
-import * as WebBrowser from "expo-web-browser";
+import * as WebBrowser from 'expo-web-browser';
 import {
   Entypo,
   MaterialIcons,
@@ -272,7 +272,15 @@ function MyInvite({ navigation, route }) {
               marginTop: heightPercentageToDP("-5"),
             }}
           >
-            <Text>RSVP</Text>
+            <Text
+              style={[
+                textStyles.normalBold,
+                {
+                  left: widthPercentageToDP("10"),
+                  marginTop: heightPercentageToDP("0"),
+                },
+              ]}
+            >RSVP</Text>
             <CustomButton
               text="Yes"
               small
@@ -427,13 +435,13 @@ function MyInvite({ navigation, route }) {
           <View>
             <TouchableOpacity
               onPress={() =>
-                InAppBrowser.open(
-                  "https://www.google.com/maps/place/" + event.location
-                )
-              }
-            >
+                WebBrowser.openBrowserAsync("https://www.google.com/maps/place/" + JSON.stringify(event.location))}>
+
               <Entypo name="location-pin" size={28} color="black" />
             </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() =>
+                WebBrowser.openBrowserAsync("https://www.google.com/maps/place/" + JSON.stringify(event.location))}>
             <Text
               style={[
                 textStyles.normalBold,
@@ -445,11 +453,14 @@ function MyInvite({ navigation, route }) {
             >
               {event.location}
             </Text>
-            <TouchableOpacity onPress={() => InAppBrowser.open(url)}>
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() =>
+                WebBrowser.openBrowserAsync("https://www.google.com/maps/place/" + JSON.stringify(event.location))}>
               <LocationNearMeIcon
                 style={{
                   left: heightPercentageToDP("40"),
-                  marginTop: heightPercentageToDP("-2.2"),
+                  marginTop: heightPercentageToDP("-3"),
                 }}
                 size={heightPercentageToDP(3)}
                 color={colors.darkGrey}

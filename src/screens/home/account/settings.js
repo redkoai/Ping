@@ -19,7 +19,7 @@ import React, {useContext, useEffect, useState} from "react";
 import AuthContext from 'ping/src/contexts/AuthContext';
 import CustomButton from 'ping/src/components/inputs/CustomButton';
 import { colors, textStyles } from 'ping/src/styles/styles';
-
+import * as WebBrowser from 'expo-web-browser';
 
 const chartConfig = {
   backgroundGradientFrom: "#1E2923",
@@ -71,31 +71,17 @@ function Settings() {
 
 <View style={{ flexDirection: 'row', justifyContent: 'space-between',marginTop:widthPercentageToDP(3)}}>
 <Text style={[textStyles.bigBold,{left:heightPercentageToDP('2'),marginBottom:heightPercentageToDP('2')} ]}>Terms and Conditions</Text>
-<TouchableOpacity onPress={() => { 
-    navigation.navigate("Events", { screen: "Events" })
-
-}}>
+<TouchableOpacity onPress={() => WebBrowser.openBrowserAsync('https://www.theredko.com/tango-terms-of-use')}>
 <Text style={[textStyles.smallSemiBold,{color:'gray', fontSize:actuatedNormalize(12),left:heightPercentageToDP('-3')} ]}>Read</Text>
 </TouchableOpacity>
 </View>
 <View style={{ flexDirection: 'row', justifyContent: 'space-between',marginTop:widthPercentageToDP(3)}}>
 <Text style={[textStyles.bigBold,{left:heightPercentageToDP('2'),marginBottom:heightPercentageToDP('2')} ]}>Privacy Policy</Text>
-<TouchableOpacity onPress={() => { 
-    navigation.navigate("Events", { screen: "Events" })
-
-}}>
+<TouchableOpacity onPress={() => WebBrowser.openBrowserAsync("https://www.theredko.com/tango-privacy-policy")}>
 <Text style={[textStyles.smallSemiBold,{color:'gray', fontSize:actuatedNormalize(12),left:heightPercentageToDP('-3')} ]}>Read</Text>
 </TouchableOpacity>
 </View>
-{/* <View style={{ flexDirection: 'row', justifyContent: 'space-between',marginTop:widthPercentageToDP(3)}}>
-<Text style={[textStyles.bigBold,{left:heightPercentageToDP('2'),marginBottom:heightPercentageToDP('2')} ]}>Terms and Conditions</Text>
-<TouchableOpacity onPress={() => { 
-    navigation.navigate("Events", { screen: "Events" })
 
-}}>
-<Text style={[textStyles.smallSemiBold,{color:'gray', fontSize:actuatedNormalize(12),left:heightPercentageToDP('-3')} ]}>Read</Text>
-</TouchableOpacity>
-</View> */}
           </View>
 
           <ScrollView

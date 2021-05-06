@@ -453,14 +453,14 @@ function HomeScreenEmpty({}) {
 
               <View
                 style={{
-                  left: heightPercentageToDP("3"),
-                  marginBottom: widthPercentageToDP(5),
+                  left: widthPercentageToDP("3"),
+                  marginTop: heightPercentageToDP(25),
                 }}
               >
                
               </View>
 
-              <TouchableOpacity  style={{left: heightPercentageToDP('2.5')}} onPress={() => { 
+              {/* <TouchableOpacity  style={{left: heightPercentageToDP('2.5')}} onPress={() => { 
     navigation.navigate('Account', {screen: " Accountsone"})
 
 }}>      
@@ -468,7 +468,7 @@ function HomeScreenEmpty({}) {
           text="Add friends"
           shadow
         />
-        </TouchableOpacity>
+        </TouchableOpacity> */}
             </View>
           ) : (
             <View
