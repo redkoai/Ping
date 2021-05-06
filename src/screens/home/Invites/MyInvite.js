@@ -8,7 +8,7 @@ import {
   Text,
   TouchableOpacity,
   ImageBackground,
-  Button
+  Button,
 } from "react-native";
 import NewInviteContext from "ping/src/contexts/NewInviteContext";
 import AuthContext from "ping/src/contexts/AuthContext";
@@ -19,7 +19,7 @@ import CustomButton from "ping/src/components/inputs/CustomButton";
 import CalendarIcon from "ping/src/icons/CalendarIcon";
 import LocationNearMeIcon from "ping/src/icons/LocationNearMeIcon";
 import { InAppBrowser } from "@matt-block/react-native-in-app-browser";
-import * as WebBrowser from 'expo-web-browser';
+import * as WebBrowser from "expo-web-browser";
 import {
   Entypo,
   MaterialIcons,
@@ -79,15 +79,14 @@ function MyInvite({ navigation, route }) {
     console.log("event = ", event);
   };
 
+  const url = "https://www.google.com/maps/place/" + event.location;
 
-  const url = "https://www.google.com/maps/place/" + event.location
-  
   /////////////////////////////////////////////
   // Firebase query for event host information
   //////////////////////////////////////////////
   const [hostEmail, setHostEmail] = useState();
   const [hostUsername, setHostUsername] = useState();
-  const [photo, setPhoto]=useState("")
+  const [photo, setPhoto] = useState("");
   const getHostInfo = () => {
     db.on("child_added", function (snapshot) {
       if (snapshot.key == event["co-host-0"]) {
@@ -100,6 +99,29 @@ function MyInvite({ navigation, route }) {
   console.log("host email =", hostEmail);
   console.log("host username =", hostUsername);
   console.log(event, "brown");
+
+  //////////////////////////////
+  // Send RSVP
+  /////////////////////////////
+
+  // const sendRSVP = () => {
+  //   const message = {
+  //     text: "Yes",
+  //     timestamp: firebase.database.ServerValue.TIMESTAMP,
+  //     user: {
+  //       _id: user.uid,
+  //       email: user.email
+  //     },
+  //     userTo: {
+  //       _id: event["co-host-0"],
+  //       email: hostEmail,
+  //       username: hostUsername
+  //     }
+  // }
+  // db.child(`${user.uid}/messages/${event["co-host-0"]}`).push(message)
+  // db.child(`${event["co-host-0"]}/messages/${user.uid}`).push(message)
+
+  // }
 
   useEffect(() => {
     getEvent();
@@ -121,16 +143,16 @@ function MyInvite({ navigation, route }) {
         });
       });
 
-//get Image
-      let storeRef = firebase.storage().ref();
-      storeRef
-        .child(`images/${route.params.eventID}`)
-        .getDownloadURL()
-        .then((url) => {
-          console.log(url,"bananas");
-          setPhoto(url);
-        });
+    //get Image
+    let storeRef = firebase.storage().ref();
+    storeRef
+      .child(`images/${route.params.eventID}`)
+      .getDownloadURL()
+      .then((url) => {
+        console.log(url, "bananas");
 
+        setPhoto(url);
+      });
   }, []);
 
   // const { formData, updateFormData, bgImage } = useContext(NewInviteContext);
@@ -165,8 +187,8 @@ function MyInvite({ navigation, route }) {
       >
         <View>
           <ImageBackground
-           // source={getImage().image}
-           source={{uri:photo}}
+            source={getImage().image}
+            source={{ uri: photo }}
             style={{
               height: heightPercentageToDP("30"),
               width: widthPercentageToDP("100"),
@@ -197,7 +219,7 @@ function MyInvite({ navigation, route }) {
           >
             {event.startdate}
           </Text>
-  
+
           <Text
             style={[
               textStyles.normalBold,
@@ -231,7 +253,7 @@ function MyInvite({ navigation, route }) {
             height: heightPercentageToDP("10"),
             width: widthPercentageToDP("20"),
             resizeMode: "contain",
-            flexDirection:'row',
+            flexDirection: "row",
             marginTop: heightPercentageToDP("3"),
             left: heightPercentageToDP("3"),
           }}
@@ -244,24 +266,103 @@ function MyInvite({ navigation, route }) {
               navigation.navigate("SecretCode");
             }}
           />
-                  <View style={{ marginLeft: widthPercentageToDP(10),marginTop: heightPercentageToDP("1"), }}>
-          <CustomButton text="RSVP" small secondary outline onPress={() => {
-              navigation.navigate("Messages", {
-                screen: "Chat",
-                params: {
-                  OtherUserInfo: {
-                    _id: event["co-host-0"],
-                    email: hostEmail,
-                    username: hostUsername,
+          <View
+            style={{
+              marginLeft: widthPercentageToDP(10),
+              marginTop: heightPercentageToDP("-5"),
+            }}
+          >
+            <Text>RSVP</Text>
+            <CustomButton
+              text="Yes"
+              small
+              secondary
+              outline
+              onPress={() => {
+                console.log("host email =", hostEmail);
+                console.log("host username =", hostUsername);
+                const message = {
+                  text: "Yes",
+                  timestamp: firebase.database.ServerValue.TIMESTAMP,
+                  user: {
+                    _id: user.uid,
+                    email: user.email,
                   },
-                },
-              });
-            }} />
-        </View>
+                  userTo: {
+                    _id: event["co-host-0"],
+                    email: `${hostEmail}`,
+                    username: `${hostUsername}`,
+                  },
+                };
+                db.child(`${user.uid}/messages/${event["co-host-0"]}`).push(
+                  message
+                );
+                db.child(`${event["co-host-0"]}/messages/${user.uid}`).push(
+                  message
+                );
+                navigation.navigate("Messages", {
+                  screen: "Chat",
+                  params: {
+                    OtherUserInfo: {
+                      _id: event["co-host-0"],
+                      email: hostEmail,
+                      username: hostUsername,
+                    },
+                  },
+                });
+              }}
+            />
+          </View>
+          <View
+            style={{
+              marginLeft: widthPercentageToDP(-28),
+              marginTop: heightPercentageToDP("3"),
+            }}
+          >
+            <CustomButton
+              text="No"
+              small
+              secondary
+              outline
+              onPress={() => {
+                console.log("host email =", hostEmail);
+                console.log("host username =", hostUsername);
+                const message = {
+                  text: "No",
+                  timestamp: firebase.database.ServerValue.TIMESTAMP,
+                  user: {
+                    _id: user.uid,
+                    email: user.email,
+                  },
+                  userTo: {
+                    _id: event["co-host-0"],
+                    email: `${hostEmail}`,
+                    username: `${hostUsername}`,
+                  },
+                };
+                db.child(`${user.uid}/messages/${event["co-host-0"]}`).push(
+                  message
+                );
+                db.child(`${event["co-host-0"]}/messages/${user.uid}`).push(
+                  message
+                );
+                navigation.navigate("Messages", {
+                  screen: "Chat",
+                  params: {
+                    OtherUserInfo: {
+                      _id: event["co-host-0"],
+                      email: hostEmail,
+                      username: hostUsername,
+                    },
+                  },
+                });
+              }}
+            />
+          </View>
 
-        {/* TODO MESSSAGE HOST TAKE HOST UID AND MESSAGE */}
-        {/* navigation.navigate("Invest", { screen: "InvestScreen" }) */}
-        {/* navigation.navigate("**stack_Name**", {
+          {/* TODO MESSSAGE HOST TAKE HOST UID AND MESSAGE */}
+          {/* navigation.navigate("Invest", { screen: "InvestScreen" }) */}
+          {/* navigation.navigate("**stack_Name**", {
  screen:"screen_name_connect_with_**stack_name**",
  params:{
  user:"anything_string_or_object"
@@ -302,334 +403,315 @@ function MyInvite({ navigation, route }) {
           left:heightPercentageToDP('25')}}>
           <Text style={[ { color: colors.darkGrey }]}>{event.startdate}</Text>
           </View> */}
-<View
-          style={{
-            left: heightPercentageToDP("2"),
-            flexDirection:'column',
-            textAlign: "center",
-            marginTop: heightPercentageToDP("1"),
-          }}
-        >
         <View
           style={{
-            paddingHorizontal: widthPercentageToDP("3"),
-            marginBottom: heightPercentageToDP("1"),
+            left: heightPercentageToDP("2"),
+            flexDirection: "column",
             textAlign: "center",
             marginTop: heightPercentageToDP("1"),
           }}
         >
-          <Text style={[{ color: colors.darkGrey }]}>{event.description}</Text>
-        </View>
-
-        <View>
-          <TouchableOpacity  onPress={() => InAppBrowser.open("https://www.google.com/maps/place/" + event.location)}>
-
-          <Entypo name="location-pin" size={28} color="black" />
-          </TouchableOpacity>
-          <Text
-            style={[
-              textStyles.normalBold,
-              {
-                left: widthPercentageToDP("10"),
-                marginTop: heightPercentageToDP("-1.8"),
-              },
-            ]}
-          >
-            {event.location}
-          </Text>
-          <TouchableOpacity  onPress={() => InAppBrowser.open(url)}>
-            <LocationNearMeIcon
-              style={{
-                left: heightPercentageToDP("40"),
-                marginTop: heightPercentageToDP("-2.2"),
-              }}
-              size={heightPercentageToDP(3)}
-              color={colors.darkGrey}
-            />
-          </TouchableOpacity>
-        </View>
-
-        <Spacer height={1} />
-
-        <View>
-          <CalendarIcon
-            style={{ left: heightPercentageToDP("0.5") }}
-            size={heightPercentageToDP(2.8)}
-            color="black"
-          />
-          <Text
-            style={[
-              textStyles.normalBold,
-              {
-                marginTop: heightPercentageToDP("-2.5"),
-                left: heightPercentageToDP("5"),
-              },
-            ]}
-          >
-            {event.startdate}
-          </Text>
-          <Text
-            style={[
-              textStyles.normalBold,
-              {
-                left: heightPercentageToDP("5"),
-                marginTop: heightPercentageToDP("0"),
-              },
-            ]}
-          >
-            {event.enddate}
-          </Text>
-        </View>
-
-        <Spacer height={1} />
-
-        <View>
-          <View
-            style={{ left: heightPercentageToDP("0.5") }}
-            size={heightPercentageToDP(2.8)}
-          >
-            <MaterialCommunityIcons name="hanger" size={32} color="black" />
-          </View>
-          {event["radio-buttons"] === "casual-and-comfortable" ? (
-            <View>
-          <Text
-            style={[
-              textStyles.normalBold,
-              {
-                left: heightPercentageToDP("5"),
-                marginTop: heightPercentageToDP("-2.6"),
-              },
-            ]}
-          >
-            Casual and Comfortable
-          </Text>
-          </View>
-          ):(
-            <View>          
-              <Text
-            style={[
-              textStyles.normalBold,
-              {
-                left: heightPercentageToDP("5"),
-                marginTop: heightPercentageToDP("-2.6"),
-              },
-            ]}
-          >
-            {event["radio-buttons"]}
-          </Text> 
-          </View>
-          )}
           <View
             style={{
-              left: heightPercentageToDP("40"),
+              paddingHorizontal: widthPercentageToDP("3"),
+              marginBottom: heightPercentageToDP("1"),
+              textAlign: "center",
               marginTop: heightPercentageToDP("1"),
             }}
-            size={heightPercentageToDP(3)}
           >
-            
+            <Text style={[{ color: colors.darkGrey }]}>
+              {event.description}
+            </Text>
           </View>
-        </View>
-
-        <View style={{ left: heightPercentageToDP("0.3") }}>
-          <MaterialCommunityIcons
-            name="frequently-asked-questions"
-            size={32}
-            color="black"
-          />
-          <Text
-            style={[
-              textStyles.normalBold,
-              {
-                left: heightPercentageToDP("5"),
-                marginTop: heightPercentageToDP("-2.6"),
-              },
-            ]}
-          >
-            FAQ'S
-          </Text>
 
           <View>
-          <Text
-            style={[
-              textStyles.normalBold,
-              {
-                marginTop: heightPercentageToDP(".5"),
-                left: heightPercentageToDP("5"),
-              },
-            ]}
-          >
-          Guests Per Invite
-          </Text>
-          <Text
-            style={[
-              textStyles.normalRegular,
-              {
-                marginTop: heightPercentageToDP(".5"),
-                left: heightPercentageToDP("5"),
-              },
-            ]}
-          >
-            
-            {event['total-invited']}
-          </Text>
+            <TouchableOpacity
+              onPress={() =>
+                InAppBrowser.open(
+                  "https://www.google.com/maps/place/" + event.location
+                )
+              }
+            >
+              <Entypo name="location-pin" size={28} color="black" />
+            </TouchableOpacity>
+            <Text
+              style={[
+                textStyles.normalBold,
+                {
+                  left: widthPercentageToDP("10"),
+                  marginTop: heightPercentageToDP("-1.8"),
+                },
+              ]}
+            >
+              {event.location}
+            </Text>
+            <TouchableOpacity onPress={() => InAppBrowser.open(url)}>
+              <LocationNearMeIcon
+                style={{
+                  left: heightPercentageToDP("40"),
+                  marginTop: heightPercentageToDP("-2.2"),
+                }}
+                size={heightPercentageToDP(3)}
+                color={colors.darkGrey}
+              />
+            </TouchableOpacity>
           </View>
 
-          
+          <Spacer height={1} />
+
+          <View>
+            <CalendarIcon
+              style={{ left: heightPercentageToDP("0.5") }}
+              size={heightPercentageToDP(2.8)}
+              color="black"
+            />
+            <Text
+              style={[
+                textStyles.normalBold,
+                {
+                  marginTop: heightPercentageToDP("-2.5"),
+                  left: heightPercentageToDP("5"),
+                },
+              ]}
+            >
+              {event.startdate}
+            </Text>
+            <Text
+              style={[
+                textStyles.normalBold,
+                {
+                  left: heightPercentageToDP("5"),
+                  marginTop: heightPercentageToDP("0"),
+                },
+              ]}
+            >
+              {event.enddate}
+            </Text>
+          </View>
+
+          <Spacer height={1} />
+
+          <View>
+            <View
+              style={{ left: heightPercentageToDP("0.5") }}
+              size={heightPercentageToDP(2.8)}
+            >
+              <MaterialCommunityIcons name="hanger" size={32} color="black" />
+            </View>
+            {event["radio-buttons"] === "casual-and-comfortable" ? (
+              <View>
+                <Text
+                  style={[
+                    textStyles.normalBold,
+                    {
+                      left: heightPercentageToDP("5"),
+                      marginTop: heightPercentageToDP("-2.6"),
+                    },
+                  ]}
+                >
+                  Casual and Comfortable
+                </Text>
+              </View>
+            ) : (
+              <View>
+                <Text
+                  style={[
+                    textStyles.normalBold,
+                    {
+                      left: heightPercentageToDP("5"),
+                      marginTop: heightPercentageToDP("-2.6"),
+                    },
+                  ]}
+                >
+                  {event["radio-buttons"]}
+                </Text>
+              </View>
+            )}
+            <View
+              style={{
+                left: heightPercentageToDP("40"),
+                marginTop: heightPercentageToDP("1"),
+              }}
+              size={heightPercentageToDP(3)}
+            ></View>
+          </View>
+
+          <View style={{ left: heightPercentageToDP("0.3") }}>
+            <MaterialCommunityIcons
+              name="frequently-asked-questions"
+              size={32}
+              color="black"
+            />
+            <Text
+              style={[
+                textStyles.normalBold,
+                {
+                  left: heightPercentageToDP("5"),
+                  marginTop: heightPercentageToDP("-2.6"),
+                },
+              ]}
+            >
+              FAQ'S
+            </Text>
 
             <View>
-          <Text
-            style={[
-              textStyles.normalBold,
-              {
-                marginTop: heightPercentageToDP(".5"),
-                left: heightPercentageToDP("5"),
-              },
-            ]}
-          >
-           Guests Should Bring
-          </Text>
-          <Text
-            style={[
-              textStyles.normalRegular,
-              {
-                marginTop: heightPercentageToDP(".5"),
-                left: heightPercentageToDP("5"),
-              },
-            ]}
-          >
-            {event.faqguests}
-          
-          </Text>
-          </View>
-          
-
-           
-            <View>
-          <Text
-            style={[
-              textStyles.normalBold,
-              {
-                marginTop: heightPercentageToDP(".5"),
-                left: heightPercentageToDP("5"),
-              },
-            ]}
-          >
-           Where To Park
-          </Text>
-          <Text
-            style={[
-              textStyles.normalRegular,
-              {
-                marginTop: heightPercentageToDP(".5"),
-                left: heightPercentageToDP("5"),
-              },
-            ]}
-          >
-            {event.faqpeoplepark}
-          </Text>
-          </View>
-        
-          
-
-
-
-        
-            <View>
-          <Text
-            style={[
-              textStyles.normalBold,
-              {
-                marginTop: heightPercentageToDP(".5"),
-                left: heightPercentageToDP("5"),
-              },
-            ]}
-          >
-          Secret Code
-          </Text>
-          <Text
-            style={[
-              textStyles.normalRegular,
-              {
-                marginTop: heightPercentageToDP(".5"),
-                left: heightPercentageToDP("5"),
-              },
-            ]}
-          >
-            {event.faqsecretcode}
-          </Text>
-         
-          </View>
-       
-
-
-         
-            <View>
-          <Text
-            style={[
-              textStyles.normalBold,
-              {
-                marginTop: heightPercentageToDP(".5"),
-                left: heightPercentageToDP("5"),
-              },
-            ]}
-          >
-          Co-Host
-          </Text>
-          <Text
-            style={[
-              textStyles.normalRegular,
-              {
-                marginTop: heightPercentageToDP(".5"),
-                left: heightPercentageToDP("5"),
-              },
-            ]}
-          >
-            {event['co-host-1']}
-          </Text>
-         
-          </View>
-        
-
-
+              <Text
+                style={[
+                  textStyles.normalBold,
+                  {
+                    marginTop: heightPercentageToDP(".5"),
+                    left: heightPercentageToDP("5"),
+                  },
+                ]}
+              >
+                Guests Per Invite
+              </Text>
+              <Text
+                style={[
+                  textStyles.normalRegular,
+                  {
+                    marginTop: heightPercentageToDP(".5"),
+                    left: heightPercentageToDP("5"),
+                  },
+                ]}
+              >
+                {event["total-invited"]}
+              </Text>
+            </View>
 
             <View>
-          <Text
-            style={[
-              textStyles.normalBold,
-              {
-                marginTop: heightPercentageToDP(".5"),
-                left: heightPercentageToDP("5"),
-              },
-            ]}
-          >
-          Can Kids Come?
-          </Text>
-          <Text
-            style={[
-              textStyles.normalRegular,
-              {
-                marginTop: heightPercentageToDP(".5"),
-                left: heightPercentageToDP("5"),
-              },
-            ]}
-          >
-            
-            {event['request-num-of-kids']}
-          </Text>
-          </View>
-        
+              <Text
+                style={[
+                  textStyles.normalBold,
+                  {
+                    marginTop: heightPercentageToDP(".5"),
+                    left: heightPercentageToDP("5"),
+                  },
+                ]}
+              >
+                Guests Should Bring
+              </Text>
+              <Text
+                style={[
+                  textStyles.normalRegular,
+                  {
+                    marginTop: heightPercentageToDP(".5"),
+                    left: heightPercentageToDP("5"),
+                  },
+                ]}
+              >
+                {event.faqguests}
+              </Text>
+            </View>
 
+            <View>
+              <Text
+                style={[
+                  textStyles.normalBold,
+                  {
+                    marginTop: heightPercentageToDP(".5"),
+                    left: heightPercentageToDP("5"),
+                  },
+                ]}
+              >
+                Where To Park
+              </Text>
+              <Text
+                style={[
+                  textStyles.normalRegular,
+                  {
+                    marginTop: heightPercentageToDP(".5"),
+                    left: heightPercentageToDP("5"),
+                  },
+                ]}
+              >
+                {event.faqpeoplepark}
+              </Text>
+            </View>
 
-          <View
-            style={{
-              left: heightPercentageToDP("40"),
-              marginTop: heightPercentageToDP("-3"),
-            }}
-            size={heightPercentageToDP(3)}
-          >
-            
+            <View>
+              <Text
+                style={[
+                  textStyles.normalBold,
+                  {
+                    marginTop: heightPercentageToDP(".5"),
+                    left: heightPercentageToDP("5"),
+                  },
+                ]}
+              >
+                Secret Code
+              </Text>
+              <Text
+                style={[
+                  textStyles.normalRegular,
+                  {
+                    marginTop: heightPercentageToDP(".5"),
+                    left: heightPercentageToDP("5"),
+                  },
+                ]}
+              >
+                {event.faqsecretcode}
+              </Text>
+            </View>
+
+            <View>
+              <Text
+                style={[
+                  textStyles.normalBold,
+                  {
+                    marginTop: heightPercentageToDP(".5"),
+                    left: heightPercentageToDP("5"),
+                  },
+                ]}
+              >
+                Co-Host
+              </Text>
+              <Text
+                style={[
+                  textStyles.normalRegular,
+                  {
+                    marginTop: heightPercentageToDP(".5"),
+                    left: heightPercentageToDP("5"),
+                  },
+                ]}
+              >
+                {event["co-host-1"]}
+              </Text>
+            </View>
+
+            <View>
+              <Text
+                style={[
+                  textStyles.normalBold,
+                  {
+                    marginTop: heightPercentageToDP(".5"),
+                    left: heightPercentageToDP("5"),
+                  },
+                ]}
+              >
+                Can Kids Come?
+              </Text>
+              <Text
+                style={[
+                  textStyles.normalRegular,
+                  {
+                    marginTop: heightPercentageToDP(".5"),
+                    left: heightPercentageToDP("5"),
+                  },
+                ]}
+              >
+                {event["request-num-of-kids"]}
+              </Text>
+            </View>
+
+            <View
+              style={{
+                left: heightPercentageToDP("40"),
+                marginTop: heightPercentageToDP("-3"),
+              }}
+              size={heightPercentageToDP(3)}
+            ></View>
           </View>
-        </View>
         </View>
         {/* <Spacer height={3} /> */}
         {/* 

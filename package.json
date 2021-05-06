@@ -28,7 +28,7 @@
     "expo-analytics-segment": "~10.1.1",
     "expo-font": "~9.1.0",
     "expo-google-sign-in": "~9.1.0",
-    "expo-image-picker": "~10.1.4",
+    "expo-image-picker": "^10.1.4",
     "expo-location": "~12.0.4",
     "expo-permissions": "~12.0.1",
     "expo-splash-screen": "~0.10.2",
@@ -76,7 +76,8 @@
     "rn-radio-button": "^1.0.2",
     "util": "^0.12.3",
     "uuid": "^8.3.2",
-    "yup": "^0.32.9"
+    "yup": "^0.32.9",
+    "expo-file-system": "~11.0.2"
   },
   "devDependencies": {
     "@babel/core": "~7.9.0"

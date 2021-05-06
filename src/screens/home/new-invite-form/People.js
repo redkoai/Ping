@@ -32,7 +32,7 @@ import add from "ping/assets/invites/adds.png";
 import { actuatedNormalize } from "ping/util/fontScaler";
 import uuid from "react-native-uuid";
 import email from "react-native-email";
-
+import Modal from "react-native-modal";
 function People({ route, navigation }) {
   const { formData, updateFormData } = useContext(NewInviteContext);
   const [guestList, setGuestList] = useState([]);
@@ -42,44 +42,42 @@ function People({ route, navigation }) {
   const { control, errors, reset, setValue, handleSubmit } = useForm({
     //resolver: yupResolver(RSVP_SCHEMA),
   });
-  const[photo, setPhoto]=useState("")
+  const [photo, setPhoto] = useState("");
 
   useEffect(() => {
     const randomID = uuid.v1();
     setEventID(randomID);
 
-    let bucketName="images"
-    let file =route.params.imagePath
-      // firebase.storage()
-      // .ref(`${bucketName}/${randomID}/${file}`)
-      // //eventID as the path name to be able to access 
-      // .put(file)
-      // .then((snapshot) => {
-      //   //You can check the image is now uploaded in the storage bucket
-      //   console.log(`image has been successfully uploaded.`);
-      // })
-      // .catch((e) => console.log('uploading image error => ', e));
+    let bucketName = "images";
+    let file = route.params.imagePath;
+    // firebase.storage()
+    // .ref(`${bucketName}/${randomID}/${file}`)
+    // //eventID as the path name to be able to access
+    // .put(file)
+    // .then((snapshot) => {
+    //   //You can check the image is now uploaded in the storage bucket
+    //   console.log(`image has been successfully uploaded.`);
+    // })
+    // .catch((e) => console.log('uploading image error => ', e));
 
-      let storageRef =firebase.storage().ref().child(`images/${randomID}`)
-      fetch(file).then(res=>res.blob()).then(blob=>
-        storageRef.put(blob).then(function(snapshot){
-          console.log(snapshot)
-          console.log("Uploaded a blob")
+    let storageRef = firebase.storage().ref().child(`images/${randomID}`);
+    fetch(file)
+      .then((res) => res.blob())
+      .then((blob) =>
+        storageRef.put(blob).then(function (snapshot) {
+          console.log(snapshot);
+          console.log("Uploaded a blob");
         })
-        ).catch(e=>console.log(e,"imageError"))
-      //eventID as the path name to be able to access 
-      // .put(file)
-      // .then((snapshot) => {
-      //   //You can check the image is now uploaded in the storage bucket
-      //   console.log(`image has been successfully uploaded.`);
-      // })
-      // .catch((e) => console.log('uploading image error => ', e));
-
-
+      )
+      .catch((e) => console.log(e, "imageError"));
+    //eventID as the path name to be able to access
+    // .put(file)
+    // .then((snapshot) => {
+    //   //You can check the image is now uploaded in the storage bucket
+    //   console.log(`image has been successfully uploaded.`);
+    // })
+    // .catch((e) => console.log('uploading image error => ', e));
   }, []);
-
-
- 
 
   // Trying to update form with the guestlist, need help
   const guests = {};
@@ -121,13 +119,12 @@ function People({ route, navigation }) {
         console.log("error ", error);
       });
     updateFormData(guests);
-    
 
     navigation.navigate("Events", {
       screen: "MyInvite",
       params: {
         eventID: eventID,
-        imagePath:route.params.imagePath
+        imagePath: route.params.imagePath,
       },
     });
     reset();
@@ -160,19 +157,33 @@ function People({ route, navigation }) {
 
   const handleEmail = () => {
     //todo : array of emails ITERARTE
+
+    const verifyEmail = (email) => {
+      let emailBoolean = true;
+      db.on("child_added", function (snapshot) {
+        if (snapshot.val().email == email) {
+          emailBoolean = false;
+        }
+      });
+      return emailBoolean;
+    };
     setEmailInviteBool(true);
     for (let i = 0; i < emailList.length; i++) {
       const to = emailList[i]; // string or array of email addresses
+
+      let newEmail = verifyEmail(emailList[i]);
+      console.log(newEmail, emailList[i], "superb");
+
       email(to, {
         // Optional additional arguments
         // cc: [`${text}`], // string or array of email addresses
         cc: [`${emailList[i]}`],
         bcc: "jbodoia@gmail.com", // string or array of email addresses [`${text}`],
         subject: "You have an invite from Ping",
-        body: `You have been invited to the follow event: 
-        
-        Event Name: ${formData.event} 
-        
+        body: `You have been invited to the follow event:
+
+        Event Name: ${formData.event}
+
         Dresscode: ${formData.dresscode}
 
         Location: ${formData.location}
@@ -181,27 +192,28 @@ function People({ route, navigation }) {
 
         End Date: ${formData.enddate}
 
-        Link to ping app: 
-
+        Link to ping app:
 
         Ping login information:
         username: ${text}
         email: ${text}
         password: ${password}
         `,
-      }).catch((e) => console.log(e, "blllur"));
+      }).catch((e) => console.log(e, "error"));
+      if (newEmail) {
+        firebase
+          .auth()
+          .createUserWithEmailAndPassword(emailList[i], password)
+          .then((cred) => {
+            console.log("cred =", cred);
+            // create email and username for user in firebase:
+            db.child(`${cred.user.uid}`).set({ email: text, username: text });
+            // push the invite data to the database for the user created:
+            db.child(`${cred.user.uid}/Events`).push(formData);
+          });
+      }
     }
     // create a user using the email from input:
-    firebase
-      .auth()
-      .createUserWithEmailAndPassword(text, password)
-      .then((cred) => {
-        console.log("cred =", cred);
-        // create email and username for user in firebase:
-        db.child(`${cred.user.uid}`).set({ email: text, username: text });
-        // push the invite data to the database for the user created:
-        db.child(`${cred.user.uid}/Events`).push(formData);
-      });
   };
 
   ////////////////////////////
@@ -226,7 +238,9 @@ function People({ route, navigation }) {
     false
   );
   const [addedFriendsList, setAddedFriendsList] = useState([]);
-
+  const [areYouSureInviteAllFriends, setAreYouSureInviteAllFriends] = useState(
+    false
+  );
   const sendInvite = () => {
     guests[foundUser.uid] = "no";
     db.child(foundUser.uid);
@@ -247,6 +261,10 @@ function People({ route, navigation }) {
   };
 
   const sendInviteToAllFriends = () => {
+    setAreYouSureInviteAllFriends(true);
+  };
+
+  const sendInviteToAllFriendsConfirmation = () => {
     db.child(`${user.uid}/Friends`).on("child_added", function (snapshot) {
       console.log("snpashot = ", snapshot);
       console.log("snapshot key =", snapshot.key);
@@ -255,6 +273,7 @@ function People({ route, navigation }) {
       console.log("form data pushed");
     });
     setSentInviteToAllFriendsBool(!sentInviteToAllFriendsBool);
+    setAreYouSureInviteAllFriends(false);
   };
 
   const sendHostEvent = () => {
@@ -284,6 +303,13 @@ function People({ route, navigation }) {
         console.log("friend added!");
       }
     });
+  };
+
+  const removeFiend = (friend) => {
+    const addedFriendsListArr = addedFriendsList;
+    const newFriendList = addedFriendsListArr.filter((item) => item != friend);
+
+    setAddedFriendsList(() => [...newFriendList]);
   };
 
   //////////////////////////////////////
@@ -427,6 +453,25 @@ function People({ route, navigation }) {
       style={{ flex: 1, backgroundColor: "white" }}
       contentContainerStyle={{ justifyContent: "center", alignItems: "center" }}
     >
+      <Modal
+        animationType={"fade"}
+        transparent={true}
+        visible={areYouSureInviteAllFriends}
+        onTouchOutside={() => {
+          setAreYouSureInviteAllFriends(false);
+        }}
+      >
+        <View style={{ backgroundColor: "white", height: 250, width: 250 }}>
+          <TouchableOpacity onPress={sendInviteToAllFriendsConfirmation}>
+            <Text>Yess</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => setAreYouSureInviteAllFriends(false)}
+          >
+            <Text>X</Text>
+          </TouchableOpacity>
+        </View>
+      </Modal>
       <StatusBar backgroundColor={colors.primary} />
       <View
         style={{
@@ -557,7 +602,6 @@ function People({ route, navigation }) {
           >
             {friends && (
               <View>
-
                 <Text
                   style={[
                     textStyles.bigBold,
@@ -565,34 +609,23 @@ function People({ route, navigation }) {
                   ]}
                 >
                   Friends:
-                 
                 </Text>
-                <View style={{flexDirection:'row'}}>
-                {addedFriendsList.map((addedFriend) => (
-                   <View style={{flexDirection:'row', justifyContent:'space-evenly'}}>
-                      <View style={{marginTop:heightPercentageToDP("2")}}>
-                  <Text style={[
-                    textStyles.bigRegular,
-                    { left: widthPercentageToDP("4") },
-                  ]}>{addedFriend.username}</Text>
-                  </View>
-                <View style={{left: widthPercentageToDP("37") }}>
-                  <CustomButton
-                  text="Remove"
-                  // onPress={sendInviteToAllFriends}
-                  outline
-                  small
-                  buttonSecondary
-                />
+                <View style={{ flexDirection: "column" }}>
+                  {addedFriendsList.map((addedFriend) => (
+                    <View style={{ flexDirection: "column" }}>
+                      <Text>{addedFriend.username}</Text>
+                      <CustomButton
+                        text="Remove"
+                        onPress={() => removeFiend(addedFriend)}
+                        outline
+                        small
+                        buttonSecondary
+                      />
+                    </View>
+                  ))}
+                  {friendLoop}
                 </View>
-                 </View>
-                ))
-                }
-                {friendLoop} 
-               
               </View>
-              </View>
-              
             )}
           </View>
 
