@@ -301,15 +301,15 @@ function HomeScreenEmpty({}) {
               style={{
                 flexDirection: "column",
                 marginLeft: "3%",
-                justifyContent: "space-between",
-                marginTop: widthPercentageToDP(-43),
+                justifyContent: "flex-start",
+                marginTop: widthPercentageToDP(0),
               }}
             >
               <View
                 style={{
                   flexDirection: "row",
                   justifyContent: "space-between",
-                  marginTop: widthPercentageToDP(45),
+                  marginTop: widthPercentageToDP(0),
                   marginBottom: heightPercentageToDP("1"),
                 }}
               >
@@ -380,7 +380,8 @@ function HomeScreenEmpty({}) {
                 horizontal={true}
                 style={{
                   flexDirection: "row",
-                  marginTop: widthPercentageToDP(3),
+                  marginTop: widthPercentageToDP(0),
+                  marginBottom: widthPercentageToDP(0),
                 }}
               >
                 <TouchableOpacity></TouchableOpacity>
@@ -415,8 +416,8 @@ function HomeScreenEmpty({}) {
                 style={{
                   flexDirection: "row",
                   justifyContent: "space-between",
-                  marginTop: widthPercentageToDP(3),
-                  marginBottom: heightPercentageToDP("2"),
+                  
+                  marginBottom: heightPercentageToDP("1"),
                 }}
               >
                 <Text
@@ -472,12 +473,7 @@ function HomeScreenEmpty({}) {
                 )}
               </ScrollView>
 
-              <View
-                style={{
-                  left: widthPercentageToDP("3"),
-                  marginTop: heightPercentageToDP(25),
-                }}
-              ></View>
+              
 
               {/* <TouchableOpacity  style={{left: heightPercentageToDP('2.5')}} onPress={() => { 
     navigation.navigate('Account', {screen: " Accountsone"})
@@ -501,7 +497,7 @@ function HomeScreenEmpty({}) {
                 style={{
                   flexDirection: "row",
                   justifyContent: "space-between",
-                  marginTop: widthPercentageToDP(-10),
+                  marginTop: widthPercentageToDP(0),
                   marginBottom: heightPercentageToDP("3"),
                 }}
               >

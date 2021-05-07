@@ -746,14 +746,14 @@ function People({ route, navigation }) {
                       width: widthPercentageToDP("10"),
                       marginTop: heightPercentageToDP("0"),
 
-                      marginLeft: widthPercentageToDP("32"),
+                      marginLeft: widthPercentageToDP("52"),
                       resizeMode: "contain",
                     }}
                   />
                 </TouchableOpacity>
                 {!sentMessageStatus ? (
                   <TouchableOpacity onPress={sendInvite}>
-                    <Image
+                    {/* <Image
                       source={send}
                       style={{
                         height: heightPercentageToDP("10"),
@@ -762,10 +762,9 @@ function People({ route, navigation }) {
                         marginLeft: widthPercentageToDP("2"),
                         resizeMode: "contain",
                       }}
-                    />
+                    /> */}
 
-                    {/* <Button onPress={sendInvite}>Send Invite</Button> */}
-                    {/* {console.log("button = ", button)} */}
+                    
                   </TouchableOpacity>
                 ) : (
                   <TouchableOpacity
