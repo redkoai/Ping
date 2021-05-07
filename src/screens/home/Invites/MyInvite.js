@@ -460,7 +460,7 @@ function MyInvite({ navigation, route }) {
                 console.log("host email =", hostEmail);
                 console.log("host username =", hostUsername);
                 const message = {
-                  text: "RSVP: Yes I will be attending " + event.event + 'on ' + event.startdate ,
+                  text: "RSVP: Yes I will be attending " + event.event + ' on ' + event.startdate ,
                   timestamp: firebase.database.ServerValue.TIMESTAMP,
                   user: {
                     _id: user.uid,

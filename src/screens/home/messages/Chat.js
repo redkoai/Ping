@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect, useCallback} from 'react';
 import AuthContext from 'ping/src/contexts/AuthContext';
-import { GiftedChat } from 'react-native-gifted-chat'
+import { GiftedChat, Bubble } from 'react-native-gifted-chat'
 import CustomButton from 'ping/src/components/inputs/CustomButton';
 import firebase from 'firebase';
 import 'firebase/firestore'
@@ -79,11 +79,15 @@ function Chat({route, navigation }) {
         getMessage(appendMessages)
     }, [])
 
+
+    
     return(
 
 
         <GiftedChat messages={messages} user = {UserInfo} onSend={send} />
         //image?: renderAvatar 
+
+        
     )
 
 }
