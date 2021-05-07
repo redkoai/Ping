@@ -607,7 +607,7 @@ function People({ route, navigation }) {
 
           {foundUser.email != null ? (
             <View style={styles.container}>
-              <View style={{ flexDirection: "row", justifyContent:'space-around' }}>
+              <View style={{ flexDirection: "row", justifyContent:'space-between' }}>
                 <Text
                   style={{
                     marginLeft: widthPercentageToDP("6"),
@@ -626,14 +626,14 @@ function People({ route, navigation }) {
                       width: widthPercentageToDP("10"),
                       marginTop: heightPercentageToDP("0"),
 
-                      marginLeft: widthPercentageToDP("32"),
+                      marginLeft: widthPercentageToDP("52"),
                       resizeMode: "contain",
                     }}
                   />
                 </TouchableOpacity>
                 {!sentMessageStatus ? (
                   <TouchableOpacity onPress={sendInvite}>
-                    <Image
+                    {/* <Image
                       source={send}
                       style={{
                         height: heightPercentageToDP("10"),
@@ -642,10 +642,9 @@ function People({ route, navigation }) {
                         marginLeft: widthPercentageToDP("2"),
                         resizeMode: "contain",
                       }}
-                    />
+                    /> */}
 
-                    {/* <Button onPress={sendInvite}>Send Invite</Button> */}
-                    {/* {console.log("button = ", button)} */}
+                    
                   </TouchableOpacity>
                 ) : (
                   <TouchableOpacity
@@ -684,9 +683,9 @@ function People({ route, navigation }) {
                 </Text>
                 <View style={{ flexDirection: "column" }}>
                   {addedFriendsList.map((addedFriend) => (
-                    <View style={{ flexDirection: "row", justifyContent:'space-around' }}>
+                    <View style={{ flexDirection: "row",  justifyContent:'space-between'  }}>
                       <Text style={[
-                    textStyles.bigRegular,{marginTop: heightPercentageToDP("1.5"),marginRight:widthPercentageToDP("0")}]}>{addedFriend.username}</Text>
+                    textStyles.bigRegular,{fontSize:actuatedNormalize(14), marginTop: heightPercentageToDP("2"),marginRight:widthPercentageToDP("0")}]}>{addedFriend.username}</Text>
                       <CustomButton
                         text="Remove"
                         onPress={() => removeFiend(addedFriend)}
@@ -757,7 +756,7 @@ function People({ route, navigation }) {
             {emailList.map((email) => (
               <View style={{flexDirection:'row'}}>
                <Text style={[
-                textStyles.bigRegular,{marginTop: heightPercentageToDP("1.5"),marginRight:widthPercentageToDP("0")}]}>{email}</Text>
+                textStyles.bigRegular,{witdh:widthPercentageToDP("10"),fontSize:actuatedNormalize(12),marginTop: heightPercentageToDP("1.5"),marginRight:widthPercentageToDP("-50")}]}>{email}</Text>
                 {/* <CustomButton
                         text="Remove"
                         onPress={() => removeFiend(addedFriend)}
