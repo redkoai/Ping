@@ -167,10 +167,10 @@ function MyEvent({ navigation, route }) {
     //get Image
     let storeRef = firebase.storage().ref();
     storeRef
-      .child(`images/${route.params.eventID}`)
+      .child(`images/${eventID}`)
       .getDownloadURL()
       .then((url) => {
-        console.log(url, "bananas");
+        console.log(url, eventID, "bananas");
 
         setPhoto(url);
       });
@@ -292,7 +292,7 @@ function MyEvent({ navigation, route }) {
         }}
       >
         <View>
-          {route.params.fbImage != null ? (
+          {event.fbImage != null ? (
             <ImageBackground
               //source={getImage().image}
               source={{ uri: photo }}
