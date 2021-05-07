@@ -43,8 +43,6 @@ import inv31 from "ping/assets/invites/cards/16.png"
 import inv46 from "ping/assets/invites/cards/17.png"
 import inv32 from "ping/assets/invites/cards/18.png"
 import inv33 from "ping/assets/invites/cards/19.png"
-import inv34 from "ping/assets/invites/cards/20.png"
-import inv35 from "ping/assets/invites/cards/21.png"
 import inv36 from "ping/assets/invites/cards/22.png"
 import inv37 from "ping/assets/invites/cards/23.png"
 import inv38 from "ping/assets/invites/cards/24.png"
@@ -54,7 +52,7 @@ import inv41 from "ping/assets/invites/cards/27.png"
 import inv42 from "ping/assets/invites/cards/28.png"
 import inv43 from "ping/assets/invites/cards/29.png"
 import inv44 from "ping/assets/invites/cards/30.png"
-import inv45 from "ping/assets/invites/cards/31.png"
+
 
 import NewInviteContext from "ping/src/contexts/NewInviteContext";
 import CreatePicker from "ping/src/components/inputs/CreatePicker";
@@ -175,7 +173,7 @@ function createnewtemplates({}) {
               <TouchableOpacity
                 onPress={() => {
                   //setImg(inv1)
-                  handlePress("cards/17.png");
+                  handlePress("cards/2.png");
                 }}
               >
                 <Image
@@ -191,7 +189,7 @@ function createnewtemplates({}) {
               </TouchableOpacity>
               <TouchableOpacity
               onPress={() => {
-                handlePress(inv12);
+                handlePress("12.png");
               }}
             >
               <Image
@@ -207,7 +205,7 @@ function createnewtemplates({}) {
             </TouchableOpacity>
               <TouchableOpacity
                 onPress={() => {
-                  handlePress("cards/16.png");
+                  handlePress("cards/1.png");
                   //navigation.navigate('Details');
                 }}
               >
@@ -239,7 +237,7 @@ function createnewtemplates({}) {
               </TouchableOpacity>
               <TouchableOpacity
                 onPress={() => {
-                  handlePress("cards/32.png");
+                  handlePress("cards/18.png");
                 }}
               >
                 <Image
@@ -354,7 +352,7 @@ function createnewtemplates({}) {
           >
               <TouchableOpacity
                 onPress={() => {
-                  handlePress(inv29);
+                  handlePress('cards/14.png');
                 }}
               >
                 <Image
@@ -370,7 +368,7 @@ function createnewtemplates({}) {
               </TouchableOpacity>
               <TouchableOpacity
                 onPress={() => {
-                  handlePress(inv30);
+                  handlePress('cards/15.png');
                 }}
               >
                 <Image
@@ -387,7 +385,7 @@ function createnewtemplates({}) {
               <TouchableOpacity
               
                 onPress={() => {
-                  handlePress(inv46);
+                  handlePress('cards/17.png');
                 }}
               >
                 <Image
@@ -403,7 +401,7 @@ function createnewtemplates({}) {
               </TouchableOpacity>
               <TouchableOpacity
                 onPress={() => {
-                  handlePress(inv44);
+                  handlePress('cards/30.png');
                 }}
               >
                 <Image
@@ -419,7 +417,7 @@ function createnewtemplates({}) {
               </TouchableOpacity>
               <TouchableOpacity
                 onPress={() => {
-                  handlePress(inv36);
+                  handlePress('cards/22.png');
                 }}
               >
                 <Image
@@ -436,7 +434,7 @@ function createnewtemplates({}) {
 
               <TouchableOpacity
                 onPress={() => {
-                  handlePress(inv4);
+                  handlePress('4.png');
                 }}
               >
                 <Image
@@ -452,7 +450,7 @@ function createnewtemplates({}) {
               </TouchableOpacity>
               <TouchableOpacity
                 onPress={() => {
-                  handlePress(inv5);
+                  handlePress('5.png');
                 }}
               >
                 <Image
@@ -489,7 +487,7 @@ function createnewtemplates({}) {
         <ScrollView horizontal={true}>
         <TouchableOpacity
               onPress={() => {
-                handlePress(inv19);
+                handlePress('cards/4.png');
               }}
             >
               <Image
@@ -505,7 +503,7 @@ function createnewtemplates({}) {
             </TouchableOpacity>
             <TouchableOpacity
               onPress={() => {
-                handlePress(inv20);
+                handlePress('cards/5.png');
               }}
             >
               <Image
@@ -522,7 +520,7 @@ function createnewtemplates({}) {
 
             <TouchableOpacity
               onPress={() => {
-                handlePress(inv21);
+                handlePress('cards/6.png');
               }}
             >
               <Image
@@ -538,7 +536,7 @@ function createnewtemplates({}) {
             </TouchableOpacity>
             <TouchableOpacity
               onPress={() => {
-                handlePress(inv22);
+                handlePress('cards/7.png');
               }}
             >
               <Image
@@ -554,7 +552,7 @@ function createnewtemplates({}) {
             </TouchableOpacity>
             <TouchableOpacity
               onPress={() => {
-                handlePress(inv24);
+                handlePress('cards/9.png');
               }}
             >
               <Image
@@ -570,7 +568,7 @@ function createnewtemplates({}) {
             </TouchableOpacity>
             <TouchableOpacity
               onPress={() => {
-                handlePress(inv25);
+                handlePress('cards/10.png');
               }}
             >
               <Image
@@ -586,7 +584,7 @@ function createnewtemplates({}) {
             </TouchableOpacity>
             <TouchableOpacity
               onPress={() => {
-                handlePress(inv26);
+                handlePress('cards/11.png');
               }}
             >
               <Image
@@ -602,7 +600,7 @@ function createnewtemplates({}) {
             </TouchableOpacity>
             <TouchableOpacity
               onPress={() => {
-                handlePress(inv28);
+                handlePress('cards/13.png');
               }}
             >
               <Image
@@ -618,7 +616,7 @@ function createnewtemplates({}) {
             </TouchableOpacity>
             <TouchableOpacity
               onPress={() => {
-                handlePress(inv33);
+                handlePress('cards/19.png');
               }}
             >
               <Image
@@ -657,7 +655,7 @@ function createnewtemplates({}) {
           >
              <TouchableOpacity
               onPress={() => {
-                handlePress(inv7);
+                handlePress('7.png');
               }}
             >
               <Image
@@ -674,7 +672,7 @@ function createnewtemplates({}) {
             
              <TouchableOpacity
               onPress={() => {
-                handlePress(inv31);
+                handlePress('cards/16.png');
               }}
             >
               <Image
@@ -690,7 +688,7 @@ function createnewtemplates({}) {
             </TouchableOpacity>
             <TouchableOpacity
               onPress={() => {
-                handlePress(inv11);
+                handlePress('11.png');
               }}
             >
               <Image
@@ -706,7 +704,7 @@ function createnewtemplates({}) {
             </TouchableOpacity>
             <TouchableOpacity
               onPress={() => {
-                handlePress(inv9);
+                handlePress('9.png');
               }}
             >
               <Image
@@ -723,7 +721,7 @@ function createnewtemplates({}) {
 
             <TouchableOpacity
               onPress={() => {
-                handlePress(inv31);
+                handlePress('cards/12.png');
               }}
             >
               <Image
@@ -739,7 +737,7 @@ function createnewtemplates({}) {
             </TouchableOpacity>
             <TouchableOpacity
               onPress={() => {
-                handlePress(inv8);
+                handlePress('8.png');
               }}
             >
               <Image
@@ -758,7 +756,7 @@ function createnewtemplates({}) {
 
             <TouchableOpacity
               onPress={() => {
-                handlePress(inv14);
+                handlePress('14.png');
               }}
             >
               <Image
@@ -796,7 +794,7 @@ function createnewtemplates({}) {
           >
     <TouchableOpacity
               onPress={() => {
-                handlePress(inv10);
+                handlePress('10.png');
               }}
             >
               <Image
@@ -812,7 +810,7 @@ function createnewtemplates({}) {
             </TouchableOpacity>
             <TouchableOpacity
               onPress={() => {
-                handlePress(inv13);
+                handlePress('13.png');
               }}
             >
               <Image
@@ -831,7 +829,7 @@ function createnewtemplates({}) {
 
             <TouchableOpacity
               onPress={() => {
-                handlePress(inv37);
+                handlePress('cards/23.png');
               }}
             >
               <Image
@@ -847,7 +845,7 @@ function createnewtemplates({}) {
             </TouchableOpacity>
             <TouchableOpacity
               onPress={() => {
-                handlePress(inv38);
+                handlePress('cards/24.png');
               }}
             >
               <Image
@@ -863,7 +861,7 @@ function createnewtemplates({}) {
             </TouchableOpacity>
             <TouchableOpacity
               onPress={() => {
-                handlePress(inv39);
+                handlePress('cards/25.png');
               }}
             >
               <Image
@@ -879,7 +877,7 @@ function createnewtemplates({}) {
             </TouchableOpacity>
             <TouchableOpacity
               onPress={() => {
-                handlePress(inv40);
+                handlePress('cards/26.png');
               }}
             >
               <Image
@@ -895,7 +893,7 @@ function createnewtemplates({}) {
             </TouchableOpacity>
             <TouchableOpacity
               onPress={() => {
-                handlePress(inv41);
+                handlePress('cards/27.png');
               }}
             >
               <Image
@@ -911,7 +909,7 @@ function createnewtemplates({}) {
             </TouchableOpacity>
             <TouchableOpacity
               onPress={() => {
-                handlePress(inv42);
+                handlePress('cards/28.png');
               }}
             >
               <Image
@@ -927,7 +925,7 @@ function createnewtemplates({}) {
             </TouchableOpacity>
             <TouchableOpacity
               onPress={() => {
-                handlePress(inv43);
+                handlePress('cards/29.png');
               }}
             >
               <Image
