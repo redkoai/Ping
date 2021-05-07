@@ -85,6 +85,7 @@ function CustomButtonCopyLong({
     height:'100%'
    
   }}>
+     <View style={{backgroundColor:'white'}}>
         <Text
           style={[
             textStyles.bigBold,
@@ -97,6 +98,7 @@ function CustomButtonCopyLong({
         >
           {text}
         </Text>
+        </View>
         </ImageBackground>}
       </TouchableOpacity>
       
