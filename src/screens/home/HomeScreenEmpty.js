@@ -52,7 +52,7 @@ function HomeScreenEmpty({}) {
   }, []);
 
   const [myEvents, setMyEvents] = useState({});
- const [isLocalImage, setIsLocalImage]=useState(false)
+  const [isLocalImage, setIsLocalImage] = useState(false);
   const eventQuery = () => {
     const myEvents_obj = {};
     const myInvites_obj = {};
@@ -64,31 +64,22 @@ function HomeScreenEmpty({}) {
       // console.log("user uid =", user.uid)
       if (snapshot.val()["co-host-0"] == user.uid) {
         // console.log("event snapshot =", snapshot);
-        let arr =[]
-        arr[3]=true
-  console.log(snapshot.val().imagePath !="null", "blueberry", snapshot.val().imagePath)
-        if( snapshot.val().imagePath =="null"){
-        arr[0] =snapshot.val().event
-        arr[1] = snapshot.val().fbImage
-        arr[3]=true
+        let arr = [];
+        arr[3] = true;
+        if (snapshot.val().imagePath == "null") {
+          arr[0] = snapshot.val().event;
+          arr[1] = snapshot.val().fbImage;
+          arr[3] = true;
 
-        
-        myEvents_obj[snapshot.key] = arr
-      
-        
-       
-        
-        }else{
-        // snapshot.val().imagePath !=undefined && 
-  
-       console.log("pizza")
-        arr[0] =snapshot.val().event
-        arr[1] = snapshot.val().imagePath
-        arr[3]=false
-        myEvents_obj[snapshot.key] = arr
-        
-      
-       }
+          myEvents_obj[snapshot.key] = arr;
+        } else {
+          // snapshot.val().imagePath !=undefined &&
+
+          arr[0] = snapshot.val().event;
+          arr[1] = snapshot.val().imagePath;
+          arr[3] = false;
+          myEvents_obj[snapshot.key] = arr;
+        }
       } else {
         // console.log("invite snapshot =", snapshot);
         myInvites_obj[snapshot.key] = snapshot.val().event;
@@ -179,12 +170,11 @@ function HomeScreenEmpty({}) {
 
     return unsubscribe;
   }, [navigation]);
-  
 
   const EventLoop = Object.keys(myEvents).map((key) => {
     const eventID = key;
     // console.log("event ID = ", eventID);
-   
+
     return (
       <TouchableOpacity
         onPress={() => {
@@ -197,27 +187,25 @@ function HomeScreenEmpty({}) {
           padding: 10,
         }}
       >
-              <View
-        style={{
-          marginRight: widthPercentageToDP(1),
-          
-          padding: widthPercentageToDP(1),
-        }}
-      >
-        
-       <CustomButtonCopyLong
-          text={myEvents[key][0]}
-          backgroundImage={myEvents[key][1]}
-          buttonSecondary
-          isLocalImage={myEvents[key][3]}
-          shadow
-          style={{ fontSize: actuatedNormalize(11) }}
-          onPress={() => {
-            navigation.navigate("MyInvite", { eventID: eventID });
+        <View
+          style={{
+            marginRight: widthPercentageToDP(1),
+
+            padding: widthPercentageToDP(1),
           }}
-        />
-        
-      </View>
+        >
+          <CustomButtonCopyLong
+            text={myEvents[key][0]}
+            backgroundImage={myEvents[key][1]}
+            buttonSecondary
+            isLocalImage={myEvents[key][3]}
+            shadow
+            style={{ fontSize: actuatedNormalize(11) }}
+            onPress={() => {
+              navigation.navigate("MyInvite", { eventID: eventID });
+            }}
+          />
+        </View>
       </TouchableOpacity>
     );
   });
@@ -242,19 +230,15 @@ function HomeScreenEmpty({}) {
     const eventID = key;
 
     return (
-
       <View
         style={{
           marginRight: widthPercentageToDP(1),
           // marginTop: 30,
-          
+
           padding: widthPercentageToDP(1),
         }}
       >
-          
-
         <CustomButtonCopyLong
-        
           text={myInvites[key]}
           buttonSecondary
           shadow
@@ -474,9 +458,7 @@ function HomeScreenEmpty({}) {
                   left: widthPercentageToDP("3"),
                   marginTop: heightPercentageToDP(25),
                 }}
-              >
-               
-              </View>
+              ></View>
 
               {/* <TouchableOpacity  style={{left: heightPercentageToDP('2.5')}} onPress={() => { 
     navigation.navigate('Account', {screen: " Accountsone"})

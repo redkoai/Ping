@@ -19,7 +19,7 @@ function CustomButtonCopyLong({
 }) 
 
 {
-  console.log(isLocalImage, "redteal")
+  
   const getImage = (img) => {
     if (backgroundImage === "1.png") {
       return {

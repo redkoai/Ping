@@ -28,9 +28,6 @@ function RSVP({ route, navigation }) {
   const [state, setState] = useState({});
   // const UserInfo = { "uid": user.uid, "email": user.email }
 
-
-
-
   const rand = () => {
     let text = "";
     let possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
@@ -71,6 +68,7 @@ function RSVP({ route, navigation }) {
 
   const onSubmit = (data) => {
     const newData = data;
+
     if (data[Object.keys(data)[0]] === undefined) {
       data["collect-rsvp"] = null;
     }
@@ -83,12 +81,21 @@ function RSVP({ route, navigation }) {
     if (data[Object.keys(data)[2]] === undefined) {
       data["total-invited"] = null;
     }
+    if (data["total-invited"] === undefined) {
+      data["total-invited"] = null;
+    }
+    if (data["request-num-of-kids"] === undefined) {
+      data["request-num-of-kids"] = null;
+    }
 
-    
     updateFormData(data);
     //console.log(eventID)
     // navigation.navigate('Signinpopup');
-    navigation.navigate("People", { eventID: route.params.eventID, fbImage:route.params.fbImage, imagePath:route.params.imagePath });
+    navigation.navigate("People", {
+      eventID: route.params.eventID,
+      fbImage: route.params.fbImage,
+      imagePath: route.params.imagePath,
+    });
   };
 
   return (
@@ -160,7 +167,7 @@ function RSVP({ route, navigation }) {
             input={{ name: "total-invited" }}
           />
         </View>
-{/* 
+        {/* 
         <View style={styles.wrapperContainer}>
           <View style={styles.textConatiner}>
             <CustomText text="Show guest list" header />

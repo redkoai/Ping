@@ -18,7 +18,7 @@ import { widthPercentageToDP, heightPercentageToDP } from "ping/util/scaler";
 import CustomButton from "ping/src/components/inputs/CustomButton";
 import CalendarIcon from "ping/src/icons/CalendarIcon";
 import LocationNearMeIcon from "ping/src/icons/LocationNearMeIcon";
-import * as WebBrowser from 'expo-web-browser';
+import * as WebBrowser from "expo-web-browser";
 import {
   Entypo,
   MaterialIcons,
@@ -171,6 +171,7 @@ function MyInvite({ navigation, route }) {
       return { image: require("../../../../assets/invites/3.png") };
     }
   };
+  console.log(event, "saladburger");
   return (
     <KeyboardAwareScrollView
       style={{ flex: 1, backgroundColor: "white" }}
@@ -185,30 +186,31 @@ function MyInvite({ navigation, route }) {
         }}
       >
         <View>
-          {route.params.fbImage !=null?<ImageBackground
-            //source={getImage().image}
-            source={{ uri: photo }}
-            style={{
-              height: heightPercentageToDP("30"),
-              width: widthPercentageToDP("100"),
-              marginLeft: widthPercentageToDP("0"),
-              marginTop: heightPercentageToDP("-1"),
-              resizeMode: "stretch",
-            }}
-          />
-          :
-           <ImageBackground
-            source={getImage().image}
-           // source={{ uri: photo }}
-            style={{
-              height: heightPercentageToDP("30"),
-              width: widthPercentageToDP("100"),
-              marginLeft: widthPercentageToDP("0"),
-              marginTop: heightPercentageToDP("-1"),
-              resizeMode: "stretch",
-            }}
-          />
-}
+          {route.params.fbImage != null ? (
+            <ImageBackground
+              //source={getImage().image}
+              source={{ uri: photo }}
+              style={{
+                height: heightPercentageToDP("30"),
+                width: widthPercentageToDP("100"),
+                marginLeft: widthPercentageToDP("0"),
+                marginTop: heightPercentageToDP("-1"),
+                resizeMode: "stretch",
+              }}
+            />
+          ) : (
+            <ImageBackground
+              source={getImage().image}
+              // source={{ uri: photo }}
+              style={{
+                height: heightPercentageToDP("30"),
+                width: widthPercentageToDP("100"),
+                marginLeft: widthPercentageToDP("0"),
+                marginTop: heightPercentageToDP("-1"),
+                resizeMode: "stretch",
+              }}
+            />
+          )}
           <Text
             style={[
               textStyles.bigBold,
@@ -292,7 +294,9 @@ function MyInvite({ navigation, route }) {
                   marginTop: heightPercentageToDP("0"),
                 },
               ]}
-            >RSVP</Text>
+            >
+              RSVP
+            </Text>
             <CustomButton
               text="Yes"
               small
@@ -447,28 +451,40 @@ function MyInvite({ navigation, route }) {
           <View>
             <TouchableOpacity
               onPress={() =>
-                WebBrowser.openBrowserAsync("https://www.google.com/maps/place/" +event.location)}>
-
+                WebBrowser.openBrowserAsync(
+                  "https://www.google.com/maps/place/" + event.location
+                )
+              }
+            >
               <Entypo name="location-pin" size={28} color="black" />
             </TouchableOpacity>
             <TouchableOpacity
               onPress={() =>
-                WebBrowser.openBrowserAsync("https://www.google.com/maps/place/" + event.location)}>
-            <Text
-              style={[
-                textStyles.normalBold,
-                {
-                  left: widthPercentageToDP("10"),
-                  marginTop: heightPercentageToDP("-1.8"),
-                },
-              ]}
+                WebBrowser.openBrowserAsync(
+                  "https://www.google.com/maps/place/" + event.location
+                )
+              }
             >
-              {event.location}
-            </Text>
+              <Text
+                style={[
+                  textStyles.normalBold,
+                  {
+                    left: widthPercentageToDP("10"),
+                    marginTop: heightPercentageToDP("-1.8"),
+                  },
+                ]}
+              >
+                {event.location}
+              </Text>
             </TouchableOpacity>
             <TouchableOpacity
               onPress={() =>
-                WebBrowser.openBrowserAsync("https://www.google.com/maps/place/" + JSON.stringify(event.location))}>
+                WebBrowser.openBrowserAsync(
+                  "https://www.google.com/maps/place/" +
+                    JSON.stringify(event.location)
+                )
+              }
+            >
               <LocationNearMeIcon
                 style={{
                   left: heightPercentageToDP("40"),
@@ -723,7 +739,7 @@ function MyInvite({ navigation, route }) {
                   },
                 ]}
               >
-                {event["request-num-of-kids"]}
+                {event["request-num-of-kids"] === true ? "Yes" : "No"}
               </Text>
             </View>
 
