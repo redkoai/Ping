@@ -16,16 +16,16 @@ import CustomButton from "ping/src/components/inputs/CustomButton";
 import CustomAddButton from "ping/src/components/inputs/CustomAddButton";
 import deprogline from "ping/assets/createnew/details/detailsprogressline.png";
 import { useForm } from "react-hook-form";
-
+import firebase from "firebase"
 import AuthContext from "ping/src/contexts/AuthContext";
-
+import uuid from "react-native-uuid";
 function Details({ route, navigation }) {
   const { formData, updateFormData } = useContext(NewInviteContext);
 
   const { user } = useContext(AuthContext);
 
   const [errorMsg, setErrorMsg] = useState(false);
-
+  const [eventID, setEventID]= useState("")
   const { control, errors, setValue, reset, handleSubmit } = useForm({
     resolver: yupResolver(DETAILS_SCHEMA),
   });
@@ -46,8 +46,40 @@ function Details({ route, navigation }) {
       setErrorMsg(true);
       return;
     }
+
+    const randomID = uuid.v1();
+    setEventID(randomID);
+    console.log(route.params.fbImage, route.params.fbImage!=null,"whipcream")
+
+    if(route.params.fbImage!=null){
+
+      
+    let bucketName = "images";
+    let file = route?.params?.fbImage;
+    // firebase.storage()
+    // .ref(`${bucketName}/${randomID}/${file}`)
+    // //eventID as the path name to be able to access
+    // .put(file)
+    // .then((snapshot) => {
+    //   //You can check the image is now uploaded in the storage bucket
+    //   console.log(`image has been successfully uploaded.`);
+    // })
+    // .catch((e) => console.log('uploading image error => ', e));
+
+    let storageRef = firebase.storage().ref().child(`images/${randomID}`);
+    fetch(file)
+      .then((res) => res.blob())
+      .then((blob) =>
+        storageRef.put(blob).then(function (snapshot) {
+          console.log(snapshot);
+          console.log("Uploaded a blob");
+        })
+      )
+      .catch((e) => console.log(e, "imageError"));
+    }
+    
     updateFormData(data);
-    navigation.navigate("Dresscode", { imagePath: route.params.imagePath });
+    navigation.navigate("Dresscode", { eventID:randomID,fbImage:route.params.fbImage,imagePath: route.params.imagePath });
     //reset();
 
     //console.log('New context', userData);

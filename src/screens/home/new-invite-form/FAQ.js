@@ -20,10 +20,13 @@ function FAQ({ route, navigation }) {
   const { control, errors, reset, handleSubmit } = useForm({
     resolver: yupResolver(FAQ_SCHEMA),
   });
+
+  console.log(route.params.eventID,"blueblue")
+
   const onSubmit = (data) => {
     updateFormData(data);
    
-    navigation.navigate("RSVP", { imagePath: route.params.imagePath });
+    navigation.navigate("RSVP", {eventID:route.params.eventID,fbImage:route.params.fbImage, imagePath: route.params.imagePath });
     //reset();
   };
   // useEffect(() => {

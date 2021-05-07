@@ -99,12 +99,12 @@ function SignUpScreen({ navigation }) {
       >
        <Image source={PingIcon} style={{ width:widthPercentageToDP(70), height:heightPercentageToDP(10), resizeMode:'contain'}}/>
         <Spacer height={6.5} />
-        {image && <Image source={{uri: image}} style={{marginTop:'0%', height: heightPercentageToDP('10'), width: widthPercentageToDP('30')}} />}
-        <TouchableOpacity onPress={pickImage}>
+        {/* {image && <Image source={{uri: image}} style={{marginTop:'0%', height: heightPercentageToDP('10'), width: widthPercentageToDP('30')}} />}
+        <TouchableOpacity onPress={pickImage}> */}
                 {/* <Image source={profileIm} style={{marginBottom:'2%', width :widthPercentageToDP('30'), height :heightPercentageToDP('8'), resizeMode:'contain'}} /> */}
                 
-                 <Text  style={[textStyles.normalSemiBold, { marginTop:'2%',color: colors.primary }]}> Pick Your Profile Image</Text>
-            </TouchableOpacity>
+                 {/* <Text  style={[textStyles.normalSemiBold, { marginTop:'2%',color: colors.primary }]}> Pick Your Profile Image</Text>
+            </TouchableOpacity> */}
 
         <UserNameInput control={control} errors={errors} onChangeText={onChange} value={username}/>
         <EmailInput control={control} errors={errors} />

@@ -65,11 +65,11 @@ function Events({navigation, route}) {
   const loadItems = () => {
       setTimeout(() => {
         db.child(`${user.uid}/Events`).on("child_added", function(snapshot) {
-          console.log("snapshot key= ", snapshot.key)
+          
           // setEventID(snapshot.key)
-          console.log("enddate = ", snapshot.val().enddate)
+         
           let date = new Date(snapshot.val().enddate.replace('th', ''))
-          console.log("date =", date.toDateString())
+         
           newItems[date.toISOString().split('T')[0]] = []
           
           newItems[date.toISOString().split('T')[0]].push( {
@@ -79,7 +79,7 @@ function Events({navigation, route}) {
             eventID: snapshot.key
           })
           
-          console.log("newItems = ", newItems)
+          
       });
         setItems(newItems)
       }, 1000);
@@ -125,10 +125,10 @@ function Events({navigation, route}) {
 
       renderItem = (item) => {
         const eventID = item.eventID
-        console.log("item =", item)
+        
           return(
           <TouchableOpacity onPress={() => { 
-            console.log("eventID = ", eventID)
+            
             navigation.navigate('MyInvite', { eventID:eventID })
         }}
           style={{

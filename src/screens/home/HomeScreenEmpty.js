@@ -40,8 +40,19 @@ function HomeScreenEmpty({}) {
 
   const [myInvites, setMyInvites] = useState({});
 
-  const [myEvents, setMyEvents] = useState({});
+  useEffect(() => {
+    db.child(`${user.uid}/Events/`).on("child_added", function (snapshot) {
+      // if(snapshot.val().imagePath ===undefined || snapshot.val().imagePath===null){
+      //   setIsLocalImage(false)
+      // }
+      // if(snapshot.val().imagePath !=undefined && snapshot.val().imagePath!=null){
+      //   setIsLocalImage(true)
+      // }
+    })();
+  }, []);
 
+  const [myEvents, setMyEvents] = useState({});
+ const [isLocalImage, setIsLocalImage]=useState(false)
   const eventQuery = () => {
     const myEvents_obj = {};
     const myInvites_obj = {};
@@ -53,7 +64,31 @@ function HomeScreenEmpty({}) {
       // console.log("user uid =", user.uid)
       if (snapshot.val()["co-host-0"] == user.uid) {
         // console.log("event snapshot =", snapshot);
-        myEvents_obj[snapshot.key] = snapshot.val().event;
+        let arr =[]
+        arr[3]=true
+  console.log(snapshot.val().imagePath !="null", "blueberry", snapshot.val().imagePath)
+        if( snapshot.val().imagePath =="null"){
+        arr[0] =snapshot.val().event
+        arr[1] = snapshot.val().fbImage
+        arr[3]=true
+
+        
+        myEvents_obj[snapshot.key] = arr
+      
+        
+       
+        
+        }else{
+        // snapshot.val().imagePath !=undefined && 
+  
+       console.log("pizza")
+        arr[0] =snapshot.val().event
+        arr[1] = snapshot.val().imagePath
+        arr[3]=false
+        myEvents_obj[snapshot.key] = arr
+        
+      
+       }
       } else {
         // console.log("invite snapshot =", snapshot);
         myInvites_obj[snapshot.key] = snapshot.val().event;
@@ -61,6 +96,7 @@ function HomeScreenEmpty({}) {
       }
     });
     // console.log("my invites =", myInvites)
+
     setMyInvites(myInvites_obj);
     setMyEvents(myEvents_obj);
   };
@@ -143,11 +179,12 @@ function HomeScreenEmpty({}) {
 
     return unsubscribe;
   }, [navigation]);
-  console.log("invite state length = ", Object.keys(myInvites).length);
+  
 
   const EventLoop = Object.keys(myEvents).map((key) => {
     const eventID = key;
     // console.log("event ID = ", eventID);
+   
     return (
       <TouchableOpacity
         onPress={() => {
@@ -167,15 +204,19 @@ function HomeScreenEmpty({}) {
           padding: widthPercentageToDP(1),
         }}
       >
-        <CustomButtonCopyLong
-          text={myEvents[key]}
+        
+       <CustomButtonCopyLong
+          text={myEvents[key][0]}
+          backgroundImage={myEvents[key][1]}
           buttonSecondary
+          isLocalImage={myEvents[key][3]}
           shadow
           style={{ fontSize: actuatedNormalize(11) }}
           onPress={() => {
             navigation.navigate("MyInvite", { eventID: eventID });
           }}
         />
+        
       </View>
       </TouchableOpacity>
     );
@@ -198,24 +239,10 @@ function HomeScreenEmpty({}) {
   // console.log("myinvite values = ", values)
 
   const InviteLoop = Object.keys(myInvites).map((key) => {
-    // console.log("invite loop key = ", key)
-    // const obj = JSON.stringify(myInvites[key])
-    // console.log("invite loop event = ", myInvites[key]);
     const eventID = key;
+
     return (
-      //   <TouchableOpacity onPress={() => {
-      //     console.log("eventID = ", eventID)
-      //     navigation.navigate('MyInvite', { eventID:eventID })
-      // }}
-      //   style={{
-      //         marginRight: 10,
-      //         marginTop: 30,
-      //         padding: 10
-      //       }}>
-      //   <View>
-      //     <Text>{myInvites[key]}</Text>
-      //   </View>
-      //   </TouchableOpacity>
+
       <View
         style={{
           marginRight: widthPercentageToDP(1),
@@ -224,16 +251,7 @@ function HomeScreenEmpty({}) {
           padding: widthPercentageToDP(1),
         }}
       >
-              {/* <ImageBackground
-            source={getImage().image}
-            style={{
-              height: heightPercentageToDP("30"),
-              width: widthPercentageToDP("100"),
-              marginLeft: widthPercentageToDP("0"),
-              marginTop: heightPercentageToDP("-1"),
-              resizeMode: "stretch",
-            }}
-          /> */}
+          
 
         <CustomButtonCopyLong
         

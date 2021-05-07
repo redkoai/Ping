@@ -18,7 +18,6 @@ import { widthPercentageToDP, heightPercentageToDP } from "ping/util/scaler";
 import CustomButton from "ping/src/components/inputs/CustomButton";
 import CalendarIcon from "ping/src/icons/CalendarIcon";
 import LocationNearMeIcon from "ping/src/icons/LocationNearMeIcon";
-import { InAppBrowser } from "@matt-block/react-native-in-app-browser";
 import * as WebBrowser from 'expo-web-browser';
 import {
   Entypo,
@@ -160,13 +159,13 @@ function MyInvite({ navigation, route }) {
   const imagePath = `../../../../assets/invites/${event.imagePath}`;
 
   const getImage = (img) => {
-    if (event.imagePath === "1.png") {
+    if (route.params.imagePath === "1.png") {
       return {
         image: require("../../../../assets/invites/1.png"),
       };
-    } else if (event.imagePath === "2.png") {
+    } else if (route.params.imagePath === "2.png") {
       return { image: require("../../../../assets/invites/2.png") };
-    } else if (event.imagePath === "3.png") {
+    } else if (route.params.imagePath === "3.png") {
       return { image: require("../../../../assets/invites/3.png") };
     } else {
       return { image: require("../../../../assets/invites/3.png") };
@@ -186,8 +185,8 @@ function MyInvite({ navigation, route }) {
         }}
       >
         <View>
-          <ImageBackground
-            source={getImage().image}
+          {route.params.fbImage !=null?<ImageBackground
+            //source={getImage().image}
             source={{ uri: photo }}
             style={{
               height: heightPercentageToDP("30"),
@@ -197,6 +196,19 @@ function MyInvite({ navigation, route }) {
               resizeMode: "stretch",
             }}
           />
+          :
+           <ImageBackground
+            source={getImage().image}
+           // source={{ uri: photo }}
+            style={{
+              height: heightPercentageToDP("30"),
+              width: widthPercentageToDP("100"),
+              marginLeft: widthPercentageToDP("0"),
+              marginTop: heightPercentageToDP("-1"),
+              resizeMode: "stretch",
+            }}
+          />
+}
           <Text
             style={[
               textStyles.bigBold,
@@ -435,13 +447,13 @@ function MyInvite({ navigation, route }) {
           <View>
             <TouchableOpacity
               onPress={() =>
-                WebBrowser.openBrowserAsync("https://www.google.com/maps/place/" + JSON.stringify(event.location))}>
+                WebBrowser.openBrowserAsync("https://www.google.com/maps/place/" +event.location)}>
 
               <Entypo name="location-pin" size={28} color="black" />
             </TouchableOpacity>
             <TouchableOpacity
               onPress={() =>
-                WebBrowser.openBrowserAsync("https://www.google.com/maps/place/" + JSON.stringify(event.location))}>
+                WebBrowser.openBrowserAsync("https://www.google.com/maps/place/" + event.location)}>
             <Text
               style={[
                 textStyles.normalBold,

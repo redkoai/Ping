@@ -28,6 +28,9 @@ function RSVP({ route, navigation }) {
   const [state, setState] = useState({});
   // const UserInfo = { "uid": user.uid, "email": user.email }
 
+
+
+
   const rand = () => {
     let text = "";
     let possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
@@ -81,11 +84,11 @@ function RSVP({ route, navigation }) {
       data["total-invited"] = null;
     }
 
-    data["imagePath"] = route.params.imagePath;
+    
     updateFormData(data);
     //console.log(eventID)
     // navigation.navigate('Signinpopup');
-    navigation.navigate("People", { eventID: eventID, imagePath:route.params.imagePath });
+    navigation.navigate("People", { eventID: route.params.eventID, fbImage:route.params.fbImage, imagePath:route.params.imagePath });
   };
 
   return (
@@ -113,7 +116,7 @@ function RSVP({ route, navigation }) {
           }}
         />
 
-        <View style={styles.wrapperContainer}>
+        {/* <View style={styles.wrapperContainer}>
           <View style={styles.textConatiner}>
             <CustomText text="Collect RSVPs" header />
             <CustomText
@@ -126,7 +129,7 @@ function RSVP({ route, navigation }) {
             errors={errors}
             input={{ name: "collect-rsvp" }}
           />
-        </View>
+        </View> */}
 
         <View style={styles.wrapperContainer}>
           <View style={styles.textConatiner}>
@@ -157,7 +160,7 @@ function RSVP({ route, navigation }) {
             input={{ name: "total-invited" }}
           />
         </View>
-
+{/* 
         <View style={styles.wrapperContainer}>
           <View style={styles.textConatiner}>
             <CustomText text="Show guest list" header />
@@ -171,7 +174,7 @@ function RSVP({ route, navigation }) {
             errors={errors}
             input={{ name: "show-guest-list" }}
           />
-        </View>
+        </View> */}
 
         <Spacer height={5} />
         <View style={{ alignSelf: "flex-end" }}>

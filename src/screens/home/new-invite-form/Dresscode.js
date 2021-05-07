@@ -14,7 +14,7 @@ import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view
 import CustomTextInput from "ping/src/components/inputs/CustomTextInput";
 import CustomButton from "ping/src/components/inputs/CustomButton";
 import CustomInputLabel from "ping/src/components/inputs/CustomInputLabel";
-
+import firebase from "firebase"
 function Dresscode({ route, navigation }) {
   const { formData, updateFormData } = useContext(NewInviteContext);
 
@@ -22,12 +22,30 @@ function Dresscode({ route, navigation }) {
     //resolver: yupResolver(DRESSCODE_SCHEMA),
   });
   const onSubmit = (data) => {
+
+if(route.params.fbImage!=null){
+
+  let storeRef = firebase.storage().ref();
+  storeRef
+    .child(`images/${route.params.eventID}`)
+    .getDownloadURL()
+    .then((url) => {
+      console.log(url);
+      data.fbImage = url
+      data.imagePath = "null"
+
+      updateFormData(data)
+      navigation.navigate("FAQ", {eventID:route.params.eventID,fbImage:route.params.fbImage, imagePath: route.params.imagePath });
+    
+    });
+}else{
+    data.imagePath=route.params.imagePath
     updateFormData(data);
-    navigation.navigate("FAQ", { imagePath: route.params.imagePath });
+    navigation.navigate("FAQ", {eventID:route.params.eventID,fbImage:route.params.fbImage, imagePath: route.params.imagePath });
     //reset();
     //console.log("After Submit Dresscode---", formData)
   };
-
+  }
   const listData = [
     { label: "Casual and Comfortable", value: "casual-and-comfortable" },
     { label: "Business casual", value: "business-casual" },

@@ -45,6 +45,7 @@ function Messages({}) {
     };
 
 
+    const itemlen = 
   useEffect(() => {
       const unsubscribe = navigation.addListener("focus", () => {
         // Login Checker
@@ -94,7 +95,8 @@ function Messages({}) {
       setUserHistory(queryUserHistory())
     }, []);
 
-  console.log("user history = ", userHistory)
+  console.log("meo = ", userHistory)
+  // const lenUserHist = userHistory.length
   const userHistoryLoop = Object.keys(userHistory).map((key) => {
     return (
     //   <Button title={key} onPress={() => { 

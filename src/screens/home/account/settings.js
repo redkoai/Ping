@@ -41,16 +41,13 @@ function Settings() {
 
   const navigation = useNavigation();
 
-  OpenWeb = () => {
-    Linking.openURL("https://theredko.com");
-  };
 
   useEffect(() => {
     let mounted = true;
   });
   return (
-    <SafeAreaView>
-      <View style={{ flex: 1 }}>
+    <SafeAreaView  style={{backgroundColor:'white' }}>
+      <View style={{backgroundColor:'white' }}>
         <ImageBackground
           style={{
             width: widthPercentageToDP(100),
@@ -66,7 +63,7 @@ function Settings() {
             }}
           >
  
-<Text style={[textStyles.bigBold,{fontSize:actuatedNormalize(20), left:heightPercentageToDP('7.5'),marginBottom:heightPercentageToDP('2')} ]}>Settings & Information</Text>
+<Text style={[textStyles.bigBold,{fontSize:actuatedNormalize(20), left:widthPercentageToDP('16'),marginBottom:heightPercentageToDP('2')} ]}>Settings & Information</Text>
 
 
 <View style={{ flexDirection: 'row', justifyContent: 'space-between',marginTop:widthPercentageToDP(3)}}>
@@ -84,11 +81,8 @@ function Settings() {
 
           </View>
 
-          <ScrollView
-            style={{ height: "200%", flex: 1 }}
-            contentContainerStyle={{ alignItems: "center" }}
-          >
- <View style={{marginTop:heightPercentageToDP(40)}}>    
+        
+ <View style={{marginTop:heightPercentageToDP(40),  alignItems: "center" }}>    
              
               {!skipped && (
                 <CustomButton
@@ -99,7 +93,7 @@ function Settings() {
                 />
               )}
             </View>
-          </ScrollView>
+          
         </ImageBackground>
       </View>
     </SafeAreaView>

@@ -30,7 +30,7 @@ import sends from "ping/assets/invites/send.png";
 import adds from "ping/assets/invites/add.png";
 import add from "ping/assets/invites/adds.png";
 import { actuatedNormalize } from "ping/util/fontScaler";
-import uuid from "react-native-uuid";
+
 import email from "react-native-email";
 import Modal from "react-native-modal";
 function People({ route, navigation }) {
@@ -44,40 +44,40 @@ function People({ route, navigation }) {
   });
   const [photo, setPhoto] = useState("");
 
-  useEffect(() => {
-    const randomID = uuid.v1();
-    setEventID(randomID);
+  // useEffect(() => {
+  //   const randomID = uuid.v1();
+  //   setEventID(randomID);
 
-    let bucketName = "images";
-    let file = route.params.imagePath;
-    // firebase.storage()
-    // .ref(`${bucketName}/${randomID}/${file}`)
-    // //eventID as the path name to be able to access
-    // .put(file)
-    // .then((snapshot) => {
-    //   //You can check the image is now uploaded in the storage bucket
-    //   console.log(`image has been successfully uploaded.`);
-    // })
-    // .catch((e) => console.log('uploading image error => ', e));
+  //   let bucketName = "images";
+  //   let file = route.params.imagePath;
+  //   // firebase.storage()
+  //   // .ref(`${bucketName}/${randomID}/${file}`)
+  //   // //eventID as the path name to be able to access
+  //   // .put(file)
+  //   // .then((snapshot) => {
+  //   //   //You can check the image is now uploaded in the storage bucket
+  //   //   console.log(`image has been successfully uploaded.`);
+  //   // })
+  //   // .catch((e) => console.log('uploading image error => ', e));
 
-    let storageRef = firebase.storage().ref().child(`images/${randomID}`);
-    fetch(file)
-      .then((res) => res.blob())
-      .then((blob) =>
-        storageRef.put(blob).then(function (snapshot) {
-          console.log(snapshot);
-          console.log("Uploaded a blob");
-        })
-      )
-      .catch((e) => console.log(e, "imageError"));
-    //eventID as the path name to be able to access
-    // .put(file)
-    // .then((snapshot) => {
-    //   //You can check the image is now uploaded in the storage bucket
-    //   console.log(`image has been successfully uploaded.`);
-    // })
-    // .catch((e) => console.log('uploading image error => ', e));
-  }, []);
+  //   let storageRef = firebase.storage().ref().child(`images/${randomID}`);
+  //   fetch(file)
+  //     .then((res) => res.blob())
+  //     .then((blob) =>
+  //       storageRef.put(blob).then(function (snapshot) {
+  //         console.log(snapshot);
+  //         console.log("Uploaded a blob");
+  //       })
+  //     )
+  //     .catch((e) => console.log(e, "imageError"));
+  //   //eventID as the path name to be able to access
+  //   // .put(file)
+  //   // .then((snapshot) => {
+  //   //   //You can check the image is now uploaded in the storage bucket
+  //   //   console.log(`image has been successfully uploaded.`);
+  //   // })
+  //   // .catch((e) => console.log('uploading image error => ', e));
+  // }, []);
 
   // Trying to update form with the guestlist, need help
   const guests = {};
@@ -93,6 +93,7 @@ function People({ route, navigation }) {
   const onSubmit = () => {
     sendHostEvent();
 
+
     // db.child(`${user.uid}/Events/${eventID}`).on(
     //   "child_added",
     //   function (snapshot) {
@@ -101,7 +102,15 @@ function People({ route, navigation }) {
     //   }
     // );
 
+    
+    if(addedFriendsList.length>0){
+      const listFormData =formData
+      listFormData["guest_list"]=addedFriendsList
+      db.child(`${foundUser.uid}/Events/${route.params.eventID}`).push(listFormData);
+    formData.guestList = addedFriendsList
+    }else{
     formData.guestList = guestList;
+    }
     firebase
       .database()
       //.ref(`InviteForms/${randomID}`)
@@ -123,11 +132,14 @@ function People({ route, navigation }) {
     navigation.navigate("Events", {
       screen: "MyInvite",
       params: {
-        eventID: eventID,
+        eventID: route.params.eventID,
         imagePath: route.params.imagePath,
+        fbImage:route.params.fbImage
       },
     });
     reset();
+
+
   };
 
   const consoleLog = () => {
@@ -254,8 +266,8 @@ function People({ route, navigation }) {
     setGuestList(modifiedGuestList);
     const listFormData = formData;
     listFormData["guest_list"] = guestList;
-
-    db.child(`${foundUser.uid}/Events/${eventID}`).push(listFormData);
+//HERE
+    db.child(`${foundUser.uid}/Events/${route.params.eventID}`).push(listFormData);
     console.log("Data pushed");
     setSentMessgeStatus(!sentMessageStatus);
   };
@@ -269,7 +281,7 @@ function People({ route, navigation }) {
       console.log("snpashot = ", snapshot);
       console.log("snapshot key =", snapshot.key);
       console.log("snapshot value =", snapshot.val());
-      db.child(`${snapshot.key}/Events/${eventID}`).set(formData);
+      db.child(`${snapshot.key}/Events/${route.params.eventID}`).set(formData);
       console.log("form data pushed");
     });
     setSentInviteToAllFriendsBool(!sentInviteToAllFriendsBool);
@@ -293,7 +305,7 @@ function People({ route, navigation }) {
   // };
 
   const sendHostEvent = () => {
-    db.child(`${user.uid}/Events/${eventID}`).set(formData);
+    db.child(`${user.uid}/Events/${route.params.eventID}`).set(formData);
     console.log("host data pushed");
   };
 
@@ -376,7 +388,7 @@ function People({ route, navigation }) {
   const friendLoop = Object.keys(friends).map((key) => {
     console.log(key);
     const sendInviteToQueryFriend = (friendKey) => {
-      db.child(`${friends[key]}/Events/${eventID}`).set(formData);
+      db.child(`${friends[key]}/Events/${route.params.eventID}`).push().set(formData);
       console.log("Data pushed");
 
       // db.child(user.user.uid).set({"email" : user.user.email})
@@ -476,7 +488,7 @@ function People({ route, navigation }) {
   return (
     <KeyboardAwareScrollView
       style={{ flex: 1, backgroundColor: "white",  }}
-      contentContainerStyle={{ justifyContent: "center", alignItems: "center" }}
+      contentContainerStyle={{ justifyContent: "flex-start", alignItems: "center", height:widthPercentageToDP("400") }}
     >
       <Modal
         animationType={"fade"}
@@ -689,7 +701,7 @@ function People({ route, navigation }) {
               </View>
             )}
           </View>
-
+          <Spacer height={2} />
           <View
             style={{
               marginLeft: widthPercentageToDP("10"),
@@ -715,16 +727,17 @@ function People({ route, navigation }) {
               />
             )}
           </View>
-
+          <Spacer height={2} />
           <View
             style={{
               marginLeft: widthPercentageToDP("5"),
               width: widthPercentageToDP("30"),
             }}
           >
+              <Spacer height={2} />
             <Card style={{ justifyContent: "center" }}>
               <SearchBar
-                placeholder="Enter an email to send an invite..."
+                placeholder="Not on Tango? Email invite..."
                 autoCapitalize="none"
                 containerStyle={{ backgroundColor: "white" }}
                 inputStyle={{ color: "black" }}
@@ -742,17 +755,26 @@ function People({ route, navigation }) {
               <CustomButton small onPress={addEmail} text="ADD"/>
             </Card>
             {emailList.map((email) => (
+              <View style={{flexDirection:'row'}}>
                <Text style={[
                 textStyles.bigRegular,{marginTop: heightPercentageToDP("1.5"),marginRight:widthPercentageToDP("0")}]}>{email}</Text>
-            ))}
-            <CustomButton
+                <CustomButton
                         text="Remove"
                         onPress={() => removeFiend(addedFriend)}
                         outline
                         small
                         buttonSecondary
                       />
+                      
+                </View>
+                
+            )
+            
+            )
+            }
+            
           </View>
+          <Spacer height={2} />
           {/* <CustomButton onPress={handleEmail} 
             // onPress={ signUp }
           > Send email </Button> */}
@@ -763,6 +785,7 @@ function People({ route, navigation }) {
                 marginTop: heightPercentageToDP("3"),
               }}
             >
+                <Spacer height={2} />
               
               {!emailInviteBool ? (
                 <CustomButton
@@ -782,29 +805,32 @@ function People({ route, navigation }) {
                   disabled
                   small
                 />
+                
               )}
             </View>
+            <Spacer height={2} />
           </TouchableOpacity>
           <TouchableOpacity></TouchableOpacity>
-        </View>
-
-        <View
+          <View
           style={{
             alignSelf: "flex-end",
+            justifyContent:'flex-end',
             left: heightPercentageToDP("0"),
-            marginTop: heightPercentageToDP("60"),
+            marginTop: heightPercentageToDP("10"),
           }}
         >
+          <Spacer height={2} />
           
           <CustomButton
             text="next"
             onPress={handleSubmit(onSubmit)}
-            //onPress={sendHostEvent}
-            //onPress={consoleLog}
             narrow
             primary
           />
         </View>
+        </View>
+        <Spacer height={2} />
+
 
         <Spacer height={2} />
       </View>

@@ -86,28 +86,25 @@ function createnewtemplates({}) {
         aspect: [2,2],
         quality: 1,
     });
-    console.log(result);
+    
     if (!result.cancelled){
         setImage(result.uri);
-// let bucketName="images"
-// let file =result.uri
-//   firebase.storage()
-//   .ref(`${bucketName}/${file}`)
-//   //eventID as the path name to be able to access 
-//   .put(file)
-//   .then((snapshot) => {
-//     //You can check the image is now uploaded in the storage bucket
-//     console.log(`image has been successfully uploaded.`);
-//   })
-//   .catch((e) => console.log('uploading image error => ', e));
-//     }
+
 };
   }
   // const [img,setImg] = useState([{idnum:1}]);
 
   const handlePress = (imagePath) => {
-    setSelectedImage(imagePath);
-    navigation.navigate("Details", { imagePath: image });
+
+
+  console.log(imagePath, "strawberries")
+    
+    if(imagePath){
+      navigation.navigate("Details", { imagePath: imagePath,fbImage:null });
+    }else{
+
+    
+    navigation.navigate("Details", { fbImage: image,imagePath:null });}
   };
 
   return (
@@ -145,7 +142,7 @@ function createnewtemplates({}) {
           text="Next"
           shadow
           small
-          onPress={handlePress}
+          onPress={()=>handlePress(false)}
           />
             </View>
             </View>}
