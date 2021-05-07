@@ -70,7 +70,7 @@ function HomeScreenEmpty({}) {
           arr[0] = snapshot.val().event;
           arr[1] = snapshot.val().fbImage;
           arr[2] = true;
-          console.log(arr, "bronze");
+
           myEvents_obj[snapshot.key] = arr;
         } else {
           // snapshot.val().imagePath !=undefined &&
@@ -79,22 +79,31 @@ function HomeScreenEmpty({}) {
           arr[1] = snapshot.val().imagePath;
           arr[2] = false;
           myEvents_obj[snapshot.key] = arr;
-          console.log(myEvents_obj, "lolabunny");
         }
       } else {
         // console.log("invite snapshot =", snapshot);
+        console.log(snapshot.val(), "sonic");
+
         let arr = [];
-        if (snapshot.val().imagePath != "null") {
-          arr[0] = snapshot.val().event;
-          arr[1] = snapshot.val().imagePath;
-          arr[2] = false;
+
+        console.log(snapshot.val()[Object.keys(snapshot.val())[0]], "bolt");
+
+        if (
+          snapshot.val()[Object.keys(snapshot.val())[0]].imagePath == "null"
+        ) {
+          console.log("awesome");
+          arr[0] = snapshot.val()[Object.keys(snapshot.val())[0]].event;
+          arr[1] = snapshot.val()[Object.keys(snapshot.val())[0]].fbImage;
+          arr[2] = true;
           myInvites_obj[snapshot.key] = arr;
 
           // setMyInvites(myInvites_obj);
         } else {
-          arr[0] = snapshot.val().event;
-          arr[1] = snapshot.val().fbImage;
+          console.log(snapshot.val(), "arrayvalue");
+          arr[0] = snapshot.val()[Object.keys(snapshot.val())[0]].event;
+          arr[1] = snapshot.val()[Object.keys(snapshot.val())[0]].imagePath;
           arr[2] = false;
+
           myInvites_obj[snapshot.key] = arr;
         }
 
@@ -244,6 +253,8 @@ function HomeScreenEmpty({}) {
   const InviteLoop = Object.keys(myInvites).map((key) => {
     const eventID = key;
 
+    console.log(myInvites[key], "baconbanana");
+
     return (
       <View
         style={{
@@ -257,6 +268,7 @@ function HomeScreenEmpty({}) {
           text={myInvites[key][0]}
           buttonSecondary
           backgroundImage={myInvites[key][1]}
+          isLocalImage={myInvites[key][2]}
           shadow
           isLocalImage={myInvites[key][2]}
           style={{ fontSize: actuatedNormalize(11) }}
@@ -417,7 +429,7 @@ function HomeScreenEmpty({}) {
                 style={{
                   flexDirection: "row",
                   justifyContent: "space-between",
-                  
+
                   marginBottom: heightPercentageToDP("1"),
                 }}
               >
@@ -473,8 +485,6 @@ function HomeScreenEmpty({}) {
                   </View>
                 )}
               </ScrollView>
-
-              
 
               {/* <TouchableOpacity  style={{left: heightPercentageToDP('2.5')}} onPress={() => { 
     navigation.navigate('Account', {screen: " Accountsone"})
