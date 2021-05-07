@@ -41,7 +41,7 @@ function NewInviteStackNavigator() {
           component={createnewtemplates}
           options={{
             headerTitle: false,
-            headerLeft: () => <BackChevron />,
+            // headerLeft: () => <BackChevron />,
             headerRight: () => <ScreenTitle title="Templates" />,
           }}
         />

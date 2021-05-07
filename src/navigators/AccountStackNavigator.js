@@ -16,6 +16,10 @@ function AccountStackNavigator() {
     {/* <AccountStack.Screen name="Accounts" component={Accounts} /> */}
       <AccountStack.Screen name="TabViewExample" component={TabViewExample} 
       />
+      <AccountStack.Screen name="settings" component={settings} options={{
+          headerLeft: () => <BackChevron />,
+          
+        }}/>
       <AccountStack.Screen name="Accountsone" component={Accountsone} options={{
           headerLeft: () => <BackChevron />,
           
@@ -24,10 +28,7 @@ function AccountStackNavigator() {
           headerLeft: () => <BackChevron />,
           
         }}/>
-      <AccountStack.Screen name="settings" component={settings} options={{
-          headerLeft: () => <BackChevron />,
-          
-        }}/>
+      
     </AccountStack.Navigator>
   );
 }

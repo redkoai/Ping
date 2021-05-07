@@ -39,6 +39,8 @@ function Chat({route, navigation }) {
         })
     }
 
+   
+
     const parse = (message) => {
         const {user, text, timestamp} = message.val()
         const {key: _id} = message
@@ -84,7 +86,16 @@ function Chat({route, navigation }) {
     return(
 
 
-        <GiftedChat messages={messages} user = {UserInfo} onSend={send} />
+        <GiftedChat messages={messages} user = {UserInfo} onSend={send} wrapperStyle={{
+            left: {
+              backgroundColor: 'white',
+            
+            },
+            right:{
+            backgroundColor: '#A6ACE9',
+            
+            },
+          }}/>
         //image?: renderAvatar 
 
         

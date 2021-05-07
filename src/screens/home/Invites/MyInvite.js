@@ -350,7 +350,7 @@ function MyInvite({ navigation, route }) {
 
 }}>
         <Text style={[
-                    textStyles.bigRegular,{color:'white',marginTop: heightPercentageToDP("2"),marginLeft:widthPercentageToDP("2")}]}>Are you sure you want to send to all friends?</Text>
+                    textStyles.bigRegular,{color:'white',marginTop: heightPercentageToDP("2"),marginLeft:widthPercentageToDP("2")}]}>Are you sure you want to RSVP?</Text>
                     <View style={{flexDirection:'row', justifyContent:'space-around'}}>
           <TouchableOpacity onPress={sendInviteToAllFriendsConfirmation}>
           <Text style={[
