@@ -93,6 +93,14 @@ function Messages({}) {
 
   useEffect(() => {
       setUserHistory(queryUserHistory())
+
+
+    }, []);
+
+    useEffect(() => {
+      setInterval(() => {
+        queryUserHistory();
+      }, 10000);
     }, []);
 
   console.log("meo = ", userHistory)

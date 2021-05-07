@@ -20,6 +20,7 @@ import { actuatedNormalize } from "ping/util/fontScaler";
 import profileIm from "ping/assets/NavBarAssets/prof.png";
 import CustomButton from "ping/src/components/inputs/CustomButton";
 import CustomButtonCopyLong from "ping/src/components/inputs/CustomButtonCopyLong";
+import CustomButtonCopy from "ping/src/components/inputs/CustomButtonCopy";
 import giffy from "../../../assets/homeScreen/circle.gif";
 import firebase from "firebase";
 
@@ -241,12 +242,16 @@ function HomeScreenEmpty({}) {
         <CustomButtonCopyLong
           text={myInvites[key]}
           buttonSecondary
+          backgroundImage={myInvites[key]}
+          isLocalImage={myInvites[key]}
           shadow
           style={{ fontSize: actuatedNormalize(11) }}
           onPress={() => {
             navigation.navigate("MyInvite", { eventID: eventID });
           }}
         />
+
+
       </View>
     );
   });
@@ -364,7 +369,7 @@ function HomeScreenEmpty({}) {
                   marginTop: widthPercentageToDP(3),
                 }}
               >
-                <TouchableOpacity></TouchableOpacity>
+                
                 {Object.keys(myEvents).length == 0 ? (
                   <View>
                     <Text
@@ -397,7 +402,7 @@ function HomeScreenEmpty({}) {
                   flexDirection: "row",
                   justifyContent: "space-between",
                   marginTop: widthPercentageToDP(3),
-                  marginBottom: heightPercentageToDP("2"),
+                  marginBottom:widthPercentageToDP("2"),
                 }}
               >
                 <Text
@@ -434,7 +439,7 @@ function HomeScreenEmpty({}) {
                   marginTop: widthPercentageToDP(3),
                 }}
               >
-                <TouchableOpacity></TouchableOpacity>
+               
                 {Object.keys(myInvites).length != 0 ? (
                   <View>
                     <Text>{InviteLoop}</Text>
@@ -455,20 +460,20 @@ function HomeScreenEmpty({}) {
 
               <View
                 style={{
-                  left: widthPercentageToDP("3"),
-                  marginTop: heightPercentageToDP(25),
+                  marginLeft: widthPercentageToDP("3"),
+                  marginTop: heightPercentageToDP(10),
                 }}
               ></View>
 
-              {/* <TouchableOpacity  style={{left: heightPercentageToDP('2.5')}} onPress={() => { 
+              <TouchableOpacity  style={{left: heightPercentageToDP('-1'),right: heightPercentageToDP('2')}} onPress={() => { 
     navigation.navigate('Account', {screen: " Accountsone"})
 
 }}>      
-        <CustomButton
-          text="Add friends"
+        <CustomButtonCopy
+          text=""
           shadow
         />
-        </TouchableOpacity> */}
+        </TouchableOpacity>
             </View>
           ) : (
             <View

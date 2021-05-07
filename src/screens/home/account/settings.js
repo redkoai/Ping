@@ -82,7 +82,7 @@ function Settings() {
           </View>
 
         
- <View style={{marginTop:heightPercentageToDP(40),  alignItems: "center" }}>    
+ {/* <View style={{marginTop:heightPercentageToDP(40),  alignItems: "center" }}>    
              
               {!skipped && (
                 <CustomButton
@@ -92,7 +92,7 @@ function Settings() {
                   primary
                 />
               )}
-            </View>
+            </View> */}
           
         </ImageBackground>
       </View>

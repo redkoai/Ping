@@ -62,6 +62,7 @@ function CustomButtonCopyLong({
     height:'100%'
    
   }}>
+    <View style={{backgroundColor:'white'}}>
         <Text
           style={[
             textStyles.bigBold,
@@ -74,6 +75,7 @@ function CustomButtonCopyLong({
         >
           {text}
         </Text>
+        </View>
         </ImageBackground>:<ImageBackground source={{uri:backgroundImage}} style={{ 
     
     resizeMode: 'contain',

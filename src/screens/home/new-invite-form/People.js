@@ -758,13 +758,13 @@ function People({ route, navigation }) {
               <View style={{flexDirection:'row'}}>
                <Text style={[
                 textStyles.bigRegular,{marginTop: heightPercentageToDP("1.5"),marginRight:widthPercentageToDP("0")}]}>{email}</Text>
-                <CustomButton
+                {/* <CustomButton
                         text="Remove"
                         onPress={() => removeFiend(addedFriend)}
                         outline
                         small
                         buttonSecondary
-                      />
+                      /> */}
                       
                 </View>
                 

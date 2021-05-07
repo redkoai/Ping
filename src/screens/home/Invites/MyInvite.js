@@ -9,6 +9,7 @@ import {
   TouchableOpacity,
   ImageBackground,
   Button,
+  Modal,
 } from "react-native";
 import NewInviteContext from "ping/src/contexts/NewInviteContext";
 import AuthContext from "ping/src/contexts/AuthContext";
@@ -56,6 +57,26 @@ function MyInvite({ navigation, route }) {
   const [secretCode, setSecretCode] = useState("");
 
   const [event, setEvent] = useState({});
+
+
+  const [areYouSureInviteAllFriends, setAreYouSureInviteAllFriends] = useState(
+    false
+  );
+  const sendInviteToAllFriends = () => {
+    setAreYouSureInviteAllFriends(true);
+  };
+
+  const sendInviteToAllFriendsConfirmation = () => {
+    db.child(`${user.uid}/Friends`).on("child_added", function (snapshot) {
+      console.log("snpashot = ", snapshot);
+      console.log("snapshot key =", snapshot.key);
+      console.log("snapshot value =", snapshot.val());
+      db.child(`${snapshot.key}/Events/${route.params.eventID}`).set(formData);
+      console.log("form data pushed");
+    });
+    setSentInviteToAllFriendsBool(!sentInviteToAllFriendsBool);
+    setAreYouSureInviteAllFriends(false);
+  };
 
   /////////////////////////
   // Firebase query
@@ -317,7 +338,34 @@ function MyInvite({ navigation, route }) {
               }}
             />
           )}
-          <Text
+          <Modal
+        animationType={"fade"}
+        transparent={true}
+        visible={areYouSureInviteAllFriends}
+        onTouchOutside={() => {
+          setAreYouSureInviteAllFriends(false);
+        }}
+      >
+        <View style={{ backgroundColor: "#A6ACE9", height: heightPercentageToDP("15"), width: widthPercentageToDP("60") ,marginLeft:widthPercentageToDP("15"),borderRadius:10,
+
+}}>
+        <Text style={[
+                    textStyles.bigRegular,{color:'white',marginTop: heightPercentageToDP("2"),marginLeft:widthPercentageToDP("2")}]}>Are you sure you want to send to all friends?</Text>
+                    <View style={{flexDirection:'row', justifyContent:'space-around'}}>
+          <TouchableOpacity onPress={sendInviteToAllFriendsConfirmation}>
+          <Text style={[
+                    textStyles.bigRegular,{color:'white',marginTop: heightPercentageToDP("2"),marginLeft:widthPercentageToDP("2")}]}>Yes</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => setAreYouSureInviteAllFriends(false)}
+          >
+             <Text style={[
+                    textStyles.bigRegular,{color:'white',marginTop: heightPercentageToDP("2"),marginLeft:widthPercentageToDP("2")}]}>No</Text>
+          </TouchableOpacity>
+        </View>
+        </View>
+      </Modal>
+          {/* <Text
             style={[
               textStyles.bigBold,
               {
@@ -350,7 +398,7 @@ function MyInvite({ navigation, route }) {
             ]}
           >
             {event.location}
-          </Text>
+          </Text> */}
           {/* </ImageBackground>  */}
         </View>
 
@@ -412,7 +460,7 @@ function MyInvite({ navigation, route }) {
                 console.log("host email =", hostEmail);
                 console.log("host username =", hostUsername);
                 const message = {
-                  text: "Yes",
+                  text: "RSVP: Yes I will be attending " + event.event + 'on ' + event.startdate ,
                   timestamp: firebase.database.ServerValue.TIMESTAMP,
                   user: {
                     _id: user.uid,
@@ -458,7 +506,7 @@ function MyInvite({ navigation, route }) {
                 console.log("host email =", hostEmail);
                 console.log("host username =", hostUsername);
                 const message = {
-                  text: "No",
+                  text: "RSVP: No I will not be attending" + event.description,
                   timestamp: firebase.database.ServerValue.TIMESTAMP,
                   user: {
                     _id: user.uid,
@@ -549,7 +597,15 @@ function MyInvite({ navigation, route }) {
               marginTop: heightPercentageToDP("1"),
             }}
           >
-            <Text style={[{ color: colors.darkGrey }]}>
+            <Text style={[
+                  textStyles.normalRegular,
+                  {
+                    left: widthPercentageToDP("0"),
+                    marginRight: widthPercentageToDP("2"),
+                    marginTop: heightPercentageToDP("0"),
+                    color: colors.darkGrey
+                  },
+                ]}>
               {event.description}
             </Text>
           </View>
