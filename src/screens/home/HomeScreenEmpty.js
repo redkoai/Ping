@@ -258,6 +258,7 @@ function HomeScreenEmpty({}) {
           buttonSecondary
           backgroundImage={myInvites[key][1]}
           shadow
+          isLocalImage={myInvites[key][2]}
           style={{ fontSize: actuatedNormalize(11) }}
           onPress={() => {
             navigation.navigate("Events", {
