@@ -106,6 +106,8 @@ function MyInvite({ navigation, route }) {
   const [hostEmail, setHostEmail] = useState();
   const [hostUsername, setHostUsername] = useState();
   const [photo, setPhoto] = useState("");
+  const [noToRSVP, setNoToRSVP] = useState(false);
+  const [yesToRSVP, setYesToRSVP] = useState(false);
   const getHostInfo = () => {
     db.on("child_added", function (snapshot) {
       if (snapshot.key == event["co-host-0"]) {
@@ -466,49 +468,54 @@ function MyInvite({ navigation, route }) {
             >
               RSVP
             </Text>
-            <CustomButton
-              text="Yes"
-              small
-              secondary
-              outline
-              onPress={() => {
-                console.log("host email =", hostEmail);
-                console.log("host username =", hostUsername);
-                const message = {
-                  text:
-                    "RSVP: Yes I will be attending " +
-                    event.event +
-                    " on " +
-                    event.startdate,
-                  timestamp: firebase.database.ServerValue.TIMESTAMP,
-                  user: {
-                    _id: user.uid,
-                    email: user.email,
-                  },
-                  userTo: {
-                    _id: event["co-host-0"],
-                    email: `${hostEmail}`,
-                    username: `${hostUsername}`,
-                  },
-                };
-                db.child(`${user.uid}/messages/${event["co-host-0"]}`).push(
-                  message
-                );
-                db.child(`${event["co-host-0"]}/messages/${user.uid}`).push(
-                  message
-                );
-                navigation.navigate("Messages", {
-                  screen: "Chat",
-                  params: {
-                    OtherUserInfo: {
-                      _id: event["co-host-0"],
-                      email: hostEmail,
-                      username: hostUsername,
+            {!yesToRSVP ? (
+              <CustomButton
+                text="Yes"
+                small
+                secondary
+                outline
+                onPress={() => {
+                  setYesToRSVP(true);
+                  console.log("host email =", hostEmail);
+                  console.log("host username =", hostUsername);
+                  const message = {
+                    text:
+                      "RSVP: Yes I will be attending " +
+                      event.event +
+                      " on " +
+                      event.startdate,
+                    timestamp: firebase.database.ServerValue.TIMESTAMP,
+                    user: {
+                      _id: user.uid,
+                      email: user.email,
                     },
-                  },
-                });
-              }}
-            />
+                    userTo: {
+                      _id: event["co-host-0"],
+                      email: `${hostEmail}`,
+                      username: `${hostUsername}`,
+                    },
+                  };
+                  db.child(`${user.uid}/messages/${event["co-host-0"]}`).push(
+                    message
+                  );
+                  db.child(`${event["co-host-0"]}/messages/${user.uid}`).push(
+                    message
+                  );
+                  navigation.navigate("Messages", {
+                    screen: "Chat",
+                    params: {
+                      OtherUserInfo: {
+                        _id: event["co-host-0"],
+                        email: hostEmail,
+                        username: hostUsername,
+                      },
+                    },
+                  });
+                }}
+              />
+            ) : (
+              <CustomButton text="Yes" small secondary disabled />
+            )}
           </View>
           <View
             style={{
@@ -516,45 +523,51 @@ function MyInvite({ navigation, route }) {
               marginTop: heightPercentageToDP("3"),
             }}
           >
-            <CustomButton
-              text="No"
-              small
-              secondary
-              outline
-              onPress={() => {
-                console.log("host email =", hostEmail);
-                console.log("host username =", hostUsername);
-                const message = {
-                  text: "RSVP: No I will not be attending" + event.description,
-                  timestamp: firebase.database.ServerValue.TIMESTAMP,
-                  user: {
-                    _id: user.uid,
-                    email: user.email,
-                  },
-                  userTo: {
-                    _id: event["co-host-0"],
-                    email: `${hostEmail}`,
-                    username: `${hostUsername}`,
-                  },
-                };
-                db.child(`${user.uid}/messages/${event["co-host-0"]}`).push(
-                  message
-                );
-                db.child(`${event["co-host-0"]}/messages/${user.uid}`).push(
-                  message
-                );
-                navigation.navigate("Messages", {
-                  screen: "Chat",
-                  params: {
-                    OtherUserInfo: {
-                      _id: event["co-host-0"],
-                      email: hostEmail,
-                      username: hostUsername,
+            {!noToRSVP ? (
+              <CustomButton
+                text="No"
+                small
+                secondary
+                outline
+                onPress={() => {
+                  setNoToRSVP(true);
+                  console.log("host email =", hostEmail);
+                  console.log("host username =", hostUsername);
+                  const message = {
+                    text:
+                      "RSVP: No I will not be attending" + event.description,
+                    timestamp: firebase.database.ServerValue.TIMESTAMP,
+                    user: {
+                      _id: user.uid,
+                      email: user.email,
                     },
-                  },
-                });
-              }}
-            />
+                    userTo: {
+                      _id: event["co-host-0"],
+                      email: `${hostEmail}`,
+                      username: `${hostUsername}`,
+                    },
+                  };
+                  db.child(`${user.uid}/messages/${event["co-host-0"]}`).push(
+                    message
+                  );
+                  db.child(`${event["co-host-0"]}/messages/${user.uid}`).push(
+                    message
+                  );
+                  navigation.navigate("Messages", {
+                    screen: "Chat",
+                    params: {
+                      OtherUserInfo: {
+                        _id: event["co-host-0"],
+                        email: hostEmail,
+                        username: hostUsername,
+                      },
+                    },
+                  });
+                }}
+              />
+            ) : (
+              <CustomButton text="No" small secondary disabled />
+            )}
           </View>
 
           {/* TODO MESSSAGE HOST TAKE HOST UID AND MESSAGE */}

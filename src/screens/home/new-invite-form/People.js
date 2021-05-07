@@ -43,6 +43,7 @@ function People({ route, navigation }) {
     //resolver: yupResolver(RSVP_SCHEMA),
   });
   const [photo, setPhoto] = useState("");
+  const [areYouSureCompleted, setAreYouSureCompleted] = useState(false);
 
   // useEffect(() => {
   //   const randomID = uuid.v1();
@@ -91,8 +92,11 @@ function People({ route, navigation }) {
     return text;
   };
   const onSubmit = () => {
+    setAreYouSureCompleted(true);
+  };
+  const completeConfirmation = () => {
+    setAreYouSureCompleted(false);
     sendHostEvent();
-
 
     // db.child(`${user.uid}/Events/${eventID}`).on(
     //   "child_added",
@@ -102,14 +106,15 @@ function People({ route, navigation }) {
     //   }
     // );
 
-    
-    if(addedFriendsList.length>0){
-      const listFormData =formData
-      listFormData["guest_list"]=addedFriendsList
-      db.child(`${foundUser.uid}/Events/${route.params.eventID}`).push(listFormData);
-    formData.guestList = addedFriendsList
-    }else{
-    formData.guestList = guestList;
+    if (addedFriendsList.length > 0) {
+      const listFormData = formData;
+      listFormData["guest_list"] = addedFriendsList;
+      db.child(`${foundUser.uid}/Events/${route.params.eventID}`).push(
+        listFormData
+      );
+      formData.guestList = addedFriendsList;
+    } else {
+      formData.guestList = guestList;
     }
     firebase
       .database()
@@ -134,12 +139,10 @@ function People({ route, navigation }) {
       params: {
         eventID: route.params.eventID,
         imagePath: route.params.imagePath,
-        fbImage:route.params.fbImage
+        fbImage: route.params.fbImage,
       },
     });
     reset();
-
-
   };
 
   const consoleLog = () => {
@@ -253,6 +256,7 @@ function People({ route, navigation }) {
   const [areYouSureInviteAllFriends, setAreYouSureInviteAllFriends] = useState(
     false
   );
+  const [emailList, setEmailList] = useState([]);
   const sendInvite = () => {
     guests[foundUser.uid] = "no";
     db.child(foundUser.uid);
@@ -266,8 +270,10 @@ function People({ route, navigation }) {
     setGuestList(modifiedGuestList);
     const listFormData = formData;
     listFormData["guest_list"] = guestList;
-//HERE
-    db.child(`${foundUser.uid}/Events/${route.params.eventID}`).push(listFormData);
+    //HERE
+    db.child(`${foundUser.uid}/Events/${route.params.eventID}`).push(
+      listFormData
+    );
     console.log("Data pushed");
     setSentMessgeStatus(!sentMessageStatus);
   };
@@ -340,7 +346,12 @@ function People({ route, navigation }) {
     setAddedFriendsList(() => [...newFriendList]);
   };
 
+  const removeEmail = (email) => {
+    const addedEmailListArr = emailList;
+    const newEmailList = addedEmailListArr.filter((item) => item != email);
 
+    setEmailList(() => [...newEmailList]);
+  };
 
   //////////////////////////////////////
   // Firebase query for current friends
@@ -388,7 +399,9 @@ function People({ route, navigation }) {
   const friendLoop = Object.keys(friends).map((key) => {
     console.log(key);
     const sendInviteToQueryFriend = (friendKey) => {
-      db.child(`${friends[key]}/Events/${route.params.eventID}`).push().set(formData);
+      db.child(`${friends[key]}/Events/${route.params.eventID}`)
+        .push()
+        .set(formData);
       console.log("Data pushed");
 
       // db.child(user.user.uid).set({"email" : user.user.email})
@@ -432,7 +445,6 @@ function People({ route, navigation }) {
   });
 
   const [sentMessageStatus, setSentMessgeStatus] = useState(false);
-  const [emailList, setEmailList] = useState([]);
 
   const updateSearch = (search) => {
     setSearch(search);
@@ -487,8 +499,12 @@ function People({ route, navigation }) {
   // };
   return (
     <KeyboardAwareScrollView
-      style={{ flex: 1, backgroundColor: "white",  }}
-      contentContainerStyle={{ justifyContent: "flex-start", alignItems: "center", height:widthPercentageToDP("400") }}
+      style={{ flex: 1, backgroundColor: "white" }}
+      contentContainerStyle={{
+        justifyContent: "flex-start",
+        alignItems: "center",
+        height: widthPercentageToDP("400"),
+      }}
     >
       <Modal
         animationType={"fade"}
@@ -498,23 +514,125 @@ function People({ route, navigation }) {
           setAreYouSureInviteAllFriends(false);
         }}
       >
-        <View style={{ backgroundColor: "#A6ACE9", height: heightPercentageToDP("15"), width: widthPercentageToDP("60") ,marginLeft:widthPercentageToDP("15"),borderRadius:10,
-
-}}>
-        <Text style={[
-                    textStyles.bigRegular,{color:'white',marginTop: heightPercentageToDP("2"),marginLeft:widthPercentageToDP("2")}]}>Are you sure you want to send to all friends?</Text>
-                    <View style={{flexDirection:'row', justifyContent:'space-around'}}>
-          <TouchableOpacity onPress={sendInviteToAllFriendsConfirmation}>
-          <Text style={[
-                    textStyles.bigRegular,{color:'white',marginTop: heightPercentageToDP("2"),marginLeft:widthPercentageToDP("2")}]}>Yes</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => setAreYouSureInviteAllFriends(false)}
+        <View
+          style={{
+            backgroundColor: "#A6ACE9",
+            height: heightPercentageToDP("15"),
+            width: widthPercentageToDP("60"),
+            marginLeft: widthPercentageToDP("15"),
+            borderRadius: 10,
+          }}
+        >
+          <Text
+            style={[
+              textStyles.bigRegular,
+              {
+                color: "white",
+                marginTop: heightPercentageToDP("2"),
+                marginLeft: widthPercentageToDP("2"),
+              },
+            ]}
           >
-             <Text style={[
-                    textStyles.bigRegular,{color:'white',marginTop: heightPercentageToDP("2"),marginLeft:widthPercentageToDP("2")}]}>No</Text>
-          </TouchableOpacity>
+            Are you sure you want to send to all friends?
+          </Text>
+          <View
+            style={{ flexDirection: "row", justifyContent: "space-around" }}
+          >
+            <TouchableOpacity onPress={sendInviteToAllFriendsConfirmation}>
+              <Text
+                style={[
+                  textStyles.bigRegular,
+                  {
+                    color: "white",
+                    marginTop: heightPercentageToDP("2"),
+                    marginLeft: widthPercentageToDP("2"),
+                  },
+                ]}
+              >
+                Yes
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => setAreYouSureInviteAllFriends(false)}
+            >
+              <Text
+                style={[
+                  textStyles.bigRegular,
+                  {
+                    color: "white",
+                    marginTop: heightPercentageToDP("2"),
+                    marginLeft: widthPercentageToDP("2"),
+                  },
+                ]}
+              >
+                No
+              </Text>
+            </TouchableOpacity>
+          </View>
         </View>
+      </Modal>
+
+      <Modal
+        animationType={"fade"}
+        transparent={true}
+        visible={areYouSureCompleted}
+        onTouchOutside={() => {
+          setAreYouSureCompleted(false);
+        }}
+      >
+        <View
+          style={{
+            backgroundColor: "#A6ACE9",
+            height: heightPercentageToDP("15"),
+            width: widthPercentageToDP("60"),
+            marginLeft: widthPercentageToDP("15"),
+            borderRadius: 10,
+          }}
+        >
+          <Text
+            style={[
+              textStyles.bigRegular,
+              {
+                color: "white",
+                marginTop: heightPercentageToDP("2"),
+                marginLeft: widthPercentageToDP("2"),
+              },
+            ]}
+          >
+            Are you sure you want to send to all friends?
+          </Text>
+          <View
+            style={{ flexDirection: "row", justifyContent: "space-around" }}
+          >
+            <TouchableOpacity onPress={completeConfirmation}>
+              <Text
+                style={[
+                  textStyles.bigRegular,
+                  {
+                    color: "white",
+                    marginTop: heightPercentageToDP("2"),
+                    marginLeft: widthPercentageToDP("2"),
+                  },
+                ]}
+              >
+                Yes
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => setAreYouSureCompleted(false)}>
+              <Text
+                style={[
+                  textStyles.bigRegular,
+                  {
+                    color: "white",
+                    marginTop: heightPercentageToDP("2"),
+                    marginLeft: widthPercentageToDP("2"),
+                  },
+                ]}
+              >
+                No
+              </Text>
+            </TouchableOpacity>
+          </View>
         </View>
       </Modal>
       {/* <Modal
@@ -607,7 +725,9 @@ function People({ route, navigation }) {
 
           {foundUser.email != null ? (
             <View style={styles.container}>
-              <View style={{ flexDirection: "row", justifyContent:'space-around' }}>
+              <View
+                style={{ flexDirection: "row", justifyContent: "space-around" }}
+              >
                 <Text
                   style={{
                     marginLeft: widthPercentageToDP("6"),
@@ -684,9 +804,23 @@ function People({ route, navigation }) {
                 </Text>
                 <View style={{ flexDirection: "column" }}>
                   {addedFriendsList.map((addedFriend) => (
-                    <View style={{ flexDirection: "row", justifyContent:'space-around' }}>
-                      <Text style={[
-                    textStyles.bigRegular,{marginTop: heightPercentageToDP("1.5"),marginRight:widthPercentageToDP("0")}]}>{addedFriend.username}</Text>
+                    <View
+                      style={{
+                        flexDirection: "row",
+                        justifyContent: "space-around",
+                      }}
+                    >
+                      <Text
+                        style={[
+                          textStyles.bigRegular,
+                          {
+                            marginTop: heightPercentageToDP("1.5"),
+                            marginRight: widthPercentageToDP("0"),
+                          },
+                        ]}
+                      >
+                        {addedFriend.username}
+                      </Text>
                       <CustomButton
                         text="Remove"
                         onPress={() => removeFiend(addedFriend)}
@@ -734,7 +868,7 @@ function People({ route, navigation }) {
               width: widthPercentageToDP("30"),
             }}
           >
-              <Spacer height={2} />
+            <Spacer height={2} />
             <Card style={{ justifyContent: "center" }}>
               <SearchBar
                 placeholder="Not on Tango? Email invite..."
@@ -752,27 +886,30 @@ function People({ route, navigation }) {
               {/* <TouchableOpacity>
                 <Text>ADD</Text>
               </TouchableOpacity> */}
-              <CustomButton small onPress={addEmail} text="ADD"/>
+              <CustomButton small onPress={addEmail} text="ADD" />
             </Card>
             {emailList.map((email) => (
-              <View style={{flexDirection:'row'}}>
-               <Text style={[
-                textStyles.bigRegular,{marginTop: heightPercentageToDP("1.5"),marginRight:widthPercentageToDP("0")}]}>{email}</Text>
-                {/* <CustomButton
-                        text="Remove"
-                        onPress={() => removeFiend(addedFriend)}
-                        outline
-                        small
-                        buttonSecondary
-                      /> */}
-                      
-                </View>
-                
-            )
-            
-            )
-            }
-            
+              <View style={{ flexDirection: "row" }}>
+                <Text
+                  style={[
+                    textStyles.bigRegular,
+                    {
+                      marginTop: heightPercentageToDP("1.5"),
+                      marginRight: widthPercentageToDP("0"),
+                    },
+                  ]}
+                >
+                  {email}
+                </Text>
+                <CustomButton
+                  text="Remove"
+                  onPress={() => removeEmail(email)}
+                  outline
+                  small
+                  buttonSecondary
+                />
+              </View>
+            ))}
           </View>
           <Spacer height={2} />
           {/* <CustomButton onPress={handleEmail} 
@@ -785,8 +922,8 @@ function People({ route, navigation }) {
                 marginTop: heightPercentageToDP("3"),
               }}
             >
-                <Spacer height={2} />
-              
+              <Spacer height={2} />
+
               {!emailInviteBool ? (
                 <CustomButton
                   text="Email Invites"
@@ -805,32 +942,30 @@ function People({ route, navigation }) {
                   disabled
                   small
                 />
-                
               )}
             </View>
             <Spacer height={2} />
           </TouchableOpacity>
           <TouchableOpacity></TouchableOpacity>
           <View
-          style={{
-            alignSelf: "flex-end",
-            justifyContent:'flex-end',
-            left: heightPercentageToDP("0"),
-            marginTop: heightPercentageToDP("10"),
-          }}
-        >
-          <Spacer height={2} />
-          
-          <CustomButton
-            text="next"
-            onPress={handleSubmit(onSubmit)}
-            narrow
-            primary
-          />
-        </View>
+            style={{
+              alignSelf: "flex-end",
+              justifyContent: "flex-end",
+              left: heightPercentageToDP("0"),
+              marginTop: heightPercentageToDP("10"),
+            }}
+          >
+            <Spacer height={2} />
+
+            <CustomButton
+              text="next"
+              onPress={handleSubmit(onSubmit)}
+              narrow
+              primary
+            />
+          </View>
         </View>
         <Spacer height={2} />
-
 
         <Spacer height={2} />
       </View>
