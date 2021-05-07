@@ -142,53 +142,59 @@ function CustomButtonCopyLong({
         disabled={disabled}
       >
         {icon && <Image source={icon} style={styles.icon} />}
-        {!isLocalImage?<ImageBackground source={getImage().image} style={{ 
-    
-    resizeMode: 'contain',
-    justifyContent: 'center',
-    alignItems: 'center',
-    width: '100%',
-    height:'100%'
-   
-  }}>
-    <View style={{backgroundColor:'white'}}>
-        <Text
-          style={[
-            textStyles.bigBold,
-            //small ? textStyles.normalBold : textStyles.bigBold,
-            primary ? styles.textPrimary : styles.textSecondary,
-            outline && styles.textOutline,
-            disabled && primary && styles.textPrimaryDisabled,
-            disabled && !primary && styles.textSecondaryDisabled,
-          ]}
-        >
-          {text}
-        </Text>
-        </View>
-        </ImageBackground>:<ImageBackground source={{uri:backgroundImage}} style={{ 
-    
-    resizeMode: 'contain',
-    justifyContent: 'center',
-    alignItems: 'center',
-    width: '100%',
-    height:'100%'
-   
-  }}>
-     <View style={{backgroundColor:'white'}}>
-        <Text
-          style={[
-            textStyles.bigBold,
-            //small ? textStyles.normalBold : textStyles.bigBold,
-            primary ? styles.textPrimary : styles.textSecondary,
-            outline && styles.textOutline,
-            disabled && primary && styles.textPrimaryDisabled,
-            disabled && !primary && styles.textSecondaryDisabled,
-          ]}
-        >
-          {text}
-        </Text>
-        </View>
-        </ImageBackground>}
+        {!isLocalImage ? (
+          <ImageBackground
+            source={getImage().image}
+            style={{
+              resizeMode: "contain",
+              justifyContent: "center",
+              alignItems: "center",
+              width: "100%",
+              height: "100%",
+            }}
+          >
+            <View style={{ backgroundColor: "white" }}>
+              <Text
+                style={[
+                  textStyles.bigBold,
+                  //small ? textStyles.normalBold : textStyles.bigBold,
+                  primary ? styles.textPrimary : styles.textSecondary,
+                  outline && styles.textOutline,
+                  disabled && primary && styles.textPrimaryDisabled,
+                  disabled && !primary && styles.textSecondaryDisabled,
+                ]}
+              >
+                {text}
+              </Text>
+            </View>
+          </ImageBackground>
+        ) : (
+          <ImageBackground
+            source={{ uri: backgroundImage }}
+            style={{
+              resizeMode: "contain",
+              justifyContent: "center",
+              alignItems: "center",
+              width: "100%",
+              height: "100%",
+            }}
+          >
+            <View style={{ backgroundColor: "white" }}>
+              <Text
+                style={[
+                  textStyles.bigBold,
+                  //small ? textStyles.normalBold : textStyles.bigBold,
+                  primary ? styles.textPrimary : styles.textSecondary,
+                  outline && styles.textOutline,
+                  disabled && primary && styles.textPrimaryDisabled,
+                  disabled && !primary && styles.textSecondaryDisabled,
+                ]}
+              >
+                {text}
+              </Text>
+            </View>
+          </ImageBackground>
+        )}
       </TouchableOpacity>
     </View>
   );
