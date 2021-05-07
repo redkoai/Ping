@@ -226,7 +226,7 @@ function HomeScreenEmpty({}) {
             shadow
             style={{ fontSize: actuatedNormalize(11) }}
             onPress={() => {
-              navigation.navigate("MyInvite", { eventID: eventID });
+              navigation.navigate("MyEvent", { eventID: eventID });
             }}
           />
         </View>
