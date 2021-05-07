@@ -20,7 +20,6 @@ import { actuatedNormalize } from "ping/util/fontScaler";
 import profileIm from "ping/assets/NavBarAssets/prof.png";
 import CustomButton from "ping/src/components/inputs/CustomButton";
 import CustomButtonCopyLong from "ping/src/components/inputs/CustomButtonCopyLong";
-import CustomButtonCopy from "ping/src/components/inputs/CustomButtonCopy";
 import giffy from "../../../assets/homeScreen/circle.gif";
 import firebase from "firebase";
 
@@ -66,28 +65,43 @@ function HomeScreenEmpty({}) {
       if (snapshot.val()["co-host-0"] == user.uid) {
         // console.log("event snapshot =", snapshot);
         let arr = [];
-        arr[3] = true;
+        arr[2] = true;
         if (snapshot.val().imagePath == "null") {
           arr[0] = snapshot.val().event;
           arr[1] = snapshot.val().fbImage;
-          arr[3] = true;
-
+          arr[2] = true;
+          console.log(arr, "bronze");
           myEvents_obj[snapshot.key] = arr;
         } else {
           // snapshot.val().imagePath !=undefined &&
 
           arr[0] = snapshot.val().event;
           arr[1] = snapshot.val().imagePath;
-          arr[3] = false;
+          arr[2] = false;
           myEvents_obj[snapshot.key] = arr;
+          console.log(myEvents_obj, "lolabunny");
         }
       } else {
         // console.log("invite snapshot =", snapshot);
-        myInvites_obj[snapshot.key] = snapshot.val().event;
+        let arr = [];
+        if (snapshot.val().imagePath != "null") {
+          arr[0] = snapshot.val().event;
+          arr[1] = snapshot.val().imagePath;
+          arr[2] = false;
+          myInvites_obj[snapshot.key] = arr;
+
+          // setMyInvites(myInvites_obj);
+        } else {
+          arr[0] = snapshot.val().event;
+          arr[1] = snapshot.val().fbImage;
+          arr[2] = false;
+          myInvites_obj[snapshot.key] = arr;
+        }
+
+        // myInvites_obj[snapshot.key] = snapshot.val().arr;
         // console.log("my invites = ", myInvites_obj);
       }
     });
-    // console.log("my invites =", myInvites)
 
     setMyInvites(myInvites_obj);
     setMyEvents(myEvents_obj);
@@ -199,7 +213,7 @@ function HomeScreenEmpty({}) {
             text={myEvents[key][0]}
             backgroundImage={myEvents[key][1]}
             buttonSecondary
-            isLocalImage={myEvents[key][3]}
+            isLocalImage={myEvents[key][2]}
             shadow
             style={{ fontSize: actuatedNormalize(11) }}
             onPress={() => {
@@ -240,18 +254,18 @@ function HomeScreenEmpty({}) {
         }}
       >
         <CustomButtonCopyLong
-          text={myInvites[key]}
+          text={myInvites[key][0]}
           buttonSecondary
-          backgroundImage={myInvites[key]}
-          isLocalImage={myInvites[key]}
+          backgroundImage={myInvites[key][1]}
           shadow
           style={{ fontSize: actuatedNormalize(11) }}
           onPress={() => {
-            navigation.navigate("MyInvite", { eventID: eventID });
+            navigation.navigate("Events", {
+              screen: "MyInvite",
+              params: { eventID: eventID },
+            });
           }}
         />
-
-
       </View>
     );
   });
@@ -369,7 +383,7 @@ function HomeScreenEmpty({}) {
                   marginTop: widthPercentageToDP(3),
                 }}
               >
-                
+                <TouchableOpacity></TouchableOpacity>
                 {Object.keys(myEvents).length == 0 ? (
                   <View>
                     <Text
@@ -402,7 +416,7 @@ function HomeScreenEmpty({}) {
                   flexDirection: "row",
                   justifyContent: "space-between",
                   marginTop: widthPercentageToDP(3),
-                  marginBottom:widthPercentageToDP("2"),
+                  marginBottom: heightPercentageToDP("2"),
                 }}
               >
                 <Text
@@ -439,7 +453,7 @@ function HomeScreenEmpty({}) {
                   marginTop: widthPercentageToDP(3),
                 }}
               >
-               
+                <TouchableOpacity></TouchableOpacity>
                 {Object.keys(myInvites).length != 0 ? (
                   <View>
                     <Text>{InviteLoop}</Text>
@@ -460,20 +474,20 @@ function HomeScreenEmpty({}) {
 
               <View
                 style={{
-                  marginLeft: widthPercentageToDP("3"),
-                  marginTop: heightPercentageToDP(10),
+                  left: widthPercentageToDP("3"),
+                  marginTop: heightPercentageToDP(25),
                 }}
               ></View>
 
-              <TouchableOpacity  style={{left: heightPercentageToDP('-1'),right: heightPercentageToDP('2')}} onPress={() => { 
+              {/* <TouchableOpacity  style={{left: heightPercentageToDP('2.5')}} onPress={() => { 
     navigation.navigate('Account', {screen: " Accountsone"})
 
 }}>      
-        <CustomButtonCopy
-          text=""
+        <CustomButton
+          text="Add friends"
           shadow
         />
-        </TouchableOpacity>
+        </TouchableOpacity> */}
             </View>
           ) : (
             <View

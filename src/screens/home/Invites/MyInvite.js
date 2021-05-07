@@ -58,7 +58,6 @@ function MyInvite({ navigation, route }) {
 
   const [event, setEvent] = useState({});
 
-
   const [areYouSureInviteAllFriends, setAreYouSureInviteAllFriends] = useState(
     false
   );
@@ -180,6 +179,7 @@ function MyInvite({ navigation, route }) {
   const imagePath = `../../../../assets/invites/${event.imagePath}`;
 
   const getImage = (img) => {
+    console.log(route.params, "greenblue");
     if (route.params.imagePath === "1.png") {
       return {
         image: require("../../../../assets/invites/1.png"),
@@ -188,112 +188,89 @@ function MyInvite({ navigation, route }) {
       return { image: require("../../../../assets/invites/2.png") };
     } else if (route.params.imagePath === "3.png") {
       return { image: require("../../../../assets/invites/3.png") };
- } else if (route.params.imagePath === "4.png") {
+    } else if (route.params.imagePath === "4.png") {
       return { image: require("../../../../assets/invites/4.png") };
- } else if (route.params.imagePath === "5.png") {
+    } else if (route.params.imagePath === "5.png") {
       return { image: require("../../../../assets/invites/5.png") };
- } else if (route.params.imagePath === "6.png") {
+    } else if (route.params.imagePath === "6.png") {
       return { image: require("../../../../assets/invites/6.png") };
- } else if (route.params.imagePath === "7.png") {
+    } else if (route.params.imagePath === "7.png") {
       return { image: require("../../../../assets/invites/7.png") };
- } else if (route.params.imagePath === "8.png") {
+    } else if (route.params.imagePath === "8.png") {
       return { image: require("../../../../assets/invites/8.png") };
- } else if (route.params.imagePath === "9.png") {
+    } else if (route.params.imagePath === "9.png") {
       return { image: require("../../../../assets/invites/9.png") };
-} else if (route.params.imagePath === "10.png") {
+    } else if (route.params.imagePath === "10.png") {
       return { image: require("../../../../assets/invites/10.png") };
-} else if (route.params.imagePath === "11.png") {
+    } else if (route.params.imagePath === "11.png") {
       return { image: require("../../../../assets/invites/11.png") };
-} else if (route.params.imagePath === "12.png") {
+    } else if (route.params.imagePath === "12.png") {
       return { image: require("../../../../assets/invites/12.png") };
-} else if (route.params.imagePath === "13.png") {
+    } else if (route.params.imagePath === "13.png") {
       return { image: require("../../../../assets/invites/13.png") };
-} else if (route.params.imagePath === "14.png") {
+    } else if (route.params.imagePath === "14.png") {
       return { image: require("../../../../assets/invites/14.png") };
-} else if (route.params.imagePath === "15.png") {
+    } else if (route.params.imagePath === "15.png") {
       return { image: require("../../../../assets/invites/15.png") };
-} else if (route.params.imagePath === "cards/1.png") {
+    } else if (route.params.imagePath === "cards/1.png") {
       return { image: require("../../../../assets/invites/cards/1.png") };
-} else if (route.params.imagePath === "cards/2.png") {
+    } else if (route.params.imagePath === "cards/2.png") {
       return { image: require("../../../../assets/invites/cards/2.png") };
-} else if (route.params.imagePath === "cards/3.png") {
+    } else if (route.params.imagePath === "cards/3.png") {
       return { image: require("../../../../assets/invites/cards/3.png") };
-} else if (route.params.imagePath === "cards/4.png") {
+    } else if (route.params.imagePath === "cards/4.png") {
       return { image: require("../../../../assets/invites/cards/4.png") };
-
-} else if (route.params.imagePath === "cards/5.png") {
+    } else if (route.params.imagePath === "cards/5.png") {
       return { image: require("../../../../assets/invites/cards/5.png") };
-
-} else if (route.params.imagePath === "cards/6.png") {
+    } else if (route.params.imagePath === "cards/6.png") {
       return { image: require("../../../../assets/invites/cards/6.png") };
-
-} else if (route.params.imagePath === "cards/7.png") {
+    } else if (route.params.imagePath === "cards/7.png") {
       return { image: require("../../../../assets/invites/cards/7.png") };
-
-} else if (route.params.imagePath === "cards/8.png") {
+    } else if (route.params.imagePath === "cards/8.png") {
       return { image: require("../../../../assets/invites/cards/8.png") };
-
-} else if (route.params.imagePath === "cards/9.png") {
+    } else if (route.params.imagePath === "cards/9.png") {
       return { image: require("../../../../assets/invites/cards/9.png") };
-
-} else if (route.params.imagePath === "cards/10.png") {
+    } else if (route.params.imagePath === "cards/10.png") {
       return { image: require("../../../../assets/invites/cards/10.png") };
-
-} else if (route.params.imagePath === "cards/11.png") {
+    } else if (route.params.imagePath === "cards/11.png") {
       return { image: require("../../../../assets/invites/cards/11.png") };
-
-} else if (route.params.imagePath === "cards/12.png") {
+    } else if (route.params.imagePath === "cards/12.png") {
       return { image: require("../../../../assets/invites/cards/12.png") };
-
-} else if (route.params.imagePath === "cards/13.png") {
+    } else if (route.params.imagePath === "cards/13.png") {
       return { image: require("../../../../assets/invites/cards/13.png") };
-
-} else if (route.params.imagePath === "cards/14.png") {
+    } else if (route.params.imagePath === "cards/14.png") {
       return { image: require("../../../../assets/invites/cards/14.png") };
-} else if (route.params.imagePath === "cards/15.png") {
+    } else if (route.params.imagePath === "cards/15.png") {
       return { image: require("../../../../assets/invites/cards/15.png") };
-
-} else if (route.params.imagePath === "cards/16.png") {
+    } else if (route.params.imagePath === "cards/16.png") {
       return { image: require("../../../../assets/invites/cards/16.png") };
-
-} else if (route.params.imagePath === "cards/17.png") {
+    } else if (route.params.imagePath === "cards/17.png") {
       return { image: require("../../../../assets/invites/cards/17.png") };
-
-} else if (route.params.imagePath === "cards/18.png") {
+    } else if (route.params.imagePath === "cards/18.png") {
       return { image: require("../../../../assets/invites/cards/18.png") };
-
-} else if (route.params.imagePath === "cards/19.png") {
+    } else if (route.params.imagePath === "cards/19.png") {
       return { image: require("../../../../assets/invites/cards/19.png") };
-
-} else if (route.params.imagePath === "cards/20.png") {
+    } else if (route.params.imagePath === "cards/20.png") {
       return { image: require("../../../../assets/invites/cards/20.png") };
-} else if (route.params.imagePath === "cards/11.png") {
+    } else if (route.params.imagePath === "cards/11.png") {
       return { image: require("../../../../assets/invites/cards/21.png") };
-
-} else if (route.params.imagePath === "cards/.22png") {
+    } else if (route.params.imagePath === "cards/.22png") {
       return { image: require("../../../../assets/invites/cards/22.png") };
-
-} else if (route.params.imagePath === "cards/23.png") {
+    } else if (route.params.imagePath === "cards/23.png") {
       return { image: require("../../../../assets/invites/cards/23.png") };
-
-} else if (route.params.imagePath === "cards/24.png") {
+    } else if (route.params.imagePath === "cards/24.png") {
       return { image: require("../../../../assets/invites/cards/24.png") };
-} else if (route.params.imagePath === "cards/25.png") {
+    } else if (route.params.imagePath === "cards/25.png") {
       return { image: require("../../../../assets/invites/cards/25.png") };
-
-} else if (route.params.imagePath === "cards/26.png") {
+    } else if (route.params.imagePath === "cards/26.png") {
       return { image: require("../../../../assets/invites/cards/26.png") };
-
-} else if (route.params.imagePath === "cards/27.png") {
+    } else if (route.params.imagePath === "cards/27.png") {
       return { image: require("../../../../assets/invites/cards/27.png") };
-
-} else if (route.params.imagePath === "cards/28.png") {
+    } else if (route.params.imagePath === "cards/28.png") {
       return { image: require("../../../../assets/invites/cards/28.png") };
-
-} else if (route.params.imagePath === "cards/29.png") {
+    } else if (route.params.imagePath === "cards/29.png") {
       return { image: require("../../../../assets/invites/cards/29.png") };
-
-} else if (route.params.imagePath === "cards/30.png") {
+    } else if (route.params.imagePath === "cards/30.png") {
       return { image: require("../../../../assets/invites/cards/30.png") };
     } else {
       return { image: require("../../../../assets/invites/3.png") };
@@ -339,32 +316,70 @@ function MyInvite({ navigation, route }) {
             />
           )}
           <Modal
-        animationType={"fade"}
-        transparent={true}
-        visible={areYouSureInviteAllFriends}
-        onTouchOutside={() => {
-          setAreYouSureInviteAllFriends(false);
-        }}
-      >
-        <View style={{ backgroundColor: "#A6ACE9", height: heightPercentageToDP("15"), width: widthPercentageToDP("60") ,marginLeft:widthPercentageToDP("15"),borderRadius:10,
-
-}}>
-        <Text style={[
-                    textStyles.bigRegular,{color:'white',marginTop: heightPercentageToDP("2"),marginLeft:widthPercentageToDP("2")}]}>Are you sure you want to send to all friends?</Text>
-                    <View style={{flexDirection:'row', justifyContent:'space-around'}}>
-          <TouchableOpacity onPress={sendInviteToAllFriendsConfirmation}>
-          <Text style={[
-                    textStyles.bigRegular,{color:'white',marginTop: heightPercentageToDP("2"),marginLeft:widthPercentageToDP("2")}]}>Yes</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => setAreYouSureInviteAllFriends(false)}
+            animationType={"fade"}
+            transparent={true}
+            visible={areYouSureInviteAllFriends}
+            onTouchOutside={() => {
+              setAreYouSureInviteAllFriends(false);
+            }}
           >
-             <Text style={[
-                    textStyles.bigRegular,{color:'white',marginTop: heightPercentageToDP("2"),marginLeft:widthPercentageToDP("2")}]}>No</Text>
-          </TouchableOpacity>
-        </View>
-        </View>
-      </Modal>
+            <View
+              style={{
+                backgroundColor: "#A6ACE9",
+                height: heightPercentageToDP("15"),
+                width: widthPercentageToDP("60"),
+                marginLeft: widthPercentageToDP("15"),
+                borderRadius: 10,
+              }}
+            >
+              <Text
+                style={[
+                  textStyles.bigRegular,
+                  {
+                    color: "white",
+                    marginTop: heightPercentageToDP("2"),
+                    marginLeft: widthPercentageToDP("2"),
+                  },
+                ]}
+              >
+                Are you sure you want to send to all friends?
+              </Text>
+              <View
+                style={{ flexDirection: "row", justifyContent: "space-around" }}
+              >
+                <TouchableOpacity onPress={sendInviteToAllFriendsConfirmation}>
+                  <Text
+                    style={[
+                      textStyles.bigRegular,
+                      {
+                        color: "white",
+                        marginTop: heightPercentageToDP("2"),
+                        marginLeft: widthPercentageToDP("2"),
+                      },
+                    ]}
+                  >
+                    Yes
+                  </Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  onPress={() => setAreYouSureInviteAllFriends(false)}
+                >
+                  <Text
+                    style={[
+                      textStyles.bigRegular,
+                      {
+                        color: "white",
+                        marginTop: heightPercentageToDP("2"),
+                        marginLeft: widthPercentageToDP("2"),
+                      },
+                    ]}
+                  >
+                    No
+                  </Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+          </Modal>
           {/* <Text
             style={[
               textStyles.bigBold,
@@ -460,7 +475,11 @@ function MyInvite({ navigation, route }) {
                 console.log("host email =", hostEmail);
                 console.log("host username =", hostUsername);
                 const message = {
-                  text: "RSVP: Yes I will be attending " + event.event + ' on ' + event.startdate ,
+                  text:
+                    "RSVP: Yes I will be attending " +
+                    event.event +
+                    " on " +
+                    event.startdate,
                   timestamp: firebase.database.ServerValue.TIMESTAMP,
                   user: {
                     _id: user.uid,
@@ -597,15 +616,17 @@ function MyInvite({ navigation, route }) {
               marginTop: heightPercentageToDP("1"),
             }}
           >
-            <Text style={[
-                  textStyles.normalRegular,
-                  {
-                    left: widthPercentageToDP("0"),
-                    marginRight: widthPercentageToDP("2"),
-                    marginTop: heightPercentageToDP("0"),
-                    color: colors.darkGrey
-                  },
-                ]}>
+            <Text
+              style={[
+                textStyles.normalRegular,
+                {
+                  left: widthPercentageToDP("0"),
+                  marginRight: widthPercentageToDP("2"),
+                  marginTop: heightPercentageToDP("0"),
+                  color: colors.darkGrey,
+                },
+              ]}
+            >
               {event.description}
             </Text>
           </View>
