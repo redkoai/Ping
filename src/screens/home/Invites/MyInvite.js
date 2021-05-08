@@ -44,7 +44,7 @@ function MyInvite({ navigation, route }) {
   // const navigation = useNavigation()
 
   const { eventID } = route.params;
-  console.log(eventID.eventID);
+  console.log(route.params, "apples");
   const { control, errors, setValue, reset, handleSubmit } = useForm({
     //resolver: yupResolver(DETAILS_SCHEMA),
   });
