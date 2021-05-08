@@ -43,8 +43,8 @@ import Events from "../Events";
 function MyInvite({ navigation, route }) {
   // const navigation = useNavigation()
 
-  const { eventID } = route.params;
-  console.log(eventID.eventID);
+  const { inviteID } = route.params;
+  // console.log(event.inviteID, 'neeeeen');
   const { control, errors, setValue, reset, handleSubmit } = useForm({
     //resolver: yupResolver(DETAILS_SCHEMA),
   });
@@ -58,24 +58,8 @@ function MyInvite({ navigation, route }) {
 
   const [event, setEvent] = useState({});
 
-  const [areYouSureInviteAllFriends, setAreYouSureInviteAllFriends] = useState(
-    false
-  );
-  const sendInviteToAllFriends = () => {
-    setAreYouSureInviteAllFriends(true);
-  };
 
-  const sendInviteToAllFriendsConfirmation = () => {
-    db.child(`${user.uid}/Friends`).on("child_added", function (snapshot) {
-      console.log("snpashot = ", snapshot);
-      console.log("snapshot key =", snapshot.key);
-      console.log("snapshot value =", snapshot.val());
-      db.child(`${snapshot.key}/Events/${route.params.eventID}`).set(formData);
-      console.log("form data pushed");
-    });
-    setSentInviteToAllFriendsBool(!sentInviteToAllFriendsBool);
-    setAreYouSureInviteAllFriends(false);
-  };
+
 
   /////////////////////////
   // Firebase query
@@ -84,10 +68,11 @@ function MyInvite({ navigation, route }) {
 
   const getEvent = () => {
     const event = {};
-    db.child(`users/${user.uid}/Events/${eventID}`).on(
+    db.child(`users/${user.uid}/Events/${inviteID}`).on(
       "child_added",
       function (snapshot) {
         // console.log("snapshot =", snapshot)
+        console.log("VVVV ", inviteID);
         event[snapshot.key] = snapshot.val();
       }
     );
@@ -148,12 +133,12 @@ function MyInvite({ navigation, route }) {
     getEvent();
     getHostInfo();
     const userUID = UserInfo.uid;
-    // console.log("userid: ", userUID);
+    
     //firebase.database().ref('/InviteForms').child("-MW_XbsJOLm2BCA6nA_K").child("formData").on('value',(snapshot)=>{
     //firebase.database().ref('/InviteForms').limitToLast(1).on('value',(snapshot)=>{
     firebase
       .database()
-      .ref(`/users/${user.uid}/Events/${eventID}`)
+      .ref(`/users/${user.uid}/Events/${inviteID}`)
       .limitToLast(1)
       .on("value", (snapshot) => {
         let data = snapshot.val() ? snapshot.val() : {};
@@ -167,7 +152,7 @@ function MyInvite({ navigation, route }) {
     //get Image
     let storeRef = firebase.storage().ref();
     storeRef
-      .child(`images/${route.params.eventID}`)
+      .child(`images/${route.params.inviteID}`)
       .getDownloadURL()
       .then((url) => {
         console.log(url, "bananas");
@@ -317,7 +302,7 @@ function MyInvite({ navigation, route }) {
               }}
             />
           )}
-          <Modal
+          {/* <Modal
             animationType={"fade"}
             transparent={true}
             visible={areYouSureInviteAllFriends}
@@ -381,7 +366,7 @@ function MyInvite({ navigation, route }) {
                 </TouchableOpacity>
               </View>
             </View>
-          </Modal>
+          </Modal> */}
           {/* <Text
             style={[
               textStyles.bigBold,

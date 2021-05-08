@@ -203,7 +203,7 @@ function HomeScreenEmpty({}) {
       <TouchableOpacity
         onPress={() => {
           // console.log("eventID =  ", eventID);
-          navigation.navigate("MyInvite", { eventID: eventID });
+          navigation.navigate("MyEvent", { eventID: eventID });
         }}
         style={{
           marginRight: 10,
@@ -251,7 +251,8 @@ function HomeScreenEmpty({}) {
   // console.log("myinvite values = ", values)
 
   const InviteLoop = Object.keys(myInvites).map((key) => {
-    const eventID = key;
+    const inviteID = key;
+    console.log(inviteID, 'invitedidddd')
 
     console.log(myInvites[key], "baconbanana");
 
@@ -275,7 +276,7 @@ function HomeScreenEmpty({}) {
           onPress={() => {
             navigation.navigate("Events", {
               screen: "MyInvite",
-              params: { eventID: eventID},
+              params: { inviteID: inviteID},
             });
           }}
         />
