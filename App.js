@@ -64,6 +64,9 @@ function App() {
   });
   if (!fontsLoaded) return null;
 
+  console.disableYellowBox = true;
+  console.reportErrorsAsExceptions = false;
+
   return (
     <AuthProvider>
       <SafeAreaProvider>

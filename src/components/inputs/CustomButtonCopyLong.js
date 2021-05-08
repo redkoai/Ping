@@ -153,7 +153,7 @@ function CustomButtonCopyLong({
               height: "100%",
             }}
           >
-            <View style={{ backgroundColor: "white" }}>
+            <View style={{ backgroundColor: "white", width:widthPercentageToDP(30), alignItems:'center' }}>
               <Text
                 style={[
                   textStyles.bigBold,
@@ -179,7 +179,7 @@ function CustomButtonCopyLong({
               height: "100%",
             }}
           >
-            <View style={{ backgroundColor: "white" }}>
+            <View style={{ backgroundColor: "white"  ,width:widthPercentageToDP(30), alignItems:'center'}}>
               <Text
                 style={[
                   textStyles.bigBold,

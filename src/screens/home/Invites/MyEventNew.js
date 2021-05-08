@@ -40,11 +40,11 @@ import firebase from "firebase";
 import "firebase/firestore";
 import Events from "../Events";
 
-function MyInvite({ navigation, route }) {
+function MyEventNew({ navigation, route }) {
   // const navigation = useNavigation()
 
-  const { inviteID } = route.params;
-  console.log(route.params, "cereal");
+  const { eventID } = route.params;
+  console.log(eventID.eventID);
   const { control, errors, setValue, reset, handleSubmit } = useForm({
     //resolver: yupResolver(DETAILS_SCHEMA),
   });
@@ -58,38 +58,40 @@ function MyInvite({ navigation, route }) {
 
   const [event, setEvent] = useState({});
 
+  const [areYouSureInviteAllFriends, setAreYouSureInviteAllFriends] = useState(
+    false
+  );
+  const sendInviteToAllFriends = () => {
+    setAreYouSureInviteAllFriends(true);
+  };
 
-
+  const sendInviteToAllFriendsConfirmation = () => {
+    db.child(`${user.uid}/Friends`).on("child_added", function (snapshot) {
+      console.log("snpashot = ", snapshot);
+      console.log("snapshot key =", snapshot.key);
+      console.log("snapshot value =", snapshot.val());
+      db.child(`${snapshot.key}/Events/${route.params.eventID}`).set(formData);
+      console.log("form data pushed");
+    });
+    setSentInviteToAllFriendsBool(!sentInviteToAllFriendsBool);
+    setAreYouSureInviteAllFriends(false);
+  };
 
   /////////////////////////
   // Firebase query
   /////////////////////////
   const db = firebase.database().ref("users");
 
-  useEffect(() => {
-    setInterval(() => {
-      getEvent();
-    }, 1000);
-  }, []);
   const getEvent = () => {
     const event = {};
-    db.child(`${user.uid}/Events/${inviteID}`).on(
+    db.child(`${user.uid}/Events/${eventID}`).on(
       "child_added",
       function (snapshot) {
-        console.log("snapshot =", snapshot);
+        // console.log("snapshot =", snapshot)
         event[snapshot.key] = snapshot.val();
       }
     );
-
-    let result = Object.fromEntries(
-      Object.entries(event).map(([k, v]) => [
-        k,
-        v && typeof v === "object" ? setEvent(v) : setEvent(event),
-      ])
-    );
-
-    //setEvent(event);
-    console.log(event, "frogs");
+    setEvent(event);
     console.log("event description = ", event.description);
     console.log("event co host = ", event["co-host-0"]);
     console.log("user.uid = ", user.uid);
@@ -117,7 +119,7 @@ function MyInvite({ navigation, route }) {
 
   console.log("host email =", hostEmail);
   console.log("host username =", hostUsername);
-  
+  console.log(event, "brown");
 
   //////////////////////////////
   // Send RSVP
@@ -146,12 +148,12 @@ function MyInvite({ navigation, route }) {
     getEvent();
     getHostInfo();
     const userUID = UserInfo.uid;
-    
+    // console.log("userid: ", userUID);
     //firebase.database().ref('/InviteForms').child("-MW_XbsJOLm2BCA6nA_K").child("formData").on('value',(snapshot)=>{
     //firebase.database().ref('/InviteForms').limitToLast(1).on('value',(snapshot)=>{
     firebase
       .database()
-      .ref(`/users/${user.uid}/Events/${inviteID}`)
+      .ref("/InviteForms")
       .limitToLast(1)
       .on("value", (snapshot) => {
         let data = snapshot.val() ? snapshot.val() : {};
@@ -165,7 +167,7 @@ function MyInvite({ navigation, route }) {
     //get Image
     let storeRef = firebase.storage().ref();
     storeRef
-      .child(`images/${inviteID}`)
+      .child(`images/${route.params.eventID}`)
       .getDownloadURL()
       .then((url) => {
         console.log(url, "bananas");
@@ -180,97 +182,97 @@ function MyInvite({ navigation, route }) {
 
   const getImage = (img) => {
     console.log(route.params, "greenblue");
-    if (event.imagePath === "1.png") {
+    if (route.params.imagePath === "1.png") {
       return {
         image: require("../../../../assets/invites/1.png"),
       };
-    } else if (event.imagePath === "2.png") {
+    } else if (route.params.imagePath === "2.png") {
       return { image: require("../../../../assets/invites/2.png") };
-    } else if (event.imagePath === "3.png") {
+    } else if (route.params.imagePath === "3.png") {
       return { image: require("../../../../assets/invites/3.png") };
-    } else if (event.imagePath === "4.png") {
+    } else if (route.params.imagePath === "4.png") {
       return { image: require("../../../../assets/invites/4.png") };
-    } else if (event.imagePath === "5.png") {
+    } else if (route.params.imagePath === "5.png") {
       return { image: require("../../../../assets/invites/5.png") };
-    } else if (event.imagePath === "6.png") {
+    } else if (route.params.imagePath === "6.png") {
       return { image: require("../../../../assets/invites/6.png") };
-    } else if (event.imagePath === "7.png") {
+    } else if (route.params.imagePath === "7.png") {
       return { image: require("../../../../assets/invites/7.png") };
-    } else if (event.imagePath === "8.png") {
+    } else if (route.params.imagePath === "8.png") {
       return { image: require("../../../../assets/invites/8.png") };
-    } else if (event.imagePath === "9.png") {
+    } else if (route.params.imagePath === "9.png") {
       return { image: require("../../../../assets/invites/9.png") };
-    } else if (event.imagePath === "10.png") {
+    } else if (route.params.imagePath === "10.png") {
       return { image: require("../../../../assets/invites/10.png") };
-    } else if (event.imagePath === "11.png") {
+    } else if (route.params.imagePath === "11.png") {
       return { image: require("../../../../assets/invites/11.png") };
-    } else if (event.imagePath === "12.png") {
+    } else if (route.params.imagePath === "12.png") {
       return { image: require("../../../../assets/invites/12.png") };
-    } else if (event.imagePath === "13.png") {
+    } else if (route.params.imagePath === "13.png") {
       return { image: require("../../../../assets/invites/13.png") };
-    } else if (event.imagePath === "14.png") {
+    } else if (route.params.imagePath === "14.png") {
       return { image: require("../../../../assets/invites/14.png") };
-    } else if (event.imagePath === "15.png") {
+    } else if (route.params.imagePath === "15.png") {
       return { image: require("../../../../assets/invites/15.png") };
-    } else if (event.imagePath === "cards/1.png") {
+    } else if (route.params.imagePath === "cards/1.png") {
       return { image: require("../../../../assets/invites/cards/1.png") };
-    } else if (event.imagePath === "cards/2.png") {
+    } else if (route.params.imagePath === "cards/2.png") {
       return { image: require("../../../../assets/invites/cards/2.png") };
-    } else if (event.imagePath === "cards/3.png") {
+    } else if (route.params.imagePath === "cards/3.png") {
       return { image: require("../../../../assets/invites/cards/3.png") };
-    } else if (event.imagePath === "cards/4.png") {
+    } else if (route.params.imagePath === "cards/4.png") {
       return { image: require("../../../../assets/invites/cards/4.png") };
-    } else if (event.imagePath === "cards/5.png") {
+    } else if (route.params.imagePath === "cards/5.png") {
       return { image: require("../../../../assets/invites/cards/5.png") };
-    } else if (event.imagePath === "cards/6.png") {
+    } else if (route.params.imagePath === "cards/6.png") {
       return { image: require("../../../../assets/invites/cards/6.png") };
-    } else if (event.imagePath === "cards/7.png") {
+    } else if (route.params.imagePath === "cards/7.png") {
       return { image: require("../../../../assets/invites/cards/7.png") };
-    } else if (event.imagePath === "cards/8.png") {
+    } else if (route.params.imagePath === "cards/8.png") {
       return { image: require("../../../../assets/invites/cards/8.png") };
-    } else if (event.imagePath === "cards/9.png") {
+    } else if (route.params.imagePath === "cards/9.png") {
       return { image: require("../../../../assets/invites/cards/9.png") };
-    } else if (event.imagePath === "cards/10.png") {
+    } else if (route.params.imagePath === "cards/10.png") {
       return { image: require("../../../../assets/invites/cards/10.png") };
-    } else if (event.imagePath === "cards/11.png") {
+    } else if (route.params.imagePath === "cards/11.png") {
       return { image: require("../../../../assets/invites/cards/11.png") };
-    } else if (event.imagePath === "cards/12.png") {
+    } else if (route.params.imagePath === "cards/12.png") {
       return { image: require("../../../../assets/invites/cards/12.png") };
-    } else if (event.imagePath === "cards/13.png") {
+    } else if (route.params.imagePath === "cards/13.png") {
       return { image: require("../../../../assets/invites/cards/13.png") };
-    } else if (event.imagePath === "cards/14.png") {
+    } else if (route.params.imagePath === "cards/14.png") {
       return { image: require("../../../../assets/invites/cards/14.png") };
-    } else if (event.imagePath === "cards/15.png") {
+    } else if (route.params.imagePath === "cards/15.png") {
       return { image: require("../../../../assets/invites/cards/15.png") };
-    } else if (event.imagePath === "cards/16.png") {
+    } else if (route.params.imagePath === "cards/16.png") {
       return { image: require("../../../../assets/invites/cards/16.png") };
-    } else if (event.imagePath === "cards/17.png") {
+    } else if (route.params.imagePath === "cards/17.png") {
       return { image: require("../../../../assets/invites/cards/17.png") };
-    } else if (event.imagePath === "cards/18.png") {
+    } else if (route.params.imagePath === "cards/18.png") {
       return { image: require("../../../../assets/invites/cards/18.png") };
-    } else if (event.imagePath === "cards/19.png") {
+    } else if (route.params.imagePath === "cards/19.png") {
       return { image: require("../../../../assets/invites/cards/19.png") };
-    } else if (event.imagePath === "cards/20.png") {
+    } else if (route.params.imagePath === "cards/20.png") {
       return { image: require("../../../../assets/invites/cards/20.png") };
-    } else if (event.imagePath === "cards/11.png") {
+    } else if (route.params.imagePath === "cards/11.png") {
       return { image: require("../../../../assets/invites/cards/21.png") };
-    } else if (event.imagePath === "cards/.22png") {
+    } else if (route.params.imagePath === "cards/.22png") {
       return { image: require("../../../../assets/invites/cards/22.png") };
-    } else if (event.imagePath === "cards/23.png") {
+    } else if (route.params.imagePath === "cards/23.png") {
       return { image: require("../../../../assets/invites/cards/23.png") };
-    } else if (event.imagePath === "cards/24.png") {
+    } else if (route.params.imagePath === "cards/24.png") {
       return { image: require("../../../../assets/invites/cards/24.png") };
-    } else if (event.imagePath === "cards/25.png") {
+    } else if (route.params.imagePath === "cards/25.png") {
       return { image: require("../../../../assets/invites/cards/25.png") };
-    } else if (event.imagePath === "cards/26.png") {
+    } else if (route.params.imagePath === "cards/26.png") {
       return { image: require("../../../../assets/invites/cards/26.png") };
-    } else if (event.imagePath === "cards/27.png") {
+    } else if (route.params.imagePath === "cards/27.png") {
       return { image: require("../../../../assets/invites/cards/27.png") };
-    } else if (event.imagePath === "cards/28.png") {
+    } else if (route.params.imagePath === "cards/28.png") {
       return { image: require("../../../../assets/invites/cards/28.png") };
-    } else if (event.imagePath === "cards/29.png") {
+    } else if (route.params.imagePath === "cards/29.png") {
       return { image: require("../../../../assets/invites/cards/29.png") };
-    } else if (event.imagePath === "cards/30.png") {
+    } else if (route.params.imagePath === "cards/30.png") {
       return { image: require("../../../../assets/invites/cards/30.png") };
     } else {
       return { image: require("../../../../assets/invites/3.png") };
@@ -290,10 +292,10 @@ function MyInvite({ navigation, route }) {
         }}
       >
         <View>
-          {event.fbImage != null ? (
+          {route.params.fbImage != null ? (
             <ImageBackground
               //source={getImage().image}
-              source={{ uri: event.fbImage }}
+              source={{ uri: photo }}
               style={{
                 height: heightPercentageToDP("30"),
                 width: widthPercentageToDP("100"),
@@ -315,7 +317,7 @@ function MyInvite({ navigation, route }) {
               }}
             />
           )}
-          {/* <Modal
+          <Modal
             animationType={"fade"}
             transparent={true}
             visible={areYouSureInviteAllFriends}
@@ -379,7 +381,7 @@ function MyInvite({ navigation, route }) {
                 </TouchableOpacity>
               </View>
             </View>
-          </Modal> */}
+          </Modal>
           {/* <Text
             style={[
               textStyles.bigBold,
@@ -402,7 +404,6 @@ function MyInvite({ navigation, route }) {
           >
             {event.startdate}
           </Text>
-
           <Text
             style={[
               textStyles.normalBold,
@@ -441,142 +442,17 @@ function MyInvite({ navigation, route }) {
             left: heightPercentageToDP("3"),
           }}
         >
+          
           <CustomButton
-            text="Secret Code"
+            text="See RSVPs"
             narrow
             primary
             onPress={() => {
-              navigation.navigate("SecretCode", { inviteID: inviteID });
-
+              navigation.navigate("Messages");
             }}
           />
-          <View
-            style={{
-              marginLeft: widthPercentageToDP(10),
-              marginTop: heightPercentageToDP("-5"),
-            }}
-          >
-            <Text
-              style={[
-                textStyles.normalBold,
-                {
-                  left: widthPercentageToDP("10"),
-                  marginTop: heightPercentageToDP("0"),
-                },
-              ]}
-            >
-              RSVP
-            </Text>
-            {!yesToRSVP ? (
-              <CustomButton
-                text="Yes"
-                small
-                secondary
-                outline
-                onPress={() => {
-                  setYesToRSVP(true);
-                  console.log("host email =", hostEmail);
-                  console.log("host username =", hostUsername);
-                  const message = {
-                    text:
-                      "RSVP: Yes I will be attending " +
-                      event.event +
-                      " on " +
-                      event.startdate,
-                    timestamp: firebase.database.ServerValue.TIMESTAMP,
-                    user: {
-                      _id: user.uid,
-                      email: user.email,
-                    },
-                    userTo: {
-                      _id: event["co-host-0"],
-                      email: `${hostEmail}`,
-                      username: `${hostUsername}`,
-                    },
-                  };
-                  db.child(`${user.uid}/messages/${event["co-host-0"]}`).push(
-                    message
-                  );
-                  db.child(`${event["co-host-0"]}/messages/${user.uid}`).push(
-                    message
-                  );
-                  navigation.navigate("Messages", {
-                    screen: "Chat",
-                    params: {
-                      OtherUserInfo: {
-                        _id: event["co-host-0"],
-                        email: hostEmail,
-                        username: hostUsername,
-                      },
-                    },
-                  });
-                }}
-              />
-            ) : (
-              <CustomButton text="Yes" small secondary disabled />
-            )}
-          </View>
-          <View
-            style={{
-              marginLeft: widthPercentageToDP(-28),
-              marginTop: heightPercentageToDP("3"),
-            }}
-          >
-            {!noToRSVP ? (
-              <CustomButton
-                text="No"
-                small
-                secondary
-                outline
-                onPress={() => {
-                  setNoToRSVP(true);
-                  console.log("host email =", hostEmail);
-                  console.log("host username =", hostUsername);
-                  const message = {
-                    text:
-                      "RSVP: No I will not be attending" + event.description,
-                    timestamp: firebase.database.ServerValue.TIMESTAMP,
-                    user: {
-                      _id: user.uid,
-                      email: user.email,
-                    },
-                    userTo: {
-                      _id: event["co-host-0"],
-                      email: `${hostEmail}`,
-                      username: `${hostUsername}`,
-                    },
-                  };
-                  db.child(`${user.uid}/messages/${event["co-host-0"]}`).push(
-                    message
-                  );
-                  db.child(`${event["co-host-0"]}/messages/${user.uid}`).push(
-                    message
-                  );
-                  navigation.navigate("Messages", {
-                    screen: "Chat",
-                    params: {
-                      OtherUserInfo: {
-                        _id: event["co-host-0"],
-                        email: hostEmail,
-                        username: hostUsername,
-                      },
-                    },
-                  });
-                }}
-              />
-            ) : (
-              <CustomButton text="No" small secondary disabled />
-            )}
-          </View>
-
-          {/* TODO MESSSAGE HOST TAKE HOST UID AND MESSAGE */}
-          {/* navigation.navigate("Invest", { screen: "InvestScreen" }) */}
-          {/* navigation.navigate("**stack_Name**", {
- screen:"screen_name_connect_with_**stack_name**",
- params:{
- user:"anything_string_or_object"
-}
-}) */}
+      
+        
         </View>
 
         {/* <TouchableOpacity>
@@ -1075,4 +951,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default MyInvite;
+export default MyEventNew;

@@ -179,17 +179,20 @@ function HomeScreenEmpty({}) {
       <TouchableOpacity
         onPress={() => {
           // console.log("eventID =  ", eventID);
-          navigation.navigate("MyEvent", { eventID: eventID });
+          navigation.navigate("Events", {
+            screen: "MyEvent",
+            params: { eventID: eventID},
+          });
         }}
         style={{
-          marginRight: 10,
-          marginTop: 30,
-          padding: 10,
+          marginRight: 0,
+          marginTop: 0,
+          padding: 0,
         }}
       >
         <View
           style={{
-            marginRight: widthPercentageToDP(1),
+            marginRight: widthPercentageToDP(0),
 
             padding: widthPercentageToDP(1),
           }}
@@ -202,7 +205,10 @@ function HomeScreenEmpty({}) {
             shadow
             style={{ fontSize: actuatedNormalize(11) }}
             onPress={() => {
-              navigation.navigate("MyEvent", { eventID: eventID });
+              navigation.navigate("Events", {
+                screen: "MyEvent",
+                params: { eventID: eventID},
+              });
             }}
           />
         </View>

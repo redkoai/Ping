@@ -135,7 +135,7 @@ function People({ route, navigation }) {
     updateFormData(guests);
 
     navigation.navigate("Events", {
-      screen: "MyInvite",
+      screen: "MyEventNew",
       params: {
         eventID: route.params.eventID,
         imagePath: route.params.imagePath,

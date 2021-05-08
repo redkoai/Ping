@@ -6,6 +6,7 @@ import BackChevron from 'ping/src/components/header/BackChevron';
 import ScreenTitle from 'ping/src/components/header/ScreenTitle';
 import MyInvite from 'ping/src/screens/home/Invites/MyInvite.js'
 import MyEvent from 'ping/src/screens/home/Invites/MyEvent.js'
+import MyEventNew from 'ping/src/screens/home/Invites/MyEventNew.js'
 import SecretCode from "ping/src/screens/home/SecretCode";
 
 
@@ -33,6 +34,14 @@ function EventsStackNavigator() {
       <EventsStack.Screen 
       name="MyEvent" 
       component={MyEvent}
+      options={{
+        headerLeft: () => <BackChevron />,
+        headerRight: () => <ScreenTitle title="My Event" />,
+      }} 
+      />
+      <EventsStack.Screen 
+      name="MyEventNew" 
+      component={MyEventNew}
       options={{
         headerLeft: () => <BackChevron />,
         headerRight: () => <ScreenTitle title="My Event" />,
