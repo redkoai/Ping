@@ -44,7 +44,7 @@ function MyInvite({ navigation, route }) {
   // const navigation = useNavigation()
 
   const { eventID } = route.params;
-  console.log(route.params, "apples");
+  console.log(route.params, "cereal");
   const { control, errors, setValue, reset, handleSubmit } = useForm({
     //resolver: yupResolver(DETAILS_SCHEMA),
   });
@@ -82,16 +82,30 @@ function MyInvite({ navigation, route }) {
   /////////////////////////
   const db = firebase.database().ref("users");
 
+  useEffect(() => {
+    setInterval(() => {
+      getEvent();
+    }, 1000);
+  }, []);
   const getEvent = () => {
     const event = {};
-    db.child(`users/${user.uid}/Events/${eventID}`).on(
+    db.child(`${user.uid}/Events/${eventID}`).on(
       "child_added",
       function (snapshot) {
-        // console.log("snapshot =", snapshot)
+        console.log("snapshot =", snapshot);
         event[snapshot.key] = snapshot.val();
       }
     );
-    setEvent(event);
+
+    let result = Object.fromEntries(
+      Object.entries(event).map(([k, v]) => [
+        k,
+        v && typeof v === "object" ? setEvent(v) : setEvent(event),
+      ])
+    );
+
+    //setEvent(event);
+    console.log(event, "frogs");
     console.log("event description = ", event.description);
     console.log("event co host = ", event["co-host-0"]);
     console.log("user.uid = ", user.uid);
@@ -119,7 +133,7 @@ function MyInvite({ navigation, route }) {
 
   console.log("host email =", hostEmail);
   console.log("host username =", hostUsername);
-  console.log(event, "brown");
+  
 
   //////////////////////////////
   // Send RSVP
@@ -292,10 +306,10 @@ function MyInvite({ navigation, route }) {
         }}
       >
         <View>
-          {route.params.fbImage != null ? (
+          {event.fbImage != null ? (
             <ImageBackground
               //source={getImage().image}
-              source={{ uri: photo }}
+              source={{ uri: event.fbImage }}
               style={{
                 height: heightPercentageToDP("30"),
                 width: widthPercentageToDP("100"),

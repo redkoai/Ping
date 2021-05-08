@@ -62,6 +62,8 @@ function HomeScreenEmpty({}) {
       // console.log("snapshot event = ", snapshot)
       // console.log("snapshot event cohost", snapshot.val()["co-host-0"])
       // console.log("user uid =", user.uid)
+
+      
       if (snapshot.val()["co-host-0"] == user.uid) {
         // console.log("event snapshot =", snapshot);
         let arr = [];
@@ -82,9 +84,11 @@ function HomeScreenEmpty({}) {
         }
       } else {
         // console.log("invite snapshot =", snapshot);
+
         console.log(snapshot.val(), "sonic");
 
         let arr = [];
+        console.log(snapshot.key, "greenBacon");
 
         console.log(snapshot.val()[Object.keys(snapshot.val())[0]], "bolt");
 
@@ -197,7 +201,7 @@ function HomeScreenEmpty({}) {
 
   const EventLoop = Object.keys(myEvents).map((key) => {
     const eventID = key;
-    // console.log("event ID = ", eventID);
+    console.log("strrawberryPie ", eventID);
 
     return (
       <TouchableOpacity
@@ -253,7 +257,7 @@ function HomeScreenEmpty({}) {
   const InviteLoop = Object.keys(myInvites).map((key) => {
     const eventID = key;
 
-    console.log(myInvites[key], "baconbanana");
+    console.log(key, "strawberryWaffles");
 
     return (
       <View
