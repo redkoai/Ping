@@ -41,7 +41,7 @@ function HomeScreenEmpty({}) {
   const [myInvites, setMyInvites] = useState({});
 
   useEffect(() => {
-    db.child(`${user.uid}/Events/`).on("child_added", function (snapshot) {
+    db.child(`users/${user.uid}/Events/`).on("child_added", function (snapshot) {
       // if(snapshot.val().imagePath ===undefined || snapshot.val().imagePath===null){
       //   setIsLocalImage(false)
       // }

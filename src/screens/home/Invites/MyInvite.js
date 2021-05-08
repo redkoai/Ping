@@ -84,7 +84,7 @@ function MyInvite({ navigation, route }) {
 
   const getEvent = () => {
     const event = {};
-    db.child(`${user.uid}/Events/${eventID}`).on(
+    db.child(`users/${user.uid}/Events/${eventID}`).on(
       "child_added",
       function (snapshot) {
         // console.log("snapshot =", snapshot)
@@ -153,7 +153,7 @@ function MyInvite({ navigation, route }) {
     //firebase.database().ref('/InviteForms').limitToLast(1).on('value',(snapshot)=>{
     firebase
       .database()
-      .ref("/InviteForms")
+      .ref(`/users/${user.uid}/Events/${eventID}`)
       .limitToLast(1)
       .on("value", (snapshot) => {
         let data = snapshot.val() ? snapshot.val() : {};
