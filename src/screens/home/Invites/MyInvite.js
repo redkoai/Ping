@@ -152,7 +152,7 @@ function MyInvite({ navigation, route }) {
     //get Image
     let storeRef = firebase.storage().ref();
     storeRef
-      .child(`images/${route.params.inviteID}`)
+      .child(`images/${inviteID}`)
       .getDownloadURL()
       .then((url) => {
         console.log(url, "bananas");
@@ -433,7 +433,8 @@ function MyInvite({ navigation, route }) {
             narrow
             primary
             onPress={() => {
-              navigation.navigate("SecretCode");
+              navigation.navigate("SecretCode", { inviteID: inviteID });
+
             }}
           />
           <View

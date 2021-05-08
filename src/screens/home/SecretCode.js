@@ -6,20 +6,22 @@ import CustomButton from 'ping/src/components/inputs/CustomButton';
 import { Image, StyleSheet,ImageBackground, StatusBar,ScrollView, View,Text,TouchableOpacity} from 'react-native';
 import { widthPercentageToDP, heightPercentageToDP } from 'ping/util/scaler';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-
+import AuthContext from "ping/src/contexts/AuthContext";
 import firebase from 'firebase';
 import 'firebase/firestore'
 import { actuatedNormalize } from 'ping/util/fontScaler';
 
 function SecretCode({navigation, route  }) {
 
-  const { eventID } = route.params;
+  const { inviteID } = route.params;
   const [secretCode, setSecretCode] = useState('');
+  const { user } = useContext(AuthContext);
+  const UserInfo = { uid: user.uid, email: user.email };
 
 
   useEffect(() => {
    //firebase.database().ref('/InviteForms').child("-MW_XbsJOLm2BCA6nA_K").child("formData").on('value',(snapshot)=>{
-  firebase.database().ref('/InviteForms').limitToLast(1).on('value',(snapshot)=>{ 
+  firebase.database().ref(`users/${user.uid}/Events/${inviteID}`).limitToLast(1).on('value',(snapshot)=>{ 
   let data = snapshot.val() ? snapshot.val() : {};
   Object.keys(data).forEach(key => {
     const dataobject =data[key];
@@ -59,7 +61,7 @@ function SecretCode({navigation, route  }) {
             resizeMode:'contain',
             marginTop: heightPercentageToDP('-62'),
             left:heightPercentageToDP('15')}}>
-                <Text style={[textStyles.bigBold ]}>{eventID.secretCode}</Text>
+                <Text style={[textStyles.bigBold ]}>{secretCode}</Text>
             </View>
         {/* <TouchableOpacity style={{marginTop: heightPercentageToDP('8'),left:heightPercentageToDP('4')}}>
         <CustomButton
