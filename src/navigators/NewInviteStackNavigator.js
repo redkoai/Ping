@@ -19,7 +19,6 @@ import EventInvited from "ping/src/screens/home/new-invite-form/EventInvited";
 import MyEventsGoing from "../screens/home/new-invite-form/MyEventsGoing";
 import MyEventsInvited from "../screens/home/new-invite-form/MyEventsInvited";
 import MyEventsDeclined from "../screens/home/new-invite-form/MyEventsDeclined";
-import SecretCode from "ping/src/screens/home/SecretCode";
 import EventsStackNavigator from "ping/src/navigators/EventsStackNavigator";
 const NewInviteStack = createStackNavigator();
 
@@ -157,15 +156,7 @@ function NewInviteStackNavigator() {
           }
         />
 
-        <NewInviteStack.Screen
-          name="SecretCode"
-          component={SecretCode}
-          options={{
-            headerTitle: false,
-            headerLeft: () => <BackChevron />,
-            // headerRight: () => <ScreenTitle title="RSVP Options" />,
-          }}
-        />
+
       </NewInviteStack.Navigator>
     </NewInviteProvider>
   );

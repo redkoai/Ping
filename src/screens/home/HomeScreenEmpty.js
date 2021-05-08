@@ -101,7 +101,7 @@ function HomeScreenEmpty({}) {
           arr[2] = true;
           myInvites_obj[snapshot.key] = arr;
 
-          // setMyInvites(myInvites_obj);
+          
         } else {
           console.log(snapshot.val(), "arrayvalue");
           arr[0] = snapshot.val()[Object.keys(snapshot.val())[0]].event;
@@ -120,35 +120,7 @@ function HomeScreenEmpty({}) {
     setMyEvents(myEvents_obj);
   };
 
-  // const imagePath = `../../../assets/invites/${event.imagePath}`;
 
-  // const getImage = (img) => {
-  //   if (event.imagePath === "1.png") {
-  //     return {
-  //       image: require("../../../assets/invites/1.png"),
-  //     };
-  //   } else if (event.imagePath === "2.png") {
-  //     return { image: require("../../../assets/invites/2.png") };
-  //   } else if (event.imagePath === "3.png") {
-  //     return { image: require("../../../assets/invites/3.png") };
-  //   } else {
-  //     return { image: require("../../../assets/invites/3.png") };
-  //   }
-  // };
-  // console.log("invite state =", myInvites)
-
-  // useEffect(() => {
-  //     const userUID=UserInfo.uid;
-  //     console.log("userid: ", userUID);
-  ////hard coded
-  //    firebase.database().ref('/InviteForms').child("-MW_XbsJOLm2BCA6nA_K").child("formData").on('value',(snapshot)=>{
-  //   //firebase.database().ref('/InviteForms').limitToLast(1).on('value',(snapshot)=>{
-  //   let data = snapshot.val() ? snapshot.val() : {};
-  //     let todoItems = {...data};
-  //     setState(todoItems );
-  //     //console.log("useritem: ",Object.keys(todoItems))
-  //     })
-  //  }, []);
 
   const pullProfileInfo = () => {
     try {
@@ -207,7 +179,7 @@ function HomeScreenEmpty({}) {
       <TouchableOpacity
         onPress={() => {
           // console.log("eventID =  ", eventID);
-          navigation.navigate("MyInvite", { eventID: eventID });
+          navigation.navigate("MyEvent", { eventID: eventID });
         }}
         style={{
           marginRight: 10,
@@ -255,7 +227,8 @@ function HomeScreenEmpty({}) {
   // console.log("myinvite values = ", values)
 
   const InviteLoop = Object.keys(myInvites).map((key) => {
-    const eventID = key;
+    const inviteID = key;
+    console.log(inviteID, 'invitedidddd')
 
     console.log(key, "strawberryWaffles");
 
@@ -279,7 +252,7 @@ function HomeScreenEmpty({}) {
           onPress={() => {
             navigation.navigate("Events", {
               screen: "MyInvite",
-              params: { eventID: eventID },
+              params: { inviteID: inviteID},
             });
           }}
         />
