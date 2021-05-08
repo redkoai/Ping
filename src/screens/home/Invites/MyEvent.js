@@ -444,13 +444,15 @@ function MyEvent({ navigation, route }) {
           }}
         >
           <CustomButton
-            text="Secret Code"
+            text="See RSVPs"
             narrow
             primary
             onPress={() => {
-              navigation.navigate("SecretCode");
+              navigation.navigate("Messages");
             }}
           />
+      
+
           <View
             style={{
               marginLeft: widthPercentageToDP(10),
@@ -466,7 +468,7 @@ function MyEvent({ navigation, route }) {
                 },
               ]}
             >
-              RSVP
+              RSVP   
             </Text>
             {!yesToRSVP ? (
               <CustomButton

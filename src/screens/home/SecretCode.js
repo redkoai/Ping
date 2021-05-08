@@ -11,9 +11,11 @@ import firebase from 'firebase';
 import 'firebase/firestore'
 import { actuatedNormalize } from 'ping/util/fontScaler';
 
-function SecretCode({ navigation }) {
+function SecretCode({navigation, route  }) {
 
+  const { eventID } = route.params;
   const [secretCode, setSecretCode] = useState('');
+
 
   useEffect(() => {
    //firebase.database().ref('/InviteForms').child("-MW_XbsJOLm2BCA6nA_K").child("formData").on('value',(snapshot)=>{
@@ -57,15 +59,15 @@ function SecretCode({ navigation }) {
             resizeMode:'contain',
             marginTop: heightPercentageToDP('-62'),
             left:heightPercentageToDP('15')}}>
-                <Text style={[textStyles.bigBold ]}>{secretCode}</Text>
+                <Text style={[textStyles.bigBold ]}>{eventID.secretCode}</Text>
             </View>
-        <TouchableOpacity style={{marginTop: heightPercentageToDP('8'),left:heightPercentageToDP('4')}}>
+        {/* <TouchableOpacity style={{marginTop: heightPercentageToDP('8'),left:heightPercentageToDP('4')}}>
         <CustomButton
          text="I'm here"
          shadow
          primary
          />
-         </TouchableOpacity>
+         </TouchableOpacity> */}
 
         {/* <TouchableOpacity style={{marginTop: heightPercentageToDP('0'),left:heightPercentageToDP('4')}}>
         <CustomButton

@@ -275,7 +275,7 @@ function HomeScreenEmpty({}) {
           onPress={() => {
             navigation.navigate("Events", {
               screen: "MyInvite",
-              params: { eventID: eventID },
+              params: { eventID: eventID},
             });
           }}
         />
