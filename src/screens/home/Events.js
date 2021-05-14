@@ -66,8 +66,9 @@ function Events({navigation, route}) {
   const loadItems = () => {
       setTimeout(() => {
         db.child(`${user.uid}/Events`).on("child_added", function(snapshot) {
-          
+          console.log("snapshot key =", snapshot.key)
           // setEventID(snapshot.key)
+          console.log("snapshot = ", snapshot)
           
           let date = new Date(snapshot.val().enddate.replace('th', ''))
           
@@ -128,8 +129,8 @@ function Events({navigation, route}) {
 
       renderItem = (item) => {
         const eventID = item.eventID
-        console.log("event ID Events screen = ", eventID)
-        console.log("item =", item)
+        // console.log("event ID Events screen = ", eventID)
+        // console.log("item =", item)
         
           return(
           <TouchableOpacity onPress={() => {   
