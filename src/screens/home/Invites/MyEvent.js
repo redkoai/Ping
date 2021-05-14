@@ -92,10 +92,10 @@ function MyEvent({ navigation, route }) {
       }
     );
     setEvent(event);
-    console.log("event description = ", event.description);
-    console.log("event co host = ", event["co-host-0"]);
-    console.log("user.uid = ", user.uid);
-    console.log("event = ", event);
+    // console.log("event description = ", event.description);
+    // console.log("event co host = ", event["co-host-0"]);
+    // console.log("user.uid = ", user.uid);
+    // console.log("event = ", event);
   };
 
   const url = "https://www.google.com/maps/place/" + event.location;

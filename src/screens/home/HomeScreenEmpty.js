@@ -83,33 +83,51 @@ function HomeScreenEmpty({}) {
           myEvents_obj[snapshot.key] = arr;
         }
       } else {
-        // console.log("invite snapshot =", snapshot);
 
-        console.log(snapshot.val(), "sonic");
+        // console.log(snapshot.val(), "sonic");
 
         let arr = [];
-        console.log(snapshot.key, "greenBacon");
+        // console.log(snapshot.key, "greenBacon");
 
-        console.log(snapshot.val()[Object.keys(snapshot.val())[0]], "bolt");
+        // console.log(snapshot.val()[Object.keys(snapshot.val())[0]], "bolt");
 
         if (
-          snapshot.val()[Object.keys(snapshot.val())[0]].imagePath == "null"
+          snapshot.val().imagePath == "null"
         ) {
-          console.log("awesome");
-          arr[0] = snapshot.val()[Object.keys(snapshot.val())[0]].event;
-          arr[1] = snapshot.val()[Object.keys(snapshot.val())[0]].fbImage;
+          // console.log("awesome");
+          arr[0] = snapshot.val().event;
+          arr[1] = snapshot.val().fbImage;
           arr[2] = true;
           myInvites_obj[snapshot.key] = arr;
 
           
         } else {
-          console.log(snapshot.val(), "arrayvalue");
-          arr[0] = snapshot.val()[Object.keys(snapshot.val())[0]].event;
-          arr[1] = snapshot.val()[Object.keys(snapshot.val())[0]].imagePath;
+          // console.log(snapshot.val(), "arrayvalue");
+          arr[0] = snapshot.val().event;
+          arr[1] = snapshot.val().imagePath;
           arr[2] = false;
 
           myInvites_obj[snapshot.key] = arr;
         }
+
+        // if (
+        //   snapshot.val()[Object.keys(snapshot.val())[0]].imagePath == "null"
+        // ) {
+        //   // console.log("awesome");
+        //   arr[0] = snapshot.val()[Object.keys(snapshot.val())[0]].event;
+        //   arr[1] = snapshot.val()[Object.keys(snapshot.val())[0]].fbImage;
+        //   arr[2] = true;
+        //   myInvites_obj[snapshot.key] = arr;
+
+          
+        // } else {
+        //   // console.log(snapshot.val(), "arrayvalue");
+        //   arr[0] = snapshot.val()[Object.keys(snapshot.val())[0]].event;
+        //   arr[1] = snapshot.val()[Object.keys(snapshot.val())[0]].imagePath;
+        //   arr[2] = false;
+
+        //   myInvites_obj[snapshot.key] = arr;
+        // }
 
         // myInvites_obj[snapshot.key] = snapshot.val().arr;
         // console.log("my invites = ", myInvites_obj);
@@ -117,6 +135,7 @@ function HomeScreenEmpty({}) {
     });
 
     setMyInvites(myInvites_obj);
+    // console.log("MyInvites =", myInvites)
     setMyEvents(myEvents_obj);
   };
 
@@ -173,7 +192,7 @@ function HomeScreenEmpty({}) {
 
   const EventLoop = Object.keys(myEvents).map((key) => {
     const eventID = key;
-    console.log("strrawberryPie ", eventID);
+    // console.log("strrawberryPie ", eventID);
 
     return (
       <TouchableOpacity
@@ -234,9 +253,9 @@ function HomeScreenEmpty({}) {
 
   const InviteLoop = Object.keys(myInvites).map((key) => {
     const inviteID = key;
-    console.log(inviteID, 'invitedidddd')
+    // console.log(inviteID, 'invitedidddd')
 
-    console.log(key, "strawberryWaffles");
+    // console.log(key, "strawberryWaffles");
 
     return (
       <View

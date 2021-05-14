@@ -109,7 +109,7 @@ function People({ route, navigation }) {
     if (addedFriendsList.length > 0) {
       const listFormData = formData;
       listFormData["guest_list"] = addedFriendsList;
-      db.child(`${foundUser.uid}/Events/${route.params.eventID}`).push(
+      db.child(`${foundUser.uid}/Events/${route.params.eventID}`).set(
         listFormData
       );
       formData.guestList = addedFriendsList;
@@ -271,8 +271,8 @@ function People({ route, navigation }) {
     const listFormData = formData;
     listFormData["guest_list"] = guestList;
     //HERE
-    db.child(`${foundUser.uid}/Events/${route.params.eventID}`).push(
-      listFormData
+    db.child(`${foundUser.uid}/Events/${route.params.eventID}`).set(
+      formData
     );
     console.log("Data pushed");
     setSentMessgeStatus(!sentMessageStatus);
@@ -399,9 +399,9 @@ function People({ route, navigation }) {
   const friendLoop = Object.keys(friends).map((key) => {
     console.log(key);
     const sendInviteToQueryFriend = (friendKey) => {
-      db.child(`${friends[key]}/Events/${route.params.eventID}`)
-        .push()
-        .set(formData);
+      db.child(`${friends[key]}/Events/${route.params.eventID}`).set(formData)
+        // .push()
+        // .set(formData);
       console.log("Data pushed");
 
       // db.child(user.user.uid).set({"email" : user.user.email})

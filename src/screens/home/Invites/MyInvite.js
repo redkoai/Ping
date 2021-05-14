@@ -44,7 +44,7 @@ function MyInvite({ navigation, route }) {
   // const navigation = useNavigation()
 
   const { inviteID } = route.params;
-  console.log(route.params, "cereal");
+  // console.log(route.params, "cereal");
   const { control, errors, setValue, reset, handleSubmit } = useForm({
     //resolver: yupResolver(DETAILS_SCHEMA),
   });
@@ -76,7 +76,7 @@ function MyInvite({ navigation, route }) {
     db.child(`${user.uid}/Events/${inviteID}`).on(
       "child_added",
       function (snapshot) {
-        console.log("snapshot =", snapshot);
+        // console.log("snapshot =", snapshot);
         event[snapshot.key] = snapshot.val();
       }
     );
@@ -89,11 +89,11 @@ function MyInvite({ navigation, route }) {
     );
 
     //setEvent(event);
-    console.log(event, "frogs");
-    console.log("event description = ", event.description);
-    console.log("event co host = ", event["co-host-0"]);
-    console.log("user.uid = ", user.uid);
-    console.log("event = ", event);
+    // console.log(event, "frogs");
+    // console.log("event description = ", event.description);
+    // console.log("event co host = ", event["co-host-0"]);
+    // console.log("user.uid = ", user.uid);
+    // console.log("event = ", event);
   };
 
   const url = "https://www.google.com/maps/place/" + event.location;
@@ -115,8 +115,8 @@ function MyInvite({ navigation, route }) {
     });
   };
 
-  console.log("host email =", hostEmail);
-  console.log("host username =", hostUsername);
+  // console.log("host email =", hostEmail);
+  // console.log("host username =", hostUsername);
   
 
   //////////////////////////////
@@ -168,7 +168,7 @@ function MyInvite({ navigation, route }) {
       .child(`images/${inviteID}`)
       .getDownloadURL()
       .then((url) => {
-        console.log(url, "bananas");
+        // console.log(url, "bananas");
 
         setPhoto(url);
       });
@@ -179,7 +179,7 @@ function MyInvite({ navigation, route }) {
   const imagePath = `../../../../assets/invites/${event.imagePath}`;
 
   const getImage = (img) => {
-    console.log(route.params, "greenblue");
+    // console.log(route.params, "greenblue");
     if (event.imagePath === "1.png") {
       return {
         image: require("../../../../assets/invites/1.png"),
@@ -475,8 +475,8 @@ function MyInvite({ navigation, route }) {
                 outline
                 onPress={() => {
                   setYesToRSVP(true);
-                  console.log("host email =", hostEmail);
-                  console.log("host username =", hostUsername);
+                  // console.log("host email =", hostEmail);
+                  // console.log("host username =", hostUsername);
                   const message = {
                     text:
                       "RSVP: Yes I will be attending " +

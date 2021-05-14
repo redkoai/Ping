@@ -30,6 +30,7 @@ const timeToString = (time) => {
 function Events({navigation, route}) {
 
   // const navigation = useNavigation()
+  
 
   const [items, setItems] = useState({})
   // const [eventID, setEventID] = useState()
@@ -67,8 +68,9 @@ function Events({navigation, route}) {
         db.child(`${user.uid}/Events`).on("child_added", function(snapshot) {
           
           // setEventID(snapshot.key)
-         
+          
           let date = new Date(snapshot.val().enddate.replace('th', ''))
+          
          
           newItems[date.toISOString().split('T')[0]] = []
           
@@ -81,6 +83,7 @@ function Events({navigation, route}) {
           
           
       });
+      console.log("newItems = ", newItems)
         setItems(newItems)
       }, 1000);
     }
@@ -125,11 +128,12 @@ function Events({navigation, route}) {
 
       renderItem = (item) => {
         const eventID = item.eventID
+        console.log("event ID Events screen = ", eventID)
+        console.log("item =", item)
         
           return(
-          <TouchableOpacity onPress={() => { 
-            
-            navigation.navigate('MyInvite', { eventID:eventID })
+          <TouchableOpacity onPress={() => {   
+            navigation.navigate('MyEvent', { eventID:eventID })
         }}
           style={{
                 marginRight: 10,
